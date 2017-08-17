@@ -87,7 +87,7 @@ fi
 #zcat ../grub.dejavusansmono.gfxterm.font.diff.gz | patch -p1 --verbose || exit 1
 #zcat ../grub.e75fdee420a7ad95e9a465c9699adc2e2e970440.terminate.efi.several.times.diff.gz | patch -p1 --verbose || exit 1
 
-sed -i "s@GNU GRUB  version %s@AryaLinux 2016.08 Dawn of justice \- GNU GRUB@g" grub-core/normal/main.c
+sed -i "s@GNU GRUB  version %s@AryaLinux 2017.08 Kuntala \- GNU GRUB@g" grub-core/normal/main.c
 sed -i "s@#define GRUB_DISK_CACHE_SIZE	(1 << GRUB_DISK_CACHE_BITS)@#define GRUB_DISK_CACHE_SIZE	8192@g" include/grub/disk.h
 
 for i in 1 2 ; do
