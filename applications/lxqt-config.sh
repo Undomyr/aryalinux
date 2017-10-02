@@ -9,23 +9,23 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The lxqt-config package providesbr3ak the LXQt system settings center.br3ak"
 SECTION="lxqt"
-VERSION=0.11.0
+VERSION=0.11.1
 NAME="lxqt-config"
 
 #REQ:liblxqt
 #REQ:lxqt-libkscreen
-#REQ:plasma-all
+#REQ:lxqt-l10n
 #OPT:git
 #OPT:lxqt-l10n
 
 
 cd $SOURCE_DIR
 
-URL=http://downloads.lxqt.org/lxqt/0.11.0/lxqt-config-0.11.0.tar.xz
+URL=https://github.com/lxde/lxqt-config/releases/download/0.11.1/lxqt-config-0.11.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://downloads.lxqt.org/lxqt/0.11.0/lxqt-config-0.11.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxqt-config/lxqt-config-0.11.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-config/lxqt-config-0.11.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/lxqt-config/lxqt-config-0.11.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-config/lxqt-config-0.11.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-config/lxqt-config-0.11.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-config/lxqt-config-0.11.0.tar.xz
+wget -nc https://github.com/lxde/lxqt-config/releases/download/0.11.1/lxqt-config-0.11.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxqt-config/lxqt-config-0.11.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/lxqt-config/lxqt-config-0.11.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-config/lxqt-config-0.11.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-config/lxqt-config-0.11.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-config/lxqt-config-0.11.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-config/lxqt-config-0.11.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -38,7 +38,26 @@ fi
 cd $DIRECTORY
 fi
 
+export QT5DIR=/opt/qt5
+export LXQT_PREFIX=/opt/lxqt
+pathappend /opt/lxqt/bin           PATH
+pathappend /opt/lxqt/share/man/    MANPATH
+pathappend /opt/lxqt/lib/pkgconfig PKG_CONFIG_PATH
+pathappend /opt/lxqt/lib/plugins   QT_PLUGIN_PATH
+pathappend $QT5DIR/plugins         QT_PLUGIN_PATH
+pathappend /opt/lxqt/lib LD_LIBRARY_PATH
+pathappend /opt/qt5/lib LD_LIBRARY_PATH
+pathappend /opt/qt5/lib/pkgconfig PKG_CONFIG_PATH
+pathappend /opt/lxqt/lib/pkgconfig PKG_CONFIG_PATH
+
 whoami > /tmp/currentuser
+
+new='../liblxqt-config-cursor/lxqt-config-cursor_autogen/include'
+sed -i "/CURRENT_BINARY_DIR/a \"\${CMAKE_CURRENT_BINARY_DIR}/$new\"" \
+       lxqt-config-appearance/CMakeLists.txt \
+       lxqt-config-input/CMakeLists.txt &&
+unset new
+
 
 mkdir -v build &&
 cd       build &&

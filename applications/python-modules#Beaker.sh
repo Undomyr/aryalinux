@@ -9,20 +9,19 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="%DESCRIPTION%"
 SECTION="general"
-VERSION=1.8.1
+VERSION=1.9.0
 NAME="python-modules#Beaker"
 
-#REQ:python-modules#setuptools
 #OPT:python-modules#funcsigs
 
 
 cd $SOURCE_DIR
 
-URL=https://pypi.python.org/packages/fe/41/b778351220614d743ffbfac01939db1c172181907e9b42b7c07bfb2002da/Beaker-1.8.1.tar.gz
+URL=https://files.pythonhosted.org/packages/source/B/Beaker/Beaker-1.9.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://pypi.python.org/packages/fe/41/b778351220614d743ffbfac01939db1c172181907e9b42b7c07bfb2002da/Beaker-1.8.1.tar.gz
+wget -nc https://files.pythonhosted.org/packages/source/B/Beaker/Beaker-1.9.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

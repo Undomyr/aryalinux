@@ -18,12 +18,12 @@ NAME="freetts"
 
 cd $SOURCE_DIR
 
-URL=http://downloads.sourceforge.net/freetts/freetts-1.2.2-src.zip
+URL=https://downloads.sourceforge.net/freetts/freetts-1.2.2-src.zip
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/freetts/freetts-1.2.2-src.zip || wget -nc http://downloads.sourceforge.net/freetts/freetts-1.2.2-src.zip || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/freetts/freetts-1.2.2-src.zip || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/freetts/freetts-1.2.2-src.zip || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/freetts/freetts-1.2.2-src.zip || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/freetts/freetts-1.2.2-src.zip || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/freetts/freetts-1.2.2-src.zip
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/freetts/freetts-1.2.2-tst.zip || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/freetts/freetts-1.2.2-tst.zip || wget -nc http://downloads.sourceforge.net/freetts/freetts-1.2.2-tst.zip || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/freetts/freetts-1.2.2-tst.zip || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/freetts/freetts-1.2.2-tst.zip || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/freetts/freetts-1.2.2-tst.zip || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/freetts/freetts-1.2.2-tst.zip
+wget -nc https://downloads.sourceforge.net/freetts/freetts-1.2.2-src.zip || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/freetts/freetts-1.2.2-src.zip || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/freetts/freetts-1.2.2-src.zip || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/freetts/freetts-1.2.2-src.zip || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/freetts/freetts-1.2.2-src.zip || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/freetts/freetts-1.2.2-src.zip || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/freetts/freetts-1.2.2-src.zip
+wget -nc https://downloads.sourceforge.net/freetts/freetts-1.2.2-tst.zip || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/freetts/freetts-1.2.2-tst.zip || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/freetts/freetts-1.2.2-tst.zip || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/freetts/freetts-1.2.2-tst.zip || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/freetts/freetts-1.2.2-tst.zip || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/freetts/freetts-1.2.2-tst.zip || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/freetts/freetts-1.2.2-tst.zip
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

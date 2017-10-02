@@ -10,7 +10,7 @@ set +h
 #REQ:perl-modules#perl-capture-tiny
 
 SOURCE_ONLY=y
-URL="http://www.cpan.org/authors/id/D/DC/DCANTRELL/Test-Differences-0.64.tar.gz"
+URL="https://www.cpan.org/authors/id/D/DC/DCANTRELL/Test-Differences-0.64.tar.gz"
 VERSION=0.64
 NAME="perl-modules#perl-test-differences"
 

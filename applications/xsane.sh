@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak XSane is another front end forbr3ak <a class=\"xref\" href=\"sane.html\" title=\"SANE-1.0.25\">SANE-1.0.25</a>. It has additional features tobr3ak improve the image quality and ease of use compared to <span class=\"command\"><strong>xscanimage</strong>.br3ak"
+DESCRIPTION="br3ak XSane is another front end forbr3ak <a class=\"xref\" href=\"sane.html\" title=\"SANE-1.0.27\">SANE-1.0.27</a>. It has additional features tobr3ak improve the image quality and ease of use compared to <span class=\"command\"><strong>xscanimage</strong>.br3ak"
 SECTION="pst"
 VERSION=0.999
 NAME="xsane"
@@ -24,7 +24,7 @@ URL=http://www.xsane.org/download/xsane-0.999.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc http://www.xsane.org/download/xsane-0.999.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xsane/xsane-0.999.tar.gz
+wget -nc http://www.xsane.org/download/xsane-0.999.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xsane/xsane-0.999.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xsane/xsane-0.999.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

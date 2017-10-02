@@ -31,7 +31,8 @@ URL=http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 if [ ! -z $URL ]
 then
 wget -nc http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
-wget -nc ftp://ftp.gnu.org/gnu/readline/readline-5.2.tar.gz
+wget -nc ftp://ftp.gnu.org/gnu/readline/readline-6.3.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/downloads/readline/readline-6.3-upstream_fixes-3.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

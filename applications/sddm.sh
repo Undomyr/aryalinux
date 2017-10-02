@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The SDDM package contains abr3ak lightweight display manager based upon Qt and QML.br3ak"
 SECTION="x"
-VERSION=0.14.0
+VERSION=0.15.0
 NAME="sddm"
 
 #REQ:cmake
@@ -21,11 +21,11 @@ NAME="sddm"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/sddm/sddm/releases/download/v0.14.0/sddm-0.14.0.tar.xz
+URL=https://github.com/sddm/sddm/releases/download/v0.15.0/sddm-0.15.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sddm/sddm-0.14.0.tar.xz || wget -nc https://github.com/sddm/sddm/releases/download/v0.14.0/sddm-0.14.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sddm/sddm-0.14.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sddm/sddm-0.14.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/sddm/sddm-0.14.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sddm/sddm-0.14.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sddm/sddm-0.14.0.tar.xz
+wget -nc https://github.com/sddm/sddm/releases/download/v0.15.0/sddm-0.15.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sddm/sddm-0.15.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/sddm/sddm-0.15.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sddm/sddm-0.15.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sddm/sddm-0.15.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sddm/sddm-0.15.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sddm/sddm-0.15.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -135,7 +135,7 @@ cat > /etc/pam.d/sddm << "EOF" &&
 # Begin /etc/pam.d/sddm
 auth requisite pam_nologin.so
 auth required pam_env.so
-auth required pam_succeed_if.so uid >=1000 quiet
+auth required pam_succeed_if.so uid >= 1000 quiet
 auth include system-auth
 account include system-account
 password include system-password
@@ -147,7 +147,7 @@ cat > /etc/pam.d/sddm-autologin << "EOF" &&
 # Begin /etc/pam.d/sddm-autologin
 auth requisite pam_nologin.so
 auth required pam_env.so
-auth required pam_succeed_if.so uid >=1000 quiet
+auth required pam_succeed_if.so uid >= 1000 quiet
 auth required pam_permit.so
 account include system-account
 password required pam_deny.so

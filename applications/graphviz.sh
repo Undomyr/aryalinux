@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Graphviz package containsbr3ak graph visualization software. Graph visualization is a way ofbr3ak representing structural information as diagrams of abstract graphsbr3ak and networks. Graphviz has severalbr3ak main graph layout programs. It also has web and interactivebr3ak graphical interfaces, auxiliary tools, libraries, and languagebr3ak bindings.br3ak"
 SECTION="general"
-VERSION=2.38.0
+VERSION=2.40.1
 NAME="graphviz"
 
 #REC:freetype2
@@ -38,12 +38,12 @@ NAME="graphviz"
 
 cd $SOURCE_DIR
 
-URL=http://pkgs.fedoraproject.org/repo/pkgs/graphviz/graphviz-2.38.0.tar.gz/5b6a829b2ac94efcd5fa3c223ed6d3ae/graphviz-2.38.0.tar.gz
+URL=http://graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.40.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/graphviz/graphviz-2.38.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/graphviz/graphviz-2.38.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/graphviz/graphviz-2.38.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/graphviz/graphviz-2.38.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/graphviz/graphviz-2.38.0.tar.gz || wget -nc http://pkgs.fedoraproject.org/repo/pkgs/graphviz/graphviz-2.38.0.tar.gz/5b6a829b2ac94efcd5fa3c223ed6d3ae/graphviz-2.38.0.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/graphviz/graphviz-2.38.0.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/downloads/graphviz/graphviz-2.38.0-consolidated_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/graphviz-2.38.0-consolidated_fixes-1.patch
+wget -nc http://graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.40.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/graphviz/graphviz-2.40.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/graphviz/graphviz-2.40.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/graphviz/graphviz-2.40.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/graphviz/graphviz-2.40.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/graphviz/graphviz-2.40.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/graphviz/graphviz-2.40.1.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/graphviz-2.40.1-qt5-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/graphviz/graphviz-2.40.1-qt5-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -58,9 +58,15 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../graphviz-2.38.0-consolidated_fixes-1.patch &&
-autoreconf                               &&
-./configure --prefix=/usr --disable-php  &&
+sed -e '/ruby/s/1\.9/2.4/' -i configure.ac
+
+
+patch -p1 -i ../graphviz-2.40.1-qt5-1.patch
+
+
+sed -i '/LIBPOSTFIX="64"/s/64//' configure.ac &&
+autoreconf                &&
+./configure --prefix=/usr &&
 make "-j`nproc`" || make
 
 
@@ -77,7 +83,7 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 ln -v -s /usr/share/graphviz/doc \
-         /usr/share/doc/graphviz-2.38.0
+         /usr/share/doc/graphviz-2.40.1
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Apache Portable Runtime Utility Library provides a predictablebr3ak and consistent interface to underlying client library interfaces.br3ak This application programming interface assures predictable if notbr3ak identical behaviour regardless of which libraries are available onbr3ak a given platform.br3ak"
 SECTION="general"
-VERSION=1.5.4
+VERSION=1.6.0
 NAME="apr-util"
 
 #REQ:apr
@@ -24,11 +24,11 @@ NAME="apr-util"
 
 cd $SOURCE_DIR
 
-URL=https://www.apache.org/dist/apr/apr-util-1.5.4.tar.bz2
+URL=https://archive.apache.org/dist/apr/apr-util-1.6.0.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.apache.org/dist/apr/apr-util-1.5.4.tar.bz2
+wget -nc https://archive.apache.org/dist/apr/apr-util-1.6.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/apr-util/apr-util-1.6.0.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/apr-util/apr-util-1.6.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/apr-util/apr-util-1.6.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/apr-util/apr-util-1.6.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/apr-util/apr-util-1.6.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/apr-util/apr-util-1.6.0.tar.bz2 || wget -nc ftp://ftp.mirrorservice.org/sites/ftp.apache.org/apr/apr-util-1.6.0.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

@@ -9,7 +9,7 @@ set +h
 #REQ:perl-modules#perl-datetime
 
 SOURCE_ONLY=y
-URL="http://www.cpan.org/authors/id/P/PI/PIJLL/DateTime-Calendar-Julian-0.04.tar.gz"
+URL="https://www.cpan.org/authors/id/P/PI/PIJLL/DateTime-Calendar-Julian-0.04.tar.gz"
 VERSION=0.04
 NAME="perl-modules#perl-datetime-calendar-julian"
 

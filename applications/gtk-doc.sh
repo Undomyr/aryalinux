@@ -9,30 +9,28 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The GTK-Doc package contains abr3ak code documenter. This is useful for extracting specially formattedbr3ak comments from the code to create API documentation. This package isbr3ak <span class=\"emphasis\"><em>optional</em>; if it is notbr3ak installed, packages will not build the documentation. This does notbr3ak mean that you will not have any documentation. If GTK-Doc is not available, the install processbr3ak will copy any pre-built documentation to your system.br3ak"
 SECTION="general"
-VERSION=1.25
+VERSION=1.26
 NAME="gtk-doc"
 
 #REQ:docbook
 #REQ:docbook-xsl
 #REQ:itstool
 #REQ:libxslt
+#REQ:python2
+#REQ:python-modules#six
+#REC:highlight
 #OPT:fop
 #OPT:glib2
 #OPT:general_which
-#OPT:openjade
-#OPT:sgml-dtd
-#OPT:docbook-dsssl
-#OPT:python2
-#OPT:rarian
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.25/gtk-doc-1.25.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.26/gtk-doc-1.26.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.25/gtk-doc-1.25.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.25/gtk-doc-1.25.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gtk-doc/gtk-doc-1.25.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.26/gtk-doc-1.26.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gtk-doc/gtk-doc-1.26.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gtk-doc/gtk-doc-1.26.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.26.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.26.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.26.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gtk-doc/gtk-doc-1.26.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.26/gtk-doc-1.26.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

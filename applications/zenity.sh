@@ -9,22 +9,23 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Zenity is a rewrite ofbr3ak gdialog, the GNOME port of dialog which allows you to displaybr3ak GTK+ dialog boxes from the commandbr3ak line and shell scripts.br3ak"
 SECTION="gnome"
-VERSION=3.22.0
+VERSION=3.24.0
 NAME="zenity"
 
 #REQ:gtk3
 #REQ:itstool
 #REC:libnotify
+#REC:libxslt
 #OPT:webkitgtk
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/zenity/3.22/zenity-3.22.0.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/zenity/3.24/zenity-3.24.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.gnome.org/pub/gnome/sources/zenity/3.22/zenity-3.22.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/zenity/zenity-3.22.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/zenity/zenity-3.22.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/zenity/zenity-3.22.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/zenity/zenity-3.22.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/zenity/zenity-3.22.0.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/zenity/3.22/zenity-3.22.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/zenity/zenity-3.22.0.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/zenity/3.24/zenity-3.24.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/zenity/zenity-3.24.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/zenity/zenity-3.24.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/zenity/zenity-3.24.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/zenity/zenity-3.24.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/zenity/zenity-3.24.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/zenity/zenity-3.24.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/zenity/3.24/zenity-3.24.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

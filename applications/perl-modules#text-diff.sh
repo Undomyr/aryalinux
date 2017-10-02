@@ -9,8 +9,8 @@ set +h
 #REQ:perl-modules#algorithm-diff(forthetestsuite)
 
 SOURCE_ONLY=y
-URL="http://search.cpan.org/CPAN/authors/id/N/NE/NEILB/Text-Diff-1.44.tar.gz"
-VERSION=1.44
+URL="http://search.cpan.org/CPAN/authors/id/N/NE/NEILB/Text-Diff-1.45.tar.gz"
+VERSION=1.45
 NAME="perl-modules#text-diff"
 
 cd $SOURCE_DIR

@@ -9,22 +9,21 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="%DESCRIPTION%"
 SECTION="general"
-VERSION=1.10.0
+VERSION=1.15.1
 NAME="python-modules#pycairo"
 
 #REQ:cairo
+#REQ:python2
 #REQ:python3
 
 
 cd $SOURCE_DIR
 
-URL=http://cairographics.org/releases/pycairo-1.10.0.tar.bz2
+URL=https://github.com/pygobject/pycairo/releases/download/v1.15.1/pycairo-1.15.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://cairographics.org/releases/pycairo-1.10.0.tar.bz2
-wget -nc http://www.linuxfromscratch.org/patches/downloads/pycairo/pycairo-1.10.0-waf_unpack-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pycairo-1.10.0-waf_unpack-1.patch
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pycairo-1.10.0-waf_python_3_4-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/pycairo/pycairo-1.10.0-waf_python_3_4-1.patch
+wget -nc https://github.com/pygobject/pycairo/releases/download/v1.15.1/pycairo-1.15.1.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -37,18 +36,22 @@ fi
 cd $DIRECTORY
 fi
 
-patch -Np1 -i ../pycairo-1.10.0-waf_unpack-1.patch     &&
-wafdir=$(./waf unpack) &&
-pushd $wafdir          &&
-patch -Np1 -i ../../pycairo-1.10.0-waf_python_3_4-1.patch &&
-popd                   &&
-unset wafdir           &&
-PYTHON=/usr/bin/python3 ./waf configure --prefix=/usr  &&
-./waf build
+python2 setup.py build
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-./waf install
+python2 setup.py install --optimize=1
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
+
+python3 setup.py build
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+python3 setup.py install --optimize=1
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo bash -e ./rootscript.sh

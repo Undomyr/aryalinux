@@ -8,7 +8,7 @@ set +h
 SOURCE_ONLY=n
 NAME="aryalinux-fonts"
 VERSION=2016.04
-DESCRIPTION="Fonts of the aryalinux XFCE, Gnome, KDE and Mate Desktops"
+DESCRIPTION="Fonts of the aryalinux XFCE and Mate Desktops"
 
 cd $SOURCE_DIR
 

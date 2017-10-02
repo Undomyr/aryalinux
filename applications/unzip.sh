@@ -16,11 +16,12 @@ NAME="unzip"
 
 cd $SOURCE_DIR
 
-URL=http://downloads.sourceforge.net/infozip/unzip60.tar.gz
+URL=https://downloads.sourceforge.net/infozip/unzip60.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/unzip/unzip60.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/unzip/unzip60.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/unzip/unzip60.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/unzip/unzip60.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/unzip/unzip60.tar.gz || wget -nc http://downloads.sourceforge.net/infozip/unzip60.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/unzip/unzip60.tar.gz
+wget -nc https://downloads.sourceforge.net/infozip/unzip60.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/unzip/unzip60.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/unzip/unzip60.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/unzip/unzip60.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/unzip/unzip60.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/unzip/unzip60.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/unzip/unzip60.tar.gz
+wget -nc ftp://ftp.info-zip.org/pub/infozip/src/unzip60.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/unzip/unzip60.tgz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/unzip/unzip60.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/unzip/unzip60.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/unzip/unzip60.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/unzip/unzip60.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/unzip/unzip60.tgz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

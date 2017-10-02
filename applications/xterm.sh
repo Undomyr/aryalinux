@@ -9,20 +9,21 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak xterm is a terminal emulator forbr3ak the X Window System.br3ak"
 SECTION="x"
-VERSION=327
+VERSION=330
 NAME="xterm"
 
 #REQ:x7app
+#REQ:dejavu-fonts
 #OPT:valgrind
 
 
 cd $SOURCE_DIR
 
-URL=ftp://invisible-island.net/xterm/xterm-327.tgz
+URL=http://invisible-mirror.net/archives/xterm/xterm-330.tgz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xterm/xterm-327.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xterm/xterm-327.tgz || wget -nc ftp://invisible-island.net/xterm/xterm-327.tgz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/xterm/xterm-327.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xterm/xterm-327.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xterm/xterm-327.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xterm/xterm-327.tgz
+wget -nc http://invisible-mirror.net/archives/xterm/xterm-330.tgz || wget -nc ftp://invisible-island.net/xterm/xterm-330.tgz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

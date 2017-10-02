@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The FOP (Formatting Objectsbr3ak Processor) package contains a print formatter driven by XSLbr3ak formatting objects (XSL-FO). It is a Java application that reads a formattingbr3ak object tree and renders the resulting pages to a specified output.br3ak Output formats currently supported include PDF, PCL, PostScript,br3ak SVG, XML (area tree representation), print, AWT, MIF and ASCIIbr3ak text. The primary output target is PDF.br3ak"
 SECTION="pst"
-VERSION=2.1
+VERSION=2.2
 NAME="fop"
 
 #REQ:apache-ant
@@ -19,14 +19,14 @@ NAME="fop"
 
 cd $SOURCE_DIR
 
-URL=https://archive.apache.org/dist/xmlgraphics/fop/source/fop-2.1-src.tar.gz
+URL=https://archive.apache.org/dist/xmlgraphics/fop/source/fop-2.2-src.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fop/fop-2.1-src.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/fop/fop-2.1-src.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fop/fop-2.1-src.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fop/fop-2.1-src.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fop/fop-2.1-src.tar.gz || wget -nc https://archive.apache.org/dist/xmlgraphics/fop/source/fop-2.1-src.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fop/fop-2.1-src.tar.gz
+wget -nc https://archive.apache.org/dist/xmlgraphics/fop/source/fop-2.2-src.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fop/fop-2.2-src.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/fop/fop-2.2-src.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fop/fop-2.2-src.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fop/fop-2.2-src.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fop/fop-2.2-src.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fop/fop-2.2-src.tar.gz
+wget -nc https://downloads.sourceforge.net/offo/2.2/offo-hyphenation.zip
 wget -nc http://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-i586.tar.gz
 wget -nc http://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/fop-2.1-listNPE-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/fop/fop-2.1-listNPE-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -40,6 +40,11 @@ cd $DIRECTORY
 fi
 
 whoami > /tmp/currentuser
+
+unzip ../offo-hyphenation.zip &&
+cp offo-hyphenation/hyph/* fop/hyph &&
+rm -rf offo-hyphenation
+
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
@@ -62,22 +67,35 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
-sed -i '\@</javad@i<arg value="-Xdoclint:none"/>' build.xml
+sed -i '\@</javad@i\
+<arg value="-Xdoclint:none"/>\
+<arg value="--allow-script-in-comments"/>' fop/build.xml
 
 
-patch -Np1 -i ../fop-2.1-listNPE-1.patch &&
-ant compile &&
-ant jar-main &&
-ant javadocs &&
+sed -e '/hyph\.stack/s/512k/1M/' \
+    -i fop/build.xml
+
+
+cd fop                    &&
+export LC_ALL=en_US.UTF-8 &&
+ant compile               &&
+ant jar-main              &&
+ant jar-hyphenation       &&
+ant javadocs              &&
 mv build/javadocs .
+
+
+sed -e '/haltonfailure/s/yes/off/' \
+    -i build.xml
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-install -v -d -m755                          /opt/fop-2.1 &&
-cp -v  KEYS LICENSE NOTICE README            /opt/fop-2.1 &&
-cp -va build conf examples fop* javadocs lib /opt/fop-2.1 &&
-ln -v -sf fop-2.1 /opt/fop
+install -v -d -m755 -o root -g root          /opt/fop-2.2 &&
+cp -v  ../{KEYS,LICENSE,NOTICE,README}       /opt/fop-2.2 &&
+cp -vR build conf examples fop* javadocs lib /opt/fop-2.2 &&
+chmod a+x /opt/fop-2.2/fop                                &&
+ln -v -sfn fop-2.2 /opt/fop
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

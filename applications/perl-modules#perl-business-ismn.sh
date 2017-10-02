@@ -9,7 +9,7 @@ set +h
 #REQ:perl-modules#tie-cycle
 
 SOURCE_ONLY=y
-URL="http://search.cpan.org/CPAN/authors/id/B/BD/BDFOY/Business-ISMN-1.131.tar.gz"
+URL="https://www.cpan.org/authors/id/B/BD/BDFOY/Business-ISMN-1.131.tar.gz"
 VERSION=1.131
 NAME="perl-modules#perl-business-ismn"
 

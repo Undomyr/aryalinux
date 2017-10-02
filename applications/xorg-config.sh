@@ -9,18 +9,16 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="%DESCRIPTION%"
 SECTION="x"
-VERSION=1.3.0
 NAME="xorg-config"
 
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg//fireflysung-1.3.0.tar.gz
+URL=
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Xorg//fireflysung-1.3.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -35,14 +33,10 @@ fi
 
 whoami > /tmp/currentuser
 
+xrandr --listproviders
 
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-usermod -a -G video <em class="replaceable"><code><username></em>
 
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
+xrandr --setprovideroffloadsink <em class="replaceable"><code><provider> <sink></em>
 
 
 DRI_PRIME=1 glxinfo | egrep "(OpenGL vendor|OpenGL renderer|OpenGL version)"
@@ -50,9 +44,14 @@ DRI_PRIME=1 glxinfo | egrep "(OpenGL vendor|OpenGL renderer|OpenGL version)"
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-install -v -d -m755 /usr/share/fonts/dejavu &&
-install -v -m644 ttf/*.ttf /usr/share/fonts/dejavu &&
-fc-cache -v /usr/share/fonts/dejavu
+cat > /etc/X11/xorg.conf.d/xkb-defaults.conf << "EOF"
+Section "InputClass"
+    Identifier "XKB Defaults"
+    MatchIsKeyboard "yes"
+    Option "XkbLayout" "fr"
+    Option "XkbOptions" "terminate:ctrl_alt_bksp"
+EndSection
+EOF
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -60,15 +59,8 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
-cat > /etc/X11/xorg.conf.d/xkb-defaults.conf << "EOF"
-Section "InputClass"
-    Identifier "XKB Defaults"
-    MatchIsKeyboard "yes"
-    Option "XkbOptions" "terminate:ctrl_alt_bksp"
-EndSection
-EOF
 
-
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat > /etc/X11/xorg.conf.d/videocard-0.conf << "EOF"
 Section "Device"
     Identifier  "Videocard0"
@@ -79,7 +71,14 @@ Section "Device"
 EndSection
 EOF
 
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
 
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat > /etc/X11/xorg.conf.d/server-layout.conf << "EOF"
 Section "ServerLayout"
     Identifier     "DefaultLayout"
@@ -88,6 +87,11 @@ Section "ServerLayout"
     Option         "Xinerama"
 EndSection
 EOF
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
 
 
 

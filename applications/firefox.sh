@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Firefox is a stand-alone browserbr3ak based on the Mozilla codebase.br3ak"
+DESCRIPTION="Firefox is a stand-alone browser based on the Mozilla codebase."
 SECTION="xsoft"
-VERSION=50.1.0
+VERSION=56.0
 NAME="firefox"
 
 #REQ:alsa-lib
@@ -20,10 +20,21 @@ NAME="firefox"
 #REQ:unzip
 #REQ:yasm
 #REQ:zip
+#REQ:dbus-glib
+#REQ:GConf
+#REQ:ffmpeg
+#REQ:libwebp
+#REQ:pulseaudio
+#REQ:startup-notification
+#REQ:valgrind
+#REQ:liboauth
+#REQ:graphite2
 #REC:icu
 #REC:libevent
 #REC:libvpx
 #REC:sqlite
+#REQ:cargo
+#REQ:rust
 #OPT:curl
 #OPT:dbus-glib
 #OPT:doxygen
@@ -43,12 +54,11 @@ NAME="firefox"
 
 cd $SOURCE_DIR
 
-URL=https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/50.1.0/source/firefox-50.1.0.source.tar.xz
+URL=https://ftp.mozilla.org/pub/firefox/releases/$VERSION/source/firefox-$VERSION.source.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/firefox/firefox-50.1.0.source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-50.1.0.source.tar.xz || wget -nc https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/50.1.0/source/firefox-50.1.0.source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-50.1.0.source.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/firefox/firefox-50.1.0.source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-50.1.0.source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-50.1.0.source.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-50.1.0-system_graphite2_harfbuzz-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-50.1.0-system_graphite2_harfbuzz-1.patch
+wget -nc $URL
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -71,20 +81,20 @@ cat > mozconfig << "EOF"
 # uncommenting the next line and setting a valid number of CPU cores.
 #mk_add_options MOZ_MAKE_FLAGS="-j1"
 # If you have installed dbus-glib, comment out this line:
-ac_add_options --disable-dbus
+#ac_add_options --disable-dbus
 # If you have installed dbus-glib, and you have installed (or will install)
 # wireless-tools, and you wish to use geolocation web services, comment out
 # this line
-ac_add_options --disable-necko-wifi
+#ac_add_options --disable-necko-wifi
 # Uncomment this option if you wish to build with gtk+-2
 #ac_add_options --enable-default-toolkit=cairo-gtk2
 # Uncomment these lines if you have installed optional dependencies:
 #ac_add_options --enable-system-hunspell
 #ac_add_options --enable-startup-notification
 # Comment out following option if you have PulseAudio installed
-ac_add_options --disable-pulseaudio
+#ac_add_options --disable-pulseaudio
 # If you have installed GConf, comment out this line
-ac_add_options --disable-gconf
+#ac_add_options --disable-gconf
 # Comment out following options if you have not installed
 # recommended dependencies:
 ac_add_options --enable-system-sqlite
@@ -95,8 +105,8 @@ ac_add_options --with-system-nss
 ac_add_options --with-system-icu
 # If you are going to apply the patch for system graphite
 # and system harfbuzz, uncomment these lines:
-#ac_add_options --with-system-graphite2
-#ac_add_options --with-system-harfbuzz
+# ac_add_options --with-system-graphite2
+# ac_add_options --with-system-harfbuzz
 # Stripping is now enabled by default.
 # Uncomment these lines if you need to run a debugger:
 #ac_add_options --disable-strip
@@ -126,30 +136,18 @@ mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-build-dir
 EOF
 
 
-patch -Np1 -i ../firefox-50.1.0-system_graphite2_harfbuzz-1.patch
-
+sed -e s/_EVENT_SIZEOF/EVENT__SIZEOF/ \
+    -i ipc/chromium/src/base/message_pump_libevent.cc
 
 make -f client.mk
+sudo make -f client.mk install INSTALL_SDK= &&
+sudo chown -R 0:0 /usr/lib/firefox-$VERSION   &&
+sudo mkdir -pv    /usr/lib/mozilla/plugins  &&
+sudo ln    -sfv   ../../mozilla/plugins /usr/lib/firefox-$VERSION/browser
 
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make -f client.mk install INSTALL_SDK= &&
-chown -R 0:0 /usr/lib/firefox-50.1.0   &&
-mkdir -pv    /usr/lib/mozilla/plugins  &&
-ln    -sfv   ../../mozilla/plugins /usr/lib/firefox-50.1.0/browser
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mkdir -pv /usr/share/applications &&
-mkdir -pv /usr/share/pixmaps &&
-cat > /usr/share/applications/firefox.desktop << "EOF" &&
+sudo mkdir -pv /usr/share/applications &&
+sudo mkdir -pv /usr/share/pixmaps &&
+sudo tee /usr/share/applications/firefox.desktop << "EOF" &&
 [Desktop Entry]
 Encoding=UTF-8
 Name=Firefox Web Browser
@@ -163,16 +161,39 @@ Categories=GNOME;GTK;Network;WebBrowser;
 MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;
 StartupNotify=true
 EOF
-ln -sfv /usr/lib/firefox-50.1.0/browser/icons/mozicon128.png \
+sudo ln -sfv /usr/lib/firefox-$VERSION/browser/icons/mozicon128.png \
         /usr/share/pixmaps/firefox.png
 
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
+# Create package...
 
+make -f client.mk install INSTALL_SDK= DESTDIR=$BINARY_DIR/firefox-$VERSION-$(uname -m) &&
+sudo chown -R 0:0 $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/lib/firefox-$VERSION   &&
+sudo mkdir -pv    $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/lib/mozilla/plugins  &&
+sudo ln    -sfv   ../../mozilla/plugins $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/lib/firefox-$VERSION/browser
 
+sudo mkdir -pv $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/share/applications &&
+sudo mkdir -pv $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/share/pixmaps &&
+sudo tee $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/share/applications/firefox.desktop << "EOF" &&
+[Desktop Entry]
+Encoding=UTF-8
+Name=Firefox Web Browser
+Comment=Browse the World Wide Web
+GenericName=Web Browser
+Exec=firefox %u
+Terminal=false
+Type=Application
+Icon=firefox
+Categories=GNOME;GTK;Network;WebBrowser;
+MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true
+EOF
+sudo ln -sfv /usr/lib/firefox-$VERSION/browser/icons/mozicon128.png \
+        $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/share/pixmaps/firefox.png
+pushd $BINARY_DIR/firefox-$VERSION-$(uname -m)
+sudo tar -cJvf ../firefox-$VERSION-$(uname -m).tar.xz *
+popd
+sudo rm -r $BINARY_DIR/firefox-$VERSION-$(uname -m)
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 

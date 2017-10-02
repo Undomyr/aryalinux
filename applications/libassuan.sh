@@ -19,11 +19,11 @@ NAME="libassuan"
 
 cd $SOURCE_DIR
 
-URL=ftp://ftp.gnupg.org/gcrypt/libassuan/libassuan-2.4.3.tar.bz2
+URL=https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-2.4.3.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libassuan/libassuan-2.4.3.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libassuan/libassuan-2.4.3.tar.bz2 || wget -nc ftp://ftp.gnupg.org/gcrypt/libassuan/libassuan-2.4.3.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libassuan/libassuan-2.4.3.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libassuan/libassuan-2.4.3.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libassuan/libassuan-2.4.3.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libassuan/libassuan-2.4.3.tar.bz2
+wget -nc https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-2.4.3.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libassuan/libassuan-2.4.3.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libassuan/libassuan-2.4.3.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libassuan/libassuan-2.4.3.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libassuan/libassuan-2.4.3.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libassuan/libassuan-2.4.3.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libassuan/libassuan-2.4.3.tar.bz2 || wget -nc ftp://ftp.gnupg.org/gcrypt/libassuan/libassuan-2.4.3.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

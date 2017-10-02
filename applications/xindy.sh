@@ -22,8 +22,8 @@ URL=http://tug.ctan.org/support/xindy/base/xindy-2.5.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xindy/xindy-2.5.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/xindy/xindy-2.5.1.tar.gz || wget -nc http://tug.ctan.org/support/xindy/base/xindy-2.5.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xindy/xindy-2.5.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xindy/xindy-2.5.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xindy/xindy-2.5.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xindy/xindy-2.5.1.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/downloads/xindy/xindy-2.5.1-upstream_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/xindy-2.5.1-upstream_fixes-1.patch
+wget -nc http://tug.ctan.org/support/xindy/base/xindy-2.5.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xindy/xindy-2.5.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/xindy/xindy-2.5.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xindy/xindy-2.5.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xindy/xindy-2.5.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xindy/xindy-2.5.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xindy/xindy-2.5.1.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/xindy-2.5.1-upstream_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/xindy/xindy-2.5.1-upstream_fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -40,13 +40,14 @@ whoami > /tmp/currentuser
 
 export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
 sed -i "s/ grep -v '^;'/ awk NF/" make-rules/inputenc/Makefile.in &&
+sed -i 's%\(indexentry\)%\1\\%' make-rules/inputenc/make-inp-rules.pl &&
 patch -Np1 -i ../xindy-2.5.1-upstream_fixes-1.patch &&
-./configure --prefix=/opt/texlive/2016              \
-            --bindir=/opt/texlive/2016/bin/$TEXARCH \
-            --datarootdir=/opt/texlive/2016         \
+./configure --prefix=/opt/texlive/2017              \
+            --bindir=/opt/texlive/2017/bin/$TEXARCH \
+            --datarootdir=/opt/texlive/2017         \
             --includedir=/usr/include               \
-            --libdir=/opt/texlive/2016/texmf-dist   \
-            --mandir=/opt/texlive/2016/texmf-dist/doc/man &&
+            --libdir=/opt/texlive/2017/texmf-dist   \
+            --mandir=/opt/texlive/2017/texmf-dist/doc/man &&
 make LC_ALL=POSIX
 
 

@@ -16,11 +16,11 @@ NAME="haveged"
 
 cd $SOURCE_DIR
 
-URL=http://downloads.sourceforge.net/project/haveged/haveged-1.9.1.tar.gz
+URL=https://downloads.sourceforge.net/haveged/haveged-1.9.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc http://downloads.sourceforge.net/project/haveged/haveged-1.9.1.tar.gz
+wget -nc https://downloads.sourceforge.net/haveged/haveged-1.9.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -56,7 +56,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://aryalinux.org/releases/2016.11/blfs-systemd-units-20160602.tar.bz2
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20160602.tar.bz2
 tar xf blfs-systemd-units-20160602.tar.bz2
 cd blfs-systemd-units-20160602
 make install-haveged

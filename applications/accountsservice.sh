@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The AccountsService packagebr3ak provides a set of D-Bus interfacesbr3ak for querying and manipulating user account information and anbr3ak implementation of those interfaces based on the usermod(8),br3ak useradd(8) and userdel(8) commands.br3ak"
 SECTION="gnome"
-VERSION=0.6.43
+VERSION=0.6.45
 NAME="accountsservice"
 
 #REQ:polkit
@@ -21,11 +21,11 @@ NAME="accountsservice"
 
 cd $SOURCE_DIR
 
-URL=http://www.freedesktop.org/software/accountsservice/accountsservice-0.6.43.tar.xz
+URL=https://www.freedesktop.org/software/accountsservice/accountsservice-0.6.45.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/accountsservice/accountsservice-0.6.43.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/accountsservice/accountsservice-0.6.43.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/accountsservice/accountsservice-0.6.43.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/accountsservice/accountsservice-0.6.43.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/accountsservice/accountsservice-0.6.43.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/accountsservice/accountsservice-0.6.43.tar.xz || wget -nc http://www.freedesktop.org/software/accountsservice/accountsservice-0.6.43.tar.xz
+wget -nc https://www.freedesktop.org/software/accountsservice/accountsservice-0.6.45.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/accountsservice/accountsservice-0.6.45.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/accountsservice/accountsservice-0.6.45.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/accountsservice/accountsservice-0.6.45.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/accountsservice/accountsservice-0.6.45.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/accountsservice/accountsservice-0.6.45.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/accountsservice/accountsservice-0.6.45.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

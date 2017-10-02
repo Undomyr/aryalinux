@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=y
 NAME=kde-desktop-environment
 DESCRIPTION="The KDE 5 Plasma Desktop environment"
-VERSION=5.8.4
+VERSION=5.9.1
 
 #REQ:gtk2
 #REQ:gtk3
@@ -102,10 +102,10 @@ Section  "InputClass"
 EndSection
 EOF
 
-if [ ! -f /usr/share/pixmaps/aryalinux.org ]
+if [ ! -f /usr/share/pixmaps/aryalinux.png ]
 then
 pushd /var/cache/alps/sources &&
-wget -nc aryalinux.org/releases/2016.04/aryalinux.png
+wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/misc/aryalinux.png
 sudo cp aryalinux.png /usr/share/pixmaps/
 popd
 fi

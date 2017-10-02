@@ -15,7 +15,7 @@ NAME="python-modules#pygtk"
 #REQ:python-modules#pygobject2
 #REQ:atk
 #REQ:pango
-#REQ:python-modules#py2cairo
+#REQ:python-modules#pycairo
 #REQ:gtk2
 #REQ:libglade
 #OPT:libxslt

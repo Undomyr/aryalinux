@@ -20,11 +20,12 @@ NAME="liboauth"
 
 cd $SOURCE_DIR
 
-URL=http://sourceforge.net/projects/liboauth/files/liboauth-1.0.3.tar.gz
+URL=https://downloads.sourceforge.net/liboauth/liboauth-1.0.3.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://sourceforge.net/projects/liboauth/files/liboauth-1.0.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz
+wget -nc https://downloads.sourceforge.net/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/liboauth/liboauth-1.0.3.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/liboauth-1.0.3-openssl-1.1.0-2.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/liboauth/liboauth-1.0.3-openssl-1.1.0-2.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -38,6 +39,9 @@ cd $DIRECTORY
 fi
 
 whoami > /tmp/currentuser
+
+patch -Np1 -i ../liboauth-1.0.3-openssl-1.1.0-2.patch
+
 
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make

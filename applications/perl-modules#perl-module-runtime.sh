@@ -9,8 +9,8 @@ set +h
 #REQ:perl-modules#perl-module-build
 
 SOURCE_ONLY=y
-URL="http://search.cpan.org//CPAN/authors/id/Z/ZE/ZEFRAM/Module-Runtime-0.014.tar.gz"
-VERSION=0.014
+URL="http://search.cpan.org//CPAN/authors/id/Z/ZE/ZEFRAM/Module-Runtime-0.015.tar.gz"
+VERSION=0.015
 NAME="perl-modules#perl-module-runtime"
 
 cd $SOURCE_DIR

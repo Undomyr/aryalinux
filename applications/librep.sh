@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The librep package contains a Lispbr3ak system. This is useful for scripting or for applications that maybr3ak use the Lisp interpreter as an extension language.br3ak"
 SECTION="general"
-VERSION=0.92.6
+VERSION=0.92.7
 NAME="librep"
 
 #OPT:libffi
@@ -17,11 +17,11 @@ NAME="librep"
 
 cd $SOURCE_DIR
 
-URL=http://download.tuxfamily.org/librep/librep_0.92.6.tar.xz
+URL=http://download.tuxfamily.org/librep/librep_0.92.7.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/librep/librep_0.92.6.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/librep/librep_0.92.6.tar.xz || wget -nc http://download.tuxfamily.org/librep/librep_0.92.6.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/librep/librep_0.92.6.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/librep/librep_0.92.6.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/librep/librep_0.92.6.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/librep/librep_0.92.6.tar.xz
+wget -nc http://download.tuxfamily.org/librep/librep_0.92.7.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/librep/librep_0.92.7.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/librep/librep_0.92.7.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/librep/librep_0.92.7.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/librep/librep_0.92.7.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/librep/librep_0.92.7.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/librep/librep_0.92.7.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -36,7 +36,7 @@ fi
 
 whoami > /tmp/currentuser
 
-./autogen.sh --prefix=/usr --disable-static &&
+./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make
 
 

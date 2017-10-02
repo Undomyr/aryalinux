@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Balsa package contains abr3ak GNOME-2 based mail client.br3ak"
 SECTION="xsoft"
-VERSION=2.5.2
+VERSION=2.5.3
 NAME="balsa"
 
 #REQ:aspell
@@ -31,11 +31,12 @@ NAME="balsa"
 
 cd $SOURCE_DIR
 
-URL=http://pawsa.fedorapeople.org/balsa/balsa-2.5.2.tar.bz2
+URL=http://pawsa.fedorapeople.org/balsa/balsa-2.5.3.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://pawsa.fedorapeople.org/balsa/balsa-2.5.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/balsa/balsa-2.5.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/balsa/balsa-2.5.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/balsa/balsa-2.5.2.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/balsa/balsa-2.5.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/balsa/balsa-2.5.2.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/balsa/balsa-2.5.2.tar.bz2
+wget -nc http://pawsa.fedorapeople.org/balsa/balsa-2.5.3.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/balsa/balsa-2.5.3.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/balsa/balsa-2.5.3.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/balsa/balsa-2.5.3.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/balsa/balsa-2.5.3.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/balsa/balsa-2.5.3.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/balsa/balsa-2.5.3.tar.bz2
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/balsa-2.5.3-openssl-1.1.0-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/balsa/balsa-2.5.3-openssl-1.1.0-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -50,13 +51,14 @@ fi
 
 whoami > /tmp/currentuser
 
+patch -Np1 -i ../balsa-2.5.3-openssl-1.1.0-1.patch
+
+
 ./configure --prefix=/usr            \
             --sysconfdir=/etc        \
             --localstatedir=/var/lib \
-            --with-rubrica           \
             --without-html-widget    \
-            --without-libnotify      \
-            --without-gtkspell       &&
+            --without-libnotify      &&
 make "-j`nproc`" || make
 
 

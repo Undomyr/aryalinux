@@ -17,11 +17,12 @@ NAME="clisp"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnu.org/pub/gnu/clisp/latest/clisp-2.49.tar.bz2
+URL=https://ftp.gnu.org/gnu/clisp/latest/clisp-2.49.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnu.org/pub/gnu/clisp/latest/clisp-2.49.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/clisp/clisp-2.49.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/clisp/clisp-2.49.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/clisp/clisp-2.49.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/clisp/clisp-2.49.tar.bz2 || wget -nc ftp://ftp.gnu.org/pub/gnu/clisp/latest/clisp-2.49.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/clisp/clisp-2.49.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/clisp/clisp-2.49.tar.bz2
+wget -nc https://ftp.gnu.org/gnu/clisp/latest/clisp-2.49.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/clisp/clisp-2.49.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/clisp/clisp-2.49.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/clisp/clisp-2.49.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/clisp/clisp-2.49.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/clisp/clisp-2.49.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/clisp/clisp-2.49.tar.bz2 || wget -nc ftp://ftp.gnu.org/gnu/clisp/latest/clisp-2.49.tar.bz2
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/clisp-2.49-readline7_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/clisp/clisp-2.49-readline7_fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -37,6 +38,9 @@ fi
 whoami > /tmp/currentuser
 
 sed -i -e '/socket/d' -e '/"streams"/d' tests/tests.lisp
+
+
+patch -Np1 -i ../clisp-2.49-readline7_fixes-1.patch
 
 
 mkdir build &&

@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Network Security Services (NSS) package is a set of libraries designed tobr3ak support cross-platform development of security-enabled client andbr3ak server applications. Applications built with NSS can support SSL v2br3ak and v3, TLS, PKCS #5, PKCS #7, PKCS #11, PKCS #12, S/MIME, X.509 v3br3ak certificates, and other security standards. This is useful forbr3ak implementing SSL and S/MIME or other Internet security standardsbr3ak into an application.br3ak"
 SECTION="postlfs"
-VERSION=3.27.2
+VERSION=3.32
 NAME="nss"
 
 #REQ:nspr
@@ -19,12 +19,12 @@ NAME="nss"
 
 cd $SOURCE_DIR
 
-URL=https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_27_2_RTM/src/nss-3.27.2.tar.gz
+URL=https://archive.mozilla.org/pub/security/nss/releases/NSS_3_32_RTM/src/nss-3.32.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nss/nss-3.27.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/nss/nss-3.27.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nss/nss-3.27.2.tar.gz || wget -nc https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_27_2_RTM/src/nss-3.27.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nss/nss-3.27.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nss/nss-3.27.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nss/nss-3.27.2.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/downloads/nss/nss-3.27.2-standalone-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/nss-3.27.2-standalone-1.patch
+wget -nc https://archive.mozilla.org/pub/security/nss/releases/NSS_3_32_RTM/src/nss-3.32.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nss/nss-3.32.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/nss/nss-3.32.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nss/nss-3.32.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nss/nss-3.32.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nss/nss-3.32.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nss/nss-3.32.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/nss-3.32-standalone-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/nss/nss-3.32-standalone-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -39,12 +39,13 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../nss-3.27.2-standalone-1.patch &&
+patch -Np1 -i ../nss-3.32-standalone-1.patch &&
 cd nss &&
 make -j1 BUILD_OPT=1                  \
   NSPR_INCLUDE_DIR=/usr/include/nspr  \
   USE_SYSTEM_ZLIB=1                   \
   ZLIB_LIBS=-lz                       \
+  NSS_ENABLE_WERROR=0                 \
   $([ $(uname -m) = x86_64 ] && echo USE_64=1) \
   $([ -f /usr/include/sqlite3.h ] && echo NSS_USE_SYSTEM_SQLITE=1)
 
@@ -68,9 +69,11 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-readlink /usr/lib/libnssckbi.so || \
-mv -v /usr/lib/libnssckbi.so /usr/lib/libnssckbi.so.orig &&
-ln -sfv libp11-kit.so /usr/lib/libnssckbi.so
+if [ -e /usr/lib/libp11-kit.so ]; then
+  readlink /usr/lib/libnssckbi.so ||
+  rm -v /usr/lib/libnssckbi.so    &&
+  ln -sfv ./pkcs11/p11-kit-trust.so /usr/lib/libnssckbi.so
+fi
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

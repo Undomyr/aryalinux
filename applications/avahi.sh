@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Avahi package is a systembr3ak which facilitates service discovery on a local network.br3ak"
 SECTION="basicnet"
-VERSION=0.6.32
+VERSION=0.7
 NAME="avahi"
 
 #REQ:glib2
@@ -24,11 +24,11 @@ NAME="avahi"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/lathiat/avahi/releases/download/v0.6.32/avahi-0.6.32.tar.gz
+URL=https://github.com/lathiat/avahi/releases/download/v0.7/avahi-0.7.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/lathiat/avahi/releases/download/v0.6.32/avahi-0.6.32.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/avahi/avahi-0.6.32.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/avahi/avahi-0.6.32.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/avahi/avahi-0.6.32.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/avahi/avahi-0.6.32.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/avahi/avahi-0.6.32.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/avahi/avahi-0.6.32.tar.gz
+wget -nc https://github.com/lathiat/avahi/releases/download/v0.7/avahi-0.7.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/avahi/avahi-0.7.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/avahi/avahi-0.7.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/avahi/avahi-0.7.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/avahi/avahi-0.7.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/avahi/avahi-0.7.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/avahi/avahi-0.7.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

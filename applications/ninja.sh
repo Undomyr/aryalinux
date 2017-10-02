@@ -20,11 +20,11 @@ NAME="ninja"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/ninja-build/ninja/archive/v1.7.2.tar.gz
+URL=https://github.com/ninja-build/ninja/archive/v1.7.2/ninja-1.7.2.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/ninja-build/ninja/archive/v1.7.2.tar.gz
+wget -nc https://github.com/ninja-build/ninja/archive/v1.7.2/ninja-1.7.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ninja/ninja-1.7.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ninja/ninja-1.7.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ninja/ninja-1.7.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ninja/ninja-1.7.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ninja/ninja-1.7.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ninja/ninja-1.7.2.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -38,10 +38,6 @@ cd $DIRECTORY
 fi
 
 whoami > /tmp/currentuser
-
-wget https://github.com/ninja-build/ninja/archive/v1.7.2.tar.gz \
-     -O ninja-1.7.2.tar.gz
-
 
 ./configure.py --bootstrap
 
@@ -58,7 +54,7 @@ emacs -Q --batch -f batch-byte-compile misc/ninja-mode.el
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -vm755 ninja /usr/bin/ &&
 install -vDm644 misc/ninja.vim \
-                /usr/share/vim/vim74/syntax/ninja.vim &&
+                /usr/share/vim/vim80/syntax/ninja.vim &&
 install -vDm644 misc/bash-completion \
                 /usr/share/bash-completion/completions/ninja &&
 install -vDm644 misc/zsh-completion \

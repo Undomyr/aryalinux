@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Audacious is an audio player.br3ak"
 SECTION="multimedia"
-VERSION=3.8.1
+VERSION=3.9
 NAME="audacious"
 
 #REQ:gtk2
@@ -17,9 +17,9 @@ NAME="audacious"
 #REQ:libxml2
 #REQ:xorg-server
 #REQ:mpg123
+#REC:mpg123
 #OPT:dbus
 #OPT:gnome-icon-theme
-#OPT:pcre
 #OPT:valgrind
 #OPT:curl
 #OPT:faad2
@@ -31,7 +31,6 @@ NAME="audacious"
 #OPT:libsamplerate
 #OPT:libsndfile
 #OPT:libvorbis
-#OPT:mpg123
 #OPT:neon
 #OPT:pulseaudio
 #OPT:sdl
@@ -39,12 +38,12 @@ NAME="audacious"
 
 cd $SOURCE_DIR
 
-URL=http://distfiles.audacious-media-player.org/audacious-3.8.1.tar.bz2
+URL=http://distfiles.audacious-media-player.org/audacious-3.9.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious/audacious-3.8.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/audacious/audacious-3.8.1.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/audacious/audacious-3.8.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/audacious/audacious-3.8.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious/audacious-3.8.1.tar.bz2 || wget -nc http://distfiles.audacious-media-player.org/audacious-3.8.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/audacious/audacious-3.8.1.tar.bz2
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.8.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.8.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.8.1.tar.bz2 || wget -nc http://distfiles.audacious-media-player.org/audacious-plugins-3.8.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/audacious-plugins/audacious-plugins-3.8.1.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/audacious-plugins/audacious-plugins-3.8.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.8.1.tar.bz2
+wget -nc http://distfiles.audacious-media-player.org/audacious-3.9.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/audacious/audacious-3.9.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/audacious/audacious-3.9.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious/audacious-3.9.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious/audacious-3.9.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/audacious/audacious-3.9.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/audacious/audacious-3.9.tar.bz2
+wget -nc http://distfiles.audacious-media-player.org/audacious-plugins-3.9.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/audacious-plugins/audacious-plugins-3.9.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/audacious-plugins/audacious-plugins-3.9.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.9.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.9.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.9.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/audacious-plugins/audacious-plugins-3.9.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -78,8 +77,8 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
-tar xf ../audacious-plugins-3.8.1.tar.bz2
-cd `tar -tf ../audacious-plugins-3.8.1.tar.bz2 | cut -d ' ' -f1 | uniq`
+tar xf ../audacious-plugins-3.9.tar.bz2
+cd `tar -tf ../audacious-plugins-3.9.tar.bz2 | cut -d ' ' -f1 | uniq`
 
 
 

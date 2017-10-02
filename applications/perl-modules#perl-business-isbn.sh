@@ -10,8 +10,8 @@ set +h
 #REQ:perl-modules#mojolicious
 
 SOURCE_ONLY=y
-URL="http://www.cpan.org/authors/id/B/BD/BDFOY/Business-ISBN-3.003.tar.gz"
-VERSION=3.003
+URL="https://www.cpan.org/authors/id/B/BD/BDFOY/Business-ISBN-3.004.tar.gz"
+VERSION=3.004
 NAME="perl-modules#perl-business-isbn"
 
 cd $SOURCE_DIR

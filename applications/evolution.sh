@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Evolution package contains anbr3ak integrated mail, calendar and address book suite designed for thebr3ak GNOME environment.br3ak"
 SECTION="gnome"
-VERSION=3.22.0
+VERSION=3.24.5
 NAME="evolution"
 
 #REQ:adwaita-icon-theme
@@ -27,22 +27,22 @@ NAME="evolution"
 #REC:libcanberra
 #REC:libgweather
 #REC:libnotify
+#REC:openldap
 #REC:seahorse
 #OPT:clutter-gtk
-#OPT:geoclue
+#OPT:geoclue2
 #OPT:geocode-glib
 #OPT:libchamplain
 #OPT:gtk-doc
-#OPT:openldap
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/evolution/3.22/evolution-3.22.0.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/evolution/3.24/evolution-3.24.5.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/evolution/evolution-3.22.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/evolution/evolution-3.22.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/evolution/3.22/evolution-3.22.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/evolution/evolution-3.22.0.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/evolution/3.22/evolution-3.22.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/evolution/evolution-3.22.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/evolution/evolution-3.22.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/evolution/evolution-3.22.0.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/evolution/3.24/evolution-3.24.5.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/evolution/evolution-3.24.5.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/evolution/evolution-3.24.5.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/evolution/evolution-3.24.5.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/evolution/evolution-3.24.5.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/evolution/evolution-3.24.5.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/evolution/evolution-3.24.5.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/evolution/3.24/evolution-3.24.5.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -57,11 +57,17 @@ fi
 
 whoami > /tmp/currentuser
 
-./configure --prefix=/usr         \
-            --sysconfdir=/etc     \
-            --disable-gtkspell    \
-            --disable-pst-import  \
-            --disable-libcryptui  &&
+mkdir build &&
+cd    build &&
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+      -DSYSCONF_INSTALL_DIR=/etc  \
+      -DENABLE_INSTALLED_TESTS=ON \
+      -DENABLE_LIBCRYPTUI=OFF     \
+      -DENABLE_PST_IMPORT=OFF     \
+      -DENABLE_GTKSPELL=OFF       \
+      -DENABLE_YTNEF=OFF          \
+      -DENABLE_CONTACT_MAPS=OFF   \
+      .. &&
 make "-j`nproc`" || make
 
 

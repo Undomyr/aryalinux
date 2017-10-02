@@ -9,18 +9,18 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The reiserfsprogs package containsbr3ak various utilities for use with the Reiser file system.br3ak"
 SECTION="postlfs"
-VERSION=3.6.25
+VERSION=3.6.27
 NAME="reiserfs"
 
 
 
 cd $SOURCE_DIR
 
-URL=https://www.kernel.org/pub/linux/kernel/people/jeffm/reiserfsprogs/v3.6.25/reiserfsprogs-3.6.25.tar.xz
+URL=https://www.kernel.org/pub/linux/kernel/people/jeffm/reiserfsprogs/v3.6.27/reiserfsprogs-3.6.27.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/reiserfsprogs/reiserfsprogs-3.6.25.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/reiserfsprogs/reiserfsprogs-3.6.25.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/reiserfsprogs/reiserfsprogs-3.6.25.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/reiserfsprogs/reiserfsprogs-3.6.25.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/reiserfsprogs/reiserfsprogs-3.6.25.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/reiserfsprogs/reiserfsprogs-3.6.25.tar.xz || wget -nc https://www.kernel.org/pub/linux/kernel/people/jeffm/reiserfsprogs/v3.6.25/reiserfsprogs-3.6.25.tar.xz
+wget -nc https://www.kernel.org/pub/linux/kernel/people/jeffm/reiserfsprogs/v3.6.27/reiserfsprogs-3.6.27.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/reiserfsprogs/reiserfsprogs-3.6.27.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/reiserfsprogs/reiserfsprogs-3.6.27.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/reiserfsprogs/reiserfsprogs-3.6.27.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/reiserfsprogs/reiserfsprogs-3.6.27.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/reiserfsprogs/reiserfsprogs-3.6.27.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/reiserfsprogs/reiserfsprogs-3.6.27.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -35,7 +35,7 @@ fi
 
 whoami > /tmp/currentuser
 
-CFLAGS="$CFLAGS -std=gnu89" \
+autoreconf -fiv             &&
 ./configure --prefix=/usr   \
             --sbindir=/sbin &&
 make "-j`nproc`" || make

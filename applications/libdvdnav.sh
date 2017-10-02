@@ -17,11 +17,11 @@ NAME="libdvdnav"
 
 cd $SOURCE_DIR
 
-URL=http://download.videolan.org/videolan/libdvdnav/5.0.3/libdvdnav-5.0.3.tar.bz2
+URL=https://get.videolan.org/libdvdnav/5.0.3/libdvdnav-5.0.3.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libdv/libdvdnav-5.0.3.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libdv/libdvdnav-5.0.3.tar.bz2 || wget -nc http://download.videolan.org/videolan/libdvdnav/5.0.3/libdvdnav-5.0.3.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libdv/libdvdnav-5.0.3.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libdv/libdvdnav-5.0.3.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libdv/libdvdnav-5.0.3.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libdv/libdvdnav-5.0.3.tar.bz2
+wget -nc https://get.videolan.org/libdvdnav/5.0.3/libdvdnav-5.0.3.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libdv/libdvdnav-5.0.3.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libdv/libdvdnav-5.0.3.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libdv/libdvdnav-5.0.3.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libdv/libdvdnav-5.0.3.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libdv/libdvdnav-5.0.3.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libdv/libdvdnav-5.0.3.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

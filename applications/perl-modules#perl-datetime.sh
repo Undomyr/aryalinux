@@ -6,13 +6,16 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#REQ:perl-modules#perl-module-runtime
-#REQ:perl-modules#perl-sub-identify
 #REQ:perl-modules#cpan-meta-check
+#REQ:perl-modules#perl-module-implementation
+#REQ:perl-modules#perl-test-needs
+#REQ:perl-modules#params-validationcompiler
+#REQ:perl-modules#perl-module-build
+#REQ:perl-modules#perl-try-tiny
 
 SOURCE_ONLY=y
-URL="http://search.cpan.org//CPAN/authors/id/D/DR/DROLSKY/DateTime-1.42.tar.gz"
-VERSION=1.42
+URL="http://search.cpan.org//CPAN/authors/id/D/DR/DROLSKY/DateTime-1.44.tar.gz"
+VERSION=1.44
 NAME="perl-modules#perl-datetime"
 
 cd $SOURCE_DIR

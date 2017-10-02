@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Cheese is used to take photos andbr3ak videos with fun graphical effects.br3ak"
 SECTION="gnome"
-VERSION=3.22.0
+VERSION=3.24.0
 NAME="cheese"
 
 #REQ:clutter-gst
@@ -24,19 +24,19 @@ NAME="cheese"
 #REQ:libgudev
 #REQ:librsvg
 #REQ:clutter-gst2
-#REC:appstream-glib
 #REC:gobject-introspection
 #REC:vala
 #OPT:gtk-doc
+#OPT:libxslt
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/cheese/3.22/cheese-3.22.0.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/cheese/3.24/cheese-3.24.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/cheese/cheese-3.22.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cheese/cheese-3.22.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cheese/cheese-3.22.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cheese/cheese-3.22.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cheese/cheese-3.22.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/cheese/3.22/cheese-3.22.0.tar.xz || wget -nc http://ftp.gnome.org/pub/gnome/sources/cheese/3.22/cheese-3.22.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cheese/cheese-3.22.0.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/cheese/3.24/cheese-3.24.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cheese/cheese-3.24.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/cheese/cheese-3.24.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cheese/cheese-3.24.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cheese/cheese-3.24.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cheese/cheese-3.24.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cheese/cheese-3.24.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/cheese/3.24/cheese-3.24.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

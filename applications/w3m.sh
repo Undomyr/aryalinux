@@ -14,7 +14,7 @@ NAME="w3m"
 
 #REQ:gc
 #OPT:gpm
-#OPT:openssl
+#OPT:openssl10
 #OPT:imlib2
 #OPT:gtk2
 #OPT:gdk-pixbuf
@@ -23,12 +23,12 @@ NAME="w3m"
 
 cd $SOURCE_DIR
 
-URL=http://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz
+URL=https://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc http://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/downloads/w3m/w3m-0.5.3-bdwgc72-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/w3m-0.5.3-bdwgc72-1.patch
+wget -nc https://downloads.sourceforge.net/w3m/w3m-0.5.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/w3m/w3m-0.5.3.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/w3m-0.5.3-bdwgc72-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/w3m/w3m-0.5.3-bdwgc72-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -46,7 +46,8 @@ whoami > /tmp/currentuser
 patch -Np1 -i ../w3m-0.5.3-bdwgc72-1.patch &&
 sed -i 's/file_handle/file_foo/' istream.{c,h} &&
 sed -i 's#gdk-pixbuf-xlib-2.0#& x11#' configure &&
-./configure --prefix=/usr --sysconfdir=/etc &&
+PKG_CONFIG_PATH="/usr/lib/openssl-1.0/pkgconfig:$PKG_CONFIG_PATH" \
+    ./configure --prefix=/usr --sysconfdir=/etc  &&
 make "-j`nproc`" || make
 
 

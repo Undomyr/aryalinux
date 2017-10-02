@@ -8,8 +8,8 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/HTTP-Cookies-6.01.tar.gz"
-VERSION=6.01
+URL="http://search.cpan.org/CPAN/authors/id/O/OA/OALDERS/HTTP-Cookies-6.04.tar.gz"
+VERSION=6.04
 NAME="perl-modules#http-cookies"
 
 cd $SOURCE_DIR

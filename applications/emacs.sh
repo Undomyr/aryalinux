@@ -9,20 +9,20 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Emacs package contains anbr3ak extensible, customizable, self-documenting real-time displaybr3ak editor.br3ak"
 SECTION="postlfs"
-VERSION=25.1
+VERSION=25.2
 NAME="emacs"
 
+#REC:giflib
 #OPT:alsa-lib
 #OPT:dbus
 #OPT:GConf
-#OPT:giflib
 #OPT:gnutls
 #OPT:gobject-introspection
 #OPT:gsettings-desktop-schemas
 #OPT:gpm
 #OPT:gtk2
 #OPT:gtk3
-#OPT:imagemagick
+#OPT:imagemagick6
 #OPT:libjpeg
 #OPT:libpng
 #OPT:librsvg
@@ -35,11 +35,11 @@ NAME="emacs"
 
 cd $SOURCE_DIR
 
-URL=https://ftp.gnu.org/pub/gnu/emacs/emacs-25.1.tar.xz
+URL=https://ftp.gnu.org/gnu/emacs/emacs-25.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/emacs/emacs-25.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/emacs/emacs-25.1.tar.xz || wget -nc ftp://ftp.gnu.org/pub/gnu/emacs/emacs-25.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/emacs/emacs-25.1.tar.xz || wget -nc https://ftp.gnu.org/pub/gnu/emacs/emacs-25.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/emacs/emacs-25.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/emacs/emacs-25.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/emacs/emacs-25.1.tar.xz
+wget -nc https://ftp.gnu.org/gnu/emacs/emacs-25.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/emacs/emacs-25.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/emacs/emacs-25.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/emacs/emacs-25.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/emacs/emacs-25.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/emacs/emacs-25.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/emacs/emacs-25.2.tar.xz || wget -nc ftp://ftp.gnu.org/gnu/emacs/emacs-25.2.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -54,7 +54,6 @@ fi
 
 whoami > /tmp/currentuser
 
-./autogen.sh                                   &&
 ./configure --prefix=/usr --localstatedir=/var &&
 make "-j`nproc`" || make
 
@@ -62,7 +61,7 @@ make "-j`nproc`" || make
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
-chown -v -R root:root /usr/share/emacs/25.1
+chown -v -R root:root /usr/share/emacs/25.2
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

@@ -6,12 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#REQ:perl-modules#perl-xml-sax
 #REQ:perl-modules#perl-xml-libxml
 #REQ:perl-modules#file-slurp-tiny
 
 SOURCE_ONLY=y
-URL="http://cpan.org/authors/id/M/MA/MARKOV/XML-LibXML-Simple-0.97.tar.gz"
+URL="https://www.cpan.org/authors/id/G/GR/GRANTM/XML-LibXML-Simple-0.97.tar.gz"
 VERSION=0.97
 NAME="perl-modules#perl-xml-libxml-simple"
 

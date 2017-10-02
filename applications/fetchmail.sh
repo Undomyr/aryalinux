@@ -20,11 +20,12 @@ NAME="fetchmail"
 
 cd $SOURCE_DIR
 
-URL=http://downloads.sourceforge.net/fetchmail/fetchmail-6.3.26.tar.xz
+URL=https://downloads.sourceforge.net/fetchmail/fetchmail-6.3.26.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.at.gnucash.org/pub/infosys/mail/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc http://downloads.sourceforge.net/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz
+wget -nc https://downloads.sourceforge.net/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fetchmail/fetchmail-6.3.26.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/fetchmail-6.3.26-disable_sslv3-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/fetchmail/fetchmail-6.3.26-disable_sslv3-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -39,6 +40,7 @@ fi
 
 whoami > /tmp/currentuser
 
+patch -Np1 -i ../fetchmail-6.3.26-disable_sslv3-1.patch &&
 ./configure --prefix=/usr --with-ssl --enable-fallback=procmail &&
 make "-j`nproc`" || make
 

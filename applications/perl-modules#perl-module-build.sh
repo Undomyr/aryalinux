@@ -8,8 +8,8 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="http://www.cpan.org/authors/id/L/LE/LEONT/Module-Build-0.4220.tar.gz"
-VERSION=0.4220
+URL="https://www.cpan.org/authors/id/L/LE/LEONT/Module-Build-0.4224.tar.gz"
+VERSION=0.4224
 NAME="perl-modules#perl-module-build"
 
 cd $SOURCE_DIR

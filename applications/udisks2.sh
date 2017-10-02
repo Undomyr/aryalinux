@@ -9,28 +9,33 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The UDisks package provides abr3ak daemon, tools and libraries to access and manipulate disks andbr3ak storage devices.br3ak"
 SECTION="general"
-VERSION=2.1.8
+VERSION=2.7.2
 NAME="udisks2"
 
 #REQ:libatasmart
+#REQ:libblockdev
 #REQ:libgudev
 #REQ:libxslt
 #REQ:polkit
+#REQ:btrfs-progs
+#REQ:dosfstools
+#REQ:gptfdisk
+#REQ:mdadm
+#REQ:xfsprogs
 #REC:systemd
 #OPT:gobject-introspection
-#OPT:gptfdisk
 #OPT:gtk-doc
+#OPT:lvm2
 #OPT:ntfs-3g
-#OPT:parted
 
 
 cd $SOURCE_DIR
 
-URL=http://udisks.freedesktop.org/releases/udisks-2.1.8.tar.bz2
+URL=https://github.com/storaged-project/udisks/releases/download/udisks-2.7.2/udisks-2.7.2.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-2.1.8.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/udisks/udisks-2.1.8.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/udisks/udisks-2.1.8.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/udisks/udisks-2.1.8.tar.bz2 || wget -nc http://udisks.freedesktop.org/releases/udisks-2.1.8.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/udisks/udisks-2.1.8.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-2.1.8.tar.bz2
+wget -nc https://github.com/storaged-project/udisks/releases/download/udisks-2.7.2/udisks-2.7.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/udisks/udisks-2.7.2.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/udisks/udisks-2.7.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-2.7.2.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/udisks/udisks-2.7.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/udisks/udisks-2.7.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/udisks/udisks-2.7.2.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

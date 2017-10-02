@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Download (HTTP): <a class=\"ulink\" href=\"http://ftp.gnu.org/gnu/which/which-2.21.tar.gz\">http://ftp.gnu.org/gnu/which/which-2.21.tar.gz</a>br3ak"
+DESCRIPTION="br3ak Download (HTTP): <a class=\"ulink\" href=\"https://ftp.gnu.org/gnu/which/which-2.21.tar.gz\">https://ftp.gnu.org/gnu/which/which-2.21.tar.gz</a>br3ak"
 SECTION="general"
 VERSION=2.21
 NAME="general_which"
@@ -16,11 +16,11 @@ NAME="general_which"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnu.org/gnu/which/which-2.21.tar.gz
+URL=https://ftp.gnu.org/gnu/which/which-2.21.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnu.org/gnu/which/which-2.21.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/which/which-2.21.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/which/which-2.21.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/which/which-2.21.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/which/which-2.21.tar.gz || wget -nc ftp://ftp.gnu.org/gnu/which/which-2.21.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/which/which-2.21.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/which/which-2.21.tar.gz
+wget -nc https://ftp.gnu.org/gnu/which/which-2.21.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/which/which-2.21.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/which/which-2.21.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/which/which-2.21.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/which/which-2.21.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/which/which-2.21.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/which/which-2.21.tar.gz || wget -nc ftp://ftp.gnu.org/gnu/which/which-2.21.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

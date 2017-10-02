@@ -13,7 +13,7 @@ VERSION=8.15.2
 NAME="sendmail"
 
 #REQ:openldap
-#REC:openssl
+#REC:openssl10
 #REC:cyrus-sasl
 #OPT:gs
 #OPT:procmail
@@ -25,7 +25,7 @@ URL=ftp://ftp.sendmail.org/pub/sendmail/sendmail.8.15.2.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sendmail/sendmail.8.15.2.tar.gz || wget -nc ftp://ftp.sendmail.org/pub/sendmail/sendmail.8.15.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/sendmail/sendmail.8.15.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sendmail/sendmail.8.15.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sendmail/sendmail.8.15.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sendmail/sendmail.8.15.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sendmail/sendmail.8.15.2.tar.gz
+wget -nc ftp://ftp.sendmail.org/pub/sendmail/sendmail.8.15.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sendmail/sendmail.8.15.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/sendmail/sendmail.8.15.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sendmail/sendmail.8.15.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sendmail/sendmail.8.15.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sendmail/sendmail.8.15.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sendmail/sendmail.8.15.2.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -56,8 +56,8 @@ sudo rm rootscript.sh
 
 cat >> devtools/Site/site.config.m4 << "EOF"
 APPENDDEF(`confENVDEF',`-DSTARTTLS -DSASL -DLDAPMAP')
-APPENDDEF(`confLIBS', `-lssl -lcrypto -lsasl2 -lldap -llber -ldb')
-APPENDDEF(`confINCDIRS', `-I/usr/include/sasl')
+APPENDDEF(`confLIBS', `-L/usr/lib/openssl-1.0 -lssl -lcrypto -lsasl2 -lldap -llber -ldb')
+APPENDDEF(`confINCDIRS', `-I/usr/include/sasl -I/usr/include/openssl-1.0')
 EOF
 
 
@@ -154,7 +154,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://aryalinux.org/releases/2016.11/blfs-systemd-units-20160602.tar.bz2
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20160602.tar.bz2
 tar xf blfs-systemd-units-20160602.tar.bz2
 cd blfs-systemd-units-20160602
 make install-sendmail

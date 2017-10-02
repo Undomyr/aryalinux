@@ -82,6 +82,7 @@ export HISTIGNORE="&:[bf]g:exit"
 # Set some defaults for graphical systems
 export XDG_DATA_DIRS=/usr/share/
 export XDG_CONFIG_DIRS=/etc/xdg/
+export XDG_RUNTIME_DIR=/tmp/xdg-$USER
 # Setup a red prompt for root and a green one for users.
 NORMAL="\[\e[0m\]"
 RED="\[\e[1;31m\]"
@@ -109,6 +110,35 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install --directory --mode=0755 --owner=root --group=root /etc/profile.d
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+cat > /etc/profile.d/bash_completion.sh << "EOF"
+# Begin /etc/profile.d/bash_completion.sh
+# Import bash completion scripts
+for script in /etc/bash_completion.d/*.sh ; do
+ if [ -r $script ] ; then
+ . $script
+ fi
+done
+# End /etc/profile.d/bash_completion.sh
+EOF
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+install --directory --mode=0755 --owner=root --group=root /etc/bash_completion.d
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -253,6 +283,18 @@ fi
 EOF
 
 
+cat > ~/.profile << "EOF"
+# Begin ~/.profile
+# Personal environment variables and startup programs.
+if [ -d "$HOME/bin" ] ; then
+ pathprepend $HOME/bin
+fi
+# Set up user specific i18n variables
+#export LANG=<em class="replaceable"><code><ll></em>_<em class="replaceable"><code><CC></em>.<em class="replaceable"><code><charmap></em><em class="replaceable"><code><@modifiers></em>
+# End ~/.profile
+EOF
+
+
 cat > ~/.bashrc << "EOF"
 # Begin ~/.bashrc
 # Written for Beyond Linux From Scratch
@@ -265,6 +307,8 @@ cat > ~/.bashrc << "EOF"
 if [ -f "/etc/bashrc" ] ; then
  source /etc/bashrc
 fi
+# Set up user specific i18n variables
+#export LANG=<em class="replaceable"><code><ll></em>_<em class="replaceable"><code><CC></em>.<em class="replaceable"><code><charmap></em><em class="replaceable"><code><@modifiers></em>
 # End ~/.bashrc
 EOF
 

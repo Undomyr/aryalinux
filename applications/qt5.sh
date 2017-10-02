@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Qt5 is a cross-platformbr3ak application framework that is widely used for developingbr3ak application software with a graphical user interface (GUI) (inbr3ak which cases Qt5 is classified as abr3ak widget toolkit), and also used for developing non-GUI programs suchbr3ak as command-line tools and consoles for servers. One of the majorbr3ak users of Qt is KDE Frameworks 5 (KF5).br3ak"
 SECTION="x"
-VERSION=5.7.1
+VERSION=5.9.1
 NAME="qt5"
 
 #REQ:python2
@@ -29,9 +29,8 @@ NAME="qt5"
 #REC:libxkbcommon
 #REC:mesa
 #REC:mtdev
-#REC:nss
-#REC:openssl
-#REC:pcre
+#REC:openssl10
+#REC:pcre2
 #REC:sqlite
 #REC:wayland
 #REC:xcb-util-image
@@ -50,11 +49,11 @@ NAME="qt5"
 
 cd $SOURCE_DIR
 
-URL=http://download.qt.io/archive/qt/5.7/5.7.1/single/qt-everywhere-opensource-src-5.7.1.tar.xz
+URL=https://download.qt.io/archive/qt/5.9/5.9.1/single/qt-everywhere-opensource-src-5.9.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://download.qt.io/archive/qt/5.7/5.7.1/single/qt-everywhere-opensource-src-5.7.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.7.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.7.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.7.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.7.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.7.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.7.1.tar.xz
+wget -nc https://download.qt.io/archive/qt/5.9/5.9.1/single/qt-everywhere-opensource-src-5.9.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.9.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.9.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.9.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.9.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.9.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.9.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -74,8 +73,8 @@ export QT5PREFIX=/opt/qt5
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mkdir /opt/qt-5.7.1
-ln -sfnv qt-5.7.1 /opt/qt5
+mkdir /opt/qt-5.9.1
+ln -sfnv qt-5.9.1 /opt/qt5
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -83,17 +82,31 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
-./configure -prefix         /opt/qt5 \
-            -sysconfdir     /etc/xdg   \
-            -confirm-license           \
-            -opensource                \
-            -dbus-linked               \
-            -openssl-linked            \
-            -system-harfbuzz           \
-            -system-sqlite             \
-            -nomake examples           \
-            -no-rpath                  \
-            -skip qtwebengine          &&
+-archdatadir    /usr/lib/qt5                \
+            -bindir         /usr/bin                    \
+            -plugindir      /usr/lib/qt5/plugins        \
+            -importdir      /usr/lib/qt5/imports        \
+            -headerdir      /usr/include/qt5            \
+            -datadir        /usr/share/qt5              \
+            -docdir         /usr/share/doc/qt5          \
+            -translationdir /usr/share/qt5/translations \
+            -examplesdir    /usr/share/doc/qt5/examples
+
+
+echo "INCLUDEPATH += /usr/include/openssl-1.0" >>           \
+                     qtbase/src/network/network.pro         &&
+export OPENSSL_LIBS='-L/usr/lib/openssl-1.0 -lssl -lcrypto' &&
+./configure -prefix /opt/qt5                          \
+            -sysconfdir /etc/xdg                        \
+            -confirm-license                            \
+            -opensource                                 \
+            -dbus-linked                                \
+            -openssl-linked                             \
+            -system-harfbuzz                            \
+            -system-sqlite                              \
+            -nomake examples                            \
+            -no-rpath                                   \
+            -skip qtwebengine                           &&
 make "-j`nproc`" || make
 
 
@@ -109,18 +122,6 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-find /opt/qt5/lib/pkgconfig -name "*.pc" -exec perl -pi -e "s, -L$PWD/?\S+,,g" {} \;
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-find /opt/qt5/ -name qt_lib_bootstrap_private.pri \
-   -exec sed -i -e "s:$PWD/qtbase://opt/qt5/lib/:g" {} \; &&
 find /opt/qt5/ -name \*.prl \
    -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 
@@ -212,11 +213,11 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-cat > /etc/profile.d/qt5.sh << EOF
+cat > /etc/profile.d/qt5.sh << "EOF"
 # Begin /etc/profile.d/qt5.sh
 QT5DIR=/opt/qt5
 export QT5DIR
-pathappend /opt/qt5/bin/qt5
+pathappend /opt/qt5/bin
 # End /etc/profile.d/qt5.sh
 EOF
 

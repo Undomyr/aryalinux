@@ -9,18 +9,18 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Xdg-user-dirs is a tool to helpbr3ak manage “<span class=\"quote\">well known” userbr3ak directories like the desktop folder and the music folder. It alsobr3ak handles localization (i.e. translation) of the filenames.br3ak"
 SECTION="general"
-VERSION=0.15
+VERSION=0.16
 NAME="xdg-user-dirs"
 
 
 
 cd $SOURCE_DIR
 
-URL=http://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.15.tar.gz
+URL=https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.16.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.15.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.15.tar.gz
+wget -nc https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.16.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.16.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.16.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.16.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.16.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.16.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xdg-user-dirs/xdg-user-dirs-0.16.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

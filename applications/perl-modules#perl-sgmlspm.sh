@@ -8,7 +8,7 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="http://anduin.linuxfromscratch.org/BLFS/perl-modules/SGMLSpm-1.1.tar.gz"
+URL="https://www.cpan.org/authors/id/R/RA/RAAB/SGMLSpm-1.1.tar.gz"
 VERSION=1.1
 NAME="perl-modules#perl-sgmlspm"
 

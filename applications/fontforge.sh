@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The FontForge package contains anbr3ak outline font editor that lets you create your own postscript,br3ak truetype, opentype, cid-keyed, multi-master, cff, svg and bitmapbr3ak (bdf, FON, NFNT) fonts, or edit existing ones.br3ak"
 SECTION="xsoft"
-VERSION=20161004
+VERSION=20170731
 NAME="fontforge"
 
 #REQ:freetype2
@@ -32,11 +32,11 @@ NAME="fontforge"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/fontforge/fontforge/releases/download/20161005/fontforge-dist-20161004.tar.gz
+URL=https://github.com/fontforge/fontforge/releases/download/20170731/fontforge-dist-20170731.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz || wget -nc https://github.com/fontforge/fontforge/releases/download/20161005/fontforge-dist-20161004.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/fontforge/fontforge-dist-20161004.tar.gz
+wget -nc https://github.com/fontforge/fontforge/releases/download/20170731/fontforge-dist-20170731.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fontforge/fontforge-dist-20170731.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/fontforge/fontforge-dist-20170731.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fontforge/fontforge-dist-20170731.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fontforge/fontforge-dist-20170731.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fontforge/fontforge-dist-20170731.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fontforge/fontforge-dist-20170731.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -54,7 +54,7 @@ whoami > /tmp/currentuser
 ./configure --prefix=/usr     \
             --enable-gtk2-use \
             --disable-static  \
-            --docdir=/usr/share/doc/fontforge-20161004 &&
+            --docdir=/usr/share/doc/fontforge-20170731 &&
 make "-j`nproc`" || make
 
 

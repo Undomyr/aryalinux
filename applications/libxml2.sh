@@ -14,6 +14,7 @@ NAME="libxml2"
 
 #REC:python2
 #REC:python3
+#OPT:icu
 #OPT:valgrind
 
 
@@ -23,7 +24,7 @@ URL=http://xmlsoft.org/sources/libxml2-2.9.4.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc http://xmlsoft.org/sources/libxml2-2.9.4.tar.gz || wget -nc ftp://xmlsoft.org/libxml2/libxml2-2.9.4.tar.gz
+wget -nc http://xmlsoft.org/sources/libxml2-2.9.4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libxml/libxml2-2.9.4.tar.gz || wget -nc ftp://xmlsoft.org/libxml2/libxml2-2.9.4.tar.gz
 wget -nc http://www.w3.org/XML/Test/xmlts20130923.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
@@ -38,6 +39,9 @@ cd $DIRECTORY
 fi
 
 whoami > /tmp/currentuser
+
+sed -i '/_PyVerify_fd/,+1d' python/types.c
+
 
 ./configure --prefix=/usr --disable-static --with-history &&
 make "-j`nproc`" || make

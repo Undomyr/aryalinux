@@ -9,23 +9,23 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The liblxqt is the core utilitybr3ak library for all LXQt components.br3ak"
 SECTION="lxqt"
-VERSION=0.11.0
+VERSION=0.11.1
 NAME="liblxqt"
 
 #REQ:libqtxdg
 #REQ:lxqt-kwindowsystem
-#REQ:kframeworks5
+#REQ:lxqt-l10n
 #OPT:git
 #OPT:lxqt-l10n
 
 
 cd $SOURCE_DIR
 
-URL=http://downloads.lxqt.org/lxqt/0.11.0/liblxqt-0.11.0.tar.xz
+URL=https://github.com/lxde/liblxqt/releases/download/0.11.1/liblxqt-0.11.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://downloads.lxqt.org/lxqt/0.11.0/liblxqt-0.11.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/liblxqt/liblxqt-0.11.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/liblxqt/liblxqt-0.11.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/liblxqt/liblxqt-0.11.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/liblxqt/liblxqt-0.11.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/liblxqt/liblxqt-0.11.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/liblxqt/liblxqt-0.11.0.tar.xz
+wget -nc https://github.com/lxde/liblxqt/releases/download/0.11.1/liblxqt-0.11.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/liblxqt/liblxqt-0.11.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/liblxqt/liblxqt-0.11.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/liblxqt/liblxqt-0.11.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/liblxqt/liblxqt-0.11.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/liblxqt/liblxqt-0.11.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/liblxqt/liblxqt-0.11.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -37,6 +37,18 @@ else
 fi
 cd $DIRECTORY
 fi
+
+export QT5DIR=/opt/qt5
+export LXQT_PREFIX=/opt/lxqt
+pathappend /opt/lxqt/bin           PATH
+pathappend /opt/lxqt/share/man/    MANPATH
+pathappend /opt/lxqt/lib/pkgconfig PKG_CONFIG_PATH
+pathappend /opt/lxqt/lib/plugins   QT_PLUGIN_PATH
+pathappend $QT5DIR/plugins         QT_PLUGIN_PATH
+pathappend /opt/lxqt/lib LD_LIBRARY_PATH
+pathappend /opt/qt5/lib LD_LIBRARY_PATH
+pathappend /opt/qt5/lib/pkgconfig PKG_CONFIG_PATH
+pathappend /opt/lxqt/lib/pkgconfig PKG_CONFIG_PATH
 
 whoami > /tmp/currentuser
 

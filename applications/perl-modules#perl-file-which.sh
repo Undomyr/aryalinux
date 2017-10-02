@@ -8,7 +8,7 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="http://cpan.metacpan.org/authors/id/P/PL/PLICEASE/File-Which-1.21.tar.gz"
+URL="https://www.cpan.org/authors/id/P/PL/PLICEASE/File-Which-1.21.tar.gz"
 VERSION=1.21
 NAME="perl-modules#perl-file-which"
 

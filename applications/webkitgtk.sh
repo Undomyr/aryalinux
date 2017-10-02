@@ -9,11 +9,12 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The WebKitGTK+ package is a portbr3ak of the portable web rendering engine WebKit to the GTK+br3ak 3 and GTK+ 2 platforms.br3ak"
 SECTION="x"
-VERSION=2.14.2
+VERSION=2.16.6
 NAME="webkitgtk"
 
 #REQ:cairo
 #REQ:cmake
+#REQ:enchant
 #REQ:gst10-plugins-base
 #REQ:gtk2
 #REQ:gtk3
@@ -26,25 +27,23 @@ NAME="webkitgtk"
 #REQ:ruby
 #REQ:sqlite
 #REQ:general_which
-#REC:enchant
 #REC:geoclue2
-#REC:geoclue
 #REC:gobject-introspection
 #REC:hicolor-icon-theme
+#REC:libnotify
 #OPT:gtk-doc
 #OPT:harfbuzz
-#OPT:libnotify
 #OPT:llvm
 #OPT:wayland
 
 
 cd $SOURCE_DIR
 
-URL=http://webkitgtk.org/releases/webkitgtk-2.14.2.tar.xz
+URL=https://webkitgtk.org/releases/webkitgtk-2.16.6.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/webkit/webkitgtk-2.14.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/webkit/webkitgtk-2.14.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/webkit/webkitgtk-2.14.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/webkit/webkitgtk-2.14.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/webkit/webkitgtk-2.14.2.tar.xz || wget -nc http://webkitgtk.org/releases/webkitgtk-2.14.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/webkit/webkitgtk-2.14.2.tar.xz
+wget -nc https://webkitgtk.org/releases/webkitgtk-2.16.6.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/webkit/webkitgtk-2.16.6.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/webkit/webkitgtk-2.16.6.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/webkit/webkitgtk-2.16.6.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/webkit/webkitgtk-2.16.6.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/webkit/webkitgtk-2.16.6.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/webkit/webkitgtk-2.16.6.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -59,8 +58,17 @@ fi
 
 whoami > /tmp/currentuser
 
+sed -i 's/unsigned short/char16_t/'            \
+       Source/JavaScriptCore/API/JSStringRef.h \
+       Source/WebKit2/Shared/API/c/WKString.h  &&
+sed -i '/stdbool.h/ a#include <uchar.h>' \
+       Source/JavaScriptCore/API/JSBase.h
+
+
 mkdir -vp build &&
 cd        build &&
+CFLAGS=-Wno-expansion-to-defined  \
+CXXFLAGS=-Wno-expansion-to-defined \
 cmake -DCMAKE_BUILD_TYPE=Release  \
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_SKIP_RPATH=ON       \

@@ -18,11 +18,11 @@ NAME="python-modules#pyxdg"
 
 cd $SOURCE_DIR
 
-URL=http://people.freedesktop.org/~takluyver/pyxdg-0.25.tar.gz
+URL=https://people.freedesktop.org/~takluyver/pyxdg-0.25.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://people.freedesktop.org/~takluyver/pyxdg-0.25.tar.gz
+wget -nc https://people.freedesktop.org/~takluyver/pyxdg-0.25.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

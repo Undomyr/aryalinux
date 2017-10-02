@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The libao package contains abr3ak cross-platform audio library. This is useful to output audio on abr3ak wide variety of platforms. It currently supports WAV files, OSSbr3ak (Open Sound System), ESD (Enlighten Sound Daemon), ALSA (Advancedbr3ak Linux Sound Architecture), NAS (Network Audio system), aRTS (analogbr3ak Real-Time Synthesizer and PulseAudio (next generation GNOME sound architecture).br3ak"
+DESCRIPTION="br3ak The libao package contains abr3ak cross-platform audio library. This is useful to output audio on abr3ak wide variety of platforms. It currently supports WAV files, OSSbr3ak (Open Sound System), ESD (Enlighten Sound Daemon), ALSA (Advancedbr3ak Linux Sound Architecture), NAS (Network Audio system), aRTS (analogbr3ak Real-Time Synthesizer), and PulseAudio (next generationbr3ak GNOME sound architecture).br3ak"
 SECTION="multimedia"
 VERSION=1.2.0
 NAME="libao"
@@ -18,11 +18,11 @@ NAME="libao"
 
 cd $SOURCE_DIR
 
-URL=http://downloads.xiph.org/releases/ao/libao-1.2.0.tar.gz
+URL=https://downloads.xiph.org/releases/ao/libao-1.2.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libao/libao-1.2.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libao/libao-1.2.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libao/libao-1.2.0.tar.gz || wget -nc http://downloads.xiph.org/releases/ao/libao-1.2.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libao/libao-1.2.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libao/libao-1.2.0.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libao/libao-1.2.0.tar.gz
+wget -nc https://downloads.xiph.org/releases/ao/libao-1.2.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libao/libao-1.2.0.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libao/libao-1.2.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libao/libao-1.2.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libao/libao-1.2.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libao/libao-1.2.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libao/libao-1.2.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

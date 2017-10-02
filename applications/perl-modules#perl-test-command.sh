@@ -8,7 +8,7 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="http://www.cpan.org/authors/id/D/DA/DANBOO/Test-Command-0.11.tar.gz"
+URL="https://www.cpan.org/authors/id/D/DA/DANBOO/Test-Command-0.11.tar.gz"
 VERSION=0.11
 NAME="perl-modules#perl-test-command"
 

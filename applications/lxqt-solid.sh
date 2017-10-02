@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Solid is a device integrationbr3ak framework. It provides a way of querying and interacting withbr3ak hardware independently of the underlying operating system.br3ak"
 SECTION="lxqt"
-VERSION=5.28.0
+VERSION=5.37.0
 NAME="lxqt-solid"
 
 #REQ:extra-cmake-modules
@@ -20,11 +20,11 @@ NAME="lxqt-solid"
 
 cd $SOURCE_DIR
 
-URL=http://download.kde.org/stable/frameworks/5.28/solid-5.28.0.tar.xz
+URL=http://download.kde.org/stable/frameworks/5.37/solid-5.37.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/solid/solid-5.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/solid/solid-5.28.0.tar.xz || wget -nc http://download.kde.org/stable/frameworks/5.28/solid-5.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/solid/solid-5.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/solid/solid-5.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/solid/solid-5.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/solid/solid-5.28.0.tar.xz
+wget -nc http://download.kde.org/stable/frameworks/5.37/solid-5.37.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/solid/solid-5.37.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/solid/solid-5.37.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/solid/solid-5.37.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/solid/solid-5.37.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/solid/solid-5.37.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/solid/solid-5.37.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -37,13 +37,24 @@ fi
 cd $DIRECTORY
 fi
 
+export QT5DIR=/opt/qt5
+export LXQT_PREFIX=/opt/lxqt
+pathappend /opt/lxqt/bin           PATH
+pathappend /opt/lxqt/share/man/    MANPATH
+pathappend /opt/lxqt/lib/pkgconfig PKG_CONFIG_PATH
+pathappend /opt/lxqt/lib/plugins   QT_PLUGIN_PATH
+pathappend $QT5DIR/plugins         QT_PLUGIN_PATH
+pathappend /opt/lxqt/lib LD_LIBRARY_PATH
+pathappend /opt/qt5/lib LD_LIBRARY_PATH
+pathappend /opt/qt5/lib/pkgconfig PKG_CONFIG_PATH
+pathappend /opt/lxqt/lib/pkgconfig PKG_CONFIG_PATH
+
 whoami > /tmp/currentuser
 
 mkdir -v build &&
 cd       build &&
 cmake -DCMAKE_INSTALL_PREFIX=$LXQT_PREFIX \
       -DCMAKE_BUILD_TYPE=Release          \
-      -DCMAKE_INSTALL_LIBDIR=lib          \
       -DBUILD_TESTING=OFF                 \
       -Wno-dev ..                         &&
 make "-j`nproc`" || make

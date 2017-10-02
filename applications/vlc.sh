@@ -1,17 +1,17 @@
 #!/bin/bash
 
 set -e
+set +h
 
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
+DESCRIPTION="br3ak VLC is a media player, streamer,br3ak and encoder. It can play from many inputs, such as files, networkbr3ak streams, capture devices, desktops, or DVD, SVCD, VCD, and audiobr3ak CD. It can use most audio and video codecs (MPEG 1/2/4, H264, VC-1,br3ak DivX, WMV, Vorbis, AC3, AAC, etc.), and it can also convert tobr3ak different formats and/or send streams through the network.br3ak"
+SECTION="multimedia"
+VERSION=2.2.6
 NAME="vlc"
-DESCRIPTION="VLC media player is a portable, free and open-source, cross-platform media player and streaming media server written by the VideoLAN project."
-VERSION="3.0.0"
 
-#REQ:qt5
-#REQ:audio-video-plugins
 #REC:alsa-lib
 #REC:ffmpeg
 #REC:liba52
@@ -35,18 +35,16 @@ VERSION="3.0.0"
 #OPT:libmpeg2
 #OPT:libpng
 #OPT:libtheora
-#OPT:libva
+#OPT:x7driver
 #OPT:libvorbis
 #OPT:opus
 #OPT:speex
 #OPT:x264
-#OPT:x265
 #OPT:aalib
 #OPT:fontconfig
 #OPT:freetype2
 #OPT:fribidi
 #OPT:librsvg
-#OPT:libvdpau
 #OPT:sdl
 #OPT:pulseaudio
 #OPT:libsamplerate
@@ -61,54 +59,74 @@ VERSION="3.0.0"
 
 cd $SOURCE_DIR
 
-URL=http://anduin.linuxfromscratch.org/BLFS/vlc/vlc-3.0.0-20160606.tar.xz
+URL=https://download.videolan.org/vlc/2.2.6/vlc-2.2.6.tar.xz
 
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/vlc/vlc-3.0.0-20160606.tar.xz || wget -nc http://anduin.linuxfromscratch.org/BLFS/vlc/vlc-3.0.0-20160606.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/vlc/vlc-3.0.0-20160606.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/vlc/vlc-3.0.0-20160606.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/vlc/vlc-3.0.0-20160606.tar.xz || wget -nc ftp://anduin.linuxfromscratch.org/BLFS/vlc/vlc-3.0.0-20160606.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/vlc/vlc-3.0.0-20160606.tar.xz
+if [ ! -z $URL ]
+then
+wget -nc https://download.videolan.org/vlc/2.2.6/vlc-2.2.6.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/vlc/vlc-2.2.6.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/vlc/vlc-2.2.6.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/vlc/vlc-2.2.6.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/vlc/vlc-2.2.6.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/vlc/vlc-2.2.6.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/vlc/vlc-2.2.6.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/vlc-2.2.6-ffmpeg3-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/vlc/vlc-2.2.6-ffmpeg3-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
-DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
-
-tar xf $TARBALL
+if [ -z $(echo $TARBALL | grep ".zip$") ]; then
+	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
+	tar --no-overwrite-dir -xf $TARBALL
+else
+	DIRECTORY=$(unzip_dirname $TARBALL $NAME)
+	unzip_file $TARBALL $NAME
+fi
 cd $DIRECTORY
+fi
 
 whoami > /tmp/currentuser
 
-export XORG_PREFIX=/usr
-export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
+export QT4PREFIX="/opt/qt4"
+export QT4BINDIR="$QT4PREFIX/bin"
+export QT4DIR="$QT4PREFIX"
+export QTDIR="$QT4PREFIX"
+export PATH="$PATH:$QT4BINDIR"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
+patch -Np1 -i ../vlc-2.2.6-ffmpeg3-1.patch    &&
+sed -i 's/error-implicit-function-declaration//' configure &&
+CFLAGS="-DLUA_COMPAT_5_1" \
+./configure --prefix=/usr --disable-atmo &&
+make "-j`nproc`" || make
 
-export QT5PREFIX="/opt/qt5"
-export QT5BINDIR="$QT5PREFIX/bin"
-export QT5DIR="$QT5PREFIX"
-export QTDIR="$QT5PREFIX"
-export PATH="$PATH:$QT5BINDIR"
-export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt5/lib/pkgconfig"
-sed -i '/seems to be moved/s/^/#/' autotools/ltmain.sh
-BUILDCC=gcc                      \
-CFLAGS="-I $XORG_PREFIX/include" \
-./configure --prefix=/usr
-find . -name Makefile -exec sed -i "s@-Werror-implicit-function-declaration @@g" {} \;
-CFLAGS='-fPIC -O2 -Wall -Wextra -DLUA_COMPAT_5_1' make "-j`nproc`"
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-export QT5PREFIX="/opt/qt5"
-export QT5BINDIR="$QT5PREFIX/bin"
-export QT5DIR="$QT5PREFIX"
-export QTDIR="$QT5PREFIX"
-export PATH="$PATH:$QT5BINDIR"
-export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt5/lib/pkgconfig"
-make docdir=/usr/share/doc/vlc-3.0.0-20160606 install
+export QT4PREFIX="/opt/qt4"
+export QT4BINDIR="$QT4PREFIX/bin"
+export QT4DIR="$QT4PREFIX"
+export QTDIR="$QT4PREFIX"
+export PATH="$PATH:$QT4BINDIR"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
+make docdir=/usr/share/doc/vlc-2.2.6 install
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+export QT4PREFIX="/opt/qt4"
+export QT4BINDIR="$QT4PREFIX/bin"
+export QT4DIR="$QT4PREFIX"
+export QTDIR="$QT4PREFIX"
+export PATH="$PATH:$QT4BINDIR"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
 gtk-update-icon-cache &&
 update-desktop-database
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
-sudo ./rootscript.sh
+sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
-cd $SOURCE_DIR
 
-cleanup "$NAME" "$DIRECTORY"
+
+if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

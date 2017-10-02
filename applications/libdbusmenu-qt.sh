@@ -22,7 +22,7 @@ URL=http://launchpad.net/ubuntu/+archive/primary/+files/libdbusmenu-qt_0.9.3+16.
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libdbusmenu/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libdbusmenu/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libdbusmenu/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libdbusmenu/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz || wget -nc http://launchpad.net/ubuntu/+archive/primary/+files/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libdbusmenu/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libdbusmenu/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz
+wget -nc http://launchpad.net/ubuntu/+archive/primary/+files/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libdbusmenu/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libdbusmenu/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libdbusmenu/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libdbusmenu/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libdbusmenu/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libdbusmenu/libdbusmenu-qt_0.9.3+16.04.20160218.orig.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -40,7 +40,6 @@ whoami > /tmp/currentuser
 mkdir build &&
 cd    build &&
 cmake -DCMAKE_INSTALL_PREFIX=/usr \
-      -DCMAKE_INSTALL_LIBDIR=lib  \
       -DCMAKE_BUILD_TYPE=Release  \
       -DWITH_DOC=OFF              \
       -Wno-dev .. &&

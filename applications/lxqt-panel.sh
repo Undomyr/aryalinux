@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The lxqt-panel package contains abr3ak lightweight X11 desktop panel.br3ak"
 SECTION="lxqt"
-VERSION=0.11.0
+VERSION=0.11.1
 NAME="lxqt-panel"
 
 #REQ:lxqt-kguiaddons
@@ -19,7 +19,7 @@ NAME="lxqt-panel"
 #REQ:liblxqt
 #REQ:lxmenu-data
 #REQ:menu-cache
-#REQ:kframeworks5
+#REQ:lxqt-l10n
 #REC:alsa-lib
 #REC:pulseaudio
 #REC:libstatgrab
@@ -32,11 +32,11 @@ NAME="lxqt-panel"
 
 cd $SOURCE_DIR
 
-URL=http://downloads.lxqt.org/lxqt/0.11.0/lxqt-panel-0.11.0.tar.xz
+URL=https://github.com/lxde/lxqt-panel/releases/download/0.11.1/lxqt-panel-0.11.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/lxqt-panel/lxqt-panel-0.11.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxqt-panel/lxqt-panel-0.11.0.tar.xz || wget -nc http://downloads.lxqt.org/lxqt/0.11.0/lxqt-panel-0.11.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-panel/lxqt-panel-0.11.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-panel/lxqt-panel-0.11.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-panel/lxqt-panel-0.11.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-panel/lxqt-panel-0.11.0.tar.xz
+wget -nc https://github.com/lxde/lxqt-panel/releases/download/0.11.1/lxqt-panel-0.11.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxqt-panel/lxqt-panel-0.11.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/lxqt-panel/lxqt-panel-0.11.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-panel/lxqt-panel-0.11.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-panel/lxqt-panel-0.11.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-panel/lxqt-panel-0.11.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-panel/lxqt-panel-0.11.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -49,8 +49,24 @@ fi
 cd $DIRECTORY
 fi
 
+export QT5DIR=/opt/qt5
+export LXQT_PREFIX=/opt/lxqt
+pathappend /opt/lxqt/bin           PATH
+pathappend /opt/lxqt/share/man/    MANPATH
+pathappend /opt/lxqt/lib/pkgconfig PKG_CONFIG_PATH
+pathappend /opt/lxqt/lib/plugins   QT_PLUGIN_PATH
+pathappend $QT5DIR/plugins         QT_PLUGIN_PATH
+pathappend /opt/lxqt/lib LD_LIBRARY_PATH
+pathappend /opt/qt5/lib LD_LIBRARY_PATH
+pathappend /opt/qt5/lib/pkgconfig PKG_CONFIG_PATH
+pathappend /opt/lxqt/lib/pkgconfig PKG_CONFIG_PATH
+
 whoami > /tmp/currentuser
 
+sed -e 's:<KF5/KWindowSystem/:<:'               \
+    -i plugin-taskbar/lxqttaskgroup.{h,cpp}     &&
+sed -e '/kbdinfo.h/i #undef explicit'           \
+    -i plugin-kbindicator/src/x11/kbdlayout.cpp &&
 mkdir -v build &&
 cd       build &&
 cmake -DCMAKE_INSTALL_PREFIX=$LXQT_PREFIX \

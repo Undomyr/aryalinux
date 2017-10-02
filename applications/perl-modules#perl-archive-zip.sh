@@ -8,7 +8,7 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="http://cpan.metacpan.org/authors/id/P/PH/PHRED/Archive-Zip-1.59.tar.gz"
+URL="https://www.cpan.org/authors/id/P/PH/PHRED/Archive-Zip-1.59.tar.gz"
 VERSION=1.59
 NAME="perl-modules#perl-archive-zip"
 

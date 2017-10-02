@@ -18,11 +18,11 @@ NAME="asciidoc"
 
 cd $SOURCE_DIR
 
-URL=http://sourceforge.net/projects/asciidoc/files/asciidoc/8.6.9/asciidoc-8.6.9.tar.gz
+URL=https://downloads.sourceforge.net/asciidoc/asciidoc-8.6.9.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/asciidoc/asciidoc-8.6.9.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/asciidoc/asciidoc-8.6.9.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/asciidoc/asciidoc-8.6.9.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/asciidoc/asciidoc-8.6.9.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/asciidoc/asciidoc-8.6.9.tar.gz || wget -nc http://sourceforge.net/projects/asciidoc/files/asciidoc/8.6.9/asciidoc-8.6.9.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/asciidoc/asciidoc-8.6.9.tar.gz
+wget -nc https://downloads.sourceforge.net/asciidoc/asciidoc-8.6.9.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/asciidoc/asciidoc-8.6.9.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/asciidoc/asciidoc-8.6.9.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/asciidoc/asciidoc-8.6.9.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/asciidoc/asciidoc-8.6.9.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/asciidoc/asciidoc-8.6.9.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/asciidoc/asciidoc-8.6.9.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

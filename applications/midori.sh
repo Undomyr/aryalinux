@@ -8,7 +8,7 @@ set +h
 
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Midori is a lightweight webbr3ak browser that uses WebKitGTK+.br3ak"
-SECTION="xfce"
+SECTION="xsoft"
 VERSION=0.5.11
 NAME="midori"
 
@@ -19,7 +19,6 @@ NAME="midori"
 #REQ:vala
 #REC:librsvg
 #OPT:gtk-doc
-#OPT:webkitgtk2
 #OPT:libzeitgeist
 
 
@@ -29,7 +28,7 @@ URL=http://www.midori-browser.org/downloads/midori_0.5.11_all_.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://www.midori-browser.org/downloads/midori_0.5.11_all_.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2
+wget -nc http://www.midori-browser.org/downloads/midori_0.5.11_all_.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/midori/midori_0.5.11_all_.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -44,6 +43,14 @@ fi
 
 whoami > /tmp/currentuser
 
+sed -e 's/protected Tally/public Tally/g'  \
+    -i midori/midori-notebook.vala         &&
+sed -e 's/%d other files/%u other files/g' \
+    -i extensions/transfers.vala           &&
+for f in transfers adblock/widgets apps history-list notes; do
+    sed -e 's/.remove (iter/.remove (ref iter/g' \
+        -i "extensions/$f.vala"
+done        &&
 mkdir build &&
 cd    build &&
 cmake -DCMAKE_INSTALL_PREFIX=/usr \

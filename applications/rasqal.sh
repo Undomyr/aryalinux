@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Rasqal is a C library that handlesbr3ak Resource Description Framework (RDF) query language syntaxes, querybr3ak construction and execution of queries returning results asbr3ak bindings, boolean, RDF graphs/triples or syntaxes. It is requiredbr3ak by Soprano to build Nepomuk.br3ak"
+DESCRIPTION="br3ak Rasqal is a C library that handlesbr3ak Resource Description Framework (RDF) query language syntaxes, querybr3ak construction, and execution of queries returning results asbr3ak bindings, boolean, RDF graphs/triples or syntaxes.br3ak"
 SECTION="general"
 VERSION=0.9.33
 NAME="rasqal"
@@ -23,7 +23,7 @@ URL=http://download.librdf.org/source/rasqal-0.9.33.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rasqal/rasqal-0.9.33.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rasqal/rasqal-0.9.33.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rasqal/rasqal-0.9.33.tar.gz || wget -nc http://download.librdf.org/source/rasqal-0.9.33.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/rasqal/rasqal-0.9.33.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rasqal/rasqal-0.9.33.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rasqal/rasqal-0.9.33.tar.gz
+wget -nc http://download.librdf.org/source/rasqal-0.9.33.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rasqal/rasqal-0.9.33.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/rasqal/rasqal-0.9.33.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rasqal/rasqal-0.9.33.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rasqal/rasqal-0.9.33.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rasqal/rasqal-0.9.33.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rasqal/rasqal-0.9.33.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

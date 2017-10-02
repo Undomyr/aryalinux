@@ -12,16 +12,15 @@ SECTION="general"
 VERSION=1.0.2
 NAME="python-modules#funcsigs"
 
-#REQ:python-modules#setuptools
 
 
 cd $SOURCE_DIR
 
-URL=https://pypi.python.org/packages/94/4a/db842e7a0545de1cdb0439bb80e6e42dfe82aaeaadd4072f2263a4fbed23/funcsigs-1.0.2.tar.gz
+URL=https://files.pythonhosted.org/packages/source/f/funcsigs/funcsigs-1.0.2.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://pypi.python.org/packages/94/4a/db842e7a0545de1cdb0439bb80e6e42dfe82aaeaadd4072f2263a4fbed23/funcsigs-1.0.2.tar.gz
+wget -nc https://files.pythonhosted.org/packages/source/f/funcsigs/funcsigs-1.0.2.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

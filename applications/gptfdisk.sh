@@ -9,21 +9,21 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The gptfdisk package is a set ofbr3ak programs for creation and maintenance of GUID Partition Table (GPT)br3ak disk drives. A GPT partitioned disk is required for drives greaterbr3ak than 2 TB and is a modern replacement for legacy PC-BIOSbr3ak partitioned disk drives that use a Master Boot Record (MBR). Thebr3ak main program, <span class=\"command\"><strong>gdisk</strong>,br3ak has an inteface similar to the classic <span class=\"command\"><strong>fdisk</strong> program.br3ak"
 SECTION="postlfs"
-VERSION=1.0.1
+VERSION=1.0.3
 NAME="gptfdisk"
 
-#OPT:popt
+#REC:popt
 #OPT:icu
 
 
 cd $SOURCE_DIR
 
-URL=http://downloads.sourceforge.net/project/gptfdisk/gptfdisk/1.0.1/gptfdisk-1.0.1.tar.gz
+URL=https://downloads.sourceforge.net/gptfdisk/gptfdisk-1.0.3.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gptfdisk/gptfdisk-1.0.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gptfdisk/gptfdisk-1.0.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gptfdisk/gptfdisk-1.0.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gptfdisk/gptfdisk-1.0.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gptfdisk/gptfdisk-1.0.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gptfdisk/gptfdisk-1.0.1.tar.gz || wget -nc http://downloads.sourceforge.net/project/gptfdisk/gptfdisk/1.0.1/gptfdisk-1.0.1.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/downloads/gptfdisk/gptfdisk-1.0.1-convenience-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/gptfdisk-1.0.1-convenience-1.patch
+wget -nc https://downloads.sourceforge.net/gptfdisk/gptfdisk-1.0.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gptfdisk/gptfdisk-1.0.3.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gptfdisk/gptfdisk-1.0.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gptfdisk/gptfdisk-1.0.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gptfdisk/gptfdisk-1.0.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gptfdisk/gptfdisk-1.0.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gptfdisk/gptfdisk-1.0.3.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/gptfdisk-1.0.3-convenience-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/gptfdisk/gptfdisk-1.0.3-convenience-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -38,13 +38,13 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../gptfdisk-1.0.1-convenience-1.patch &&
-make "-j`nproc`" || make
+patch -Np1 -i ../gptfdisk-1.0.3-convenience-1.patch &&
+make POPT=1
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
+make POPT=1 install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

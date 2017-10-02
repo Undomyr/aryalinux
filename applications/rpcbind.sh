@@ -17,11 +17,12 @@ NAME="rpcbind"
 
 cd $SOURCE_DIR
 
-URL=http://downloads.sourceforge.net/rpcbind/rpcbind-0.2.4.tar.bz2
+URL=https://downloads.sourceforge.net/rpcbind/rpcbind-0.2.4.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc http://downloads.sourceforge.net/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2
+wget -nc https://downloads.sourceforge.net/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/rpcbind-0.2.4-vulnerability_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/rpcbind/rpcbind-0.2.4-vulnerability_fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -51,9 +52,11 @@ sudo rm rootscript.sh
 sed -i "/servname/s:rpcbind:sunrpc:" src/rpcbind.c
 
 
-./configure --prefix=/usr  \
-            --bindir=/sbin \
-            --with-rpcuser=rpc &&
+patch -Np1 -i ../rpcbind-0.2.4-vulnerability_fixes-1.patch &&
+./configure --prefix=/usr       \
+            --bindir=/sbin      \
+            --enable-warmstarts \
+            --with-rpcuser=rpc  &&
 make "-j`nproc`" || make
 
 
@@ -72,7 +75,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://aryalinux.org/releases/2016.11/blfs-systemd-units-20160602.tar.bz2
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20160602.tar.bz2
 tar xf blfs-systemd-units-20160602.tar.bz2
 cd blfs-systemd-units-20160602
 make install-rpcbind

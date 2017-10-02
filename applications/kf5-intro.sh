@@ -75,6 +75,7 @@ pathappend /opt/kf5/share XDG_DATA_DIRS
 pathappend /opt/kf5/lib/plugins QT_PLUGIN_PATH
 pathappend /opt/kf5/lib/qml QML2_IMPORT_PATH
 pathappend /opt/kf5/lib/python2.7/site-packages PYTHONPATH
+pathappend /opt/kf5/share/man MANPATH
 # End /etc/profile.d/kf5.sh
 EOF
 cat >> /etc/profile.d/qt5.sh << "EOF"
@@ -129,8 +130,8 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mv /opt/kf5{,-5.28.0}
-ln -sfv kf5-5.28.0 /opt/kf5
+mv /opt/kf5{,-5.37.0}
+ln -sfv kf5-5.37.0 /opt/kf5
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

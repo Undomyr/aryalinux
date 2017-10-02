@@ -9,19 +9,20 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The lxqt-build-tools packagebr3ak provides several tools needed to build LXQt itself as well as otherbr3ak components maintained by the LXQt project.br3ak"
 SECTION="lxqt"
-VERSION=0.3.0
+VERSION=0.3.2
 NAME="lxqt-build-tools"
 
 #REQ:cmake
+#REQ:qt5
 
 
 cd $SOURCE_DIR
 
-URL=http://downloads.lxqt.org/lxqt-build-tools/0.3.0/lxqt-build-tools-0.3.0.tar.xz
+URL=https://github.com/lxde/lxqt-build-tools/releases/download/0.3.2/lxqt-build-tools-0.3.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/lxqt-build-tools/lxqt-build-tools-0.3.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-build-tools/lxqt-build-tools-0.3.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-build-tools/lxqt-build-tools-0.3.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-build-tools/lxqt-build-tools-0.3.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-build-tools/lxqt-build-tools-0.3.0.tar.xz || wget -nc http://downloads.lxqt.org/lxqt-build-tools/0.3.0/lxqt-build-tools-0.3.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxqt-build-tools/lxqt-build-tools-0.3.0.tar.xz
+wget -nc https://github.com/lxde/lxqt-build-tools/releases/download/0.3.2/lxqt-build-tools-0.3.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxqt-build-tools/lxqt-build-tools-0.3.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/lxqt-build-tools/lxqt-build-tools-0.3.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-build-tools/lxqt-build-tools-0.3.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-build-tools/lxqt-build-tools-0.3.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-build-tools/lxqt-build-tools-0.3.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-build-tools/lxqt-build-tools-0.3.2.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -33,6 +34,18 @@ else
 fi
 cd $DIRECTORY
 fi
+
+export QT5DIR=/opt/qt5
+export LXQT_PREFIX=/opt/lxqt
+pathappend /opt/lxqt/bin           PATH
+pathappend /opt/lxqt/share/man/    MANPATH
+pathappend /opt/lxqt/lib/pkgconfig PKG_CONFIG_PATH
+pathappend /opt/lxqt/lib/plugins   QT_PLUGIN_PATH
+pathappend $QT5DIR/plugins         QT_PLUGIN_PATH
+pathappend /opt/lxqt/lib LD_LIBRARY_PATH
+pathappend /opt/qt5/lib LD_LIBRARY_PATH
+pathappend /opt/qt5/lib/pkgconfig PKG_CONFIG_PATH
+pathappend /opt/lxqt/lib/pkgconfig PKG_CONFIG_PATH
 
 whoami > /tmp/currentuser
 

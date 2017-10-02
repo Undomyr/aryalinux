@@ -9,20 +9,18 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The ISC DHCP package contains bothbr3ak the client and server programs for DHCP. <span class=\"command\"><strong>dhclient</strong> (the client) is used forbr3ak connecting to a network which uses DHCP to assign networkbr3ak addresses. <span class=\"command\"><strong>dhcpd</strong> (thebr3ak server) is used for assigning network addresses on privatebr3ak networks.br3ak"
 SECTION="basicnet"
-VERSION=4.3.5
+VERSION=4.3.6
 NAME="dhcp"
 
 
 
 cd $SOURCE_DIR
 
-URL=ftp://ftp.isc.org/isc/dhcp/4.3.5/dhcp-4.3.5.tar.gz
+URL=ftp://ftp.isc.org/isc/dhcp/4.3.6/dhcp-4.3.6.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcp-4.3.5.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcp-4.3.5.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/dhcp/dhcp-4.3.5.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcp-4.3.5.tar.gz || wget -nc ftp://ftp.isc.org/isc/dhcp/4.3.5/dhcp-4.3.5.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcp-4.3.5.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/dhcp/dhcp-4.3.5.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/dhcp-4.3.5-client_script-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/dhcp/dhcp-4.3.5-client_script-1.patch
-wget -nc http://www.linuxfromscratch.org/patches/downloads/dhcp/dhcp-4.3.5-missing_ipv6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/dhcp-4.3.5-missing_ipv6-1.patch
+wget -nc ftp://ftp.isc.org/isc/dhcp/4.3.6/dhcp-4.3.6.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/dhcp/dhcp-4.3.6.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/dhcp/dhcp-4.3.6.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcp-4.3.6.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcp-4.3.6.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcp-4.3.6.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcp-4.3.6.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -37,10 +35,6 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../dhcp-4.3.5-missing_ipv6-1.patch
-
-
-patch -Np1 -i ../dhcp-4.3.5-client_script-1.patch &&
 CFLAGS="-D_PATH_DHCLIENT_SCRIPT='\"/sbin/dhclient-script\"'         \
         -D_PATH_DHCPD_CONF='\"/etc/dhcp/dhcpd.conf\"'               \
         -D_PATH_DHCLIENT_CONF='\"/etc/dhcp/dhclient.conf\"'"        &&
@@ -130,7 +124,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://aryalinux.org/releases/2016.11/blfs-systemd-units-20160602.tar.bz2
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20160602.tar.bz2
 tar xf blfs-systemd-units-20160602.tar.bz2
 cd blfs-systemd-units-20160602
 make install-dhclient
@@ -206,7 +200,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://aryalinux.org/releases/2016.11/blfs-systemd-units-20160602.tar.bz2
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20160602.tar.bz2
 tar xf blfs-systemd-units-20160602.tar.bz2
 cd blfs-systemd-units-20160602
 make install-dhcpd

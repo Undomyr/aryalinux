@@ -9,11 +9,12 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak While systemd was installed whenbr3ak building LFS, there are many features provided by the package thatbr3ak were not included in the initial installation because Linux-PAM was not yet installed. Thebr3ak systemd package needs to bebr3ak rebuilt to provide a working <span class=\"command\"><strong>systemd-logind</strong> service, whichbr3ak provides many additional features for dependent packages.br3ak"
 SECTION="general"
-VERSION=232
+VERSION=234
 NAME="systemd"
 
 #REQ:linux-pam
 #REC:polkit
+#REC:python3
 #OPT:cacerts
 #OPT:curl
 #OPT:elfutils
@@ -22,22 +23,23 @@ NAME="systemd"
 #OPT:libgcrypt
 #OPT:libidn
 #OPT:libxkbcommon
-#OPT:python-modules#lxml
 #OPT:qemu
 #OPT:valgrind
 #OPT:zsh
 #OPT:docbook
 #OPT:docbook-xsl
 #OPT:libxslt
+#OPT:python-modules#lxml
 
 
 cd $SOURCE_DIR
 
-URL=http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-232.tar.xz
+URL=http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-234-lfs.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/systemd/systemd-232.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-232.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-232.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-232.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-232.tar.xz || wget -nc http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-232.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/systemd/systemd-232.tar.xz
+wget -nc http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-234-lfs.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/systemd/systemd-234-lfs.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/systemd/systemd-234-lfs.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-234-lfs.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-234-lfs.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-234-lfs.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-234-lfs.tar.xz
+wget -nc http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-233.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -52,13 +54,6 @@ fi
 
 whoami > /tmp/currentuser
 
-sed -e 's:test/udev-test.pl ::g'  \
-    -e 's:test-copy$(EXEEXT) ::g' \
-    -i Makefile.in
-
-
-cc_cv_CFLAGS__flto=no               \
-XSLTPROC="/usr/bin/xsltproc"         \
 ./configure --prefix=/usr            \
             --sysconfdir=/etc        \
             --localstatedir=/var     \
@@ -68,9 +63,9 @@ XSLTPROC="/usr/bin/xsltproc"         \
             --disable-firstboot      \
             --disable-ldconfig       \
             --disable-sysusers       \
-            --without-python         \
+            --disable-manpages       \
             --with-default-dnssec=no \
-            --docdir=/usr/share/doc/systemd-232 &&
+            --docdir=/usr/share/doc/systemd-234 &&
 make "-j`nproc`" || make
 
 

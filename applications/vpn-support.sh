@@ -8,7 +8,6 @@ set -e
 NAME="vpn-support"
 VERSION="N.A."
 META=y
-SECTION=basicnet
 
 #REQ:vpnc
 #REQ:network-manager-vpnc

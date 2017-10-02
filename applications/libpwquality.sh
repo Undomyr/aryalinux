@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The libpwquality package providesbr3ak common functions for password quality checking and also scoringbr3ak them based on their apparent randomness. The library also providesbr3ak a function for generating random passwords with goodbr3ak pronounceability.br3ak"
 SECTION="postlfs"
-VERSION=1.3.0
+VERSION=1.4.0
 NAME="libpwquality"
 
 #REQ:cracklib
@@ -18,11 +18,11 @@ NAME="libpwquality"
 
 cd $SOURCE_DIR
 
-URL=https://fedorahosted.org/releases/l/i/libpwquality/libpwquality-1.3.0.tar.bz2
+URL=https://github.com/libpwquality/libpwquality/releases/download/libpwquality-1.4.0/libpwquality-1.4.0.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libpwquality/libpwquality-1.3.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpwquality/libpwquality-1.3.0.tar.bz2 || wget -nc https://fedorahosted.org/releases/l/i/libpwquality/libpwquality-1.3.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpwquality/libpwquality-1.3.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libpwquality/libpwquality-1.3.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libpwquality/libpwquality-1.3.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libpwquality/libpwquality-1.3.0.tar.bz2
+wget -nc https://github.com/libpwquality/libpwquality/releases/download/libpwquality-1.4.0/libpwquality-1.4.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libpwquality/libpwquality-1.4.0.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libpwquality/libpwquality-1.4.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpwquality/libpwquality-1.4.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libpwquality/libpwquality-1.4.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libpwquality/libpwquality-1.4.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libpwquality/libpwquality-1.4.0.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

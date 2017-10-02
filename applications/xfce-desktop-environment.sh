@@ -39,13 +39,15 @@ VERSION=4.12
 #REQ:xfburn
 #REQ:ristretto
 #REQ:xfce4-notifyd
+#REQ:pavucontrol
 #REQ:pnmixer
 #REQ:xfce4-whiskermenu-plugin
 #REQ:xfce4-screenshooter
 #REQ:p7zip-full
 #REQ:xarchiver
 #REQ:imagemagick
-#REQ:thunar-plugins
+#REQ:thunar-thumbnailers
+#REQ:thunar-archive-plugin
 #REQ:xdg-utils
 #REQ:xdg-user-dirs
 #REQ:galculator
@@ -71,10 +73,13 @@ VERSION=4.12
 #REQ:usb_modeswitch
 #REQ:compton
 
+#REQ:greybird-gtk-theme
+#REQ:adapta-gtk-theme
+#REQ:arc-gtk-theme
+#REQ:flat-remix-icon-theme
+#REQ:aryalinux-xfce-settings
+
 cd $SOURCE_DIR
-wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/2017/aryalinux-xfce-config.tar.gz
-tar xf aryalinux-xfce-config.tar.gz -C ~
-sudo tar xf aryalinux-xfce-config.tar.gz -C /etc/skel/
 
 sudo tee /etc/gtk-2.0/gtkrc <<"EOF"
 include "/usr/share/themes/Clearlooks/gtk-2.0/gtkrc"
@@ -108,11 +113,6 @@ sudo rm -rf ~/.ccache
 xdg-user-dirs-update
 sudo xdg-user-dirs-update
 
-sudo tee /etc/profile.d/xdg.sh << EOF
-cd ~
-xdg-user-dirs-update
-EOF
-
 sudo rm -rf /etc/X11/xorg.conf.d/*
 
 sudo tee /etc/X11/xorg.conf.d/99-synaptics-overrides.conf <<"EOF"
@@ -135,10 +135,10 @@ Section  "InputClass"
 EndSection
 EOF
 
-if [ ! -f /usr/share/pixmaps/aryalinux.org ]
+if [ ! -f /usr/share/pixmaps/aryalinux.png ]
 then
 cd $SOURCE_DIR
-wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/2017/aryalinux.png
+wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/misc/aryalinux.png
 pushd /usr/share/pixmaps/
 sudo cp -v $SOURCE_DIR/aryalinux.png .
 popd

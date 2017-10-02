@@ -9,22 +9,23 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak IceWM is a window manager with thebr3ak goals of speed, simplicity, and not getting in the user's way.br3ak"
 SECTION="x"
-VERSION=1.3.12
+VERSION=1.4.2
 NAME="icewm"
 
 #REQ:gdk-pixbuf
 #REQ:xorg-server
+#OPT:fribidi
 #OPT:libsndfile
 #OPT:alsa-lib
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/bbidulock/icewm/releases/download/1.3.12/icewm-1.3.12.tar.bz2
+URL=https://github.com/bbidulock/icewm/releases/download/1.4.2/icewm-1.4.2.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/icewm/icewm-1.3.12.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/icewm/icewm-1.3.12.tar.bz2 || wget -nc https://github.com/bbidulock/icewm/releases/download/1.3.12/icewm-1.3.12.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/icewm/icewm-1.3.12.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/icewm/icewm-1.3.12.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/icewm/icewm-1.3.12.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/icewm/icewm-1.3.12.tar.bz2
+wget -nc https://github.com/bbidulock/icewm/releases/download/1.4.2/icewm-1.4.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/icewm/icewm-1.4.2.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/icewm/icewm-1.4.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/icewm/icewm-1.4.2.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/icewm/icewm-1.4.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/icewm/icewm-1.4.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/icewm/icewm-1.4.2.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -39,10 +40,9 @@ fi
 
 whoami > /tmp/currentuser
 
-
 ./configure --prefix=/usr                     \
             --sysconfdir=/etc                 \
-            --docdir=/usr/share/icewm-1.3.12 &&
+            --docdir=/usr/share/doc/icewm-1.4.2 &&
 make "-j`nproc`" || make
 
 

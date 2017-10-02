@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Speex is an audio compressionbr3ak format designed especially for speech. It is well-adapted tobr3ak internet applications and provides useful features that are notbr3ak present in most other CODECs.br3ak"
 SECTION="multimedia"
-VERSION=2
+VERSION=1.2.0
 NAME="speex"
 
 #REQ:libogg
@@ -18,12 +18,12 @@ NAME="speex"
 
 cd $SOURCE_DIR
 
-URL=http://downloads.us.xiph.org/releases/speex/speex-1.2rc2.tar.gz
+URL=https://downloads.xiph.org/releases/speex/speex-1.2.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/speex/speex-1.2rc2.tar.gz || wget -nc http://downloads.us.xiph.org/releases/speex/speex-1.2rc2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speex-1.2rc2.tar.gz
-wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://downloads.us.xiph.org/releases/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz
+wget -nc https://downloads.xiph.org/releases/speex/speex-1.2.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/speex/speex-1.2.0.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/speex/speex-1.2.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speex-1.2.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speex-1.2.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/speex/speex-1.2.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/speex/speex-1.2.0.tar.gz
+wget -nc https://downloads.xiph.org/releases/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/speex/speexdsp-1.2rc3.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -40,7 +40,7 @@ whoami > /tmp/currentuser
 
 ./configure --prefix=/usr    \
             --disable-static \
-            --docdir=/usr/share/doc/speex-1.2rc2 &&
+            --docdir=/usr/share/doc/speex-1.2.0 &&
 make "-j`nproc`" || make
 
 

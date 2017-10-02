@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak MariaDB is a community-developedbr3ak fork and a drop-in replacement for the MySQL relational database management system.br3ak"
 SECTION="server"
-VERSION=10.1.19
+VERSION=10.2.8
 NAME="mariadb"
 
 #REQ:cmake
@@ -27,11 +27,11 @@ NAME="mariadb"
 
 cd $SOURCE_DIR
 
-URL=ftp://mirrors.fe.up.pt/pub/mariadb/mariadb-10.1.19/source/mariadb-10.1.19.tar.gz
+URL=https://downloads.mariadb.org/interstitial/mariadb-10.2.8/source/mariadb-10.2.8.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mariadb/mariadb-10.1.19.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mariadb/mariadb-10.1.19.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mariadb/mariadb-10.1.19.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/mariadb/mariadb-10.1.19.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mariadb/mariadb-10.1.19.tar.gz || wget -nc ftp://mirrors.fe.up.pt/pub/mariadb/mariadb-10.1.19/source/mariadb-10.1.19.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mariadb/mariadb-10.1.19.tar.gz
+wget -nc https://downloads.mariadb.org/interstitial/mariadb-10.2.8/source/mariadb-10.2.8.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mariadb/mariadb-10.2.8.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/mariadb/mariadb-10.2.8.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mariadb/mariadb-10.2.8.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mariadb/mariadb-10.2.8.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mariadb/mariadb-10.2.8.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mariadb/mariadb-10.2.8.tar.gz || wget -nc ftp://mirrors.fe.up.pt/pub/mariadb/mariadb-10.2.8/source/mariadb-10.2.8.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -58,32 +58,40 @@ sudo rm rootscript.sh
 
 
 sed -i "s@data/test@\${INSTALL_MYSQLTESTDIR}@g" sql/CMakeLists.txt &&
+sed -i '/void..coc_malloc/{s/char ./&x/; s/int/& y/}' mysys_ssl/openssl.c &&
 mkdir build &&
 cd build    &&
-cmake -DCMAKE_BUILD_TYPE=Release                       \
-      -DCMAKE_INSTALL_PREFIX=/usr                      \
-      -DINSTALL_DOCDIR=share/doc/mariadb-10.1.19       \
-      -DINSTALL_DOCREADMEDIR=share/doc/mariadb-10.1.19 \
-      -DINSTALL_MANDIR=share/man                       \
-      -DINSTALL_MYSQLSHAREDIR=share/mysql              \
-      -DINSTALL_MYSQLTESTDIR=share/mysql/test          \
-      -DINSTALL_PLUGINDIR=lib/mysql/plugin             \
-      -DINSTALL_SBINDIR=sbin                           \
-      -DINSTALL_SCRIPTDIR=bin                          \
-      -DINSTALL_SQLBENCHDIR=share/mysql/bench          \
-      -DINSTALL_SUPPORTFILESDIR=share/mysql            \
-      -DMYSQL_DATADIR=/srv/mysql                       \
-      -DMYSQL_UNIX_ADDR=/run/mysqld/mysqld.sock        \
-      -DWITH_EXTRA_CHARSETS=complex                    \
-      -DWITH_EMBEDDED_SERVER=ON                        \
-      -DTOKUDB_OK=0                                    \
+cmake -DCMAKE_BUILD_TYPE=Release                      \
+      -DCMAKE_INSTALL_PREFIX=/usr                     \
+      -DINSTALL_DOCDIR=share/doc/mariadb-10.2.8       \
+      -DINSTALL_DOCREADMEDIR=share/doc/mariadb-10.2.8 \
+      -DINSTALL_MANDIR=share/man                      \
+      -DINSTALL_MYSQLSHAREDIR=share/mysql             \
+      -DINSTALL_MYSQLTESTDIR=share/mysql/test         \
+      -DINSTALL_PLUGINDIR=lib/mysql/plugin            \
+      -DINSTALL_SBINDIR=sbin                          \
+      -DINSTALL_SCRIPTDIR=bin                         \
+      -DINSTALL_SQLBENCHDIR=share/mysql/bench         \
+      -DINSTALL_SUPPORTFILESDIR=share/mysql           \
+      -DMYSQL_DATADIR=/srv/mysql                      \
+      -DMYSQL_UNIX_ADDR=/run/mysqld/mysqld.sock       \
+      -DWITH_EXTRA_CHARSETS=complex                   \
+      -DWITH_EMBEDDED_SERVER=ON                       \
+      -DSKIP_TESTS=ON                                 \
+      -DTOKUDB_OK=0                                   \
       .. &&
 make "-j`nproc`" || make
 
 
+pushd mysql-test
+./mtr --parallel <N> --mem --force
+popd
+
+
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
+make install &&
+ln -sfv /usr/include/mysql/{mariadb,mysql}_version.h
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -121,15 +129,14 @@ server-id = 1
 #bdb_max_lock = 10000
 # InnoDB tables are now used by default
 innodb_data_home_dir = /srv/mysql
-innodb_data_file_path = ibdata1:10M:autoextend
 innodb_log_group_home_dir = /srv/mysql
+# All the innodb_xxx values below are the default ones:
+innodb_data_file_path = ibdata1:12M:autoextend
 # You can set .._buffer_pool_size up to 50 - 80 %
 # of RAM but beware of setting memory usage too high
-innodb_buffer_pool_size = 16M
-innodb_additional_mem_pool_size = 2M
-# Set .._log_file_size to 25 % of buffer pool size
-innodb_log_file_size = 5M
-innodb_log_buffer_size = 8M
+innodb_buffer_pool_size = 128M
+innodb_log_file_size = 48M
+innodb_log_buffer_size = 16M
 innodb_flush_log_at_trx_commit = 1
 innodb_lock_wait_timeout = 50
 [mysqldump]
@@ -211,7 +218,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://aryalinux.org/releases/2016.11/blfs-systemd-units-20160602.tar.bz2
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20160602.tar.bz2
 tar xf blfs-systemd-units-20160602.tar.bz2
 cd blfs-systemd-units-20160602
 make install-mysqld

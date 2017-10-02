@@ -9,19 +9,18 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="%DESCRIPTION%"
 SECTION="general"
-VERSION=0.23
+VERSION=1.0
 NAME="python-modules#MarkupSafe"
 
-#REQ:python-modules#setuptools
 
 
 cd $SOURCE_DIR
 
-URL=https://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-0.23.tar.gz
+URL=https://files.pythonhosted.org/packages/source/M/MarkupSafe/MarkupSafe-1.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-0.23.tar.gz
+wget -nc https://files.pythonhosted.org/packages/source/M/MarkupSafe/MarkupSafe-1.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
