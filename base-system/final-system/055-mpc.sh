@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="005-linux-headers.sh"
-TARBALL="linux-4.12.7.tar.xz"
+STEPNAME="055-mpc.sh"
+TARBALL="mpc-1.0.3.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,9 +29,13 @@ then
 	cd $DIRECTORY
 fi
 
-make mrproper
-make INSTALL_HDR_PATH=dest headers_install
-cp -rv dest/include/* /tools/include
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/mpc-1.0.3
+make
+make html
+make install
+make install-html
 
 
 cd $SOURCE_DIR

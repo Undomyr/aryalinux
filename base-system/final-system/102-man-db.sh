@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="005-linux-headers.sh"
-TARBALL="linux-4.12.7.tar.xz"
+STEPNAME="102-man-db.sh"
+TARBALL="man-db-2.7.6.1.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,9 +29,17 @@ then
 	cd $DIRECTORY
 fi
 
-make mrproper
-make INSTALL_HDR_PATH=dest headers_install
-cp -rv dest/include/* /tools/include
+./configure --prefix=/usr                        \
+            --docdir=/usr/share/doc/man-db-2.7.6.1 \
+            --sysconfdir=/etc                    \
+            --disable-setuid                     \
+            --enable-cache-owner=bin             \
+            --with-browser=/usr/bin/lynx         \
+            --with-vgrind=/usr/bin/vgrind        \
+            --with-grap=/usr/bin/grap
+make
+make install
+sed -i "s:man man:root root:g" /usr/lib/tmpfiles.d/man-db.conf
 
 
 cd $SOURCE_DIR

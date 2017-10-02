@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="005-linux-headers.sh"
-TARBALL="linux-4.12.7.tar.xz"
+STEPNAME="083-gettext.sh"
+TARBALL="gettext-0.19.8.1.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,9 +29,14 @@ then
 	cd $DIRECTORY
 fi
 
-make mrproper
-make INSTALL_HDR_PATH=dest headers_install
-cp -rv dest/include/* /tools/include
+sed -i '/^TESTS =/d' gettext-runtime/tests/Makefile.in &&
+sed -i 's/test-lock..EXEEXT.//' gettext-tools/gnulib-tests/Makefile.in
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/gettext-0.19.8.1
+make
+make install
+chmod -v 0755 /usr/lib/preloadable_libintl.so
 
 
 cd $SOURCE_DIR

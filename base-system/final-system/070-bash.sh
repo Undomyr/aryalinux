@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="005-linux-headers.sh"
-TARBALL="linux-4.12.7.tar.xz"
+STEPNAME="070-bash.sh"
+TARBALL="bash-4.4.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,9 +29,15 @@ then
 	cd $DIRECTORY
 fi
 
-make mrproper
-make INSTALL_HDR_PATH=dest headers_install
-cp -rv dest/include/* /tools/include
+patch -Np1 -i ../bash-4.4-upstream_fixes-1.patch
+./configure --prefix=/usr                       \
+            --docdir=/usr/share/doc/bash-4.4 \
+            --without-bash-malloc               \
+            --with-installed-readline
+make
+chown -Rv nobody .
+make install
+mv -vf /usr/bin/bash /bin
 
 
 cd $SOURCE_DIR

@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="005-linux-headers.sh"
-TARBALL="linux-4.12.7.tar.xz"
+STEPNAME="047-zlib.sh"
+TARBALL="zlib-1.2.11.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,9 +29,11 @@ then
 	cd $DIRECTORY
 fi
 
-make mrproper
-make INSTALL_HDR_PATH=dest headers_install
-cp -rv dest/include/* /tools/include
+./configure --prefix=/usr
+make
+make install
+mv -v /usr/lib/libz.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so
 
 
 cd $SOURCE_DIR

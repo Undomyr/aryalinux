@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="005-linux-headers.sh"
-TARBALL="linux-4.12.7.tar.xz"
+STEPNAME="061-acl.sh"
+TARBALL="acl-2.2.52.src.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,9 +29,19 @@ then
 	cd $DIRECTORY
 fi
 
-make mrproper
-make INSTALL_HDR_PATH=dest headers_install
-cp -rv dest/include/* /tools/include
+sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in
+sed -i "s:| sed.*::g" test/{sbits-restore,cp,misc}.test
+sed -i 's/{(/\\{(/' test/run
+sed -i -e "/TABS-1;/a if (x > (TABS-1)) x = (TABS-1);" \
+    libacl/__acl_to_any_text.c
+./configure --prefix=/usr    \
+            --disable-static \
+            --libexecdir=/usr/lib
+make
+make install install-dev install-lib
+chmod -v 755 /usr/lib/libacl.so
+mv -v /usr/lib/libacl.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libacl.so) /usr/lib/libacl.so
 
 
 cd $SOURCE_DIR

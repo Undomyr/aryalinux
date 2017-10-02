@@ -12,7 +12,7 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="005-linux-headers.sh"
+STEPNAME="043-linux-headers.sh"
 TARBALL="linux-4.12.7.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
@@ -31,7 +31,8 @@ fi
 
 make mrproper
 make INSTALL_HDR_PATH=dest headers_install
-cp -rv dest/include/* /tools/include
+find dest/include \( -name .install -o -name ..install.cmd \) -delete
+cp -rv dest/include/* /usr/include
 
 
 cd $SOURCE_DIR

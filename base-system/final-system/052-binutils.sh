@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="005-linux-headers.sh"
-TARBALL="linux-4.12.7.tar.xz"
+STEPNAME="052-binutils.sh"
+TARBALL="binutils-2.29.tar.bz2"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,9 +29,18 @@ then
 	cd $DIRECTORY
 fi
 
-make mrproper
-make INSTALL_HDR_PATH=dest headers_install
-cp -rv dest/include/* /tools/include
+expect -c "spawn ls"
+mkdir -v build
+cd       build
+../configure --prefix=/usr       \
+             --enable-gold       \
+             --enable-ld=default \
+             --enable-plugins    \
+             --enable-shared     \
+             --disable-werror    \
+             --with-system-zlib
+make tooldir=/usr
+make tooldir=/usr install
 
 
 cd $SOURCE_DIR

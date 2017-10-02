@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="005-linux-headers.sh"
-TARBALL="linux-4.12.7.tar.xz"
+STEPNAME="074-expat.sh"
+TARBALL="expat-2.2.3.tar.bz2"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,9 +29,12 @@ then
 	cd $DIRECTORY
 fi
 
-make mrproper
-make INSTALL_HDR_PATH=dest headers_install
-cp -rv dest/include/* /tools/include
+sed -i 's|usr/bin/env |bin/|' run.sh.in
+./configure --prefix=/usr --disable-static
+make
+make install
+install -v -dm755 /usr/share/doc/expat-2.2.3
+install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.3
 
 
 cd $SOURCE_DIR
