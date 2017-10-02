@@ -57,14 +57,14 @@ EOF
             --without-python         \
             --with-default-dnssec=no \
             --docdir=/usr/share/doc/systemd-234
-make
-make install
+make LIBRARY_PATH=/tools/lib
+make LIBRARY_PATH=/tools/lib install
 rm -rfv /usr/lib/rpm
 for tool in runlevel reboot shutdown poweroff halt telinit; do
      ln -sfv ../bin/systemctl /sbin/${tool}
 done
 ln -sfv ../lib/systemd/systemd /sbin/init
-systemd-machine-id-setup
+LIBRARY_PATH=/tools/lib systemd-machine-id-setup
 
 
 cd $SOURCE_DIR

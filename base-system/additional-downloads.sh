@@ -43,7 +43,6 @@ wget -nc ftp://sources.redhat.com/pub/lvm2/releases/LVM2.2.02.155.tgz
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs-4.12.tar.gz
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-base.patch
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-kbuild.patch
-wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-loopback.patch
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-mmap.patch
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-standalone.patch
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/2017/0.21-nvme_ioctl.h.patch
