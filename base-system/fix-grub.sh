@@ -14,7 +14,7 @@ TARBALL="grub-2.02.tar.xz"
 cd $SOURCE_DIR
 
 tar xf $TARBALL
-cd grub-2.02~beta3
+cd grub-2.02
 
 sed -i "s@GNU GRUB  version %s@$OS_NAME $OS_VERSION $OS_CODENAME \- GNU GRUB@g" grub-core/normal/main.c
 
@@ -60,7 +60,4 @@ then
 	rm -rf {gcc,glibc,binutils}-build
 fi
 
-
-rm -rf grub-2.02~beta3
-
-grub-install /dev/sda
+rm -rf grub-2.02
