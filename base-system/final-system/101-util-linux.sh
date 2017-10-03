@@ -43,6 +43,7 @@ mkdir -pv /var/lib/hwclock
             --without-python
 make
 make install
+systemd-machine-id-setup
 
 
 cd $SOURCE_DIR
