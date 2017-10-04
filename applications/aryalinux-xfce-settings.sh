@@ -6,16 +6,16 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-NAME="aryalinux-gnome-settings"
+NAME="aryalinux-xfce-settings"
 VERSION=2017.08
 DESCRIPTION="Fonts of the aryalinux XFCE, Mate, KDE and Gnome Desktops"
 
 cd $SOURCE_DIR
 
-URL=https://sourceforge.net/projects/aryalinux-bin/files/releases/misc/aryalinux-gnome-defaults.tar.gz
+URL=https://sourceforge.net/projects/aryalinux-bin/files/releases/misc/aryalinux-xfce-settings.tar.gz
 wget -nc $URL
 
-sudo tar xf aryalinux-gnome-defaults.tar.gz -C /
+sudo tar xf aryalinux-xfce-settings.tar.gz -C /
 cp -r /etc/skel/.config ~
 cp -r /etc/skel/.Xresources ~
 cp -r /etc/skel/.bash{_logout,_profile,rc}  ~

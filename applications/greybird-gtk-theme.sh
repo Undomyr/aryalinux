@@ -8,7 +8,7 @@ set +h
 
 SOURCE_ONLY=n
 NAME="greybird-gtk-theme"
-VERSION=SVN
+VERSION=1.0
 DESCRIPTION="Desktop Suite for Xfce"
 
 #REQ:gtk2
@@ -16,10 +16,10 @@ DESCRIPTION="Desktop Suite for Xfce"
 
 cd $SOURCE_DIR
 
-wget -nc https://sourceforge.net/projects/aryalinux-bin/files/artifacts/greybird-gtk-theme.tar.gz
+URL=https://sourceforge.net/projects/aryalinux-bin/files/releases/2017.09/bin/greybird-gtk-theme.tar.xz
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 
-sudo tar xf greybird-gtk-theme.tar.gz -C /
-
-cd $SOURCE_DIR
+wget -nc $URL
+sudo tar xf $TARBALL -C /
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
