@@ -79,7 +79,20 @@ cmake -DCMAKE_BUILD_TYPE=Release  \
       -Wno-dev .. &&
 make "-j`nproc`" || make
 
+if [ -f /sources/distro-build.sh ]; then
 
+make DESTDIR=$BINARY_DIR/$NAME-$VERSION-$(uname -m) install
+install -vdm755 $BINARY_DIR/$NAME-$VERSION-$(uname -m)/usr/share/gtk-doc/html/webkit{2,dom}gtk-4.0 &&
+install -vm644  ../Documentation/webkit2gtk-4.0/html/*   \
+                $BINARY_DIR/$NAME-$VERSION-$(uname -m)/usr/share/gtk-doc/html/webkit2gtk-4.0       &&
+install -vm644  ../Documentation/webkitdomgtk-4.0/html/* \
+                $BINARY_DIR/$NAME-$VERSION-$(uname -m)/usr/share/gtk-doc/html/webkitdomgtk-4.0
+pushd $BINARY_DIR/$NAME-$VERSION-$(uname -m)
+tar -cJvf $BINARY_DIR/$NAME-$VERSION-$(uname -m).tar.xz *
+popd
+rm -rf $BINARY_DIR/$NAME-$VERSION-$(uname -m)
+
+fi
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&

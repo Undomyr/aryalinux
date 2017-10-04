@@ -29,32 +29,22 @@ NAME="firefox"
 #REQ:valgrind
 #REQ:liboauth
 #REQ:graphite2
+#REQ:harfbuzz
 #REC:icu
 #REC:libevent
 #REC:libvpx
 #REC:sqlite
-#REQ:cargo
 #REQ:rust
+#REQ:wireless_tools
 #OPT:curl
-#OPT:dbus-glib
 #OPT:doxygen
-#OPT:GConf
-#OPT:ffmpeg
-#OPT:libwebp
 #OPT:openjdk
-#OPT:pulseaudio
-#OPT:startup-notification
-#OPT:valgrind
 #OPT:wget
-#OPT:wireless_tools
-#OPT:liboauth
-#OPT:graphite2
-#OPT:harfbuzz
 
 
 cd $SOURCE_DIR
 
-URL=https://ftp.mozilla.org/pub/firefox/releases/$VERSION/source/firefox-$VERSION.source.tar.xz
+URL=https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$VERSION/source/firefox-$VERSION.source.tar.xz
 
 if [ ! -z $URL ]
 then
@@ -81,24 +71,24 @@ cat > mozconfig << "EOF"
 # uncommenting the next line and setting a valid number of CPU cores.
 #mk_add_options MOZ_MAKE_FLAGS="-j1"
 # If you have installed dbus-glib, comment out this line:
-#ac_add_options --disable-dbus
+# ac_add_options --disable-dbus
 # If you have installed dbus-glib, and you have installed (or will install)
 # wireless-tools, and you wish to use geolocation web services, comment out
 # this line
-#ac_add_options --disable-necko-wifi
+ac_add_options --disable-necko-wifi
 # Uncomment this option if you wish to build with gtk+-2
 #ac_add_options --enable-default-toolkit=cairo-gtk2
 # Uncomment these lines if you have installed optional dependencies:
-#ac_add_options --enable-system-hunspell
-#ac_add_options --enable-startup-notification
+# ac_add_options --enable-system-hunspell
+ac_add_options --enable-startup-notification
 # Comment out following option if you have PulseAudio installed
-#ac_add_options --disable-pulseaudio
+# ac_add_options --disable-pulseaudio
 # If you have installed GConf, comment out this line
-#ac_add_options --disable-gconf
+# ac_add_options --disable-gconf
 # Comment out following options if you have not installed
 # recommended dependencies:
 ac_add_options --enable-system-sqlite
-ac_add_options --with-system-libevent
+# ac_add_options --with-system-libevent
 ac_add_options --with-system-libvpx
 ac_add_options --with-system-nspr
 ac_add_options --with-system-nss
@@ -118,7 +108,7 @@ ac_add_options --disable-crashreporter
 ac_add_options --disable-updater
 ac_add_options --disable-tests
 ac_add_options --enable-optimize
-ac_add_options --enable-gio
+# ac_add_options --enable-gio
 ac_add_options --enable-official-branding
 ac_add_options --enable-safe-browsing
 ac_add_options --enable-url-classifier
@@ -138,6 +128,9 @@ EOF
 
 sed -e s/_EVENT_SIZEOF/EVENT__SIZEOF/ \
     -i ipc/chromium/src/base/message_pump_libevent.cc
+
+echo "AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ" > google-key
+echo "d2284a20-0505-4927-a809-7ffaf4d91e55" > mozilla-key
 
 make -f client.mk
 sudo make -f client.mk install INSTALL_SDK= &&
@@ -166,6 +159,7 @@ sudo ln -sfv /usr/lib/firefox-$VERSION/browser/icons/mozicon128.png \
 
 
 # Create package...
+if [ -f /sources/distro-build.sh ]; then
 
 make -f client.mk install INSTALL_SDK= DESTDIR=$BINARY_DIR/firefox-$VERSION-$(uname -m) &&
 sudo chown -R 0:0 $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/lib/firefox-$VERSION   &&
@@ -174,7 +168,7 @@ sudo ln    -sfv   ../../mozilla/plugins $BINARY_DIR/firefox-$VERSION-$(uname -m)
 
 sudo mkdir -pv $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/share/applications &&
 sudo mkdir -pv $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/share/pixmaps &&
-sudo tee $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/share/applications/firefox.desktop << "EOF" &&
+sudo tee $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/share/applications/firefox.desktop << "EOF"
 [Desktop Entry]
 Encoding=UTF-8
 Name=Firefox Web Browser
@@ -194,6 +188,8 @@ pushd $BINARY_DIR/firefox-$VERSION-$(uname -m)
 sudo tar -cJvf ../firefox-$VERSION-$(uname -m).tar.xz *
 popd
 sudo rm -r $BINARY_DIR/firefox-$VERSION-$(uname -m)
+
+fi
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
