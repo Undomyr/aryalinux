@@ -90,7 +90,7 @@ ac_add_options --enable-startup-notification
 ac_add_options --enable-system-sqlite
 # ac_add_options --with-system-libevent
 ac_add_options --with-system-libvpx
-ac_add_options --with-system-nspr
+# ac_add_options --with-system-nspr
 # ac_add_options --with-system-nss
 ac_add_options --with-system-icu
 # If you are going to apply the patch for system graphite
