@@ -24,10 +24,10 @@ cd $DIRECTORY
 
 patch -Np1 -i ../bsddb3-6.1.1-assertion-error.patch
 python setup.py --berkeley-db=/usr build
-sudo python setup.py install
+sudo python setup.py --berkeley-db=/usr install
 
 python3 setup.py --berkeley-db=/usr build
-sudo python3 setup.py install
+sudo python3 setup.py --berkeley-db=/usr install
 
 cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
