@@ -10,6 +10,9 @@ set +h
 #REQ:ffmpeg
 #REQ:pulseaudio
 
+NAME=simple-screen-recorder
+VERSION=0.3.8
+
 cd $SOURCE_DIR
 
 URL=https://github.com/MaartenBaert/ssr/archive/master.tar.gz
@@ -28,7 +31,9 @@ export QTDIR="$QT5PREFIX"
 export PATH="$PATH:$QT5BINDIR"
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt5/lib/pkgconfig"
 
-CXXFLAGS="-fPIC" ./configure --prefix=/usr --with-qt5 --with-jack --with-pulseaudio &&
+mkdir -pv build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr -DWITH_QT5=1 -DWITH_JACK=1 -DWITH_PULSEAUDIO=1 .. &&
 make "-j`nproc`"
 sudo make install
 
