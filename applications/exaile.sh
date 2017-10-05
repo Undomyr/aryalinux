@@ -11,14 +11,14 @@ VERSION="3.4.5"
 
 NAME="exaile"
 
-#REQ:gstreamer-0.10
-#REQ:gstreamer-0.10-plugins-base
-#REQ:gstreamer-0.10-plugins-good
-#REQ:gstreamer-0.10-plugins-bad
-#REQ:gstreamer-0.10-plugins-ugly
-#REQ:gstreamer-0.10-ffmpeg
+#OPT:gstreamer-0.10
+#OPT:gstreamer-0.10-plugins-base
+#OPT:gstreamer-0.10-plugins-good
+#OPT:gstreamer-0.10-plugins-bad
+#OPT:gstreamer-0.10-plugins-ugly
+#OPT:gstreamer-0.10-ffmpeg
 #REQ:mutagen
-#REQ:gstreamer-0.10-python
+#OPT:gstreamer-0.10-python
 
 cd $SOURCE_DIR
 URL="http://archive.ubuntu.com/ubuntu/pool/universe/e/exaile/exaile_3.4.5.orig.tar.gz"
@@ -38,3 +38,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+STALLED_LIST"
