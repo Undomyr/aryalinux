@@ -21,7 +21,7 @@ DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 tar xf $TARBALL
 cd $DIRECTORY
 
-python setup.py build
+python setup.py --berkeley-db=/usr build
 sudo python setup.py install
 
 #python3 setup.py build
