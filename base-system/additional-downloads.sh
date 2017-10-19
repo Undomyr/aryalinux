@@ -3,7 +3,7 @@
 set -e
 set +h
 
-VERSION=2017.10
+VERSION=1.0
 
 pushd ~/sources
 
