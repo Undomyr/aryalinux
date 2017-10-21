@@ -90,7 +90,7 @@ install -vm644  ../Documentation/webkitdomgtk-4.0/html/* \
 pushd $BINARY_DIR/$NAME-$VERSION-$(uname -m)
 tar -cJvf $BINARY_DIR/$NAME-$VERSION-$(uname -m).tar.xz *
 popd
-rm -rf $BINARY_DIR/$NAME-$VERSION-$(uname -m)
+# rm -rf $BINARY_DIR/$NAME-$VERSION-$(uname -m)
 
 fi
 
@@ -110,6 +110,6 @@ sudo rm rootscript.sh
 
 
 
-if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
+# if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
