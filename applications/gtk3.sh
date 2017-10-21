@@ -25,7 +25,7 @@ NAME="gtk3"
 #OPT:docbook-utils
 #OPT:gtk-doc
 #OPT:json-glib
-#OPT:libxkbcommon
+#REQ:libxkbcommon
 #OPT:python-modules#pyatspi2
 #OPT:rest
 #OPT:wayland
