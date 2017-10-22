@@ -81,7 +81,7 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-systemctl enable gdm
+systemctl disable gdm
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
