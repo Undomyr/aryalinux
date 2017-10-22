@@ -10,6 +10,10 @@ NAME="aryalinux-gnome-settings"
 VERSION=2017.08
 DESCRIPTION="Fonts of the aryalinux XFCE, Mate, KDE and Gnome Desktops"
 
+#REQ:flat-remix-icon-theme
+#REQ:arc-gtk-theme
+#REQ:adapta-gtk-theme
+
 cd $SOURCE_DIR
 
 URL=https://sourceforge.net/projects/aryalinux-bin/files/releases/misc/aryalinux-gnome-defaults.tar.gz
