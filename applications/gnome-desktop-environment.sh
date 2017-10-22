@@ -156,4 +156,7 @@ sudo cp -v $SOURCE_DIR/aryalinux.png .
 popd
 fi
 
+sudo systemctl disable gdm.service
+sudo systemctl enable lightdm.service
+
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
