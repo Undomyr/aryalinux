@@ -92,6 +92,7 @@ DESCRIPTION="GNOME is a desktop environment that is composed entirely of free an
 #REQ:notification-daemon
 #REQ:polkit-gnome
 #REQ:aryalinux-gnome-settings
+#REQ:xdg-user-dirs
 
 sudo tee /etc/gtk-2.0/gtkrc <<"EOF"
 include "/usr/share/themes/Clearlooks/gtk-2.0/gtkrc"

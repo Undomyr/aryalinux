@@ -7,7 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Samba package provides filebr3ak and print services to SMB/CIFS clients and Windows networking tobr3ak Linux clients. Samba can also bebr3ak configured as a Windows Domain Controller replacement, a file/printbr3ak server acting as a member of a Windows Active Directory domain andbr3ak a NetBIOS (rfc1001/1002) nameserver (which among other thingsbr3ak provides LAN browsing support).br3ak"
+DESCRIPTION="br3ak The Samba package provides filebr3ak and print services to SMB/CIFS clients and Windows networking tobr3ak Linux clients. 
+Samba can also bebr3ak configured as a Windows Domain Controller replacement, a file/printbr3ak server acting as a member of a Windows Active 
+Directory domain andbr3ak a NetBIOS (rfc1001/1002) nameserver (which among other thingsbr3ak provides LAN browsing support).br3ak"
 SECTION="basicnet"
 VERSION=4.6.7
 NAME="samba"
@@ -39,6 +41,7 @@ NAME="samba"
 #OPT:vala
 #OPT:valgrind
 #OPT:xfsprogs
+#OPT:python-modules#six
 
 
 cd $SOURCE_DIR
@@ -48,6 +51,7 @@ URL=https://download.samba.org/pub/samba/stable/samba-4.5.1.tar.gz
 if [ ! -z $URL ]
 then
 wget -nc https://download.samba.org/pub/samba/stable/samba-4.5.1.tar.gz
+wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/2017.09/samba-4.5.1-samba_perl.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -63,7 +67,7 @@ fi
 whoami > /tmp/currentuser
 
 echo "^samba4.rpc.echo.*on.*ncacn_np.*with.*object.*nt4_dc" >> selftest/knownfail
-
+patch -Np1 -i ../samba-4.5.1-samba_perl.patch
 
 ./configure                            \
     --prefix=/usr                      \
@@ -168,3 +172,4 @@ sudo rm rootscript.sh
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
+
