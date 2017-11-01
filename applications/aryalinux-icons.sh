@@ -11,5 +11,6 @@ DESCRIPTION="Icons collection for AryaLinux XFCE and Mate Desktops"
 VERSION="2016.08"
 
 #REQ:numix-icons
+#REQ:flat-remix-icon-theme
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

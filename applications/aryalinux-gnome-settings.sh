@@ -13,6 +13,10 @@ DESCRIPTION="Fonts of the aryalinux XFCE, Mate, KDE and Gnome Desktops"
 #REQ:flat-remix-icon-theme
 #REQ:arc-gtk-theme
 #REQ:adapta-gtk-theme
+#REQ:aryalinux-fonts
+#REQ:aryalinux-wallpapers
+#REQ:aryalinux-icons
+#REQ:aryalinux-themes
 
 cd $SOURCE_DIR
 
