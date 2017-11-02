@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="Firefox is a stand-alone browser based on the Mozilla codebase."
 SECTION="xsoft"
-VERSION=56.0
+VERSION=56.0.2
 NAME="firefox"
 
 #REQ:alsa-lib
@@ -44,7 +44,7 @@ NAME="firefox"
 
 cd $SOURCE_DIR
 
-URL=https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$VERSION/source/firefox-$VERSION.source.tar.xz
+URL=https://ftp.mozilla.org/pub/firefox/releases/$VERSION/source/firefox-$VERSION.source.tar.xz
 
 if [ ! -z $URL ]
 then
