@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="044-man-pages.sh"
-TARBALL="man-pages-4.13.tar.xz"
+STEPNAME="084-libffi.sh"
+TARBALL="libffi-3.2.1.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,6 +29,13 @@ then
 	cd $DIRECTORY
 fi
 
+sed -e '/^includesdir/ s/$(libdir).*$/$(includedir)/' \
+    -i include/Makefile.in
+sed -e '/^includedir/ s/=.*$/=@includedir@/' \
+    -e 's/^Cflags: -I${includedir}/Cflags:/' \
+    -i libffi.pc.in
+./configure --prefix=/usr --disable-static
+make
 make install
 
 

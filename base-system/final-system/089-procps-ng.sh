@@ -12,7 +12,7 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="085-procps-ng.sh"
+STEPNAME="089-procps-ng.sh"
 TARBALL="procps-ng-3.3.12.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track

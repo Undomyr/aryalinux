@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="090-findutils.sh"
-TARBALL="findutils-4.6.0.tar.gz"
+STEPNAME="085-Python.sh"
+TARBALL="Python-3.6.3.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,12 +29,21 @@ then
 	cd $DIRECTORY
 fi
 
-sed -i 's/test-lock..EXEEXT.//' tests/Makefile.in
-./configure --prefix=/usr --localstatedir=/var/lib/locate
+./configure --prefix=/usr       \
+            --enable-shared     \
+            --with-system-expat \
+            --with-system-ffi   \
+            --with-ensurepip=yes
 make
 make install
-mv -v /usr/bin/find /bin
-sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb
+chmod -v 755 /usr/lib/libpython3.6m.so
+chmod -v 755 /usr/lib/libpython3.so
+install -v -dm755 /usr/share/doc/python-3.6.3/html 
+tar --strip-components=1  \
+    --no-same-owner       \
+    --no-same-permissions \
+    -C /usr/share/doc/python-3.6.3/html \
+    -xvf ../python-3.6.3-docs-html.tar.bz2
 
 
 cd $SOURCE_DIR

@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="011-expect.sh"
-TARBALL="expect5.45.tar.gz"
+TARBALL="expect5.45.3.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 

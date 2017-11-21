@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="102-man-db.sh"
-TARBALL="man-db-2.7.6.1.tar.xz"
+STEPNAME="094-findutils.sh"
+TARBALL="findutils-4.6.0.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,17 +29,12 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr                        \
-            --docdir=/usr/share/doc/man-db-2.7.6.1 \
-            --sysconfdir=/etc                    \
-            --disable-setuid                     \
-            --enable-cache-owner=bin             \
-            --with-browser=/usr/bin/lynx         \
-            --with-vgrind=/usr/bin/vgrind        \
-            --with-grap=/usr/bin/grap
+sed -i 's/test-lock..EXEEXT.//' tests/Makefile.in
+./configure --prefix=/usr --localstatedir=/var/lib/locate
 make
 make install
-sed -i "s:man man:root root:g" /usr/lib/tmpfiles.d/man-db.conf
+mv -v /usr/bin/find /bin
+sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb
 
 
 cd $SOURCE_DIR
