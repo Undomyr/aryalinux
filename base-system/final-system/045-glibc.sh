@@ -65,6 +65,7 @@ localedef -i de_DE@euro -f ISO-8859-15 de_DE@euro
 localedef -i de_DE -f UTF-8 de_DE.UTF-8
 localedef -i en_GB -f UTF-8 en_GB.UTF-8
 localedef -i en_HK -f ISO-8859-1 en_HK
+localedef -i en_IN -f UTF-8 en_IN.UTF-8
 localedef -i en_PH -f ISO-8859-1 en_PH
 localedef -i en_US -f ISO-8859-1 en_US
 localedef -i en_US -f UTF-8 en_US.UTF-8

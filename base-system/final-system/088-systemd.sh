@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="088-systemd.sh"
-TARBALL="systemd-man-pages-235.tar.xz"
+TARBALL="systemd-235.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,11 +29,11 @@ then
 	cd $DIRECTORY
 fi
 
-ln -s /tools/bin/true /usr/bin/xsltproc
+ln -svf /tools/bin/true /usr/bin/xsltproc
 tar -xf ../systemd-man-pages-235.tar.xz
 mkdir -p build
 cd       build
-LANG=en_US.UTF-8                   \
+LANG="$LOCALE"                     \
 meson --prefix=/usr                \
       --sysconfdir=/etc            \
       --localstatedir=/var         \
@@ -53,8 +53,8 @@ meson --prefix=/usr                \
       -Dumount-path=/bin/umount    \
       -Db_lto=false                \
       ..
-LANG=en_US.UTF-8 ninja
-LANG=en_US.UTF-8 ninja install
+LANG="$LOCALE" ninja
+LANG="$LOCALE" ninja install
 rm -rfv /usr/lib/rpm
 for tool in runlevel reboot shutdown poweroff halt telinit; do
      ln -sfv ../bin/systemctl /sbin/${tool}
