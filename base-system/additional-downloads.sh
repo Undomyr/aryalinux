@@ -9,7 +9,7 @@ pushd ~/sources
 
 wget -nc http://pkgs.fedoraproject.org/lookaside/pkgs/dosfstools/dosfstools-3.0.26.tar.xz/45012f5f56f2aae3afcd62120b9e5a08/dosfstools-3.0.26.tar.xz
 wget -nc http://ftp.gnu.org/gnu/which/which-2.21.tar.gz
-wget -nc http://ftp.de.debian.org/debian/pool/main/o/os-prober/os-prober_1.71.tar.xz
+wget -nc http://mirrors.ocf.berkeley.edu/tanglu/pool/main/o/os-prober/os-prober_1.71.tar.xz
 wget -nc https://github.com/rhboot/efivar/releases/download/31/efivar-31.tar.bz2
 wget -nc https://github.com/rhboot/efibootmgr/releases/download/14/efibootmgr-14.tar.bz2
 wget -nc http://downloads.sourceforge.net/freetype/freetype-2.6.3.tar.bz2
@@ -40,7 +40,7 @@ tar -cJvf dracut-master.tar.xz dracut-master
 rm -r dracut-master
 rm -r master.zip
 wget -nc ftp://sources.redhat.com/pub/lvm2/releases/LVM2.2.02.155.tgz
-wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs-4.12.tar.gz
+wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs-4.14.tar.gz
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-base.patch
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-kbuild.patch
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-mmap.patch
