@@ -17,8 +17,8 @@ wget -nc http://unifoundry.com/pub/unifont-7.0.05/font-builds/unifont-7.0.05.pcf
 wget -nc http://pkgs.fedoraproject.org/repo/pkgs/pciutils/pciutils-3.4.1.tar.gz/acc91d632dbc98f624a8e57b4e478160/pciutils-3.4.1.tar.gz
 wget -nc http://pkgs.fedoraproject.org/repo/pkgs/popt/popt-1.16.tar.gz/3743beefa3dd6247a73f8f7a32c14c33/popt-1.16.tar.gz
 wget -nc http://pkgs.fedoraproject.org/repo/pkgs/linux-firmware/linux-firmware-20160321.tar.gz/46a7ec26850851c9da93ba84dd14fc71/linux-firmware-20160321.tar.gz
-wget -nc http://ftp.gnu.org/pub/gnu/cpio/cpio-2.12.tar.bz2
-wget -nc http://pkgs.fedoraproject.org/repo/pkgs/redhat-lsb/lsb-release-1.4.tar.gz/30537ef5a01e0ca94b7b8eb6a36bb1e4/lsb-release-1.4.tar.gz
+wget -nc https://ftp.gnu.org/gnu/cpio/cpio-2.12.tar.bz2
+wget -nc https://ftp.osuosl.org/pub/blfs/conglomeration/lsb-release/lsb-release-1.4.tar.gz
 wget -nc https://busybox.net/downloads/fixes-1.20.2/busybox-1.20.2-sys-resource.patch
 wget -nc https://busybox.net/downloads/busybox-1.20.2.tar.bz2
 wget -nc https://ftp.gnu.org/gnu/nettle/nettle-3.1.1.tar.gz
