@@ -40,7 +40,7 @@ tar -cJvf dracut-master.tar.xz dracut-master
 rm -r dracut-master
 rm -r master.zip
 wget -nc https://www.mirrorservice.org/sites/sourceware.org/pub/lvm2/releases/LVM2.2.02.155.tgz
-wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs-4.14.tar.gz
+wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs-4.12.tar.gz
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-base.patch
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-kbuild.patch
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-mmap.patch
