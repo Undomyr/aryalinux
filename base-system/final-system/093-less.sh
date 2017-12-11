@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="087-meson.sh"
-TARBALL="meson-0.43.0.tar.gz"
+STEPNAME="093-less.sh"
+TARBALL="less-487.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,8 +29,9 @@ then
 	cd $DIRECTORY
 fi
 
-python3 setup.py build
-python3 setup.py install
+./configure --prefix=/usr --sysconfdir=/etc
+make
+make install
 
 
 cd $SOURCE_DIR

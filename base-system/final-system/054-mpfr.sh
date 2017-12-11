@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="054-mpfr.sh"
-TARBALL="mpfr-3.1.6.tar.xz"
+TARBALL="mpfr-3.1.5.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -32,7 +32,7 @@ fi
 ./configure --prefix=/usr        \
             --disable-static     \
             --enable-thread-safe \
-            --docdir=/usr/share/doc/mpfr-3.1.6
+            --docdir=/usr/share/doc/mpfr-3.1.5
 make
 make html
 make install

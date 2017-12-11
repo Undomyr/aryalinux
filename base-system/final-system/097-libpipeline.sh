@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="105-util-linux.sh"
-TARBALL="util-linux-2.31.tar.xz"
+STEPNAME="097-libpipeline.sh"
+TARBALL="libpipeline-1.4.2.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,19 +29,7 @@ then
 	cd $DIRECTORY
 fi
 
-mkdir -pv /var/lib/hwclock
-rm -vf /usr/include/{blkid,libmount,uuid}
-./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
-            --docdir=/usr/share/doc/util-linux-2.31 \
-            --disable-chfn-chsh  \
-            --disable-login      \
-            --disable-nologin    \
-            --disable-su         \
-            --disable-setpriv    \
-            --disable-runuser    \
-            --disable-pylibmount \
-            --disable-static     \
-            --without-python
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr
 make
 make install
 
