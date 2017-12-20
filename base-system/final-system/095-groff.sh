@@ -7,13 +7,13 @@ set +h
 
 if [ "x$MULTICORE" == "xy" ] || [ "x$MULTICORE" == "xY" ]
 then
-	export MAKEFLAGS="-j `nproc`"
+	export MAKEFLAGS="-j 1"
 fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="043-linux-headers.sh"
-TARBALL="linux-4.14.6.tar.xz"
+STEPNAME="095-groff.sh"
+TARBALL="groff-1.22.3.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,10 +29,9 @@ then
 	cd $DIRECTORY
 fi
 
-make mrproper
-make INSTALL_HDR_PATH=dest headers_install
-find dest/include \( -name .install -o -name ..install.cmd \) -delete
-cp -rv dest/include/* /usr/include
+PAGE=PAPER_SIZE ./configure --prefix=/usr
+make -j1
+make install
 
 
 cd $SOURCE_DIR

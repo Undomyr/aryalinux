@@ -207,7 +207,8 @@ make install
 cd /sources
 rm -rf $FIRMWARE_DIR
 
-dracut -f /boot/initrd.img-$LINUX_VERSION `ls /lib/modules`
+mkinitramfs `ls /lib/modules`
+mv -v initrd.img-$LINUX_VERSION /boot/
 
 echo "$STEPNAME" | tee -a $LOGFILE
 

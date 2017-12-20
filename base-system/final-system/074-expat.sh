@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="074-expat.sh"
-TARBALL="expat-2.2.3.tar.bz2"
+TARBALL="expat-2.2.5.tar.bz2"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -33,8 +33,8 @@ sed -i 's|usr/bin/env |bin/|' run.sh.in
 ./configure --prefix=/usr --disable-static
 make
 make install
-install -v -dm755 /usr/share/doc/expat-2.2.3
-install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.3
+install -v -dm755 /usr/share/doc/expat-2.2.5
+install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.5
 
 
 cd $SOURCE_DIR

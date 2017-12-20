@@ -7,13 +7,13 @@ set +h
 
 if [ "x$MULTICORE" == "xy" ] || [ "x$MULTICORE" == "xY" ]
 then
-	export MAKEFLAGS="-j 1"
+	export MAKEFLAGS="-j `nproc`"
 fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="091-groff.sh"
-TARBALL="groff-1.22.3.tar.gz"
+STEPNAME="097-less.sh"
+TARBALL="less-487.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,8 +29,8 @@ then
 	cd $DIRECTORY
 fi
 
-PAGE=PAPER_SIZE ./configure --prefix=/usr
-make -j1
+./configure --prefix=/usr --sysconfdir=/etc
+make
 make install
 
 

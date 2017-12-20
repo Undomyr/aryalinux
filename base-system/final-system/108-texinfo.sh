@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="043-linux-headers.sh"
-TARBALL="linux-4.14.6.tar.xz"
+STEPNAME="108-texinfo.sh"
+TARBALL="texinfo-6.5.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,10 +29,16 @@ then
 	cd $DIRECTORY
 fi
 
-make mrproper
-make INSTALL_HDR_PATH=dest headers_install
-find dest/include \( -name .install -o -name ..install.cmd \) -delete
-cp -rv dest/include/* /usr/include
+./configure --prefix=/usr --disable-static
+make
+make install
+make TEXMF=/usr/share/texmf install-tex
+pushd /usr/share/info
+rm -v dir
+for f in *
+  do install-info $f dir 2>/dev/null
+done
+popd
 
 
 cd $SOURCE_DIR

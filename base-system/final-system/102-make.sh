@@ -12,7 +12,7 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="098-make.sh"
+STEPNAME="102-make.sh"
 TARBALL="make-4.2.1.tar.bz2"
 
 echo "$LOGLENGTH" > /sources/lines2track

@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="102-man-db.sh"
-TARBALL="man-db-2.7.6.1.tar.xz"
+STEPNAME="092-diffutils.sh"
+TARBALL="diffutils-3.6.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,17 +29,9 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr                        \
-            --docdir=/usr/share/doc/man-db-2.7.6.1 \
-            --sysconfdir=/etc                    \
-            --disable-setuid                     \
-            --enable-cache-owner=bin             \
-            --with-browser=/usr/bin/lynx         \
-            --with-vgrind=/usr/bin/vgrind        \
-            --with-grap=/usr/bin/grap
+./configure --prefix=/usr
 make
 make install
-sed -i "s:man man:root root:g" /usr/lib/tmpfiles.d/man-db.conf
 
 
 cd $SOURCE_DIR

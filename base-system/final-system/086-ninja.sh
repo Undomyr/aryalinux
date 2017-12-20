@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="101-util-linux.sh"
-TARBALL="util-linux-2.30.1.tar.xz"
+STEPNAME="086-ninja.sh"
+TARBALL="ninja-1.8.2.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,20 +29,15 @@ then
 	cd $DIRECTORY
 fi
 
-mkdir -pv /var/lib/hwclock
-./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
-            --docdir=/usr/share/doc/util-linux-2.30.1 \
-            --disable-chfn-chsh  \
-            --disable-login      \
-            --disable-nologin    \
-            --disable-su         \
-            --disable-setpriv    \
-            --disable-runuser    \
-            --disable-pylibmount \
-            --disable-static     \
-            --without-python
-make
-make install
+patch -Np1 -i ../ninja-1.8.2-add_NINJAJOBS_var-1.patch
+python3 configure.py --bootstrap
+python3 configure.py
+./ninja ninja_test
+./ninja_test --gtest_filter=-SubprocessTest.SetWithLots
+install -vm755 ninja /usr/bin/
+install -vDm644 misc/ninja.vim       /usr/share/vim/vim80/syntax/ninja.vim
+install -vDm644 misc/bash-completion /usr/share/bash-completion/completions/ninja
+install -vDm644 misc/zsh-completion  /usr/share/zsh/site-functions/_ninja
 
 
 cd $SOURCE_DIR

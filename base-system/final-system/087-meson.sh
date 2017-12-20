@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="104-texinfo.sh"
-TARBALL="texinfo-6.4.tar.xz"
+STEPNAME="087-meson.sh"
+TARBALL="meson-0.44.0.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,16 +29,8 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr --disable-static
-make
-make install
-make TEXMF=/usr/share/texmf install-tex
-pushd /usr/share/info
-rm -v dir
-for f in *
-  do install-info $f dir 2>/dev/null
-done
-popd
+python3 setup.py build
+python3 setup.py install
 
 
 cd $SOURCE_DIR

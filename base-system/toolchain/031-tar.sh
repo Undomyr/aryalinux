@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="031-tar.sh"
-TARBALL="tar-1.29.tar.xz"
+TARBALL="tar-1.30.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 

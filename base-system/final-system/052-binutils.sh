@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="052-binutils.sh"
-TARBALL="binutils-2.29.tar.bz2"
+TARBALL="binutils-2.29.1.tar.bz2"
 
 echo "$LOGLENGTH" > /sources/lines2track
 

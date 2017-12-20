@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="097-libpipeline.sh"
-TARBALL="libpipeline-1.4.2.tar.gz"
+STEPNAME="106-man-db.sh"
+TARBALL="man-db-2.7.6.1.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,9 +29,17 @@ then
 	cd $DIRECTORY
 fi
 
-PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr
+./configure --prefix=/usr                        \
+            --docdir=/usr/share/doc/man-db-2.7.6.1 \
+            --sysconfdir=/etc                    \
+            --disable-setuid                     \
+            --enable-cache-owner=bin             \
+            --with-browser=/usr/bin/lynx         \
+            --with-vgrind=/usr/bin/vgrind        \
+            --with-grap=/usr/bin/grap
 make
 make install
+sed -i "s:man man:root root:g" /usr/lib/tmpfiles.d/man-db.conf
 
 
 cd $SOURCE_DIR

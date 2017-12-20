@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="043-linux-headers.sh"
-TARBALL="linux-4.14.6.tar.xz"
+STEPNAME="084-libffi.sh"
+TARBALL="libffi-3.2.1.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,10 +29,14 @@ then
 	cd $DIRECTORY
 fi
 
-make mrproper
-make INSTALL_HDR_PATH=dest headers_install
-find dest/include \( -name .install -o -name ..install.cmd \) -delete
-cp -rv dest/include/* /usr/include
+sed -e '/^includesdir/ s/$(libdir).*$/$(includedir)/' \
+    -i include/Makefile.in
+sed -e '/^includedir/ s/=.*$/=@includedir@/' \
+    -e 's/^Cflags: -I${includedir}/Cflags:/' \
+    -i libffi.pc.in
+./configure --prefix=/usr --disable-static
+make
+make install
 
 
 cd $SOURCE_DIR

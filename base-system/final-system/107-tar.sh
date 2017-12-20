@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="090-findutils.sh"
-TARBALL="findutils-4.6.0.tar.gz"
+STEPNAME="107-tar.sh"
+TARBALL="tar-1.30.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,12 +29,12 @@ then
 	cd $DIRECTORY
 fi
 
-sed -i 's/test-lock..EXEEXT.//' tests/Makefile.in
-./configure --prefix=/usr --localstatedir=/var/lib/locate
+FORCE_UNSAFE_CONFIGURE=1  \
+./configure --prefix=/usr \
+            --bindir=/bin
 make
 make install
-mv -v /usr/bin/find /bin
-sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb
+make -C doc install-html docdir=/usr/share/doc/tar-1.30
 
 
 cd $SOURCE_DIR
