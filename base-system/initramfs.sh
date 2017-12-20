@@ -38,7 +38,6 @@ make install
 cd /sources
 rm -rf dash-0.5.9.1
 
-
 cat > /sbin/mkinitramfs << "EOF"
 #!/bin/bash
 # This file based in part on the mkinitramfs script for the LFS LiveCD
