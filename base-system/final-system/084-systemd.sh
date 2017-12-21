@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="088-systemd.sh"
-TARBALL="systemd-236.tar.gz"
+STEPNAME="084-systemd.sh"
+TARBALL="systemd-234-lfs.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -28,9 +28,6 @@ then
 	tar xf $TARBALL
 	cd $DIRECTORY
 fi
-
-ln -sf /tools/bin/true /usr/bin/xsltproc
-tar -xf ../systemd-man-pages-235.tar.xz
 
 cat > config.cache << "EOF"
 KILL=/bin/kill
@@ -47,7 +44,6 @@ SULOGIN="/sbin/sulogin"
 GPERF_LEN_TYPE=size_t
 XSLTPROC="/usr/bin/xsltproc"
 EOF
-
 ./configure --prefix=/usr            \
             --sysconfdir=/etc        \
             --localstatedir=/var     \
@@ -60,8 +56,7 @@ EOF
             --disable-sysusers       \
             --without-python         \
             --with-default-dnssec=no \
-            --docdir=/usr/share/doc/systemd-236
-
+            --docdir=/usr/share/doc/systemd-234
 make
 make install
 rm -rfv /usr/lib/rpm
@@ -70,13 +65,6 @@ for tool in runlevel reboot shutdown poweroff halt telinit; do
 done
 ln -sfv ../lib/systemd/systemd /sbin/init
 systemd-machine-id-setup
-
-cat > /lib/systemd/systemd-user-sessions << "EOF"
-#!/bin/bash
-rm -f /run/nologin
-EOF
-
-chmod 755 /lib/systemd/systemd-user-sessions
 
 
 cd $SOURCE_DIR

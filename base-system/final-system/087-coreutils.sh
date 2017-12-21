@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="091-coreutils.sh"
-TARBALL="coreutils-8.28.tar.xz"
+STEPNAME="087-coreutils.sh"
+TARBALL="coreutils-8.27.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,7 +29,7 @@ then
 	cd $DIRECTORY
 fi
 
-patch -Np1 -i ../coreutils-8.28-i18n-1.patch
+patch -Np1 -i ../coreutils-8.27-i18n-1.patch
 sed -i '/test.lock/s/^/#/' gnulib-tests/gnulib.mk
 FORCE_UNSAFE_CONFIGURE=1 ./configure \
             --prefix=/usr            \
@@ -45,7 +45,7 @@ mv -v /usr/bin/{rmdir,stty,sync,true,uname} /bin
 mv -v /usr/bin/chroot /usr/sbin
 mv -v /usr/share/man/man1/chroot.1 /usr/share/man/man8/chroot.8
 sed -i s/\"1\"/\"8\"/1 /usr/share/man/man8/chroot.8
-mv -v /usr/bin/{head,sleep,nice} /bin
+mv -v /usr/bin/{head,sleep,nice,test,[} /bin
 
 
 cd $SOURCE_DIR

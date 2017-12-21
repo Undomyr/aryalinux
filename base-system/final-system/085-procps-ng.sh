@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="085-Python.sh"
-TARBALL="Python-3.6.3.tar.xz"
+STEPNAME="085-procps-ng.sh"
+TARBALL="procps-ng-3.3.12.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,21 +29,17 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr       \
-            --enable-shared     \
-            --with-system-expat \
-            --with-system-ffi   \
-            --with-ensurepip=yes
+./configure --prefix=/usr                            \
+            --exec-prefix=                           \
+            --libdir=/usr/lib                        \
+            --docdir=/usr/share/doc/procps-ng-3.3.12 \
+            --disable-static                         \
+            --disable-kill                           \
+            --with-systemd
 make
 make install
-chmod -v 755 /usr/lib/libpython3.6m.so
-chmod -v 755 /usr/lib/libpython3.so
-install -v -dm755 /usr/share/doc/python-3.6.3/html 
-tar --strip-components=1  \
-    --no-same-owner       \
-    --no-same-permissions \
-    -C /usr/share/doc/python-3.6.3/html \
-    -xvf ../python-3.6.3-docs-html.tar.bz2
+mv -v /usr/lib/libprocps.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so
 
 
 cd $SOURCE_DIR

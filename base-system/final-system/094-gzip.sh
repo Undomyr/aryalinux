@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="103-patch.sh"
-TARBALL="patch-2.7.5.tar.xz"
+STEPNAME="094-gzip.sh"
+TARBALL="gzip-1.8.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -32,6 +32,7 @@ fi
 ./configure --prefix=/usr
 make
 make install
+mv -v /usr/bin/gzip /bin
 
 
 cd $SOURCE_DIR

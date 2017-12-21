@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="093-gawk.sh"
-TARBALL="gawk-4.2.0.tar.xz"
+STEPNAME="093-less.sh"
+TARBALL="less-487.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,12 +29,9 @@ then
 	cd $DIRECTORY
 fi
 
-sed -i 's/extras//' Makefile.in
-./configure --prefix=/usr
+./configure --prefix=/usr --sysconfdir=/etc
 make
 make install
-mkdir -v /usr/share/doc/gawk-4.2.0
-cp    -v doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-4.2.0
 
 
 cd $SOURCE_DIR

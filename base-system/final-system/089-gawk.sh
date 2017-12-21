@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="089-procps-ng.sh"
-TARBALL="procps-ng-3.3.12.tar.xz"
+STEPNAME="089-gawk.sh"
+TARBALL="gawk-4.1.4.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,17 +29,11 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr                            \
-            --exec-prefix=                           \
-            --libdir=/usr/lib                        \
-            --docdir=/usr/share/doc/procps-ng-3.3.12 \
-            --disable-static                         \
-            --disable-kill                           \
-            --with-systemd
+./configure --prefix=/usr
 make
 make install
-mv -v /usr/lib/libprocps.so.* /lib
-ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so
+mkdir -v /usr/share/doc/gawk-4.1.4
+cp    -v doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-4.1.4
 
 
 cd $SOURCE_DIR
