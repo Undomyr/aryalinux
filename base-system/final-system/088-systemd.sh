@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="088-systemd.sh"
-TARBALL="systemd-man-pages-236.tar.xz"
+TARBALL="systemd-236.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -30,42 +30,52 @@ then
 fi
 
 ln -sf /tools/bin/true /usr/bin/xsltproc
-tar -xf ../systemd-man-pages-236.tar.xz
-mkdir -p build
-cd       build
-LANG=en_US.UTF-8                   \
-meson --prefix=/usr                \
-      --sysconfdir=/etc            \
-      --localstatedir=/var         \
-      -Dblkid=true                 \
-      -Dbuildtype=release          \
-      -Ddefault-dnssec=no          \
-      -Dfirstboot=false            \
-      -Dkill-path=/bin/kill        \
-      -Dkmod-path=/bin/kmod        \
-      -Dldconfig=false             \
-      -Dmount-path=/bin/mount      \
-      -Drootprefix=                \
-      -Drootlibdir=/lib            \
-      -Dsplit-usr=true             \
-      -Dsulogin-path=/sbin/sulogin \
-      -Dsysusers=false             \
-      -Dumount-path=/bin/umount    \
-      -Db_lto=false                \
-      ..
-LANG=en_US.UTF-8 ninja
-LANG=en_US.UTF-8 ninja install
+tar -xf ../systemd-man-pages-235.tar.xz
+
+cat > config.cache << "EOF"
+KILL=/bin/kill
+MOUNT_PATH=/bin/mount
+UMOUNT_PATH=/bin/umount
+HAVE_BLKID=1
+BLKID_LIBS="-lblkid"
+BLKID_CFLAGS="-I/tools/include/blkid"
+HAVE_LIBMOUNT=1
+MOUNT_LIBS="-lmount"
+MOUNT_CFLAGS="-I/tools/include/libmount"
+cc_cv_CFLAGS__flto=no
+SULOGIN="/sbin/sulogin"
+GPERF_LEN_TYPE=size_t
+XSLTPROC="/usr/bin/xsltproc"
+EOF
+
+./configure --prefix=/usr            \
+            --sysconfdir=/etc        \
+            --localstatedir=/var     \
+            --config-cache           \
+            --with-rootprefix=       \
+            --with-rootlibdir=/lib   \
+            --enable-split-usr       \
+            --disable-firstboot      \
+            --disable-ldconfig       \
+            --disable-sysusers       \
+            --without-python         \
+            --with-default-dnssec=no \
+            --docdir=/usr/share/doc/systemd-236
+
+make
+make install
 rm -rfv /usr/lib/rpm
 for tool in runlevel reboot shutdown poweroff halt telinit; do
      ln -sfv ../bin/systemctl /sbin/${tool}
 done
 ln -sfv ../lib/systemd/systemd /sbin/init
-rm -f /usr/bin/xsltproc
 systemd-machine-id-setup
+
 cat > /lib/systemd/systemd-user-sessions << "EOF"
 #!/bin/bash
 rm -f /run/nologin
 EOF
+
 chmod 755 /lib/systemd/systemd-user-sessions
 
 
