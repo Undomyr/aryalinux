@@ -9,8 +9,8 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak LibreOffice is a full-featuredbr3ak office suite. It is largely compatible with Microsoft Office and is descended frombr3ak OpenOffice.org.br3ak"
 SECTION="xsoft"
-VERSION_MAJOR=5.4.2
-VERSION_MINOR=2
+VERSION_MAJOR=5.3.0
+VERSION_MINOR=3
 VERSION=$VERSION_MAJOR.$VERSION_MINOR
 PARENT_DIR_URL="http://download.documentfoundation.org/libreoffice/src/$VERSION_MAJOR/"
 NAME="libreoffice"
@@ -90,14 +90,14 @@ fi
 
 whoami > /tmp/currentuser
 
-LANGUAGE="ALL"
+if [ -z "$LANGUAGE" ]; then export LANGUAGE=en-US; fi
 
 install -dm755 external/tarballs &&
-ln -svf ../../../libreoffice-dictionaries-$VERSION_MAJOR.$VERSION_MINOR.tar.xz external/tarballs/ &&
-ln -svf ../../../libreoffice-help-$VERSION_MAJOR.$VERSION_MINOR.tar.xz         external/tarballs/
+ln -sv ../../../libreoffice-dictionaries-$VERSION_MAJOR.$VERSION_MINOR.tar.xz external/tarballs/ &&
+ln -sv ../../../libreoffice-help-$VERSION_MAJOR.$VERSION_MINOR.tar.xz         external/tarballs/
 
 
-ln -svf ../../../libreoffice-translations-$VERSION_MAJOR.$VERSION_MINOR.tar.xz external/tarballs/
+ln -sv ../../../libreoffice-translations-$VERSION_MAJOR.$VERSION_MINOR.tar.xz external/tarballs/
 
 
 sed -e "/gzip -f/d"   \
@@ -144,23 +144,17 @@ sed -e "/distro-install-file-lists/d" -i Makefile.in &&
              --with-system-serf          \
              --with-system-zlib
 
-# Build...
+
 make build-nocheck
+sudo make distro-pack-install
+sudo update-desktop-database
 
-# Create the package and install
+# Create the package
 
-if [ -f /sources/distro-build.sh ]; then
-	make distro-pack-install DESTDIR=$BINARY_DIR/libreoffice-$VERSION-$(uname -m)
-	pushd $BINARY_DIR/libreoffice-$VERSION-$(uname -m)
-	tar -cJvf $BINARY_DIR/libreoffice-$VERSION-$(uname -m).tar.xz *
-	popd
-	rm -rf DESTDIR=$BINARY_DIR/libreoffice-$VERSION-$(uname -m)
-	sudo tar xf $BINARY_DIR/libreoffice-$VERSION-$(uname -m).tar.xz -C /
-else
-	sudo make distro-pack-install
-	sudo update-desktop-database
-fi
-
+make distro-pack-install DESTDIR=$BINARY_DIR/libreoffice-$VERSION-$(uname -m)
+pushd $BINARY_DIR/libreoffice-$VERSION-$(uname -m)
+tar -cJvf $BINARY_DIR/libreoffice-$VERSION-$(uname -m).tar.xz *
+popd
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 

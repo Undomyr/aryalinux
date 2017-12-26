@@ -14,7 +14,7 @@ set +h
 SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/D/DR/DROLSKY/Module-Implementation-0.09.tar.gz"
 VERSION=0.09
-NAME="perl-modules#perl-module-implementation"
+NAME="perl-modules#module-implementation"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -42,3 +42,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

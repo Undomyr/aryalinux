@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/D/DA/DAGOLDEN/Capture-Tiny-0.47-TRIAL.tar.gz"
 VERSION=0.47
-NAME="perl-modules#perl-capture-tiny"
+NAME="perl-modules#capture-tiny--trial"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,3 +38,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

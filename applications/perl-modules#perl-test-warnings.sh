@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/E/ET/ETHER/Test-Warnings-0.026.tar.gz"
 VERSION=0.026
-NAME="perl-modules#perl-test-warnings"
+NAME="perl-modules#test-warnings"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,3 +38,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

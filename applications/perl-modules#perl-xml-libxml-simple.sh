@@ -12,7 +12,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/G/GR/GRANTM/XML-LibXML-Simple-0.97.tar.gz"
 VERSION=0.97
-NAME="perl-modules#perl-xml-libxml-simple"
+NAME="perl-modules#xml-libxml-simple"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -40,3 +40,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

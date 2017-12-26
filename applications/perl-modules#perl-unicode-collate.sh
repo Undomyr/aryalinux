@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/S/SA/SADAHIRO/Unicode-Collate-1.19.tar.gz"
 VERSION=1.19
-NAME="perl-modules#perl-unicode-collate"
+NAME="perl-modules#unicode-collate"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,3 +38,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

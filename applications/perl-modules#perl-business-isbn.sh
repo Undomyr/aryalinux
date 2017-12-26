@@ -12,7 +12,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/B/BD/BDFOY/Business-ISBN-3.004.tar.gz"
 VERSION=3.004
-NAME="perl-modules#perl-business-isbn"
+NAME="perl-modules#business-isbn"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -40,3 +40,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

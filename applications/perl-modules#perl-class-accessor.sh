@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/K/KA/KASEI/Class-Accessor-0.34.tar.gz"
 VERSION=0.34
-NAME="perl-modules#perl-class-accessor"
+NAME="perl-modules#class-accessor"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,3 +38,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

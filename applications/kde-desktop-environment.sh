@@ -105,7 +105,7 @@ EOF
 if [ ! -f /usr/share/pixmaps/aryalinux.png ]
 then
 pushd /var/cache/alps/sources &&
-wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/misc/aryalinux.png
+wget -nc https://sourceforge.net/projects/aryalinux-bin/files/artifacts/aryalinux.png
 sudo cp aryalinux.png /usr/share/pixmaps/
 popd
 fi

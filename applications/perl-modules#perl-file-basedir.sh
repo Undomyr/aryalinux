@@ -13,7 +13,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/K/KI/KIMRYAN/File-BaseDir-0.07.tar.gz"
 VERSION=0.07
-NAME="perl-modules#perl-file-basedir"
+NAME="perl-modules#file-basedir"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -41,3 +41,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

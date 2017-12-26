@@ -35,7 +35,7 @@ wget -nc http://www.linuxfromscratch.org/patches/blfs/7.6-systemd/openssl-1.0.1i
 wget -nc http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.06.tar.xz
 wget -nc http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.9.1.tar.gz
 wget -nc https://www.mirrorservice.org/sites/sourceware.org/pub/lvm2/releases/LVM2.2.02.155.tgz
-wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs-4.14.tar.gz
+wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs-4.12.tar.gz
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-base.patch
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-kbuild.patch
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-mmap.patch

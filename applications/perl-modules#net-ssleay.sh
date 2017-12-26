@@ -8,8 +8,8 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-1.81.tar.gz"
-VERSION=1.81
+URL="http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-1.82.tar.gz"
+VERSION=1.82
 NAME="perl-modules#net-ssleay"
 
 cd $SOURCE_DIR

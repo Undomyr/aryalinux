@@ -8,8 +8,8 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="http://search.cpan.org/CPAN/authors/id/S/SR/SRI/Mojolicious-7.46.tar.gz"
-VERSION=7.46
+URL="http://search.cpan.org/CPAN/authors/id/S/SR/SRI/Mojolicious-7.59.tar.gz"
+VERSION=7.59
 NAME="perl-modules#mojolicious"
 
 cd $SOURCE_DIR

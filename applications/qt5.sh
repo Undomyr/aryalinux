@@ -73,13 +73,25 @@ export QT5PREFIX=/opt/qt5
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mkdir -pv /opt/qt-5.9.1
+mkdir /opt/qt-5.9.1
 ln -sfnv qt-5.9.1 /opt/qt5
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
+
+
+-archdatadir    /usr/lib/qt5                \
+            -bindir         /usr/bin                    \
+            -plugindir      /usr/lib/qt5/plugins        \
+            -importdir      /usr/lib/qt5/imports        \
+            -headerdir      /usr/include/qt5            \
+            -datadir        /usr/share/qt5              \
+            -docdir         /usr/share/doc/qt5          \
+            -translationdir /usr/share/qt5/translations \
+            -examplesdir    /usr/share/doc/qt5/examples
+
 
 echo "INCLUDEPATH += /usr/include/openssl-1.0" >>           \
                      qtbase/src/network/network.pro         &&
@@ -246,9 +258,7 @@ sudo chmod 755 rootscript.sh
 sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
-if [ -f /sources/distro-build.sh ]; then
-	tar -cJvf $BINARY_DIR/qt5-$VERSION-$(uname -m).tar.xz /opt/qt* /etc/profile.d/qt5.sh /usr/share/applications/*-qt5.desktop /usr/bin/*-qt5
-fi
+
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi

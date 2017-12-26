@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/N/NE/NEZUMI/Encode-EUCJPASCII-0.03.tar.gz"
 VERSION=0.03
-NAME="perl-modules#perl-encode-eucjpascii"
+NAME="perl-modules#encode-eucjpascii"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,3 +38,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

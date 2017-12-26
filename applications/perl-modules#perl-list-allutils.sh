@@ -16,7 +16,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/D/DR/DROLSKY/List-AllUtils-0.14.tar.gz"
 VERSION=0.14
-NAME="perl-modules#perl-list-allutils"
+NAME="perl-modules#list-allutils"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -44,3 +44,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

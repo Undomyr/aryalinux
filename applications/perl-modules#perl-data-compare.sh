@@ -11,7 +11,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/D/DC/DCANTRELL/Data-Compare-1.25.tar.gz"
 VERSION=1.25
-NAME="perl-modules#perl-data-compare"
+NAME="perl-modules#data-compare"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -39,3 +39,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

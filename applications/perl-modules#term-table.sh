@@ -8,8 +8,8 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="http://search.cpan.org/CPAN/authors/id/E/EX/EXODIST/Term-Table-0.008.tar.gz"
-VERSION=0.008
+URL="http://search.cpan.org/CPAN/authors/id/E/EX/EXODIST/Term-Table-0.012.tar.gz"
+VERSION=0.012
 NAME="perl-modules#term-table"
 
 cd $SOURCE_DIR

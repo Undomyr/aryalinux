@@ -49,7 +49,7 @@ fi
 
 whoami > /tmp/currentuser
 
-CFLAGS="-Wno-error=format= -Wno-error=sign-compare" ./configure --prefix=/usr --disable-static &&
+./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make
 
 

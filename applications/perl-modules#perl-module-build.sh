@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/L/LE/LEONT/Module-Build-0.4224.tar.gz"
 VERSION=0.4224
-NAME="perl-modules#perl-module-build"
+NAME="perl-modules#module-build"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,3 +38,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

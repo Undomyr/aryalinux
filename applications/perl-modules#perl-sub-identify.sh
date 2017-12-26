@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/R/RG/RGARCIA/Sub-Identify-0.14.tar.gz"
 VERSION=0.14
-NAME="perl-modules#perl-sub-identify"
+NAME="perl-modules#sub-identify"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,3 +38,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

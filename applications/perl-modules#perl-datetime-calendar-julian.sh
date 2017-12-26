@@ -11,7 +11,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/P/PI/PIJLL/DateTime-Calendar-Julian-0.04.tar.gz"
 VERSION=0.04
-NAME="perl-modules#perl-datetime-calendar-julian"
+NAME="perl-modules#datetime-calendar-julian"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -39,3 +39,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

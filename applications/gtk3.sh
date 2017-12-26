@@ -25,7 +25,7 @@ NAME="gtk3"
 #OPT:docbook-utils
 #OPT:gtk-doc
 #OPT:json-glib
-#REQ:libxkbcommon
+#OPT:libxkbcommon
 #OPT:python-modules#pyatspi2
 #OPT:rest
 #OPT:wayland
@@ -57,7 +57,7 @@ whoami > /tmp/currentuser
             --sysconfdir=/etc         \
             --enable-broadway-backend \
             --enable-x11-backend      \
-            --enable-wayland-backend &&
+            --disable-wayland-backend &&
 make "-j`nproc`" || make
 
 

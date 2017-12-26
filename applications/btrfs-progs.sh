@@ -46,6 +46,24 @@ sed -i '1,100 s/\.gz//g' Documentation/Makefile.in &&
 make "-j`nproc`" || make
 
 
+mv tests/fuzz-tests/003-multi-check-unmounted/test.sh{,.broken}    &&
+mv tests/fuzz-tests/004-simple-dump-tree/test.sh{,.broken}         &&
+mv tests/fuzz-tests/007-simple-super-recover/test.sh{,.broken}     &&
+mv tests/fuzz-tests/009-simple-zero-log/test.sh{,.broken}          &&
+mv tests/misc-tests/019-receive-clones-on-munted-subvol/test.sh{,.broken}
+
+
+pushd tests
+   ./fsck-tests.sh
+   ./mkfs-tests.sh
+   ./convert-tests.sh
+   ./misc-tests.sh
+   ./cli-tests.sh
+   ./fuzz-tests.sh
+popd
+
+
+
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
 ln -sfv ../../lib/$(readlink /lib/libbtrfs.so) /usr/lib/libbtrfs.so &&
@@ -56,6 +74,7 @@ ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
+
 
 
 

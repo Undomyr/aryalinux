@@ -9,9 +9,9 @@ set +h
 #REQ:perl-modules#perl-xml-sax
 #REQ:libxml2
 SOURCE_ONLY=y
-URL="http://search.cpan.org//CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-2.0129.tar.gz"
-VERSION=2.0129
-NAME="perl-modules#perl-xml-libxml"
+URL="http://search.cpan.org//CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-2.0132.tar.gz"
+VERSION=2.0132
+NAME="perl-modules#xml-libxml"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -39,3 +39,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

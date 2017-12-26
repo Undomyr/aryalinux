@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/M/MS/MSCHILLI/Log-Log4perl-1.49.tar.gz"
 VERSION=1.49
-NAME="perl-modules#perl-log-log4perl"
+NAME="perl-modules#log-log4perl"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,3 +38,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

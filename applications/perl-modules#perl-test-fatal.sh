@@ -11,7 +11,7 @@ set +h
 SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/R/RJ/RJBS/Test-Fatal-0.014.tar.gz"
 VERSION=0.014
-NAME="perl-modules#perl-test-fatal"
+NAME="perl-modules#test-fatal"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -39,3 +39,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+

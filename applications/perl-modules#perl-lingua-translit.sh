@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/A/AL/ALINKE/Lingua-Translit-0.27.tar.gz"
 VERSION=0.27
-NAME="perl-modules#perl-lingua-translit"
+NAME="perl-modules#lingua-translit"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,3 +38,4 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
+
