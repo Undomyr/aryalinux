@@ -13,7 +13,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/M/MS/MSCHILLI/LWP-Protocol-https-6.06.tar.gz"
 VERSION=6.06
-NAME="perl-modules#lwp-protocol-https"
+NAME="perl-modules#perl-lwp-protocol-https"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -41,4 +41,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

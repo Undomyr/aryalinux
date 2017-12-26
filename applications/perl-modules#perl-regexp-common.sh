@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/A/AB/ABIGAIL/Regexp-Common-2017060201.tar.gz"
 VERSION=2017060201
-NAME="perl-modules#regexp-common"
+NAME="perl-modules#perl-regexp-common"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,4 +38,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

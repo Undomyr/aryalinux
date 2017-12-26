@@ -11,7 +11,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/E/ET/ETHER/URI-1.72.tar.gz"
 VERSION=1.72
-NAME="perl-modules#uri"
+NAME="perl-modules#perl-uri"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -39,4 +39,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

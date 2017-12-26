@@ -14,7 +14,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/G/GR/GRANTM/XML-Simple-2.24.tar.gz"
 VERSION=2.24
-NAME="perl-modules#xml-simple"
+NAME="perl-modules#perl-xml-simple"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -42,4 +42,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

@@ -11,7 +11,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/N/NE/NEZUMI/Unicode-LineBreak-2017.004.tar.gz"
 VERSION=2017.004
-NAME="perl-modules#unicode-linebreak"
+NAME="perl-modules#perl-unicode-linebreak"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -39,4 +39,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

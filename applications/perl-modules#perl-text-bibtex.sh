@@ -11,7 +11,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/A/AM/AMBS/Text-BibTeX-0.81.tar.gz"
 VERSION=0.81
-NAME="perl-modules#text-bibtex"
+NAME="perl-modules#perl-text-bibtex"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -39,4 +39,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

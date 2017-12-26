@@ -12,7 +12,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/G/GA/GAAS/HTML-Parser-3.72.tar.gz"
 VERSION=3.72
-NAME="perl-modules#html-parser"
+NAME="perl-modules#perl-html-parser"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -40,4 +40,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

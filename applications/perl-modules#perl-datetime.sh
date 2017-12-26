@@ -16,7 +16,7 @@ set +h
 SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/D/DR/DROLSKY/DateTime-1.44.tar.gz"
 VERSION=1.44
-NAME="perl-modules#datetime"
+NAME="perl-modules#perl-datetime"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -44,4 +44,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

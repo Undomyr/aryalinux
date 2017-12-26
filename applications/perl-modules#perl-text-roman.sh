@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/S/SY/SYP/Text-Roman-3.5.tar.gz"
 VERSION=3.5
-NAME="perl-modules#text-roman"
+NAME="perl-modules#perl-text-roman"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,4 +38,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

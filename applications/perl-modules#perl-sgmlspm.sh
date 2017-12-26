@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/R/RA/RAAB/SGMLSpm-1.1.tar.gz"
 VERSION=1.1
-NAME="perl-modules#sgmlspm"
+NAME="perl-modules#perl-sgmlspm"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,4 +38,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz"
 VERSION=0.10
-NAME="perl-modules#test-requires"
+NAME="perl-modules#perl-test-requires"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,4 +38,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

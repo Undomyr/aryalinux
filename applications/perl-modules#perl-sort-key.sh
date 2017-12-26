@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/S/SA/SALVA/Sort-Key-1.33.tar.gz"
 VERSION=1.33
-NAME="perl-modules#sort-key"
+NAME="perl-modules#perl-sort-key"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,4 +38,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

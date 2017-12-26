@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="http://search.cpan.org//CPAN/authors/id/P/PE/PEVANS/Scalar-List-Utils-1.49.tar.gz"
 VERSION=1.49
-NAME="perl-modules#scalar-list-utils"
+NAME="perl-modules#perl-scalar-list-utils"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,4 +38,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

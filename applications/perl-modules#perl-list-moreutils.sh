@@ -12,7 +12,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-0.419.tar.gz"
 VERSION=0.419
-NAME="perl-modules#list-moreutils"
+NAME="perl-modules#perl-list-moreutils"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -40,4 +40,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

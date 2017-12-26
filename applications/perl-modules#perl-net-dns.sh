@@ -13,7 +13,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/N/NL/NLNETLABS/Net-DNS-1.12.tar.gz"
 VERSION=1.12
-NAME="perl-modules#net-dns"
+NAME="perl-modules#perl-net-dns"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -41,4 +41,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-

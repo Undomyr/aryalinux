@@ -10,7 +10,7 @@ set +h
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/P/PH/PHRED/Archive-Zip-1.59.tar.gz"
 VERSION=1.59
-NAME="perl-modules#archive-zip"
+NAME="perl-modules#perl-archive-zip"
 
 cd $SOURCE_DIR
 wget -nc $URL
@@ -38,4 +38,3 @@ cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME=>`date`" "$VERSION" "$INSTALLED_LIST"
-
