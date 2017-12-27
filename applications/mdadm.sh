@@ -47,16 +47,6 @@ make test
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-./test --keep-going --logdir=test-logs --save-logs
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
 
 ENDOFROOTSCRIPT
