@@ -21,7 +21,6 @@ NAME="mesa"
 #REC:llvm
 #REC:wayland
 #REC:plasma-all
-#REC:lxqt
 #REC:libva-wo-mesa
 #REC:libvdpau
 #OPT:libgcrypt
