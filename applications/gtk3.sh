@@ -17,6 +17,7 @@ NAME="gtk3"
 #REQ:libepoxy
 #REQ:pango
 #REQ:wayland-protocols
+#REQ:wayland
 #REC:hicolor-icon-theme
 #REC:adwaita-icon-theme
 #REC:gobject-introspection
@@ -28,8 +29,6 @@ NAME="gtk3"
 #OPT:libxkbcommon
 #OPT:python-modules#pyatspi2
 #OPT:rest
-#OPT:wayland
-#OPT:wayland-protocols
 
 
 cd $SOURCE_DIR
@@ -57,7 +56,7 @@ whoami > /tmp/currentuser
             --sysconfdir=/etc         \
             --enable-broadway-backend \
             --enable-x11-backend      \
-            --disable-wayland-backend &&
+            --enable-wayland-backend &&
 make "-j`nproc`" || make
 
 
