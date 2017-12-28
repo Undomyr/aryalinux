@@ -79,6 +79,10 @@ make "-j`nproc`" || make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+if [ -L /var/lock ]; then
+rm /var/lock
+mkdir -pv /var/lock/subsys/
+fi
 make install &&
 mv -v /usr/lib/libnss_win{s,bind}.so*   /lib                       &&
 ln -v -sf ../../lib/libnss_winbind.so.2 /usr/lib/libnss_winbind.so &&
