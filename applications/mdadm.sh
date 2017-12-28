@@ -41,10 +41,6 @@ sed 's@-Werror@@' -i Makefile
 make
 
 
-sed -i 's# if.* == "1"#& -a -e $targetdir/log#' test &&
-make test
-
-
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
