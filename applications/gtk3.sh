@@ -18,6 +18,7 @@ NAME="gtk3"
 #REQ:pango
 #REQ:wayland-protocols
 #REQ:wayland
+#REQ:libxkbcommon
 #REC:hicolor-icon-theme
 #REC:adwaita-icon-theme
 #REC:gobject-introspection
@@ -26,7 +27,6 @@ NAME="gtk3"
 #OPT:docbook-utils
 #OPT:gtk-doc
 #OPT:json-glib
-#OPT:libxkbcommon
 #OPT:python-modules#pyatspi2
 #OPT:rest
 
