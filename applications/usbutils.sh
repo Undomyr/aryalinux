@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The USB Utils package containsbr3ak utilities used to display information about USB buses in the systembr3ak and the devices connected to them.br3ak"
 SECTION="general"
-VERSION=008
+VERSION=009
 NAME="usbutils"
 
 #REQ:libusb
@@ -18,11 +18,11 @@ NAME="usbutils"
 
 cd $SOURCE_DIR
 
-URL=https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-008.tar.xz
+URL=https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-009.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-008.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/usbutils/usbutils-008.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/usbutils/usbutils-008.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/usbutils/usbutils-008.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/usbutils/usbutils-008.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/usbutils/usbutils-008.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/usbutils/usbutils-008.tar.xz
+wget -nc https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-009.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/usbutils/usbutils-009.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/usbutils/usbutils-009.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/usbutils/usbutils-009.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/usbutils/usbutils-009.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/usbutils/usbutils-009.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/usbutils/usbutils-009.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -37,7 +37,6 @@ fi
 
 whoami > /tmp/currentuser
 
-sed -i '/^usbids/ s:usb.ids:hwdata/&:' lsusb.py &&
 ./configure --prefix=/usr --datadir=/usr/share/hwdata &&
 make "-j`nproc`" || make
 
@@ -65,7 +64,28 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-pushd /var/cache/alps/sources/ && wget -nc http://www.linux-usb.org/usb.ids && cp -v usb.ids /usr/share/hwdata/usb.ids && popd
+cat > /lib/systemd/system/update-usbids.service << "EOF" &&
+[Unit]
+Description=Update usb.ids file
+Documentation=man:lusub(8)
+DefaultDependencies=no
+After=local-fs.target
+Before=shutdown.target
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/pushd /var/cache/alps/sources/ && wget -nc http://www.linux-usb.org/usb.ids && cp -v usb.ids /usr/share/hwdata/usb.ids && popd
+EOF
+cat > /lib/systemd/system/update-usbids.timer << "EOF" &&
+[Unit]
+Description=Update usb.ids file weekly
+[Timer]
+OnCalendar=Sun 03:00:00
+Persistent=true
+[Install]
+WantedBy=timers.target
+EOF
+systemctl enable update-usbids.timer
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

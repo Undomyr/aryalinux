@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The libcdio is a library forbr3ak CD-ROM and CD image access. The associated libcdio-cdparanoia library reads audio frombr3ak the CD-ROM directly as data, with no analog step between, andbr3ak writes the data to a file or pipe as .wav, .aifc or as raw 16 bitbr3ak linear PCM.br3ak"
 SECTION="multimedia"
-VERSION=0.94
+VERSION=2.0.0
 NAME="libcdio"
 
 #OPT:libcddb
@@ -17,11 +17,11 @@ NAME="libcdio"
 
 cd $SOURCE_DIR
 
-URL=https://ftp.gnu.org/gnu/libcdio/libcdio-0.94.tar.gz
+URL=https://ftp.gnu.org/gnu/libcdio/libcdio-2.0.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://ftp.gnu.org/gnu/libcdio/libcdio-0.94.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libcdio/libcdio-0.94.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libcdio/libcdio-0.94.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libcdio/libcdio-0.94.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libcdio/libcdio-0.94.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libcdio/libcdio-0.94.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libcdio/libcdio-0.94.tar.gz || wget -nc ftp://ftp.gnu.org/gnu/libcdio/libcdio-0.94.tar.gz
+wget -nc https://ftp.gnu.org/gnu/libcdio/libcdio-2.0.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libcdio/libcdio-2.0.0.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libcdio/libcdio-2.0.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libcdio/libcdio-2.0.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libcdio/libcdio-2.0.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libcdio/libcdio-2.0.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libcdio/libcdio-2.0.0.tar.gz || wget -nc ftp://ftp.gnu.org/gnu/libcdio/libcdio-2.0.0.tar.gz
 wget -nc https://ftp.gnu.org/gnu/libcdio/libcdio-paranoia-10.2+0.94+2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libcdio/libcdio-paranoia-10.2+0.94+2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libcdio/libcdio-paranoia-10.2+0.94+2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libcdio/libcdio-paranoia-10.2+0.94+2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libcdio/libcdio-paranoia-10.2+0.94+2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libcdio/libcdio-paranoia-10.2+0.94+2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libcdio/libcdio-paranoia-10.2+0.94+2.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
@@ -51,7 +51,7 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
-tar -xf ../libcdio-paranoia-10.2+0.94+2.tar.bz2 &&
+tar -xf ../libcdio-paranoia-10.2+0.94+2.tar.gz &&
 cd libcdio-paranoia-10.2+0.94+2 &&
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make

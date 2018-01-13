@@ -13,6 +13,7 @@ VERSION=0.3.9
 NAME="xcb-util-renderutil"
 
 #REQ:libxcb
+#OPT:doxygen
 
 
 cd $SOURCE_DIR

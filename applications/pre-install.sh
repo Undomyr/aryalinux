@@ -109,8 +109,8 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mv /opt/lxqt{,-0.11.1}
-ln -sfv lxqt-0.11.1 /opt/lxqt
+mv /opt/lxqt{,-0.12.0}
+ln -sfv lxqt-0.12.0 /opt/lxqt
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -121,7 +121,7 @@ sudo rm rootscript.sh
 ls -Fd qt* | grep / | sed 's/^/-skip /;s/qt//;s@/@@' > tempconf
 sed -i '/base/d;/tools/d;/x11extras/d;/svg/d' tempconf
 # if you plan to build SDDM, add:
-sed -i '/declarative/d'
+sed -i '/declarative/d' tempconf
 ./configure <book flags> $(cat tempconf)
 
 

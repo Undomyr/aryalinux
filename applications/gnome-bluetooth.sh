@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The GNOME Bluetooth packagebr3ak contains tools for managing and manipulating Bluetooth devicesbr3ak using the GNOME Desktop.br3ak"
 SECTION="gnome"
-VERSION=3.20.1
+VERSION=3.26.1
 NAME="gnome-bluetooth"
 
 #REQ:gtk3
@@ -23,11 +23,11 @@ NAME="gnome-bluetooth"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gnome-bluetooth/3.20/gnome-bluetooth-3.20.1.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/gnome-bluetooth/3.26/gnome-bluetooth-3.26.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-bluetooth/3.20/gnome-bluetooth-3.20.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-bluetooth/gnome-bluetooth-3.20.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-bluetooth/gnome-bluetooth-3.20.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-bluetooth/gnome-bluetooth-3.20.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-bluetooth/gnome-bluetooth-3.20.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-bluetooth/gnome-bluetooth-3.20.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-bluetooth/gnome-bluetooth-3.20.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-bluetooth/3.20/gnome-bluetooth-3.20.1.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-bluetooth/3.26/gnome-bluetooth-3.26.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-bluetooth/gnome-bluetooth-3.26.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-bluetooth/gnome-bluetooth-3.26.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-bluetooth/gnome-bluetooth-3.26.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-bluetooth/gnome-bluetooth-3.26.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-bluetooth/gnome-bluetooth-3.26.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-bluetooth/gnome-bluetooth-3.26.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-bluetooth/3.26/gnome-bluetooth-3.26.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -42,13 +42,16 @@ fi
 
 whoami > /tmp/currentuser
 
-./configure --prefix=/usr &&
-make "-j`nproc`" || make
+
+mkdir build &&
+cd    build &&
+meson --prefix=/usr .. &&
+ninja
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
+ninja install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

@@ -10,6 +10,8 @@ set +h
 #REQ:perl-modules#test-simple
 #REQ:perl-modules#sub-info
 #REQ:perl-modules#term-table
+#REQ:perl-modules#module-pluggable
+#REQ:perl-modules#scope-guard
 
 SOURCE_ONLY=y
 URL="http://search.cpan.org/CPAN/authors/id/E/EX/EXODIST/Test2-Suite-0.000097.tar.gz"

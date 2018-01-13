@@ -50,7 +50,8 @@ pathappend /opt/lxqt/lib/pkgconfig PKG_CONFIG_PATH
 
 whoami > /tmp/currentuser
 
-sed -i 's/"64"/""/' cmake/LibSuffix.cmake &&
+sed -i 's/"64"/""/' cmake/LibSuffix.cmake                                     &&
+sed -i '/JUFFED_LIBRARY/s/)$/ qtermwidget5)/' plugins/terminal/CMakeLists.txt &&
 mkdir -v build &&
 cd       build &&
 cmake -DCMAKE_INSTALL_PREFIX=$LXQT_PREFIX \

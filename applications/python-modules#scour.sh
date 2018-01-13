@@ -12,6 +12,7 @@ SECTION="general"
 VERSION=0.36
 NAME="python-modules#scour"
 
+#OPT:python-modules#six
 
 
 cd $SOURCE_DIR

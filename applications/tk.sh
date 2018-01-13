@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Tk package contains a TCL GUIbr3ak Toolkit.br3ak"
 SECTION="general"
-VERSION=8.6.7
+VERSION=8.6.8
 NAME="tk"
 
 #REQ:tcl
@@ -18,11 +18,11 @@ NAME="tk"
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/tcl/tk8.6.7-src.tar.gz
+URL=https://downloads.sourceforge.net/tcl/tk8.6.8-src.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/tcl/tk8.6.7-src.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/tk/tk8.6.7-src.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/tk/tk8.6.7-src.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/tk/tk8.6.7-src.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/tk/tk8.6.7-src.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/tk/tk8.6.7-src.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/tk/tk8.6.7-src.tar.gz
+wget -nc https://downloads.sourceforge.net/tcl/tk8.6.8-src.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/tk/tk8.6.8-src.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/tk/tk8.6.8-src.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/tk/tk8.6.8-src.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/tk/tk8.6.8-src.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/tk/tk8.6.8-src.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/tk/tk8.6.8-src.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

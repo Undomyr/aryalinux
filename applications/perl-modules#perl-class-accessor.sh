@@ -8,8 +8,8 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/K/KA/KASEI/Class-Accessor-0.34.tar.gz"
-VERSION=0.34
+URL="https://www.cpan.org/authors/id/K/KA/KASEI/Class-Accessor-0.51.tar.gz"
+VERSION=0.51
 NAME="perl-modules#perl-class-accessor"
 
 cd $SOURCE_DIR

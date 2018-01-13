@@ -37,7 +37,7 @@ if [ ! -z $URL ]
 then
 wget -nc http://www.abisource.com/downloads/abiword/3.0.2/source/abiword-3.0.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/abiword/abiword-3.0.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/abiword/abiword-3.0.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/abiword/abiword-3.0.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/abiword/abiword-3.0.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/abiword/abiword-3.0.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/abiword/abiword-3.0.2.tar.gz
 wget -nc http://www.abisource.com/downloads/abiword/3.0.2/source/abiword-docs-3.0.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/abiword/abiword-docs-3.0.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/abiword/abiword-docs-3.0.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/abiword/abiword-docs-3.0.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/abiword/abiword-docs-3.0.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/abiword/abiword-docs-3.0.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/abiword/abiword-docs-3.0.2.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/abiword-3.0.2-gtk3_22_render_fix-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/abiword/abiword-3.0.2-gtk3_22_render_fix-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/abiword-3.0.2-gtk3_22_render_fix-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/abiword/abiword-3.0.2-gtk3_22_render_fix-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -53,6 +53,13 @@ fi
 whoami > /tmp/currentuser
 
 patch -Np1 -i ../abiword-3.0.2-gtk3_22_render_fix-1.patch &&
+   
+sed -e "s/free_suggestions/free_string_list/" \
+    -e "s/_to_personal//"                     \
+    -e "s/in_session/added/"                  \
+    -i src/af/xap/xp/enchant_checker.cpp      &&
+sed -e "/icaltime_from_timet/{s/timet/&_with_zone/;s/0/0, 0/}" \
+    -i src/text/ptbl/xp/pd_DocumentRDF.cpp &&
 ./configure --prefix=/usr &&
 make "-j`nproc`" || make
 

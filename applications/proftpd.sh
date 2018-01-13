@@ -131,13 +131,13 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20160602.tar.bz2
-tar xf blfs-systemd-units-20160602.tar.bz2
-cd blfs-systemd-units-20160602
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
+tar xf blfs-systemd-units-20180105.tar.bz2
+cd blfs-systemd-units-20180105
 make install-proftpd
 
 cd ..
-rm -rf blfs-systemd-units-20160602
+rm -rf blfs-systemd-units-20180105
 popd
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

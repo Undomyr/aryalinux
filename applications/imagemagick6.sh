@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak ImageMagick underwent many changesbr3ak in its libraries between versions 6 and 7. Most packages in BLFSbr3ak which use ImageMagick can usebr3ak version 7, but for the others this page will install only thebr3ak libraries, headers and general documentation (not programs,br3ak manpages, perl modules), and it will rename the unversionedbr3ak pkgconfig files so that they do not overwrite the same-named filesbr3ak from version 7.br3ak"
 SECTION="general"
-VERSION=9
+VERSION=23
 NAME="imagemagick6"
 
 #REC:x7lib
@@ -29,6 +29,7 @@ NAME="imagemagick6"
 #OPT:libexif
 #OPT:libjpeg
 #OPT:libpng
+#OPT:libraw
 #OPT:librsvg
 #OPT:libtiff
 #OPT:libwebp
@@ -46,12 +47,12 @@ NAME="imagemagick6"
 
 cd $SOURCE_DIR
 
-URL=https://www.imagemagick.org/download/releases/ImageMagick-6.9.9-9.tar.xz
+URL=https://www.imagemagick.org/download/releases/ImageMagick-6.9.9-23.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.imagemagick.org/download/releases/ImageMagick-6.9.9-9.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ImageMagick/ImageMagick-6.9.9-9.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ImageMagick/ImageMagick-6.9.9-9.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ImageMagick/ImageMagick-6.9.9-9.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ImageMagick/ImageMagick-6.9.9-9.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ImageMagick/ImageMagick-6.9.9-9.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ImageMagick/ImageMagick-6.9.9-9.tar.xz || wget -nc ftp://ftp.imagemagick.org/pub/ImageMagick/releases/ImageMagick-6.9.9-9.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/ImageMagick-6.9.9-9-libs_only-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/ImageMagick/ImageMagick-6.9.9-9-libs_only-1.patch
+wget -nc https://www.imagemagick.org/download/releases/ImageMagick-6.9.9-23.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ImageMagick/ImageMagick-6.9.9-23.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ImageMagick/ImageMagick-6.9.9-23.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ImageMagick/ImageMagick-6.9.9-23.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ImageMagick/ImageMagick-6.9.9-23.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ImageMagick/ImageMagick-6.9.9-23.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ImageMagick/ImageMagick-6.9.9-23.tar.xz || wget -nc ftp://ftp.imagemagick.org/pub/ImageMagick/releases/ImageMagick-6.9.9-23.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/ImageMagick-6.9.9-23-libs_only-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/ImageMagick/ImageMagick-6.9.9-23-libs_only-1.patch
 wget -nc http://www.mcmurchy.com/ralcgm/ralcgm-3.51.tar.gz
 wget -nc http://www.mcmurchy.com/urt/urt-3.1b.tar.gz
 
@@ -68,7 +69,7 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../ImageMagick-6.9.9-9-libs_only-1.patch &&
+patch -Np1 -i ../ImageMagick-6.9.9-23-libs_only-1.patch &&
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
             --enable-hdri     \

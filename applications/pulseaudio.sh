@@ -9,10 +9,9 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak PulseAudio is a sound system forbr3ak POSIX OSes, meaning that it is a proxy for sound applications. Itbr3ak allows you to do advanced operations on your sound data as itbr3ak passes between your application and your hardware. Things likebr3ak transferring the audio to a different machine, changing the samplebr3ak format or channel count and mixing several sounds into one arebr3ak easily achieved using a sound server.br3ak"
 SECTION="multimedia"
-VERSION=10.0
+VERSION=11.1
 NAME="pulseaudio"
 
-#REQ:json-c
 #REQ:libsndfile
 #REQ:bluez
 #REQ:sbc
@@ -36,11 +35,11 @@ NAME="pulseaudio"
 
 cd $SOURCE_DIR
 
-URL=https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-10.0.tar.xz
+URL=https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-11.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-10.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/pulseaudio/pulseaudio-10.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/pulseaudio/pulseaudio-10.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/pulseaudio/pulseaudio-10.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/pulseaudio/pulseaudio-10.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/pulseaudio/pulseaudio-10.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/pulseaudio/pulseaudio-10.0.tar.xz
+wget -nc https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-11.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/pulseaudio/pulseaudio-11.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/pulseaudio/pulseaudio-11.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/pulseaudio/pulseaudio-11.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/pulseaudio/pulseaudio-11.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/pulseaudio/pulseaudio-11.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/pulseaudio/pulseaudio-11.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -76,7 +75,7 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-rm /etc/dbus-1/system.d/pulseaudio-system.conf
+rm -fv /etc/dbus-1/system.d/pulseaudio-system.conf
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

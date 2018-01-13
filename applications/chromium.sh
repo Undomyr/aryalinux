@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Chromium is an open-source browserbr3ak project that aims to build a safer, faster, and more stable way forbr3ak all users to experience the web.br3ak"
 SECTION="xsoft"
-VERSION=60.0.3112.101
+VERSION=63.0.3239.132
 NAME="chromium"
 
 #REQ:alsa-lib
@@ -21,15 +21,15 @@ NAME="chromium"
 #REQ:hicolor-icon-theme
 #REQ:mitkrb
 #REQ:mesa
-#REQ:ninja
 #REQ:nodejs
 #REQ:nss
 #REQ:python2
 #REQ:usbutils
 #REQ:xorg-server
-#REC:ffmpeg
+#REC:cacerts
 #REC:flac
 #REC:git
+#REC:TTF-and-OTF-fonts#liberation-fonts
 #REC:libexif
 #REC:libjpeg
 #REC:libpng
@@ -39,23 +39,23 @@ NAME="chromium"
 #REC:pulseaudio
 #REC:xdg-utils
 #REC:yasm
+#OPT:ffmpeg
 #OPT:GConf
 #OPT:icu
 #OPT:gnome-keyring
 #OPT:libevent
 #OPT:libvpx
 #OPT:libxml2
+#OPT:upower
 
 
 cd $SOURCE_DIR
 
-URL=https://commondatastorage.googleapis.com/chromium-browser-official/chromium-60.0.3112.101.tar.xz
+URL=https://commondatastorage.googleapis.com/chromium-browser-official/chromium-63.0.3239.132.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://commondatastorage.googleapis.com/chromium-browser-official/chromium-60.0.3112.101.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/chromium/chromium-60.0.3112.101.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/chromium/chromium-60.0.3112.101.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-60.0.3112.101.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-60.0.3112.101.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-60.0.3112.101.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-60.0.3112.101.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/chromium-60.0.3112.101-gcc7-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/chromium/chromium-60.0.3112.101-gcc7-1.patch
-wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/chromium-60.0.3112.101-glibc-2.26-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/chromium/chromium-60.0.3112.101-glibc-2.26-1.patch
+wget -nc https://commondatastorage.googleapis.com/chromium-browser-official/chromium-63.0.3239.132.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/chromium/chromium-63.0.3239.132.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/chromium/chromium-63.0.3239.132.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-63.0.3239.132.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-63.0.3239.132.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-63.0.3239.132.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-63.0.3239.132.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -70,33 +70,32 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../chromium-60.0.3112.101-gcc7-1.patch
-
-
-patch -Np1 -i ../chromium-60.0.3112.101-glibc-2.26-1.patch
-
-
-sed 's/WIDEVINE_CDM_AVAILABLE/&\n\n#define WIDEVINE_CDM_VERSION_STRING "Pinkie Pie"/' \
+line='#define WIDEVINE_CDM_VERSION_STRING "Pinkie Pie"' 
+sed "/WIDEVINE_CDM_AVAILABLE/a$line" \
     -i third_party/widevine/cdm/stub/widevine_cdm_version.h
 
 
-sed "/delayed_task_manager.cc/a\      'base/task_scheduler/environment_config.cc'," \
-    -i tools/gn/bootstrap/bootstrap.py
+sed '/port\.h"/a#include <math.h>' -i.bak third_party/webrtc/p2p/base/port.cc
 
 
-for LIB in ffmpeg flac harfbuzz-ng libjpeg \
+sed '/static_assert/s:^://:' \
+    -i third_party/WebKit/Source/platform/wtf/text/TextCodec.h
+
+
+for LIB in flac freetype harfbuzz-ng libjpeg \
            libjpeg_turbo libpng libwebp libxslt yasm; do
-    find -type f -path "*third_party/$LIB/*"     \
-        \! -path "*third_party/$LIB/chromium/*"  \
-        \! -path "*third_party/$LIB/google/*"    \
-        \! -path "*base/third_party/icu/*"       \
-        \! -path "*base/third_party/libevent/*"  \
-        \! -regex '.*\.\(gn\|gni\|isolate\|py\)' \
+    find -type f -path "*third_party/$LIB/*"      \
+        \! -path "*third_party/$LIB/chromium/*"   \
+        \! -path "*third_party/$LIB/google/*"     \
+        \! -path "*base/third_party/icu/*"        \
+        \! -path './third_party/yasm/run_yasm.py' \
+        \! -regex '.*\.\(gn\|gni\|isolate\|py\)'  \
+        \! -path './third_party/freetype/src/src/psnames/pstables.h' \
         -delete
 done &&
-python build/linux/unbundle/replace_gn_files.py \
-    --system-libraries ffmpeg flac harfbuzz-ng libjpeg \
-                       libpng libwebp libxslt yasm &&
+python build/linux/unbundle/replace_gn_files.py                   \
+    --system-libraries flac libjpeg libxml libevent \
+                       libpng libwebp libxslt opus yasm       &&
 python third_party/libaddressinput/chromium/tools/update-strings.py
 
 
@@ -128,7 +127,9 @@ GN_CONFIG=('google_api_key="AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ"'
 'use_gtk3=true'
 'use_kerberos=true'
 'use_pulseaudio=true'
-'use_sysroot=false')
+'use_sysroot=false'
+'use_system_freetype=true'
+'use_system_harfbuzz=true')
 
 
 python tools/gn/bootstrap/bootstrap.py --gn-gen-args "${GN_CONFIG[*]}" &&
@@ -148,26 +149,26 @@ install -vDm4755 out/Release/chrome_sandbox \
                  /usr/lib/chromium/chrome-sandbox             &&
 install -vDm755  out/Release/chromedriver \
                  /usr/lib/chromium/chromedriver               &&
-ln -svf /usr/lib/chromium/chromium /usr/bin                   &&
-ln -svf /usr/lib/chromium/chromedriver /usr/bin/              &&
-install -vm644  out/Release/icudtl.dat /usr/lib/chromium/     &&
+ln -svf /usr/lib/chromium/chromium     /usr/bin               &&
+ln -svf /usr/lib/chromium/chromedriver /usr/bin               &&
 install -vDm644 out/Release/gen/content/content_resources.pak \
                 /usr/lib/chromium/                            &&
-install -vm644  out/Release/{*.pak,*.bin} \
+install -vDm644 out/Release/icudtl.dat \
+                /usr/lib/chromium/icudtl.dat                  &&
+install -vDm644 out/Release/{*.pak,*.bin} \
                 /usr/lib/chromium/                            &&
+sed -i \
+    -e "s/@@MENUNAME@@/Chromium/g" \
+    -e "s/@@PACKAGE@@/chromium/g" \
+    -e "s/@@USR_BIN_SYMLINK_NAME@@/chromium/g" \
+    chrome/installer/linux/common/desktop.template \
+    chrome/app/resources/manpage.1.in                         &&
+install -vDm644 chrome/installer/linux/common/desktop.template \
+                /usr/share/applications/chromium.desktop      &&
+install -vDm644 chrome/app/resources/manpage.1.in \
+                /usr/share/man/man1/chromium.1                &&
 cp -av out/Release/locales /usr/lib/chromium/                 &&
 chown -Rv root:root /usr/lib/chromium/locales                 &&
-install -vDm644 out/Release/chrome.1 \
-                /usr/share/man/man1/chromium.1
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 for size in 16 32; do
     install -vDm644 \
         "chrome/app/theme/default_100_percent/chromium/product_logo_$size.png" \
@@ -176,20 +177,7 @@ done &&
 for size in 22 24 48 64 128 256; do
     install -vDm644 "chrome/app/theme/chromium/product_logo_$size.png" \
         "/usr/share/icons/hicolor/${size}x${size}/apps/chromium.png"
-done &&
-cat > /usr/share/applications/chromium.desktop << "EOF"
-[Desktop Entry]
-Encoding=UTF-8
-Name=Chromium Web Browser
-Comment=Access the Internet
-GenericName=Web Browser
-Exec=chromium %u
-Terminal=false
-Type=Application
-Icon=chromium
-Categories=GTK;Network;WebBrowser;
-MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;
-EOF
+done
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -200,7 +188,7 @@ sudo rm rootscript.sh
 mkdir temp                                         &&
 cd temp                                            &&
 case $(uname -m) in
-    x86_64) ar -x ../../google-chrome-stable_60.0.3112.101-1_amd64.deb
+    x86_64) ar -x ../../google-chrome-stable_63.0.3239.132-1_amd64.deb
     ;;
     i?86)   ar -x ../../google-chrome-stable_48.0.2564.116-1_i386.deb
     ;;

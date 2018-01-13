@@ -9,30 +9,25 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak libblockdev is a C library supporting GObject introspection forbr3ak manipulation of block devices. It has a plugin-based architecturebr3ak where each technology (like LVM, Btrfs, MD RAID, Swap,...) isbr3ak implemented in a separate plugin, possibly with multiplebr3ak implementations (e.g. using LVM CLI or the new LVM DBus API).br3ak"
 SECTION="general"
-VERSION=1
+VERSION=2.15
 NAME="libblockdev"
 
 #REQ:gobject-introspection
 #REQ:libbytesize
-#REQ:lvm2
+#REQ:parted
 #REQ:volume_key
-#REC:python3
-#REC:nss
-#REC:cryptsetup
 #OPT:btrfs-progs
 #OPT:gtk-doc
 #OPT:mdadm
-#OPT:parted
-#OPT:python2
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/storaged-project/libblockdev/archive/libblockdev-2.11-1.tar.gz
+URL=https://github.com/storaged-project/libblockdev/releases/download/2.15-1/libblockdev-2.15.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/storaged-project/libblockdev/archive/libblockdev-2.11-1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libblockdev/libblockdev-2.11-1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libblockdev/libblockdev-2.11-1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libblockdev/libblockdev-2.11-1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libblockdev/libblockdev-2.11-1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libblockdev/libblockdev-2.11-1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libblockdev/libblockdev-2.11-1.tar.gz
+wget -nc https://github.com/storaged-project/libblockdev/releases/download/2.15-1/libblockdev-2.15.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libblockdev/libblockdev-2.15.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libblockdev/libblockdev-2.15.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libblockdev/libblockdev-2.15.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libblockdev/libblockdev-2.15.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libblockdev/libblockdev-2.15.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libblockdev/libblockdev-2.15.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -47,10 +42,11 @@ fi
 
 whoami > /tmp/currentuser
 
-sh autogen.sh &&
-./configure --prefix=/usr \
-            --without-dm  \
-            --sysconfdir=/etc &&
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --with-python3    \
+            --without-gtk-doc \
+            --without-dm      &&
 make "-j`nproc`" || make
 
 

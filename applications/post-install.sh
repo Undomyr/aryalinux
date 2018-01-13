@@ -15,7 +15,7 @@ NAME="post-install"
 #REQ:xfwm4
 #REQ:plasma-all
 #REQ:icewm
-#REC:sddm
+#REC:lightdm
 #REC:lxdm
 #REC:desktop-file-utils
 #REC:shared-mime-info

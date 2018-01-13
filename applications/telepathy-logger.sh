@@ -8,7 +8,7 @@ set +h
 
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Telepathy Logger package is abr3ak headless observer client that logs information received by thebr3ak Telepathy framework. It featuresbr3ak pluggable backends to log different sorts of messages in differentbr3ak formats.br3ak"
-SECTION="gnome"
+SECTION="general"
 VERSION=0.8.2
 NAME="telepathy-logger"
 

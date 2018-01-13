@@ -8,8 +8,8 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/V/VP/VPIT/autovivification-0.17.tar.gz"
-VERSION=0.17
+URL="https://www.cpan.org/authors/id/V/VP/VPIT/autovivification-0.18.tar.gz"
+VERSION=0.18
 NAME="perl-modules#perl-autovivification"
 
 cd $SOURCE_DIR

@@ -24,7 +24,7 @@ NAME="lxde-common"
 #OPT:notification-daemon
 #OPT:xfce4-notifyd
 #OPT:lxdm
-#OPT:sddm
+#OPT:lightdm
 
 
 cd $SOURCE_DIR

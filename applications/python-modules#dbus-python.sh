@@ -13,8 +13,8 @@ VERSION=1.2.4
 NAME="python-modules#dbus-python"
 
 #REQ:dbus-glib
-#REQ:python2
-#REQ:python3
+#OPT:python2
+#OPT:python-modules#docutils
 
 
 cd $SOURCE_DIR

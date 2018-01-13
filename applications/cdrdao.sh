@@ -39,8 +39,10 @@ fi
 
 whoami > /tmp/currentuser
 
-sed -i '/ioctl.h/a #include <sys/stat.h>' dao/ScsiIf-linux.cc  &&
-sed -i 's/\(char .*REMOTE\)/unsigned \1/' dao/CdrDriver.{cc,h} &&
+
+sed -i '/ioctl.h/a #include <sys/stat.h>' dao/ScsiIf-linux.cc             &&
+sed -i 's/\(char .*REMOTE\)/unsigned \1/' dao/CdrDriver.{cc,h}            &&
+sed -i 's/bitrate_table.1..i./lame_get_bitrate(1, i)/g' utils/toc2mp3.cc  &&
 ./configure --prefix=/usr --mandir=/usr/share/man &&
 make "-j`nproc`" || make
 

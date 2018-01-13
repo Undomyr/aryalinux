@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Gvfs package is a userspacebr3ak virtual filesystem designed to work with the I/O abstractions ofbr3ak GLib's GIO library.br3ak"
 SECTION="gnome"
-VERSION=1.32.1
+VERSION=1.34.1
 NAME="gvfs"
 
 #REQ:dbus
@@ -41,11 +41,11 @@ NAME="gvfs"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gvfs/1.32/gvfs-1.32.1.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/gvfs/1.34/gvfs-1.34.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gvfs/1.32/gvfs-1.32.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gvfs/gvfs-1.32.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gvfs/gvfs-1.32.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gvfs/gvfs-1.32.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gvfs/gvfs-1.32.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gvfs/gvfs-1.32.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gvfs/gvfs-1.32.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gvfs/1.32/gvfs-1.32.1.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/gvfs/1.34/gvfs-1.34.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gvfs/gvfs-1.34.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gvfs/gvfs-1.34.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gvfs/gvfs-1.34.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gvfs/gvfs-1.34.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gvfs/gvfs-1.34.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gvfs/gvfs-1.34.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gvfs/1.34/gvfs-1.34.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

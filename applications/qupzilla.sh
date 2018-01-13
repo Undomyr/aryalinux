@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak QupZilla is a fast, feature-richbr3ak and lightweight QtWebEngine basedbr3ak browser, originally intended only for educational purposes.br3ak"
 SECTION="xsoft"
-VERSION=2.1.2
+VERSION=2.2.3
 NAME="qupzilla"
 
 #REQ:qtwebengine
@@ -18,12 +18,11 @@ NAME="qupzilla"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/QupZilla/qupzilla/releases/download/v2.1.2/QupZilla-2.1.2.tar.xz
+URL=https://github.com/QupZilla/qupzilla/releases/download/v2.2.3/QupZilla-2.2.3.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/QupZilla/qupzilla/releases/download/v2.1.2/QupZilla-2.1.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qupzilla/QupZilla-2.1.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/qupzilla/QupZilla-2.1.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qupzilla/QupZilla-2.1.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qupzilla/QupZilla-2.1.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qupzilla/QupZilla-2.1.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qupzilla/QupZilla-2.1.2.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/qupzilla-2.1.2-openssl1.1-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/qupzilla/qupzilla-2.1.2-openssl1.1-1.patch
+wget -nc https://github.com/QupZilla/qupzilla/releases/download/v2.2.3/QupZilla-2.2.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qupzilla/QupZilla-2.2.3.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/qupzilla/QupZilla-2.2.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qupzilla/QupZilla-2.2.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qupzilla/QupZilla-2.2.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qupzilla/QupZilla-2.2.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qupzilla/QupZilla-2.2.3.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -50,7 +49,6 @@ pathappend /opt/lxqt/lib/pkgconfig PKG_CONFIG_PATH
 
 whoami > /tmp/currentuser
 
-patch -p1 -i ../qupzilla-2.1.2-openssl1.1-1.patch &&
 export QUPZILLA_PREFIX=/usr &&
 qmake                       &&
 make "-j`nproc`" || make

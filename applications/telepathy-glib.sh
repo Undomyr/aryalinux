@@ -8,7 +8,7 @@ set +h
 
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Telepathy GLib contains abr3ak library used by GLib basedbr3ak Telepathy components. Telepathy isbr3ak a D-Bus framework for unifyingbr3ak real time communication, including instant messaging, voice callsbr3ak and video calls. It abstracts differences between protocols tobr3ak provide a unified interface for applications.br3ak"
-SECTION="gnome"
+SECTION="general"
 VERSION=0.24.1
 NAME="telepathy-glib"
 

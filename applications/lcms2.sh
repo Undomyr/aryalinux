@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Little Color Management System is a small-footprint colorbr3ak management engine, with special focus on accuracy and performance.br3ak It uses the International Color Consortium standard (ICC), which isbr3ak the modern standard for color management.br3ak"
 SECTION="general"
-VERSION=2.8
+VERSION=2.9
 NAME="lcms2"
 
 #OPT:libjpeg
@@ -18,11 +18,11 @@ NAME="lcms2"
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/lcms/lcms2-2.8.tar.gz
+URL=https://downloads.sourceforge.net/lcms/lcms2-2.9.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/lcms/lcms2-2.8.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lcms2/lcms2-2.8.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/lcms2/lcms2-2.8.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lcms2/lcms2-2.8.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lcms2/lcms2-2.8.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lcms2/lcms2-2.8.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lcms2/lcms2-2.8.tar.gz
+wget -nc https://downloads.sourceforge.net/lcms/lcms2-2.9.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lcms2/lcms2-2.9.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/lcms2/lcms2-2.9.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lcms2/lcms2-2.9.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lcms2/lcms2-2.9.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lcms2/lcms2-2.9.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lcms2/lcms2-2.9.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -36,6 +36,10 @@ cd $DIRECTORY
 fi
 
 whoami > /tmp/currentuser
+
+sed -i '/AX_APPEND/s/^/#/' configure.ac &&
+autoreconf
+
 
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make
