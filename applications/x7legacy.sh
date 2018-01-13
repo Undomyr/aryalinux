@@ -12,6 +12,11 @@ SECTION="x"
 NAME="x7legacy"
 
 #REQ:xcursor-themes
+#OPT:xmlto
+#OPT:fop
+#OPT:links
+#OPT:lynx
+#OPT:w3m
 
 
 cd $SOURCE_DIR
@@ -38,7 +43,8 @@ export XORG_PREFIX=/usr
 export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static"
 
 cat > legacy.dat << "EOF"
-2a455d3c02390597feb9cefb3fe97a45 app/ bdftopcf-1.1.tar.bz2
+254ee42bd178d18ebc7a73aacfde7f79 lib/ libXfont-1.5.2.tar.bz2
+53a48e1fdfec29ab2e89f86d4b7ca902 app/ bdftopcf-1.0.5.tar.bz2
 1347c3031b74c9e91dc4dfa53b12f143 font/ font-adobe-100dpi-1.0.3.tar.bz2
 6c9f26c92393c0756f3e8d614713495b font/ font-adobe-75dpi-1.0.3.tar.bz2
 cb7b57d7800fd9e28ec35d85761ed278 font/ font-jis-misc-1.0.3.tar.bz2
@@ -73,7 +79,14 @@ do
   packagedir=${package%.tar.bz2}
   tar -xf $package
   pushd $packagedir
-  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static
+  case $packagedir in
+    libXfont-[0-9]* )
+      ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static --disable-devel-docs
+    ;;
+    * )
+      ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static
+    ;;
+  esac
   make "-j`nproc`" || make
   as_root make install
   popd

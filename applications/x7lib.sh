@@ -58,22 +58,22 @@ e5e06eb14a608b58746bdd1c0bd7b8e3 libXaw-1.0.13.tar.bz2
 07e01e046a0215574f36a3aacb148be0 libXfixes-5.0.3.tar.bz2
 f7a218dcbf6f0848599c6c36fc65c51a libXcomposite-0.4.4.tar.bz2
 802179a76bded0b658f4e9ec5e1830a4 libXrender-0.9.10.tar.bz2
-58fe3514e1e7135cf364101e714d1a14 libXcursor-1.1.15.tar.bz2
+1e7c17afbbce83e2215917047c57d1b3 libXcursor-1.1.14.tar.bz2
 0cf292de2a9fa2e9a939aefde68fd34f libXdamage-1.1.4.tar.bz2
 0920924c3a9ebc1265517bdd2f9fde50 libfontenc-1.1.3.tar.bz2
-b7ca87dfafeb5205b28a1e91ac3efe85 libXfont2-2.0.3.tar.bz2
+0d9f6dd9c23bf4bcbfb00504b566baf5 libXfont2-2.0.1.tar.bz2
 331b3a2a3a1a78b5b44cfbd43f86fcfe libXft-2.3.2.tar.bz2
 1f0f2719c020655a60aee334ddd26d67 libXi-1.7.9.tar.bz2
 9336dc46ae3bf5f81c247f7131461efd libXinerama-1.1.3.tar.bz2
 28e486f1d491b757173dd85ba34ee884 libXrandr-1.5.1.tar.bz2
-5d6d443d1abc8e1f6fc1c57fb27729bb libXres-1.2.0.tar.bz2
+45ef29206a6b58254c81bea28ec6c95f libXres-1.0.7.tar.bz2
 ef8c2c1d16a00bd95b9fdcef63b8a2ca libXtst-1.2.3.tar.bz2
 210b6ef30dda2256d54763136faa37b9 libXv-1.0.11.tar.bz2
 4cbe1c1def7a5e1b0ed5fce8e512f4c6 libXvMC-1.0.10.tar.bz2
 d7dd9b9df336b7dd4028b6b56542ff2c libXxf86dga-1.1.4.tar.bz2
 298b8fff82df17304dfdb5fe4066fe3a libXxf86vm-1.1.4.tar.bz2
 ba983eba5a9f05d152a0725b8e863151 libdmx-1.1.3.tar.bz2
-8f436e151d5106a9cfaa71857a066d33 libpciaccess-0.14.tar.bz2
+d810ab17e24c1418dedf7207fb2841d4 libpciaccess-0.13.5.tar.bz2
 4a4cfeaf24dab1b991903455d6d7d404 libxkbfile-1.0.9.tar.bz2
 66662e76899112c0f99e22f2fc775a7e libxshmfence-1.2.tar.bz2
 EOF

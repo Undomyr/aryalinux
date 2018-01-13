@@ -9,12 +9,11 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Nautilus package contains thebr3ak GNOME file manager.br3ak"
 SECTION="gnome"
-VERSION=3.26.2
+VERSION=3.24.2.1
 NAME="nautilus"
 
 #REQ:gnome-autoar
 #REQ:gnome-desktop
-#REQ:tracker
 #REQ:libnotify
 #REC:exempi
 #REC:gobject-introspection
@@ -26,11 +25,11 @@ NAME="nautilus"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/nautilus/3.26/nautilus-3.26.2.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/nautilus/3.24/nautilus-3.24.2.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/nautilus/3.26/nautilus-3.26.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nautilus/nautilus-3.26.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/nautilus/nautilus-3.26.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nautilus/nautilus-3.26.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nautilus/nautilus-3.26.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nautilus/nautilus-3.26.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nautilus/nautilus-3.26.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/nautilus/3.26/nautilus-3.26.2.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/nautilus/3.24/nautilus-3.24.2.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nautilus/nautilus-3.24.2.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/nautilus/nautilus-3.24.2.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nautilus/nautilus-3.24.2.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nautilus/nautilus-3.24.2.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nautilus/nautilus-3.24.2.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nautilus/nautilus-3.24.2.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/nautilus/3.24/nautilus-3.24.2.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -45,18 +44,17 @@ fi
 
 whoami > /tmp/currentuser
 
-mkdir build &&
-cd    build &&
-meson --prefix=/usr     \
-      --sysconfdir=/etc \
-      -Denable-selinux=false .. &&
-ninja
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --disable-selinux    \
+            --disable-tracker    \
+            --disable-packagekit &&
+make "-j`nproc`" || make
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install &&
-glib-compile-schemas /usr/share/glib-2.0/schemas
+make install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

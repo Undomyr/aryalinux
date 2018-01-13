@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Thunderbird is a stand-alonebr3ak mail/news client based on the Mozilla codebase. It uses the Gecko renderingbr3ak engine to enable it to display and compose HTML emails.br3ak"
 SECTION="xsoft"
-VERSION=52.5.2
+VERSION=52.3.0
 NAME="thunderbird"
 
 #REQ:alsa-lib
@@ -36,11 +36,11 @@ NAME="thunderbird"
 
 cd $SOURCE_DIR
 
-URL=https://archive.mozilla.org/pub/thunderbird/releases/52.5.2/source/thunderbird-52.5.2.source.tar.xz
+URL=https://archive.mozilla.org/pub/thunderbird/releases/52.3.0/source/thunderbird-52.3.0.source.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://archive.mozilla.org/pub/thunderbird/releases/52.5.2/source/thunderbird-52.5.2.source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/thunderbird/thunderbird-52.5.2.source.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/thunderbird/thunderbird-52.5.2.source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/thunderbird/thunderbird-52.5.2.source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/thunderbird/thunderbird-52.5.2.source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/thunderbird/thunderbird-52.5.2.source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/thunderbird/thunderbird-52.5.2.source.tar.xz
+wget -nc https://archive.mozilla.org/pub/thunderbird/releases/52.3.0/source/thunderbird-52.3.0.source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/thunderbird/thunderbird-52.3.0.source.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/thunderbird/thunderbird-52.3.0.source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/thunderbird/thunderbird-52.3.0.source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/thunderbird/thunderbird-52.3.0.source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/thunderbird/thunderbird-52.3.0.source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/thunderbird/thunderbird-52.3.0.source.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -115,7 +115,7 @@ make -f client.mk
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make -f client.mk install INSTALL_SDK= &&
-chown -R 0:0 /usr/lib/thunderbird-52.5.2
+chown -R 0:0 /usr/lib/thunderbird-52.3.0
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -140,7 +140,7 @@ Categories=Application;Network;Email;
 MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/xml;application/rss+xml;x-scheme-handler/mailto;
 StartupNotify=true
 EOF
-ln -sfv /usr/lib/thunderbird-52.5.2/chrome/icons/default/default256.png \
+ln -sfv /usr/lib/thunderbird-52.3.0/chrome/icons/default/default256.png \
         /usr/share/pixmaps/thunderbird.png
 
 ENDOFROOTSCRIPT

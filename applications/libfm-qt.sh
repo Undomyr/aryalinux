@@ -9,11 +9,10 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak libfm-qt is the Qt port of libfm,br3ak a library providing components to build desktop file managers.br3ak"
 SECTION="lxqt"
-VERSION=0.12.0
+VERSION=0.11.2
 NAME="libfm-qt"
 
 #REQ:cmake
-#REQ:libexif
 #REQ:libfm
 #REQ:qt5
 #OPT:git
@@ -22,11 +21,11 @@ NAME="libfm-qt"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/lxde/libfm-qt/releases/download/0.12.0/libfm-qt-0.12.0.tar.xz
+URL=https://github.com/lxde/libfm-qt/releases/download/0.11.2/libfm-qt-0.11.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/lxde/libfm-qt/releases/download/0.12.0/libfm-qt-0.12.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libfm/libfm-qt-0.12.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libfm/libfm-qt-0.12.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libfm/libfm-qt-0.12.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libfm/libfm-qt-0.12.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libfm/libfm-qt-0.12.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libfm/libfm-qt-0.12.0.tar.xz
+wget -nc https://github.com/lxde/libfm-qt/releases/download/0.11.2/libfm-qt-0.11.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libfm/libfm-qt-0.11.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libfm/libfm-qt-0.11.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libfm/libfm-qt-0.11.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libfm/libfm-qt-0.11.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libfm/libfm-qt-0.11.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libfm/libfm-qt-0.11.2.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -58,6 +57,7 @@ cd       build &&
 cmake -DCMAKE_INSTALL_PREFIX=$LXQT_PREFIX \
       -DCMAKE_BUILD_TYPE=Release          \
       -DPULL_TRANSLATIONS=no              \
+      -DCMAKE_INSTALL_LIBDIR=lib          \
       ..                                  &&
 make "-j`nproc`" || make
 

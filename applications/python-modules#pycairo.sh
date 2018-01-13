@@ -9,20 +9,21 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="%DESCRIPTION%"
 SECTION="general"
-VERSION=1.15.4
+VERSION=1.15.1
 NAME="python-modules#pycairo"
 
 #REQ:cairo
-#OPT:python2
+#REQ:python2
+#REQ:python3
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/pygobject/pycairo/releases/download/v1.15.4/pycairo-1.15.4.tar.gz
+URL=https://github.com/pygobject/pycairo/releases/download/v1.15.1/pycairo-1.15.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/pygobject/pycairo/releases/download/v1.15.4/pycairo-1.15.4.tar.gz
+wget -nc https://github.com/pygobject/pycairo/releases/download/v1.15.1/pycairo-1.15.1.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

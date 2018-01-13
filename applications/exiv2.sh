@@ -9,22 +9,23 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Exiv2 is a C++ library and abr3ak command line utility for managing image and video metadata.br3ak"
 SECTION="general"
-VERSION=0.26
+VERSION=0.25
 NAME="exiv2"
 
 #REC:curl
 #OPT:doxygen
 #OPT:graphviz
+#OPT:python3
 #OPT:libxslt
 
 
 cd $SOURCE_DIR
 
-URL=http://www.exiv2.org/builds/exiv2-0.26-trunk.tar.gz
+URL=http://www.exiv2.org/exiv2-0.25.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://www.exiv2.org/builds/exiv2-0.26-trunk.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/exiv2/exiv2-0.26-trunk.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/exiv2/exiv2-0.26-trunk.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/exiv2/exiv2-0.26-trunk.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/exiv2/exiv2-0.26-trunk.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/exiv2/exiv2-0.26-trunk.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/exiv2/exiv2-0.26-trunk.tar.gz
+wget -nc http://www.exiv2.org/exiv2-0.25.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/exiv2/exiv2-0.25.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/exiv2/exiv2-0.25.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/exiv2/exiv2-0.25.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/exiv2/exiv2-0.25.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/exiv2/exiv2-0.25.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/exiv2/exiv2-0.25.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

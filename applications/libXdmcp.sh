@@ -13,9 +13,6 @@ VERSION=1.1.2
 NAME="libXdmcp"
 
 #REQ:x7proto
-#OPT:xmlto
-#OPT:fop
-#OPT:libxslt
 
 
 cd $SOURCE_DIR

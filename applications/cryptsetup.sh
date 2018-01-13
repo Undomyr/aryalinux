@@ -12,13 +12,14 @@ SECTION="postlfs"
 VERSION=1.7.5
 NAME="cryptsetup"
 
-#REQ:lvm2
-#REQ:popt
 #REQ:libgcrypt
 #REQ:nettle
+#REQ:lvm2
 #REQ:nss
 #REQ:openssl
+#REQ:popt
 #OPT:libpwquality
+#OPT:lvm2
 #OPT:python2
 
 

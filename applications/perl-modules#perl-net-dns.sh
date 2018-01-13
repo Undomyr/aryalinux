@@ -11,8 +11,8 @@ set +h
 #REQ:perl-modules#io
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/N/NL/NLNETLABS/Net-DNS-1.14.tar.gz"
-VERSION=1.14
+URL="https://www.cpan.org/authors/id/N/NL/NLNETLABS/Net-DNS-1.12.tar.gz"
+VERSION=1.12
 NAME="perl-modules#perl-net-dns"
 
 cd $SOURCE_DIR

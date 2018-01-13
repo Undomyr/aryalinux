@@ -9,8 +9,8 @@ set +h
 #REQ:perl-modules#perl-test-needs
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/E/ET/ETHER/URI-1.73.tar.gz"
-VERSION=1.73
+URL="https://www.cpan.org/authors/id/E/ET/ETHER/URI-1.72.tar.gz"
+VERSION=1.72
 NAME="perl-modules#perl-uri"
 
 cd $SOURCE_DIR

@@ -36,10 +36,9 @@ if [ ! -z $URL ]
 then
 wget -nc ftp://tug.org/texlive/historic/2017/texlive-20170524-source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20170524-source.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/texlive/texlive-20170524-source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20170524-source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20170524-source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20170524-source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20170524-source.tar.xz
 wget -nc ftp://tug.org/texlive/historic/2017/texlive-20170524-texmf.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/texlive/texlive-20170524-texmf.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/texlive/texlive-20170524-texmf.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20170524-texmf.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/texlive/texlive-20170524-texmf.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20170524-texmf.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/texlive/texlive-20170524-texmf.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/texlive-20170524-source-gcc7-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/texlive/texlive-20170524-source-gcc7-1.patch
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/texlive-20170524-source-upstream_fixes-2.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/texlive/texlive-20170524-source-upstream_fixes-2.patch
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/texlive-20170524-source-poppler059-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/texlive/texlive-20170524-source-poppler059-1.patch
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/texlive-20170524-texmf-upstream_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/texlive/texlive-20170524-texmf-upstream_fixes-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/texlive-20170524-source-gcc7-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/texlive/texlive-20170524-source-gcc7-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/texlive-20170524-source-upstream_fixes-2.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/texlive/texlive-20170524-source-upstream_fixes-2.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/texlive-20170524-texmf-upstream_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/texlive/texlive-20170524-texmf-upstream_fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -71,7 +70,6 @@ sudo rm rootscript.sh
 export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
 patch -Np1 -i ../texlive-20170524-source-gcc7-1.patch           &&
 patch -Np1 -i ../texlive-20170524-source-upstream_fixes-2.patch &&
-patch -Np1 -i ../texlive-20170524-source-poppler059-1.patch     &&
 mkdir texlive-build &&
 cd texlive-build    &&
 ../configure                                                    \
@@ -109,8 +107,8 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 
 pushd $SOURCE_DIR
 wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
-tar xf blfs-systemd-units-20180105.tar.bz2
-cd blfs-systemd-units-20180105
+tar xf blfs-systemd-units-20160602.tar.bz2
+cd blfs-systemd-units-20160602
 make install-strip &&
 /sbin/ldconfig &&
 make texlinks &&
@@ -118,7 +116,7 @@ mkdir -pv /opt/texlive/2017/tlpkg/TeXLive/ &&
 install -v -m644 ../texk/tests/TeXLive/* /opt/texlive/2017/tlpkg/TeXLive/
 
 cd ..
-rm -rf blfs-systemd-units-20180105
+rm -rf blfs-systemd-units-20160602
 popd
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

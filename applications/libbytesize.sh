@@ -9,22 +9,22 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The libbytesize package is abr3ak library facilitates the common operations with sizes in bytes.br3ak"
 SECTION="general"
-VERSION=1.2
+VERSION=0.11
 NAME="libbytesize"
 
-#REQ:pcre
+#REQ:pcre2
 #OPT:gtk-doc
 #OPT:python2
-#OPT:python-modules#six
+#OPT:python3
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/storaged-project/libbytesize/releases/download/1.2/libbytesize-1.2.tar.gz
+URL=https://github.com/storaged-project/libbytesize/archive/libbytesize-0.11.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/storaged-project/libbytesize/releases/download/1.2/libbytesize-1.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libbytesize/libbytesize-1.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libbytesize/libbytesize-1.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libbytesize/libbytesize-1.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libbytesize/libbytesize-1.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libbytesize/libbytesize-1.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libbytesize/libbytesize-1.2.tar.gz
+wget -nc https://github.com/storaged-project/libbytesize/archive/libbytesize-0.11.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libbytesize/libbytesize-0.11.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libbytesize/libbytesize-0.11.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libbytesize/libbytesize-0.11.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libbytesize/libbytesize-0.11.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libbytesize/libbytesize-0.11.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libbytesize/libbytesize-0.11.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -39,6 +39,7 @@ fi
 
 whoami > /tmp/currentuser
 
+sh autogen.sh             &&
 ./configure --prefix=/usr &&
 make "-j`nproc`" || make
 

@@ -9,19 +9,20 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="%DESCRIPTION%"
 SECTION="general"
-VERSION=1.11.0
+VERSION=1.10.0
 NAME="python-modules#six"
 
-#OPT:python2
+#REQ:python2
+#REQ:python3
 
 
 cd $SOURCE_DIR
 
-URL=https://pypi.io/packages/source/s/six/six-1.11.0.tar.gz
+URL=https://pypi.io/packages/source/s/six/six-1.10.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://pypi.io/packages/source/s/six/six-1.11.0.tar.gz
+wget -nc https://pypi.io/packages/source/s/six/six-1.10.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

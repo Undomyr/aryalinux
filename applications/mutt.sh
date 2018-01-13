@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Mutt package contains a Mailbr3ak User Agent. This is useful for reading, writing, replying to,br3ak saving, and deleting your email.br3ak"
 SECTION="basicnet"
-VERSION=1.9.2
+VERSION=1.8.3
 NAME="mutt"
 
 #OPT:aspell
@@ -34,11 +34,11 @@ NAME="mutt"
 
 cd $SOURCE_DIR
 
-URL=ftp://ftp.mutt.org/pub/mutt/mutt-1.9.2.tar.gz
+URL=ftp://ftp.mutt.org/pub/mutt/mutt-1.8.3.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.mutt.org/pub/mutt/mutt-1.9.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mutt/mutt-1.9.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/mutt/mutt-1.9.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mutt/mutt-1.9.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mutt/mutt-1.9.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mutt/mutt-1.9.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mutt/mutt-1.9.2.tar.gz
+wget -nc ftp://ftp.mutt.org/pub/mutt/mutt-1.8.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mutt/mutt-1.8.3.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/mutt/mutt-1.8.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mutt/mutt-1.8.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mutt/mutt-1.8.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mutt/mutt-1.8.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mutt/mutt-1.8.3.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -73,15 +73,17 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
+cp -v doc/manual.txt{,.shipped} &&
 ./configure --prefix=/usr                           \
             --sysconfdir=/etc                       \
-            --with-docdir=/usr/share/doc/mutt-1.9.2 \
+            --with-docdir=/usr/share/doc/mutt-1.8.3 \
             --enable-external-dotlock               \
             --enable-pop                            \
             --enable-imap                           \
             --enable-hcache                         \
             --enable-sidebar                        &&
-make "-j`nproc`" || make
+make &&
+test -s doc/manual.txt || mv -v doc/manual.txt{.shipped,}
 
 
 make -C doc manual.pdf
@@ -100,7 +102,7 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -v -m644 doc/manual.pdf \
-    /usr/share/doc/mutt-1.9.2
+    /usr/share/doc/mutt-1.8.3
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -112,7 +114,7 @@ chown root:mail /usr/bin/mutt_dotlock &&
 chmod -v 2755 /usr/bin/mutt_dotlock
 
 
-cat /usr/share/doc/mutt-1.9.2/samples/gpg.rc >> ~/.muttrc
+cat /usr/share/doc/mutt-1.8.3/samples/gpg.rc >> ~/.muttrc
 
 
 

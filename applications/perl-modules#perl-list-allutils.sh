@@ -9,6 +9,7 @@ set +h
 #REQ:perl-modules#perl-module-implementation
 #REQ:perl-modules#list-utilsby
 #REQ:perl-modules#number-compare
+#REQ:perl-modules#perl-scalar-list-utils
 #REQ:perl-modules#perl-test-warnings
 #REQ:perl-modules#text-glob
 

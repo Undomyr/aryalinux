@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak GNOME Weather is a smallbr3ak application that allows you to monitor the current weatherbr3ak conditions for your city, or anywhere in the world, and to accessbr3ak updated forecasts provided by various internet services.br3ak"
 SECTION="gnome"
-VERSION=3.26.0
+VERSION=3.24.0
 NAME="gnome-weather"
 
 #REQ:gjs
@@ -18,11 +18,11 @@ NAME="gnome-weather"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gnome-weather/3.26/gnome-weather-3.26.0.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/gnome-weather/3.24/gnome-weather-3.24.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-weather/3.26/gnome-weather-3.26.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-weather/gnome-weather-3.26.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-weather/gnome-weather-3.26.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-weather/gnome-weather-3.26.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-weather/gnome-weather-3.26.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-weather/gnome-weather-3.26.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-weather/gnome-weather-3.26.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-weather/3.26/gnome-weather-3.26.0.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-weather/3.24/gnome-weather-3.24.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-weather/gnome-weather-3.24.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-weather/gnome-weather-3.24.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-weather/gnome-weather-3.24.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-weather/gnome-weather-3.24.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-weather/gnome-weather-3.24.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-weather/gnome-weather-3.24.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-weather/3.24/gnome-weather-3.24.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

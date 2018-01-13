@@ -27,6 +27,7 @@ wget -nc https://github.com/p11-glue/p11-kit/releases/download/0.23.9/p11-kit-0.
 wget -nc https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.1.tar.xz
 wget -nc https://ftp.gnu.org/gnu/wget/wget-1.19.2.tar.gz
 wget -nc http://www.sudo.ws/dist/sudo-1.8.21p2.tar.gz
+wget -nc https://ftp.osuosl.org/pub/blfs/conglomeration/libffi/libffi-3.2.1.tar.gz
 wget -nc https://www.python.org/ftp/python/2.7.14/Python-2.7.14.tar.xz
 wget -nc https://hg.mozilla.org/projects/nss/raw-file/tip/lib/ckfw/builtins/certdata.txt
 wget -nc https://openssl.org/source/openssl-1.1.0g.tar.gz

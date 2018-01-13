@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The GNOME Screenshot is a utilitybr3ak used for taking screenshots of the entire screen, a window or abr3ak user-defined area of the screen, with optional beautifying borderbr3ak effects.br3ak"
 SECTION="gnome"
-VERSION=3.26.0
+VERSION=3.22.0
 NAME="gnome-screenshot"
 
 #REQ:gtk3
@@ -18,11 +18,11 @@ NAME="gnome-screenshot"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gnome-screenshot/3.26/gnome-screenshot-3.26.0.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/gnome-screenshot/3.22/gnome-screenshot-3.22.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-screenshot/3.26/gnome-screenshot-3.26.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.26.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.26.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.26.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.26.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.26.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.26.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-screenshot/3.26/gnome-screenshot-3.26.0.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-screenshot/3.22/gnome-screenshot-3.22.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-screenshot/gnome-screenshot-3.22.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-screenshot/3.22/gnome-screenshot-3.22.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -37,19 +37,13 @@ fi
 
 whoami > /tmp/currentuser
 
-mkdir build &&
-cd    build &&
-meson --prefix=/usr .. &&
-sed '/^build all/s@src/org.gnome.Screenshot.metainfo.xml@@' \
-    -i build.ninja                          &&
-cp ../src/org.gnome.Screenshot.metainfo.xml.in \
-      src/org.gnome.Screenshot.metainfo.xml &&
-ninja
+./configure --prefix=/usr &&
+make "-j`nproc`" || make
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install
+make install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak GNOME Tweak Tool is a simplebr3ak program used to tweak advanced GNOME settings.br3ak"
 SECTION="gnome"
-VERSION=3.26.4
+VERSION=3.24.1
 NAME="gnome-tweak-tool"
 
 #REQ:gtk3
@@ -19,11 +19,11 @@ NAME="gnome-tweak-tool"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gnome-tweak-tool/3.26/gnome-tweak-tool-3.26.4.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/gnome-tweak-tool/3.24/gnome-tweak-tool-3.24.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-tweak-tool/3.26/gnome-tweak-tool-3.26.4.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.26.4.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.26.4.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.26.4.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.26.4.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.26.4.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.26.4.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-tweak-tool/3.26/gnome-tweak-tool-3.26.4.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-tweak-tool/3.24/gnome-tweak-tool-3.24.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.24.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.24.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.24.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.24.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.24.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-tweak-tool/gnome-tweak-tool-3.24.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-tweak-tool/3.24/gnome-tweak-tool-3.24.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -38,15 +38,13 @@ fi
 
 whoami > /tmp/currentuser
 
-mkdir build &&
-cd    build &&
-meson --prefix=/usr &&
-ninja
+./configure --prefix=/usr &&
+make "-j`nproc`" || make
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install
+make install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

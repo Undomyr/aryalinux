@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The enchant package provide abr3ak generic interface into various existing spell checking libraries.br3ak"
 SECTION="general"
-VERSION=2.2.1
+VERSION=1.6.0
 NAME="enchant"
 
 #REQ:glib2
@@ -19,11 +19,11 @@ NAME="enchant"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/AbiWord/enchant/releases/download/v2.2.1/enchant-2.2.1.tar.gz
+URL=http://www.abisource.com/downloads/enchant/1.6.0/enchant-1.6.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/AbiWord/enchant/releases/download/v2.2.1/enchant-2.2.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/enchant/enchant-2.2.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/enchant/enchant-2.2.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/enchant/enchant-2.2.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/enchant/enchant-2.2.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/enchant/enchant-2.2.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/enchant/enchant-2.2.1.tar.gz
+wget -nc http://www.abisource.com/downloads/enchant/1.6.0/enchant-1.6.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/enchant/enchant-1.6.0.tar.gz || wget -nc ftp://ftp.netbsd.org/pub/pkgsrc/distfiles/enchant-1.6.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -44,11 +44,7 @@ make "-j`nproc`" || make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install                                   &&
-rm -rf /usr/include/enchant                    &&
-ln -sfv enchant-2       /usr/include/enchant   &&
-ln -sfv libenchant-2.so /usr/lib/libenchant.so &&
-ln -sfv enchant-2.pc    /usr/lib/pkgconfig/enchant.pc
+make install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

@@ -6,12 +6,12 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#REQ:perl-modules#list-moreutils-xs
+#REQ:perl-modules#xsloader
 #REQ:perl-modules#exporter-tiny
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-0.428.tar.gz"
-VERSION=0.428
+URL="https://www.cpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-0.419.tar.gz"
+VERSION=0.419
 NAME="perl-modules#perl-list-moreutils"
 
 cd $SOURCE_DIR

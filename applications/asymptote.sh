@@ -30,6 +30,8 @@ URL=https://downloads.sourceforge.net/asymptote/asymptote-2.41.src.tgz
 if [ ! -z $URL ]
 then
 wget -nc https://downloads.sourceforge.net/asymptote/asymptote-2.41.src.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/asymptote/asymptote-2.41.src.tgz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/asymptote/asymptote-2.41.src.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/asymptote/asymptote-2.41.src.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/asymptote/asymptote-2.41.src.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/asymptote/asymptote-2.41.src.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/asymptote/asymptote-2.41.src.tgz
+wget -nc http://effbot.org/downloads/Imaging-1.1.7.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/downloads/Imaging/Imaging-1.1.7-freetype_fix-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

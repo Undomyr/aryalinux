@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The UPower package provides anbr3ak interface to enumerating power devices, listening to device eventsbr3ak and querying history and statistics. Any application or service onbr3ak the system can access the org.freedesktop.UPower service via thebr3ak system message bus.br3ak"
 SECTION="general"
-VERSION=0.99.7
+VERSION=0.99.5
 NAME="upower"
 
 #REQ:dbus-glib
@@ -18,16 +18,17 @@ NAME="upower"
 #REQ:polkit
 #OPT:gobject-introspection
 #OPT:gtk-doc
+#OPT:python3
 #OPT:python-modules#pygobject3
 
 
 cd $SOURCE_DIR
 
-URL=https://upower.freedesktop.org/releases/upower-0.99.7.tar.xz
+URL=https://upower.freedesktop.org/releases/upower-0.99.5.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://upower.freedesktop.org/releases/upower-0.99.7.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/upower/upower-0.99.7.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/upower/upower-0.99.7.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/upower/upower-0.99.7.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/upower/upower-0.99.7.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/upower/upower-0.99.7.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/upower/upower-0.99.7.tar.xz
+wget -nc https://upower.freedesktop.org/releases/upower-0.99.5.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/upower/upower-0.99.5.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/upower/upower-0.99.5.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/upower/upower-0.99.5.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/upower/upower-0.99.5.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/upower/upower-0.99.5.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/upower/upower-0.99.5.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

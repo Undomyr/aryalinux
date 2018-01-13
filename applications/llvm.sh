@@ -9,11 +9,12 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The LLVM package contains abr3ak collection of modular and reusable compiler and toolchainbr3ak technologies. The Low Level Virtual Machine (LLVM) Core librariesbr3ak provide a modern source and target-independent optimizer, alongbr3ak with code generation support for many popular CPUs (as well as somebr3ak less common ones!). These libraries are built around a wellbr3ak specified code representation known as the LLVM intermediatebr3ak representation (\"LLVM IR\").br3ak"
 SECTION="general"
-VERSION=5.0.1
+VERSION=4.0.1
 NAME="llvm"
 
 #REQ:cmake
-#REQ:python2
+#REC:libffi
+#REC:python2
 #OPT:doxygen
 #OPT:graphviz
 #OPT:libxml2
@@ -25,13 +26,14 @@ NAME="llvm"
 
 cd $SOURCE_DIR
 
-URL=http://llvm.org/releases/5.0.1/llvm-5.0.1.src.tar.xz
+URL=http://llvm.org/releases/4.0.1/llvm-4.0.1.src.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://llvm.org/releases/5.0.1/llvm-5.0.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/llvm-5.0.1.src.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/llvm/llvm-5.0.1.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-5.0.1.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-5.0.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-5.0.1.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-5.0.1.src.tar.xz
-wget -nc http://llvm.org/releases/5.0.1/cfe-5.0.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/cfe-5.0.1.src.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/llvm/cfe-5.0.1.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-5.0.1.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-5.0.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-5.0.1.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-5.0.1.src.tar.xz
-wget -nc http://llvm.org/releases/5.0.1/compiler-rt-5.0.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/compiler-rt/compiler-rt-5.0.1.src.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/compiler-rt/compiler-rt-5.0.1.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-5.0.1.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-5.0.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-5.0.1.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-5.0.1.src.tar.xz
+wget -nc http://llvm.org/releases/4.0.1/llvm-4.0.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/llvm-4.0.1.src.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/llvm/llvm-4.0.1.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-4.0.1.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-4.0.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-4.0.1.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-4.0.1.src.tar.xz
+wget -nc http://llvm.org/releases/4.0.1/cfe-4.0.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/cfe-4.0.1.src.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/llvm/cfe-4.0.1.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-4.0.1.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-4.0.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-4.0.1.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-4.0.1.src.tar.xz
+wget -nc http://llvm.org/releases/4.0.1/compiler-rt-4.0.1.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/compiler-rt/compiler-rt-4.0.1.src.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/compiler-rt/compiler-rt-4.0.1.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-4.0.1.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-4.0.1.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-4.0.1.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-4.0.1.src.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/compiler-rt-4.0.1-glibc-2.26-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/compiler-rt/compiler-rt-4.0.1-glibc-2.26-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -46,10 +48,11 @@ fi
 
 whoami > /tmp/currentuser
 
-tar -xf ../cfe-5.0.1.src.tar.xz -C tools &&
-tar -xf ../compiler-rt-5.0.1.src.tar.xz -C projects &&
-mv tools/cfe-5.0.1.src tools/clang &&
-mv projects/compiler-rt-5.0.1.src projects/compiler-rt
+tar -xf ../cfe-4.0.1.src.tar.xz -C tools &&
+tar -xf ../compiler-rt-4.0.1.src.tar.xz -C projects &&
+mv tools/cfe-4.0.1.src tools/clang &&
+mv projects/compiler-rt-4.0.1.src projects/compiler-rt
+patch -Np1 -d projects/compiler-rt < ../compiler-rt-4.0.1-glibc-2.26-1.patch
 
 
 mkdir -v build &&

@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The xine User Interface packagebr3ak contains a multimedia player. It plays back CDs, DVDs and VCDs. Itbr3ak also decodes multimedia files like AVI, MOV, WMV, MPEG and MP3 frombr3ak local disk drives, and displays multimedia streamed over thebr3ak Internet.br3ak"
 SECTION="multimedia"
-VERSION=0.99.10
+VERSION=0.99.9
 NAME="xine-ui"
 
 #REQ:xine-lib
@@ -20,11 +20,11 @@ NAME="xine-ui"
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/xine/xine-ui-0.99.10.tar.xz
+URL=https://downloads.sourceforge.net/xine/xine-ui-0.99.9.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/xine/xine-ui-0.99.10.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xine-ui/xine-ui-0.99.10.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/xine-ui/xine-ui-0.99.10.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xine-ui/xine-ui-0.99.10.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xine-ui/xine-ui-0.99.10.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xine-ui/xine-ui-0.99.10.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xine-ui/xine-ui-0.99.10.tar.xz
+wget -nc https://downloads.sourceforge.net/xine/xine-ui-0.99.9.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xine-ui/xine-ui-0.99.9.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/xine-ui/xine-ui-0.99.9.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xine-ui/xine-ui-0.99.9.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xine-ui/xine-ui-0.99.9.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xine-ui/xine-ui-0.99.9.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xine-ui/xine-ui-0.99.9.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -45,7 +45,7 @@ make "-j`nproc`" || make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make docsdir=/usr/share/doc/xine-ui-0.99.10 install
+make docsdir=/usr/share/doc/xine-ui-0.99.9 install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

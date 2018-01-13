@@ -41,9 +41,6 @@ fi
 
 whoami > /tmp/currentuser
 
-sed -i '1904s/4/5/' coregrind/m_syswrap/syswrap-linux.c
-
-
 sed -i 's|/doc/valgrind||' docs/Makefile.in &&
 ./configure --prefix=/usr \
             --datadir=/usr/share/doc/valgrind-3.13.0 &&

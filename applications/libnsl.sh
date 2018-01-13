@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The libnsl package contains thebr3ak public client interface for NIS(YP) and NIS+. It replaces the NISbr3ak library that used to be in GlibC.br3ak"
 SECTION="basicnet"
-VERSION=1.2.0
+VERSION=1.1.0
 NAME="libnsl"
 
 #REQ:rpcsvc-proto
@@ -18,11 +18,11 @@ NAME="libnsl"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/thkukuk/libnsl/archive/v1.2.0/libnsl-1.2.0.tar.gz
+URL=https://github.com/thkukuk/libnsl/archive/1.1.0/libnsl-1.1.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/thkukuk/libnsl/archive/v1.2.0/libnsl-1.2.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libnsl/libnsl-1.2.0.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libnsl/libnsl-1.2.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libnsl/libnsl-1.2.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libnsl/libnsl-1.2.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libnsl/libnsl-1.2.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libnsl/libnsl-1.2.0.tar.gz
+wget -nc https://github.com/thkukuk/libnsl/archive/1.1.0/libnsl-1.1.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libnsl/libnsl-1.1.0.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libnsl/libnsl-1.1.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libnsl/libnsl-1.1.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libnsl/libnsl-1.1.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libnsl/libnsl-1.1.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libnsl/libnsl-1.1.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

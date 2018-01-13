@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Power Management Utilitiesbr3ak provide simple shell command line tools to suspend and hibernatebr3ak the computer. They can be used to run user supplied scripts onbr3ak suspend and resume.br3ak"
+DESCRIPTION="br3ak The Power Management Utilities isbr3ak a small collection of scripts to suspend and hibernate computerbr3ak that can be used to run user supplied scripts on suspend andbr3ak resume.br3ak"
 SECTION="general"
 VERSION=1.4.1
 NAME="pm-utils"

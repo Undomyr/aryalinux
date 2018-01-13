@@ -9,10 +9,11 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Autofs controls the operation ofbr3ak the automount daemons. The automount daemons automatically mountbr3ak filesystems when they are accessed and unmount them after a periodbr3ak of inactivity. This is done based on a set of pre-configured maps.br3ak"
 SECTION="general"
-VERSION=5.1.4
+VERSION=5.1.3
 NAME="autofs"
 
-#REQ:libtirpc
+#REQ:rpcsvc-proto
+#OPT:libtirpc
 #OPT:nfs-utils
 #OPT:libxml2
 #OPT:mitkrb
@@ -22,11 +23,11 @@ NAME="autofs"
 
 cd $SOURCE_DIR
 
-URL=https://www.kernel.org/pub/linux/daemons/autofs/v5/autofs-5.1.4.tar.xz
+URL=https://www.kernel.org/pub/linux/daemons/autofs/v5/autofs-5.1.3.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.kernel.org/pub/linux/daemons/autofs/v5/autofs-5.1.4.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/autofs/autofs-5.1.4.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/autofs/autofs-5.1.4.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/autofs/autofs-5.1.4.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/autofs/autofs-5.1.4.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/autofs/autofs-5.1.4.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/autofs/autofs-5.1.4.tar.xz
+wget -nc https://www.kernel.org/pub/linux/daemons/autofs/v5/autofs-5.1.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/autofs/autofs-5.1.3.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/autofs/autofs-5.1.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/autofs/autofs-5.1.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/autofs/autofs-5.1.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/autofs/autofs-5.1.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/autofs/autofs-5.1.3.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -42,11 +43,10 @@ fi
 whoami > /tmp/currentuser
 
 ./configure --prefix=/         \
-            --with-libtirpc    \
             --with-systemd     \            
             --without-openldap \
             --mandir=/usr/share/man &&
-make "-j`nproc`" || make
+CFLAGS+='-I/usr/include/tirpc/' make
 
 
 

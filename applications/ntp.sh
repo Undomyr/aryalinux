@@ -123,12 +123,12 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 
 pushd $SOURCE_DIR
 wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
-tar xf blfs-systemd-units-20180105.tar.bz2
-cd blfs-systemd-units-20180105
+tar xf blfs-systemd-units-20160602.tar.bz2
+cd blfs-systemd-units-20160602
 make install-ntpd
 
 cd ..
-rm -rf blfs-systemd-units-20180105
+rm -rf blfs-systemd-units-20160602
 popd
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

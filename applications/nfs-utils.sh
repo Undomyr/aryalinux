@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The NFS Utilities package containsbr3ak the userspace server and client tools necessary to use the kernel'sbr3ak NFS abilities. NFS is a protocol that allows sharing file systemsbr3ak over the network.br3ak"
 SECTION="basicnet"
-VERSION=2.3.1
+VERSION=2.1.1
 NAME="nfs-utils"
 
 #REQ:libtirpc
@@ -24,11 +24,11 @@ NAME="nfs-utils"
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/nfs/nfs-utils-2.3.1.tar.xz
+URL=https://downloads.sourceforge.net/nfs/nfs-utils-2.1.1.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/nfs/nfs-utils-2.3.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nfs-utils/nfs-utils-2.3.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/nfs-utils/nfs-utils-2.3.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nfs-utils/nfs-utils-2.3.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nfs-utils/nfs-utils-2.3.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nfs-utils/nfs-utils-2.3.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nfs-utils/nfs-utils-2.3.1.tar.xz
+wget -nc https://downloads.sourceforge.net/nfs/nfs-utils-2.1.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nfs-utils/nfs-utils-2.1.1.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/nfs-utils/nfs-utils-2.1.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nfs-utils/nfs-utils-2.1.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nfs-utils/nfs-utils-2.1.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nfs-utils/nfs-utils-2.1.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nfs-utils/nfs-utils-2.1.1.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -51,6 +51,7 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
+sed -i '/fcntl.h/a#include <stdint.h>' support/nsm/rpc.c &&
 ./configure --prefix=/usr          \
             --sysconfdir=/etc      \
             --sbindir=/sbin        \
@@ -62,9 +63,8 @@ make "-j`nproc`" || make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install                      &&
-mv -v /sbin/start-statd /usr/sbin &&
-chmod u+w,go+r /sbin/mount.nfs    &&
+make install                   &&
+chmod u+w,go+r /sbin/mount.nfs &&
 chown nobody.nogroup /var/lib/nfs
 
 ENDOFROOTSCRIPT
@@ -79,12 +79,12 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 
 pushd $SOURCE_DIR
 wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
-tar xf blfs-systemd-units-20180105.tar.bz2
-cd blfs-systemd-units-20180105
+tar xf blfs-systemd-units-20160602.tar.bz2
+cd blfs-systemd-units-20160602
 make install-nfs-client
 
 cd ..
-rm -rf blfs-systemd-units-20180105
+rm -rf blfs-systemd-units-20160602
 popd
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

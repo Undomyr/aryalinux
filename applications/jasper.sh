@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The JasPer Project is anbr3ak open-source initiative to provide a free software-based referencebr3ak implementation of the JPEG-2000 codec.br3ak"
 SECTION="general"
-VERSION=2.0.14
+VERSION=2.0.12
 NAME="jasper"
 
 #REQ:cmake
@@ -21,11 +21,11 @@ NAME="jasper"
 
 cd $SOURCE_DIR
 
-URL=http://www.ece.uvic.ca/~frodo/jasper/software/jasper-2.0.14.tar.gz
+URL=http://www.ece.uvic.ca/~frodo/jasper/software/jasper-2.0.12.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://www.ece.uvic.ca/~frodo/jasper/software/jasper-2.0.14.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/jasper/jasper-2.0.14.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/jasper/jasper-2.0.14.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/jasper/jasper-2.0.14.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/jasper/jasper-2.0.14.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/jasper/jasper-2.0.14.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/jasper/jasper-2.0.14.tar.gz
+wget -nc http://www.ece.uvic.ca/~frodo/jasper/software/jasper-2.0.12.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/jasper/jasper-2.0.12.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/jasper/jasper-2.0.12.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/jasper/jasper-2.0.12.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/jasper/jasper-2.0.12.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/jasper/jasper-2.0.12.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/jasper/jasper-2.0.12.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -45,8 +45,7 @@ cd    BUILD &&
 cmake -DCMAKE_INSTALL_PREFIX=/usr    \
       -DCMAKE_BUILD_TYPE=Release     \
       -DCMAKE_SKIP_INSTALL_RPATH=YES \
-      -DJAS_ENABLE_DOC=NO            \
-      -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/jasper-2.0.14 \
+      -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/jasper-2.0.12 \
       ..  &&
 make "-j`nproc`" || make
 

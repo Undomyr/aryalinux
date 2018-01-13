@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Exim package contains a Mailbr3ak Transport Agent written by the University of Cambridge, releasedbr3ak under the GNU Public License.br3ak"
 SECTION="server"
-VERSION=4.90
+VERSION=4.89
 NAME="exim"
 
 #REQ:pcre
@@ -28,11 +28,12 @@ NAME="exim"
 
 cd $SOURCE_DIR
 
-URL=http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.90.tar.xz
+URL=http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.89.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.90.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/exim/exim-4.90.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/exim/exim-4.90.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/exim/exim-4.90.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/exim/exim-4.90.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/exim/exim-4.90.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/exim/exim-4.90.tar.xz || wget -nc ftp://ftp.exim.org/pub/exim/exim4/exim-4.90.tar.xz
+wget -nc http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.89.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/exim/exim-4.89.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/exim/exim-4.89.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/exim/exim-4.89.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/exim/exim-4.89.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/exim/exim-4.89.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/exim/exim-4.89.tar.xz || wget -nc ftp://ftp.exim.org/pub/exim/exim4/exim-4.89.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/exim-4.89-avoid_mem_clash-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/exim/exim-4.89-avoid_mem_clash-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -58,6 +59,7 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
+patch -p1 -i ../exim-4.89-avoid_mem_clash-1.patch &&
 sed -e 's,^BIN_DIR.*$,BIN_DIRECTORY=/usr/sbin,'    \
     -e 's,^CONF.*$,CONFIGURE_FILE=/etc/exim.conf,' \
     -e 's,^EXIM_USER.*$,EXIM_USER=exim,'           \
@@ -70,11 +72,11 @@ make "-j`nproc`" || make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install                                    &&
-install -v -m644 doc/exim.8 /usr/share/man/man8 &&
-install -v -d -m755    /usr/share/doc/exim-4.90 &&
-install -v -m644 doc/* /usr/share/doc/exim-4.90 &&
-ln -sfv exim /usr/sbin/sendmail                 &&
+make install                                      &&
+install -v -m644 doc/exim.8 /usr/share/man/man8   &&
+install -v -d -m755 /usr/share/doc/exim-4.89    &&
+install -v -m644 doc/* /usr/share/doc/exim-4.89 &&
+ln -sfv exim /usr/sbin/sendmail                   &&
 install -v -d -m750 -o exim -g exim /var/spool/exim
 
 ENDOFROOTSCRIPT
@@ -114,12 +116,12 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 
 pushd $SOURCE_DIR
 wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
-tar xf blfs-systemd-units-20180105.tar.bz2
-cd blfs-systemd-units-20180105
+tar xf blfs-systemd-units-20160602.tar.bz2
+cd blfs-systemd-units-20160602
 make install-exim
 
 cd ..
-rm -rf blfs-systemd-units-20180105
+rm -rf blfs-systemd-units-20160602
 popd
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

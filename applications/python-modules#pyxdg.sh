@@ -12,7 +12,8 @@ SECTION="general"
 VERSION=0.25
 NAME="python-modules#pyxdg"
 
-#OPT:python2
+#REQ:python2
+#REQ:python3
 
 
 cd $SOURCE_DIR

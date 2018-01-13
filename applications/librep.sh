@@ -12,6 +12,7 @@ SECTION="general"
 VERSION=0.92.7
 NAME="librep"
 
+#OPT:libffi
 
 
 cd $SOURCE_DIR

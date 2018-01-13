@@ -14,7 +14,6 @@ NAME="gimp"
 
 #REQ:gegl
 #REQ:gtk2
-#REQ:python-modules#libxml2py2
 #REC:python-modules#pygtk
 #OPT:aalib
 #OPT:alsa-lib

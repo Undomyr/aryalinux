@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Pango is a library for laying outbr3ak and rendering of text, with an emphasis on internationalization. Itbr3ak can be used anywhere that text layout is needed, though most of thebr3ak work on Pango so far has been donebr3ak in the context of the GTK+ widgetbr3ak toolkit.br3ak"
 SECTION="x"
-VERSION=1.40.14
+VERSION=1.40.10
 NAME="pango"
 
 #REQ:fontconfig
@@ -17,19 +17,19 @@ NAME="pango"
 #REQ:harfbuzz
 #REQ:glib2
 #REC:cairo
+#REC:gtk-doc
 #REC:x7lib
 #OPT:gobject-introspection
 #OPT:TTF-and-OTF-fonts#cantarell-fonts
-#OPT:gtk-doc
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/pango/1.40/pango-1.40.14.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/pango/1.40/pango-1.40.10.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/pango/1.40/pango-1.40.14.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/pango/pango-1.40.14.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/pango/pango-1.40.14.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/pango/pango-1.40.14.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/pango/pango-1.40.14.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/pango/pango-1.40.14.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/pango/pango-1.40.14.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/pango/1.40/pango-1.40.14.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/pango/1.40/pango-1.40.10.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/pango/pango-1.40.10.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/pango/pango-1.40.10.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/pango/pango-1.40.10.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/pango/pango-1.40.10.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/pango/pango-1.40.10.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/pango/pango-1.40.10.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/pango/1.40/pango-1.40.10.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -44,15 +44,13 @@ fi
 
 whoami > /tmp/currentuser
 
-mkdir build &&
-cd    build &&
-meson --prefix=/usr --sysconfdir=/etc .. &&
-ninja
+./autogen.sh --prefix=/usr --sysconfdir=/etc &&
+make "-j`nproc`" || make
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install
+make install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

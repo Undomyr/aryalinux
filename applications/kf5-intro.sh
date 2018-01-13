@@ -68,7 +68,9 @@ cat > /etc/profile.d/kf5.sh << "EOF"
 export KF5_PREFIX=/opt/kf5
 pathappend /opt/kf5/bin PATH
 pathappend /opt/kf5/lib/pkgconfig PKG_CONFIG_PATH
+pathappend /etc/xdg XDG_CONFIG_DIRS
 pathappend /opt/kf5/etc/xdg XDG_CONFIG_DIRS
+pathappend /usr/share XDG_DATA_DIRS
 pathappend /opt/kf5/share XDG_DATA_DIRS
 pathappend /opt/kf5/lib/plugins QT_PLUGIN_PATH
 pathappend /opt/kf5/lib/qml QML2_IMPORT_PATH
@@ -128,8 +130,8 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mv /opt/kf5{,-5.41.0}
-ln -sfv kf5-5.41.0 /opt/kf5
+mv /opt/kf5{,-5.37.0}
+ln -sfv kf5-5.37.0 /opt/kf5
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

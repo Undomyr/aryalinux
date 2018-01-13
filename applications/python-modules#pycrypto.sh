@@ -12,7 +12,8 @@ SECTION="general"
 VERSION=2.6.1
 NAME="python-modules#pycrypto"
 
-#OPT:python2
+#REQ:python2
+#REQ:python3
 
 
 cd $SOURCE_DIR

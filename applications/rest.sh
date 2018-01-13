@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The rest package contains abr3ak library that was designed to make it easier to access web servicesbr3ak that claim to be \"RESTful\". It includes convenience wrappers forbr3ak libsoup and libxml to ease remote use of the RESTful API.br3ak"
 SECTION="gnome"
-VERSION=0.8.1
+VERSION=0.8.0
 NAME="rest"
 
 #REQ:cacerts
@@ -20,11 +20,11 @@ NAME="rest"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/rest/0.8/rest-0.8.1.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/rest/0.8/rest-0.8.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/rest/0.8/rest-0.8.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rest/rest-0.8.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/rest/rest-0.8.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rest/rest-0.8.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rest/rest-0.8.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rest/rest-0.8.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rest/rest-0.8.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/rest/0.8/rest-0.8.1.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/rest/0.8/rest-0.8.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rest/rest-0.8.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/rest/0.8/rest-0.8.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

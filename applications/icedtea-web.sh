@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The IcedTea-Web package containsbr3ak both a Java browser plugin, and abr3ak new webstart implementation, licensed under GPLV3.br3ak"
 SECTION="xsoft"
-VERSION=1.7.1
+VERSION=1.7
 NAME="icedtea-web"
 
 #REQ:npapi-sdk
@@ -25,11 +25,11 @@ NAME="icedtea-web"
 
 cd $SOURCE_DIR
 
-URL=http://icedtea.wildebeest.org/download/source/icedtea-web-1.7.1.tar.gz
+URL=http://icedtea.wildebeest.org/download/source/icedtea-web-1.7.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://icedtea.wildebeest.org/download/source/icedtea-web-1.7.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/icedtea/icedtea-web-1.7.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/icedtea/icedtea-web-1.7.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/icedtea/icedtea-web-1.7.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/icedtea/icedtea-web-1.7.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/icedtea/icedtea-web-1.7.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/icedtea/icedtea-web-1.7.1.tar.gz
+wget -nc http://icedtea.wildebeest.org/download/source/icedtea-web-1.7.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/icedtea/icedtea-web-1.7.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/icedtea/icedtea-web-1.7.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/icedtea/icedtea-web-1.7.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/icedtea/icedtea-web-1.7.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/icedtea/icedtea-web-1.7.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/icedtea/icedtea-web-1.7.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

@@ -8,8 +8,8 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/A/AL/ALINKE/Lingua-Translit-0.28.tar.gz"
-VERSION=0.28
+URL="https://www.cpan.org/authors/id/A/AL/ALINKE/Lingua-Translit-0.27.tar.gz"
+VERSION=0.27
 NAME="perl-modules#perl-lingua-translit"
 
 cd $SOURCE_DIR

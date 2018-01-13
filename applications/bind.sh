@@ -36,7 +36,7 @@ URL=ftp://ftp.isc.org/isc/bind9/9.11.2/bind-9.11.2.tar.gz
 if [ ! -z $URL ]
 then
 wget -nc ftp://ftp.isc.org/isc/bind9/9.11.2/bind-9.11.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/bind/bind-9.11.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/bind/bind-9.11.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/bind/bind-9.11.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/bind/bind-9.11.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/bind/bind-9.11.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/bind/bind-9.11.2.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/bind-9.11.2-use_iproute2-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/bind/bind-9.11.2-use_iproute2-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/bind-9.11.2-use_iproute2-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/bind/bind-9.11.2-use_iproute2-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -298,12 +298,12 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 
 pushd $SOURCE_DIR
 wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
-tar xf blfs-systemd-units-20180105.tar.bz2
-cd blfs-systemd-units-20180105
+tar xf blfs-systemd-units-20160602.tar.bz2
+cd blfs-systemd-units-20160602
 make install-named
 
 cd ..
-rm -rf blfs-systemd-units-20180105
+rm -rf blfs-systemd-units-20160602
 popd
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

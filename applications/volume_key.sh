@@ -15,8 +15,9 @@ NAME="volume_key"
 #REQ:cryptsetup
 #REQ:glib2
 #REQ:gpgme
-#REQ:python2
-#OPT:swig
+#REQ:swig
+#REC:python2
+#OPT:python3
 
 
 cd $SOURCE_DIR
@@ -40,14 +41,15 @@ fi
 
 whoami > /tmp/currentuser
 
+sed -i '/config.h/d' lib/libvolume_key.h &&
+autoreconf -fiv           &&
 ./configure --prefix=/usr &&
 make "-j`nproc`" || make
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install &&
-sed -i '/config.h/d' /usr/include/volume_key/libvolume_key.h
+make install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

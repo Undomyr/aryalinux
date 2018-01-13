@@ -14,9 +14,9 @@ NAME="newt"
 
 #REQ:popt
 #REQ:slang
-#REC:tcl
 #REC:gpm
 #OPT:python2
+#OPT:python3
 
 
 cd $SOURCE_DIR

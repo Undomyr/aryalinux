@@ -17,8 +17,8 @@ NAME="thunar-volman"
 #REQ:libxfce4ui
 #REC:libnotify
 #REC:startup-notification
-#REC:gvfs
-#REC:polkit-gnome
+#OPT:gvfs
+#OPT:polkit-gnome
 
 
 cd $SOURCE_DIR

@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The obconf-qt package is anbr3ak OpenBox Qt based configurationbr3ak tool.br3ak"
 SECTION="lxqt"
-VERSION=0.12.0
+VERSION=0.11.1
 NAME="obconf-qt"
 
 #REQ:gtk2
@@ -22,11 +22,11 @@ NAME="obconf-qt"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/lxde/obconf-qt/releases/download/0.12.0/obconf-qt-0.12.0.tar.xz
+URL=https://github.com/lxde/obconf-qt/releases/download/0.11.1/obconf-qt-0.11.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/lxde/obconf-qt/releases/download/0.12.0/obconf-qt-0.12.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/obconf-qt/obconf-qt-0.12.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/obconf-qt/obconf-qt-0.12.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/obconf-qt/obconf-qt-0.12.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/obconf-qt/obconf-qt-0.12.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/obconf-qt/obconf-qt-0.12.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/obconf-qt/obconf-qt-0.12.0.tar.xz
+wget -nc https://github.com/lxde/obconf-qt/releases/download/0.11.1/obconf-qt-0.11.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/obconf-qt/obconf-qt-0.11.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/obconf-qt/obconf-qt-0.11.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/obconf-qt/obconf-qt-0.11.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/obconf-qt/obconf-qt-0.11.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/obconf-qt/obconf-qt-0.11.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/obconf-qt/obconf-qt-0.11.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

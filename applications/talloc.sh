@@ -16,6 +16,7 @@ NAME="talloc"
 #OPT:docbook-xsl
 #OPT:libxslt
 #OPT:python2
+#OPT:python3
 
 
 cd $SOURCE_DIR

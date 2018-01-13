@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Postfix package contains abr3ak Mail Transport Agent (MTA). This is useful for sending email tobr3ak other users of your host machine. It can also be configured to be abr3ak central mail server for your domain, a mail relay agent or simply abr3ak mail delivery agent to your local Internet Service Provider.br3ak"
 SECTION="server"
-VERSION=3.2.4
+VERSION=3.2.2
 NAME="postfix"
 
 #REC:db
@@ -26,11 +26,11 @@ NAME="postfix"
 
 cd $SOURCE_DIR
 
-URL=ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-3.2.4.tar.gz
+URL=ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-3.2.2.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-3.2.4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/postfix/postfix-3.2.4.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/postfix/postfix-3.2.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/postfix/postfix-3.2.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/postfix/postfix-3.2.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/postfix/postfix-3.2.4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/postfix/postfix-3.2.4.tar.gz
+wget -nc ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-3.2.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/postfix/postfix-3.2.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/postfix/postfix-3.2.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/postfix/postfix-3.2.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/postfix/postfix-3.2.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/postfix/postfix-3.2.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/postfix/postfix-3.2.2.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -74,8 +74,8 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 sh postfix-install -non-interactive \
    daemon_directory=/usr/lib/postfix \
    manpage_directory=/usr/share/man \
-   html_directory=/usr/share/doc/postfix-3.2.4/html \
-   readme_directory=/usr/share/doc/postfix-3.2.4/readme
+   html_directory=/usr/share/doc/postfix-3.2.2/html \
+   readme_directory=/usr/share/doc/postfix-3.2.2/readme
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -126,12 +126,12 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 
 pushd $SOURCE_DIR
 wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
-tar xf blfs-systemd-units-20180105.tar.bz2
-cd blfs-systemd-units-20180105
+tar xf blfs-systemd-units-20160602.tar.bz2
+cd blfs-systemd-units-20160602
 make install-postfix
 
 cd ..
-rm -rf blfs-systemd-units-20180105
+rm -rf blfs-systemd-units-20160602
 popd
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

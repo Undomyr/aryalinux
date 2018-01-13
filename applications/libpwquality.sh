@@ -37,8 +37,7 @@ fi
 
 whoami > /tmp/currentuser
 
-./configure --prefix=/usr --disable-static \
-            --with-securedir=/lib/security &&
+./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make
 
 

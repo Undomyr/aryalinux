@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The OpenSSL-1.0.2n packagebr3ak contains libraries relating to cryptography. These are useful forbr3ak providing cryptographic functions to other packages, such as emailbr3ak applications and web browsers (for accessing HTTPS sites). Thisbr3ak package provides only the libraries and headers for packages thatbr3ak have not yet been ported to <a class=\"xref\" href=\"openssl.html\" br3ak title=\"OpenSSL-1.1.0g\">OpenSSL-1.1.0g</a>.br3ak"
+DESCRIPTION="br3ak The OpenSSL-1.0.2l packagebr3ak contains libraries relating to cryptography. These are useful forbr3ak providing cryptographic functions to other packages, such as emailbr3ak applications and web browsers (for accessing HTTPS sites). Thisbr3ak package provides only the libraries and headers for packages thatbr3ak have not yet been ported to <a class=\"xref\" href=\"openssl.html\" br3ak title=\"OpenSSL-1.1.0f\">OpenSSL-1.1.0f</a>.br3ak"
 SECTION="postlfs"
-VERSION=1.0.2n
+VERSION=1.0.2l
 NAME="openssl10"
 
 #OPT:mitkrb
@@ -17,12 +17,12 @@ NAME="openssl10"
 
 cd $SOURCE_DIR
 
-URL=https://openssl.org/source/openssl-1.0.2n.tar.gz
+URL=https://openssl.org/source/openssl-1.0.2l.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://openssl.org/source/openssl-1.0.2n.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openssl/openssl-1.0.2n.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/openssl/openssl-1.0.2n.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openssl/openssl-1.0.2n.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openssl/openssl-1.0.2n.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openssl/openssl-1.0.2n.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openssl/openssl-1.0.2n.tar.gz || wget -nc ftp://openssl.org/source/openssl-1.0.2n.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/openssl-1.0.2n-compat_versioned_symbols-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/openssl/openssl-1.0.2n-compat_versioned_symbols-1.patch
+wget -nc https://openssl.org/source/openssl-1.0.2l.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openssl/openssl-1.0.2l.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/openssl/openssl-1.0.2l.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openssl/openssl-1.0.2l.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openssl/openssl-1.0.2l.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openssl/openssl-1.0.2l.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openssl/openssl-1.0.2l.tar.gz || wget -nc ftp://openssl.org/source/openssl-1.0.2l.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/openssl-1.0.2l-compat_versioned_symbols-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/openssl/openssl-1.0.2l-compat_versioned_symbols-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -37,7 +37,7 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../openssl-1.0.2n-compat_versioned_symbols-1.patch &&
+patch -Np1 -i ../openssl-1.0.2l-compat_versioned_symbols-1.patch &&
 ./config --prefix=/usr            \
          --openssldir=/etc/ssl    \
          --libdir=lib/openssl-1.0 \
@@ -50,7 +50,6 @@ make -j1
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make INSTALL_PREFIX=$PWD/Dest install_sw                      &&
-rm -rf /usr/lib/openssl-1.0                                   &&
 install -vdm755                   /usr/lib/openssl-1.0        &&
 cp -Rv Dest/usr/lib/openssl-1.0/* /usr/lib/openssl-1.0        &&
 mv -v  /usr/lib/openssl-1.0/lib{crypto,ssl}.so.1.0.0 /usr/lib &&

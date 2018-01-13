@@ -18,8 +18,8 @@ set +h
 #REQ:perl-modules#perl-test-fatal
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/E/ET/ETHER/libwww-perl-6.31.tar.gz"
-VERSION=6.31
+URL="https://www.cpan.org/authors/id/O/OA/OALDERS/libwww-perl-6.26.tar.gz"
+VERSION=6.26
 NAME="perl-modules#perl-lwp"
 
 cd $SOURCE_DIR

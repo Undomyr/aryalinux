@@ -9,18 +9,18 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The hicolor-icon-theme packagebr3ak contains a default fallback theme for implementations of the iconbr3ak theme specification.br3ak"
 SECTION="x"
-VERSION=0.17
+VERSION=0.15
 NAME="hicolor-icon-theme"
 
 
 
 cd $SOURCE_DIR
 
-URL=https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.17.tar.xz
+URL=https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.15.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.17.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.17.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.17.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.17.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.17.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.17.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.17.tar.xz
+wget -nc https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.15.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.15.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.15.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.15.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.15.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.15.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/hicolor-icon-theme/hicolor-icon-theme-0.15.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

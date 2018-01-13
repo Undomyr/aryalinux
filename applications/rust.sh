@@ -16,6 +16,7 @@ NAME="rust"
 #REQ:cmake
 #REQ:python2
 #OPT:gdb
+#OPT:ninja
 
 
 cd $SOURCE_DIR

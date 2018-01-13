@@ -12,7 +12,8 @@ SECTION="general"
 VERSION=8.6.9
 NAME="asciidoc"
 
-#OPT:python2
+#REQ:python2
+#REQ:python3
 
 
 cd $SOURCE_DIR

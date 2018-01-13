@@ -49,7 +49,8 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -v -m755 -d /usr/share/{doc,java}/junit-4.11 &&
 chown -R root:root .                                 &&
 cp -v -R junit*/javadoc/*             /usr/share/doc/junit-4.11  &&
-cp -v junit*/junit*.jar               /usr/share/java/junit-4.11
+cp -v junit*/junit*.jar               /usr/share/java/junit-4.11 &&
+cp -v hamcrest-1.3/hamcrest-core*.jar /usr/share/java/junit-4.11
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

@@ -52,8 +52,6 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 cat >> /etc/X11/app-defaults/URxvt << "EOF"
 ! Use the specified colour as the windows background colour [default white]
 URxvt*background: black
@@ -72,11 +70,6 @@ URxvt*url-launcher: firefox
 ! Below, default modified to mouse left button.
 URxvt*matcher.button: 1
 EOF
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
 
 
 xrdb -query
