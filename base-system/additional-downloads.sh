@@ -34,7 +34,7 @@ wget -nc https://openssl.org/source/openssl-1.1.0g.tar.gz
 wget -nc http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.06.tar.xz
 wget -nc http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.9.1.tar.gz
 wget -nc https://sourceware.org/ftp/lvm2/releases/LVM2.2.02.177.tgz
-wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs-4.14.tar.gz
+wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs-4.12.tar.gz
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-base.patch
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-kbuild.patch
 wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs4-mmap.patch
