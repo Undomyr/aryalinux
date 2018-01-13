@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="025-gzip.sh"
-TARBALL="gzip-1.8.tar.xz"
+TARBALL="gzip-1.9.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 

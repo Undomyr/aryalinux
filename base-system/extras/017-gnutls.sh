@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="017-gnutls.sh"
-TARBALL="gnutls-3.4.3.tar.xz"
+TARBALL="gnutls-3.6.1.tar.xz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
@@ -23,7 +23,8 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr &&
+./configure --prefix=/usr \
+            --with-default-trust-store-pkcs11="pkcs11:" &&
 make
 make install
 make -C doc/reference install-data-local

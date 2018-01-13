@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="070-bash.sh"
-TARBALL="bash-4.4.tar.gz"
+TARBALL="bash-4.4.12.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,9 +29,8 @@ then
 	cd $DIRECTORY
 fi
 
-patch -Np1 -i ../bash-4.4-upstream_fixes-1.patch
 ./configure --prefix=/usr                       \
-            --docdir=/usr/share/doc/bash-4.4 \
+            --docdir=/usr/share/doc/bash-4.4.12 \
             --without-bash-malloc               \
             --with-installed-readline
 make

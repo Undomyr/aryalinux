@@ -30,6 +30,7 @@ then
 fi
 
 patch -Np1 -i ../glibc-2.26-fhs-1.patch
+patch -Np1 -i ../glibc-2.26-local_glob_exploits-2.patch
 ln -sfv /tools/lib/gcc /usr/lib
 case $(uname -m) in
     i?86)    GCC_INCDIR=/usr/lib/gcc/$(uname -m)-pc-linux-gnu/7.2.0/include
@@ -94,7 +95,7 @@ ethers: files
 rpc: files
 # End /etc/nsswitch.conf
 EOF
-tar -xf ../../tzdata2017b.tar.gz
+tar -xf ../../tzdata2017c.tar.gz
 ZONEINFO=/usr/share/zoneinfo
 mkdir -pv $ZONEINFO/{posix,right}
 for tz in etcetera southamerica northamerica europe africa antarctica  \

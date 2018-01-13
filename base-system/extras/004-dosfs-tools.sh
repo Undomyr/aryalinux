@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="004-dosfs-tools.sh"
-TARBALL="dosfstools-3.0.26.tar.xz"
+TARBALL="dosfstools-4.1.tar.xz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
@@ -23,9 +23,12 @@ then
 	cd $DIRECTORY
 fi
 
+./configure --prefix=/               \
+            --enable-compat-symlinks \
+            --mandir=/usr/share/man  \
+            --docdir=/usr/share/doc/dosfstools-4.1 &&
 make
-make PREFIX=/usr SBINDIR=/usr/bin MANDIR=/usr/share/man  \
-DOCDIR=/usr/share/doc install
+make install
 
 cd $SOURCE_DIR
 rm -rf $DIRECTORY

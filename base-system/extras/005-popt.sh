@@ -23,7 +23,7 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr &&
+./configure --prefix=/usr --disable-static &&
 make
 make install
 

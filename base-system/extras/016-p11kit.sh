@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="016-p11kit.sh"
-TARBALL="p11-kit-0.23.1.tar.gz"
+TARBALL="p11-kit-0.23.9.tar.gz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
@@ -23,9 +23,16 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr --sysconfdir=/etc &&
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --with-trust-paths=/etc/pki/anchors &&
 make
 make install
+if [ -e /usr/lib/libnssckbi.so ]; then
+  readlink /usr/lib/libnssckbi.so ||
+  rm -v /usr/lib/libnssckbi.so    &&
+  ln -sfv ./pkcs11/p11-kit-trust.so /usr/lib/libnssckbi.so
+fi
 
 cd $SOURCE_DIR
 rm -rf $DIRECTORY

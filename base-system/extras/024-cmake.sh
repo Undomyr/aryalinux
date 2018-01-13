@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="024-cmake.sh"
-TARBALL="cmake-3.5.0.tar.gz"
+TARBALL="cmake-3.10.1.tar.gz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
@@ -23,13 +23,14 @@ then
 	cd $DIRECTORY
 fi
 
-./bootstrap --prefix=/usr       \
-            --system-libs       \
-            --mandir=/share/man \
-            --no-system-jsoncpp \
-            --no-system-curl    \
-            --no-system-libarchive \
-            --docdir=/share/doc/cmake-3.5.0 &&
+sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake &&
+
+./bootstrap --prefix=/usr        \
+            --system-libs        \
+            --mandir=/share/man  \
+            --no-system-jsoncpp  \
+            --no-system-librhash \
+            --docdir=/share/doc/cmake-3.10.1 &&
 make "-j`nproc`"
 make install
 

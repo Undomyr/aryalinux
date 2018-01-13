@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="018-wget.sh"
-TARBALL="wget-1.16.3.tar.xz"
+TARBALL="wget-1.19.2.tar.gz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
@@ -24,7 +24,8 @@ then
 fi
 
 ./configure --prefix=/usr      \
-            --sysconfdir=/etc  &&
+            --sysconfdir=/etc  \
+            --with-ssl=openssl &&
 make
 make install
 

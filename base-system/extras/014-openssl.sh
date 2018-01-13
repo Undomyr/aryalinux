@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="015-openssl.sh"
-TARBALL="openssl-1.0.1i.tar.gz"
+TARBALL="openssl-1.1.0g.tar.gz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
@@ -23,18 +23,16 @@ then
 	cd $DIRECTORY
 fi
 
-patch -Np1 -i ../openssl-1.0.1i-fix_parallel_build-1.patch &&
-
 ./config --prefix=/usr         \
          --openssldir=/etc/ssl \
          --libdir=lib          \
          shared                \
          zlib-dynamic &&
 make
-sed -i 's# libcrypto.a##;s# libssl.a##' Makefile
-make MANDIR=/usr/share/man MANSUFFIX=ssl install &&
-install -dv -m755 /usr/share/doc/openssl-1.0.1i  &&
-cp -vfr doc/*     /usr/share/doc/openssl-1.0.1i
+sed -i 's# libcrypto.a##;s# libssl.a##;/INSTALL_LIBS/s#libcrypto.a##' Makefile
+make MANSUFFIX=ssl install           &&
+mv -v /usr/share/doc/openssl{,-1.1.0g} &&
+cp -vfr doc/* /usr/share/doc/openssl-1.1.0g
 
 cd $SOURCE_DIR
 rm -rf $DIRECTORY
