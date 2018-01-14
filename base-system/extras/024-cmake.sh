@@ -31,6 +31,8 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake &&
             --mandir=/share/man  \
             --no-system-jsoncpp  \
             --no-system-librhash \
+            --no-system-curl     \
+            --no-system-libarchive \
             --docdir=/share/doc/cmake-3.9.1 &&
 make
 make install
