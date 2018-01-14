@@ -31,8 +31,8 @@ fi
 make
 sed -i 's# libcrypto.a##;s# libssl.a##;/INSTALL_LIBS/s#libcrypto.a##' Makefile
 make MANSUFFIX=ssl install           &&
-mv -v /usr/share/doc/openssl{,-1.1.0g} &&
-cp -vfr doc/* /usr/share/doc/openssl-1.1.0g
+mv -v /usr/share/doc/openssl{,-1.1.0f} &&
+cp -vfr doc/* /usr/share/doc/openssl-1.1.0f
 
 cd $SOURCE_DIR
 rm -rf $DIRECTORY
