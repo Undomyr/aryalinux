@@ -39,7 +39,6 @@ URL=http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-234-lfs.tar
 if [ ! -z $URL ]
 then
 wget -nc http://anduin.linuxfromscratch.org/sources/other/systemd/systemd-234-lfs.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/systemd/systemd-234-lfs.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/systemd/systemd-234-lfs.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-234-lfs.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-234-lfs.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-234-lfs.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-234-lfs.tar.xz
-wget -nc https://github.com/systemd/systemd/archive/v236/systemd-236.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
