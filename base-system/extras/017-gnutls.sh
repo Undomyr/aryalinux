@@ -24,7 +24,8 @@ then
 fi
 
 ./configure --prefix=/usr \
-            --with-default-trust-store-pkcs11="pkcs11:" &&
+	--with-default-trust-store-pkcs11="pkcs11:" \
+	--with-included-unistring &&
 make
 make install
 make -C doc/reference install-data-local
