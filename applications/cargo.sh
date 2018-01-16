@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Cargo is the Package Manager forbr3ak Rust. Like that, during the buildbr3ak it uses <span class=\"command\"><strong>curl</strong> tobr3ak download <code class=\"filename\">cargo files which arebr3ak actually <code class=\"filename\">.tar.gz source archives.br3ak"
 SECTION="general"
-VERSION=null
+VERSION=0.24.0
 NAME="cargo"
 
 #REQ:cmake
@@ -20,16 +20,17 @@ NAME="cargo"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/rust-lang/cargo/archive/0.17.0.tar.gz
+URL=https://github.com/rust-lang/cargo/archive/0.24.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/rust-lang/cargo/archive/0.17.0.tar.gz
+
+wget -c https://github.com/rust-lang/cargo/archive/0.24.0.tar.gz -O cargo-0.24.0.tar.gz
 wget -nc http://anduin.linuxfromscratch.org/BLFS/rust/rust-installer-20161004.tar.xz
 wget -nc https://static.rust-lang.org/dist/cargo-0.16.0-x86_64-unknown-linux-gnu.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cargo/cargo-0.16.0-x86_64-unknown-linux-gnu.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/cargo/cargo-0.16.0-x86_64-unknown-linux-gnu.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cargo/cargo-0.16.0-x86_64-unknown-linux-gnu.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cargo/cargo-0.16.0-x86_64-unknown-linux-gnu.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cargo/cargo-0.16.0-x86_64-unknown-linux-gnu.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cargo/cargo-0.16.0-x86_64-unknown-linux-gnu.tar.gz
 wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cargo/cargo-0.16.0-i686-unknown-linux-gnu.tar.gz || wget -nc https://static.rust-lang.org/dist/cargo-0.16.0-i686-unknown-linux-gnu.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cargo/cargo-0.16.0-i686-unknown-linux-gnu.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cargo/cargo-0.16.0-i686-unknown-linux-gnu.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cargo/cargo-0.16.0-i686-unknown-linux-gnu.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cargo/cargo-0.16.0-i686-unknown-linux-gnu.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/cargo/cargo-0.16.0-i686-unknown-linux-gnu.tar.gz
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL="cargo-0.24.0.tar.gz"
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
 	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
@@ -42,10 +43,6 @@ fi
 
 whoami > /tmp/currentuser
 
-wget https://github.com/rust-lang/cargo/archive/0.17.0.tar.gz \
-     -O cargo-0.17.0.tar.gz
-
-
 pushd src/rust-installer                        &&
 tar -xf ../../../rust-installer-20161004.tar.xz \
  --strip-components=1                           &&
@@ -57,7 +54,7 @@ case $(uname -m) in
     ;;
 esac                                            &&
 ./configure --prefix=/usr --sysconfdir=/etc     \
-  --docdir=/usr/share/doc/cargo-0.17.0          \
+  --docdir=/usr/share/doc/cargo-0.24.0          \
   --cargo=./cargo-nightly*/cargo/bin/cargo      &&
 make "-j`nproc`" || make
 
