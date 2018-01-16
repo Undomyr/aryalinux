@@ -114,11 +114,10 @@ ac_add_options --with-system-icu
 # The BLFS editors recommend not changing anything below this line:
 ac_add_options --prefix=/usr
 ac_add_options --enable-application=browser
-ac_add_options --disable-crashreporter
+ac_add_options --enable-crashreporter
 ac_add_options --disable-updater
 ac_add_options --disable-tests
-ac_add_options --enable-optimize
-ac_add_options --enable-gio
+ac_add_options --enable-optimize="-O2"
 ac_add_options --enable-official-branding
 ac_add_options --enable-safe-browsing
 ac_add_options --enable-url-classifier
