@@ -39,10 +39,6 @@ whoami > /tmp/currentuser
 make "-j`nproc`" || make
 
 
-make html
-
-
-
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install
 
@@ -50,19 +46,6 @@ ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
-
-
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mkdir                   /usr/share/doc/gsl-2.4 &&
-cp -R doc/_build/html/* /usr/share/doc/gsl-2.4
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
