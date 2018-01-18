@@ -20,7 +20,7 @@ URL=https://sourceforge.net/projects/aryalinux-bin/files/releases/1.0/adapta-gtk
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 
 wget -nc $URL
-DIRCTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL
 cd $DIRECTORY
