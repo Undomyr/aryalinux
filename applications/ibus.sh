@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak IBus is an Intelligent Input Bus.br3ak It is a new input framework for Linux OS. It provides a fullbr3ak featured and user friendly input method user interface.br3ak"
 SECTION="general"
-VERSION=1.5.16
+VERSION=1.5.17
 NAME="ibus"
 
 #REQ:dconf
@@ -21,7 +21,6 @@ NAME="ibus"
 #OPT:python-modules#dbus-python
 #OPT:python-modules#pygobject3
 #OPT:gtk-doc
-#OPT:python3
 #OPT:python-modules#pyxdg
 #OPT:libxkbcommon
 #OPT:wayland
@@ -29,11 +28,11 @@ NAME="ibus"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/ibus/ibus/releases/download/1.5.16/ibus-1.5.16.tar.gz
+URL=https://github.com/ibus/ibus/releases/download/1.5.17/ibus-1.5.17.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/ibus/ibus/releases/download/1.5.16/ibus-1.5.16.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ibus/ibus-1.5.16.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ibus/ibus-1.5.16.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ibus/ibus-1.5.16.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ibus/ibus-1.5.16.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ibus/ibus-1.5.16.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ibus/ibus-1.5.16.tar.gz
+wget -nc https://github.com/ibus/ibus/releases/download/1.5.17/ibus-1.5.17.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ibus/ibus-1.5.17.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ibus/ibus-1.5.17.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ibus/ibus-1.5.17.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ibus/ibus-1.5.17.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ibus/ibus-1.5.17.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ibus/ibus-1.5.17.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

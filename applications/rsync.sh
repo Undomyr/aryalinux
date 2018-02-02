@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The rsync package contains thebr3ak <span class=\"command\"><strong>rsync</strong> utility. Thisbr3ak is useful for synchronizing large file archives over a network.br3ak"
 SECTION="basicnet"
-VERSION=3.1.2
+VERSION=3.1.3
 NAME="rsync"
 
 #REC:popt
@@ -17,11 +17,11 @@ NAME="rsync"
 
 cd $SOURCE_DIR
 
-URL=https://www.samba.org/ftp/rsync/src/rsync-3.1.2.tar.gz
+URL=https://www.samba.org/ftp/rsync/src/rsync-3.1.3.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.samba.org/ftp/rsync/src/rsync-3.1.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rsync/rsync-3.1.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/rsync/rsync-3.1.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rsync/rsync-3.1.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rsync/rsync-3.1.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rsync/rsync-3.1.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rsync/rsync-3.1.2.tar.gz
+wget -nc https://www.samba.org/ftp/rsync/src/rsync-3.1.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rsync/rsync-3.1.3.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/rsync/rsync-3.1.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rsync/rsync-3.1.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rsync/rsync-3.1.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rsync/rsync-3.1.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rsync/rsync-3.1.3.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -90,13 +90,13 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/8.1/blfs-systemd-units-20160602.tar.bz2
-tar xf blfs-systemd-units-20160602.tar.bz2
-cd blfs-systemd-units-20160602
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
+tar xf blfs-systemd-units-20180105.tar.bz2
+cd blfs-systemd-units-20180105
 make install-rsyncd
 
 cd ..
-rm -rf blfs-systemd-units-20160602
+rm -rf blfs-systemd-units-20180105
 popd
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

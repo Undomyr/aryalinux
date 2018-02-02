@@ -7,10 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The SQLite package is a softwarebr3ak library that implements a self-contained, serverless,br3ak zero-configuration, 
-transactional SQL database engine.br3ak"
+DESCRIPTION="br3ak The SQLite package is a softwarebr3ak library that implements a self-contained, serverless,br3ak zero-configuration, transactional SQL database engine.br3ak"
 SECTION="server"
-VERSION=3210000
+VERSION=3220000
 NAME="sqlite"
 
 #OPT:unzip
@@ -18,12 +17,12 @@ NAME="sqlite"
 
 cd $SOURCE_DIR
 
-URL=https://sqlite.org/2017/sqlite-autoconf-3210000.tar.gz
+URL=https://sqlite.org/2018/sqlite-autoconf-3220000.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc $URL
-wget -nc https://sqlite.org/2017/sqlite-doc-3210000.zip
+wget -nc https://sqlite.org/2018/sqlite-autoconf-3220000.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sqlite/sqlite-autoconf-3220000.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/sqlite/sqlite-autoconf-3220000.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sqlite/sqlite-autoconf-3220000.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sqlite/sqlite-autoconf-3220000.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sqlite/sqlite-autoconf-3220000.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sqlite/sqlite-autoconf-3220000.tar.gz
+wget -nc https://sqlite.org/2018/sqlite-doc-3220000.zip || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/sqlite/sqlite-doc-3220000.zip || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/sqlite/sqlite-doc-3220000.zip || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/sqlite/sqlite-doc-3220000.zip || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/sqlite/sqlite-doc-3220000.zip || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/sqlite/sqlite-doc-3220000.zip || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/sqlite/sqlite-doc-3220000.zip
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -38,7 +37,8 @@ fi
 
 whoami > /tmp/currentuser
 
-unzip -q ../sqlite-doc-3210000.zip
+unzip -q ../sqlite-doc-3220000.zip
+
 
 ./configure --prefix=/usr     \
             --disable-static  \
@@ -65,8 +65,8 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-install -v -m755 -d /usr/share/doc/sqlite-3.21.0 &&
-cp -v -R sqlite-doc-3210000/* /usr/share/doc/sqlite-3.21.0
+install -v -m755 -d /usr/share/doc/sqlite-3.22.0 &&
+cp -v -R sqlite-doc-3220000/* /usr/share/doc/sqlite-3.22.0
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

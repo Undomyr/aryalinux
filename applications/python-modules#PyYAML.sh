@@ -12,9 +12,8 @@ SECTION="general"
 VERSION=3.12
 NAME="python-modules#PyYAML"
 
-#REQ:python2
-#REQ:python3
 #REQ:yaml
+#OPT:python2
 
 
 cd $SOURCE_DIR

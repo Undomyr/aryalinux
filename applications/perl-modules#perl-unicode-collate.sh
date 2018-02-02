@@ -8,8 +8,8 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/S/SA/SADAHIRO/Unicode-Collate-1.19.tar.gz"
-VERSION=1.19
+URL="https://www.cpan.org/authors/id/S/SA/SADAHIRO/Unicode-Collate-1.25.tar.gz"
+VERSION=1.25
 NAME="perl-modules#perl-unicode-collate"
 
 cd $SOURCE_DIR

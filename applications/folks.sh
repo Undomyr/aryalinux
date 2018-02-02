@@ -17,8 +17,8 @@ NAME="folks"
 #REQ:libgee
 #REQ:telepathy-glib
 #REC:bluez
-#REC:python3
 #REC:vala
+#OPT:tracker
 
 
 cd $SOURCE_DIR

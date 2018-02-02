@@ -9,10 +9,11 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Mercurial is a distributed sourcebr3ak control management tool similar to Git and Bazaar. Mercurial is written in Python and is used by projects such as Mozillabr3ak and Vim.br3ak"
 SECTION="general"
-VERSION=4.3.1
+VERSION=4.4.2
 NAME="mercurial"
 
 #REQ:python2
+#OPT:python-modules#docutils
 #OPT:git
 #OPT:gnupg
 #OPT:openssh
@@ -21,11 +22,11 @@ NAME="mercurial"
 
 cd $SOURCE_DIR
 
-URL=https://www.mercurial-scm.org/release/mercurial-4.3.1.tar.gz
+URL=https://www.mercurial-scm.org/release/mercurial-4.4.2.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.mercurial-scm.org/release/mercurial-4.3.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mercurial/mercurial-4.3.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/mercurial/mercurial-4.3.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mercurial/mercurial-4.3.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mercurial/mercurial-4.3.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mercurial/mercurial-4.3.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mercurial/mercurial-4.3.1.tar.gz
+wget -nc https://www.mercurial-scm.org/release/mercurial-4.4.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mercurial/mercurial-4.4.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/mercurial/mercurial-4.4.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mercurial/mercurial-4.4.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mercurial/mercurial-4.4.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mercurial/mercurial-4.4.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mercurial/mercurial-4.4.2.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -47,13 +48,12 @@ make doc
 
 
 rm -rf tests/tmp &&
-TESTFLAGS="-j<em class="replaceable"><code><N></em> --tmpdir tmp --blacklist blacklists/failed-tests" \
-make check
+TESTFLAGS="-j<em class="replaceable"><code><N></em> --tmpdir tmp --blacklist blacklists/failed-tests" make check
 
 
 pushd tests  &&
   rm -rf tmp &&
-  ./run-tests.py - -tmpdir tmp test-gpg.t &&
+  ./run-tests.py --tmpdir tmp test-gpg.t
 popd
 
 

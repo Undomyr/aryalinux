@@ -9,10 +9,10 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The qterminal package contains abr3ak Qt widget based terminal emulator for Qt with support for multiple tabs.br3ak"
 SECTION="lxqt"
-VERSION=0.7.1
+VERSION=0.8.0
 NAME="qterminal"
 
-#REQ:liblxqt
+#REQ:lxqt-build-tools
 #REQ:qtermwidget
 #OPT:doxygen
 #OPT:texlive
@@ -23,11 +23,11 @@ NAME="qterminal"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/lxde/qterminal/releases/download/0.7.1/qterminal-0.7.1.tar.xz
+URL=https://github.com/lxde/qterminal/releases/download/0.8.0/qterminal-0.8.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/lxde/qterminal/releases/download/0.7.1/qterminal-0.7.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qterminal/qterminal-0.7.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/qterminal/qterminal-0.7.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qterminal/qterminal-0.7.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qterminal/qterminal-0.7.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qterminal/qterminal-0.7.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qterminal/qterminal-0.7.1.tar.xz
+wget -nc https://github.com/lxde/qterminal/releases/download/0.8.0/qterminal-0.8.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qterminal/qterminal-0.8.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/qterminal/qterminal-0.8.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qterminal/qterminal-0.8.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qterminal/qterminal-0.8.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qterminal/qterminal-0.8.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qterminal/qterminal-0.8.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -60,7 +60,7 @@ cmake -DCMAKE_INSTALL_PREFIX=$LXQT_PREFIX \
       -DCMAKE_BUILD_TYPE=Release          \
       -DPULL_TRANSLATIONS=no              \
       ..       &&
-LIBRARY_PATH=$LXQT_PREFIX/lib make
+make "-j`nproc`" || make
 
 
 

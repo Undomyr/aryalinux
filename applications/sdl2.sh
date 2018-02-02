@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Simple DirectMedia Layer Version 2 (SDL2 for short) is a cross-platform librarybr3ak designed to make it easy to write multimedia software, such asbr3ak games and emulators.br3ak"
 SECTION="multimedia"
-VERSION=2.0.5
+VERSION=2.0.7
 NAME="sdl2"
 
 #OPT:doxygen
@@ -21,11 +21,11 @@ NAME="sdl2"
 
 cd $SOURCE_DIR
 
-URL=http://www.libsdl.org/release/SDL2-2.0.5.tar.gz
+URL=http://www.libsdl.org/release/SDL2-2.0.7.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://www.libsdl.org/release/SDL2-2.0.5.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/SDL2/SDL2-2.0.5.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/SDL2/SDL2-2.0.5.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/SDL2/SDL2-2.0.5.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/SDL2/SDL2-2.0.5.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/SDL2/SDL2-2.0.5.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/SDL2/SDL2-2.0.5.tar.gz
+wget -nc http://www.libsdl.org/release/SDL2-2.0.7.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/SDL2/SDL2-2.0.7.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/SDL2/SDL2-2.0.7.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/SDL2/SDL2-2.0.7.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/SDL2/SDL2-2.0.7.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/SDL2/SDL2-2.0.7.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/SDL2/SDL2-2.0.7.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

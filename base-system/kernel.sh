@@ -39,8 +39,8 @@ then
 
 cd /sources
 
-LINUX_VERSION=`ls linux*xz | grep -v "firmware" | sed "s@linux-@@g" | sed "s@\.tar\.xz@@g"`
-LINUX_TARBALL=`ls linux*xz | grep -v "firmware"`
+LINUX_VERSION=`ls linux*xz | sed "s@linux-@@g" | sed "s@\.tar\.xz@@g"`
+LINUX_TARBALL=`ls linux*xz`
 LINUX_SRC_DIR=`tar -tf $LINUX_TARBALL | cut "-d/" -f1 | uniq`
 tar xf $LINUX_TARBALL
 cd $LINUX_SRC_DIR
@@ -207,9 +207,7 @@ make install
 cd /sources
 rm -rf $FIRMWARE_DIR
 
-mkinitramfs `ls /lib/modules`
-mv initrd.img-* /boot/
-# dracut -f /boot/initrd.img-$LINUX_VERSION `ls /lib/modules`
+dracut -f /boot/initrd.img-$LINUX_VERSION `ls /lib/modules`
 
 echo "$STEPNAME" | tee -a $LOGFILE
 

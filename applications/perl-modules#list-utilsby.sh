@@ -8,8 +8,8 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="http://search.cpan.org/CPAN/authors/id/P/PE/PEVANS/List-UtilsBy-0.10.tar.gz"
-VERSION=0.10
+URL="http://search.cpan.org/CPAN/authors/id/P/PE/PEVANS/List-UtilsBy-0.11.tar.gz"
+VERSION=0.11
 NAME="perl-modules#list-utilsby"
 
 cd $SOURCE_DIR

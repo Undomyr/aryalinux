@@ -37,7 +37,8 @@ fi
 
 whoami > /tmp/currentuser
 
-./configure --prefix=/usr --enable-gtk3 &&
+sed -i 's/\xd6/\xc3\x96/' gtk-3.0/xfce_style_types.h &&
+./configure --prefix=/usr --enable-gtk3              &&
 make "-j`nproc`" || make
 
 

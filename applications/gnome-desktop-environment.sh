@@ -66,7 +66,7 @@ DESCRIPTION="GNOME is a desktop environment that is composed entirely of free an
 #REQ:gnome-session
 #OPT:plymouth
 #REQ:gdm
-#REQ:lightdm-gtk-greeter
+#OPT:lightdm-gtk-greeter
 #REQ:gnome-user-docs
 #OPT:yelp
 #REQ:baobab

@@ -9,22 +9,22 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Ninja is a small build system withbr3ak a focus on speed.br3ak"
 SECTION="general"
-VERSION=1.7.2
+VERSION=1.8.2
 NAME="ninja"
 
-#REQ:python2
-#OPT:emacs
+#REQ:python3
 #OPT:asciidoc
+#OPT:emacs
 #OPT:doxygen
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/ninja-build/ninja/archive/v1.7.2/ninja-1.7.2.tar.gz
+URL=https://github.com/ninja-build/ninja/archive/v1.8.2/ninja-1.8.2.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/ninja-build/ninja/archive/v1.7.2/ninja-1.7.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ninja/ninja-1.7.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ninja/ninja-1.7.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ninja/ninja-1.7.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ninja/ninja-1.7.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ninja/ninja-1.7.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ninja/ninja-1.7.2.tar.gz
+wget -nc https://github.com/ninja-build/ninja/archive/v1.8.2/ninja-1.8.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ninja/ninja-1.8.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ninja/ninja-1.8.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ninja/ninja-1.8.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ninja/ninja-1.8.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ninja/ninja-1.8.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ninja/ninja-1.8.2.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -39,14 +39,14 @@ fi
 
 whoami > /tmp/currentuser
 
-./configure.py --bootstrap
+python3 configure.py --bootstrap
 
 
 emacs -Q --batch -f batch-byte-compile misc/ninja-mode.el
 
 
-./configure.py &&
-./ninja ninja_test &&
+python3 configure.py &&
+./ninja ninja_test   &&
 ./ninja_test --gtest_filter=-SubprocessTest.SetWithLots
 
 

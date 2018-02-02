@@ -9,18 +9,18 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak FAAD2 is a decoder for a lossybr3ak sound compression scheme specified in MPEG-2 Part 7 and MPEG-4 Partbr3ak 3 standards and known as Advanced Audio Coding (AAC).br3ak"
 SECTION="multimedia"
-VERSION=2.8.1
+VERSION=2.8.8
 NAME="faad2"
 
 
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/faac/faad2-2.8.1.tar.gz
+URL=https://downloads.sourceforge.net/faac/faad2-2.8.8.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/faac/faad2-2.8.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/faad2/faad2-2.8.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/faad2/faad2-2.8.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/faad2/faad2-2.8.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/faad2/faad2-2.8.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/faad2/faad2-2.8.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/faad2/faad2-2.8.1.tar.gz
+wget -nc https://downloads.sourceforge.net/faac/faad2-2.8.8.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/faad2/faad2-2.8.8.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/faad2/faad2-2.8.8.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/faad2/faad2-2.8.8.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/faad2/faad2-2.8.8.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/faad2/faad2-2.8.8.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/faad2/faad2-2.8.8.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -35,7 +35,6 @@ fi
 
 whoami > /tmp/currentuser
 
-autoreconf -fiv &&
 ./configure --prefix=/usr --disable-static &&
 make "-j`nproc`" || make
 

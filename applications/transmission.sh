@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Transmission is a cross-platform,br3ak open source BitTorrent client. This is useful for downloading largebr3ak files (such as Linux ISOs) and reduces the need for thebr3ak distributors to provide server bandwidth.br3ak"
 SECTION="xsoft"
-VERSION=2.92
+VERSION=2.93
 NAME="transmission"
 
 #REQ:curl
@@ -22,12 +22,11 @@ NAME="transmission"
 
 cd $SOURCE_DIR
 
-URL=https://transmission.cachefly.net/transmission-2.92.tar.xz
+URL=https://raw.githubusercontent.com/transmission/transmission-releases/master/transmission-2.93.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://transmission.cachefly.net/transmission-2.92.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/transmission/transmission-2.92.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/transmission/transmission-2.92.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/transmission/transmission-2.92.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/transmission/transmission-2.92.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/transmission/transmission-2.92.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/transmission/transmission-2.92.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/transmission-2.92-openssl-1.1.0-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/transmission/transmission-2.92-openssl-1.1.0-1.patch
+wget -nc https://raw.githubusercontent.com/transmission/transmission-releases/master/transmission-2.93.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/transmission/transmission-2.93.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/transmission/transmission-2.93.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/transmission/transmission-2.93.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/transmission/transmission-2.93.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/transmission/transmission-2.93.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/transmission/transmission-2.93.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -41,9 +40,6 @@ cd $DIRECTORY
 fi
 
 whoami > /tmp/currentuser
-
-patch -Np1 -i ../transmission-2.92-openssl-1.1.0-1.patch
-
 
 ./configure --prefix=/usr &&
 make "-j`nproc`" || make

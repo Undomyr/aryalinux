@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak dhcpcd is an implementation of thebr3ak DHCP client specified in RFC2131. A DHCP client is useful forbr3ak connecting your computer to a network which uses DHCP to assignbr3ak network addresses. dhcpcd strives to be a fully featured, yet verybr3ak lightweight DHCP client.br3ak"
 SECTION="basicnet"
-VERSION=6.11.5
+VERSION=7.0.1
 NAME="dhcpcd"
 
 #OPT:llvm
@@ -17,11 +17,11 @@ NAME="dhcpcd"
 
 cd $SOURCE_DIR
 
-URL=http://roy.marples.name/downloads/dhcpcd/dhcpcd-6.11.5.tar.xz
+URL=http://roy.marples.name/downloads/dhcpcd/dhcpcd-7.0.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://roy.marples.name/downloads/dhcpcd/dhcpcd-6.11.5.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/dhcp/dhcpcd-6.11.5.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/dhcp/dhcpcd-6.11.5.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcpcd-6.11.5.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcpcd-6.11.5.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcpcd-6.11.5.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcpcd-6.11.5.tar.xz || wget -nc ftp://roy.marples.name/pub/dhcpcd/dhcpcd-6.11.5.tar.xz
+wget -nc http://roy.marples.name/downloads/dhcpcd/dhcpcd-7.0.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/dhcp/dhcpcd-7.0.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/dhcp/dhcpcd-7.0.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcpcd-7.0.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcpcd-7.0.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcpcd-7.0.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcpcd-7.0.1.tar.xz || wget -nc ftp://roy.marples.name/pub/dhcpcd/dhcpcd-7.0.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -56,13 +56,13 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/8.1/blfs-systemd-units-20160602.tar.bz2
-tar xf blfs-systemd-units-20160602.tar.bz2
-cd blfs-systemd-units-20160602
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
+tar xf blfs-systemd-units-20180105.tar.bz2
+cd blfs-systemd-units-20180105
 make install-dhcpcd
 
 cd ..
-rm -rf blfs-systemd-units-20160602
+rm -rf blfs-systemd-units-20180105
 popd
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

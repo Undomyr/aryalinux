@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Samba package provides filebr3ak and print services to SMB/CIFS clients and Windows networking tobr3ak Linux clients. Samba can also bebr3ak configured as a Windows Domain Controller replacement, a file/printbr3ak server acting as a member of a Windows Active Directory domain andbr3ak a NetBIOS (rfc1001/1002) nameserver (which among other thingsbr3ak provides LAN browsing support).br3ak"
 SECTION="basicnet"
-VERSION=4.6.7
+VERSION=4.7.4
 NAME="samba"
 
 #REQ:python2
@@ -18,7 +18,6 @@ NAME="samba"
 #REC:libxslt
 #REC:perl-modules#perl-parse-yapp
 #REC:python-modules#pycrypto
-#REC:python3
 #REC:openldap
 #REC:openssl
 #OPT:avahi
@@ -39,15 +38,16 @@ NAME="samba"
 #OPT:vala
 #OPT:valgrind
 #OPT:xfsprogs
+#OPT:python-modules#six
 
 
 cd $SOURCE_DIR
 
-URL=https://www.samba.org/ftp/samba/stable/samba-4.6.7.tar.gz
+URL=https://www.samba.org/ftp/samba/stable/samba-4.7.4.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.samba.org/ftp/samba/stable/samba-4.6.7.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/samba/samba-4.6.7.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/samba/samba-4.6.7.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/samba/samba-4.6.7.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/samba/samba-4.6.7.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/samba/samba-4.6.7.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/samba/samba-4.6.7.tar.gz
+wget -nc https://www.samba.org/ftp/samba/stable/samba-4.7.4.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/samba/samba-4.7.4.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/samba/samba-4.7.4.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/samba/samba-4.7.4.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/samba/samba-4.7.4.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/samba/samba-4.7.4.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/samba/samba-4.7.4.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -117,13 +117,13 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/8.1/blfs-systemd-units-20160602.tar.bz2
-tar xf blfs-systemd-units-20160602.tar.bz2
-cd blfs-systemd-units-20160602
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
+tar xf blfs-systemd-units-20180105.tar.bz2
+cd blfs-systemd-units-20180105
 make install-samba
 
 cd ..
-rm -rf blfs-systemd-units-20160602
+rm -rf blfs-systemd-units-20180105
 popd
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -136,13 +136,13 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/8.1/blfs-systemd-units-20160602.tar.bz2
-tar xf blfs-systemd-units-20160602.tar.bz2
-cd blfs-systemd-units-20160602
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
+tar xf blfs-systemd-units-20180105.tar.bz2
+cd blfs-systemd-units-20180105
 make install-winbindd
 
 cd ..
-rm -rf blfs-systemd-units-20160602
+rm -rf blfs-systemd-units-20180105
 popd
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

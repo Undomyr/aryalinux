@@ -49,12 +49,8 @@ whoami > /tmp/currentuser
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-if [ -L /var/lock ]; then
-	rm -f /var/lock
-fi
-if [ ! -d /var/lock ]; then
-	mkdir -pv /var/lock/
-fi
+rm -f /var/lock
+mkdir -pv /var/lock/
 touch /var/lock/sane
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

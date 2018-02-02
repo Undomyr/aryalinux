@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak This package provides the GEneric Graphics Library, which is abr3ak graph based image processing format.br3ak"
 SECTION="general"
-VERSION=0.3.20
+VERSION=0.3.28
 NAME="gegl"
 
 #REQ:babl
@@ -37,11 +37,11 @@ NAME="gegl"
 
 cd $SOURCE_DIR
 
-URL=https://download.gimp.org/pub/gegl/0.3/gegl-0.3.20.tar.bz2
+URL=https://download.gimp.org/pub/gegl/0.3/gegl-0.3.28.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://download.gimp.org/pub/gegl/0.3/gegl-0.3.20.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gegl/gegl-0.3.20.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gegl/gegl-0.3.20.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gegl/gegl-0.3.20.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gegl/gegl-0.3.20.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gegl/gegl-0.3.20.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gegl/gegl-0.3.20.tar.bz2
+wget -nc https://download.gimp.org/pub/gegl/0.3/gegl-0.3.28.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gegl/gegl-0.3.28.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gegl/gegl-0.3.28.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gegl/gegl-0.3.28.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gegl/gegl-0.3.28.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gegl/gegl-0.3.28.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gegl/gegl-0.3.28.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -57,14 +57,13 @@ fi
 whoami > /tmp/currentuser
 
 ./configure --prefix=/usr &&
-LC_ALL=en_US make
+make "-j`nproc`" || make
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
 install -v -m644 docs/*.{css,html} /usr/share/gtk-doc/html/gegl &&
-install -d -v -m755 /usr/share/gtk-doc/html/gegl/images &&
 install -v -m644 docs/images/*.{png,ico,svg} /usr/share/gtk-doc/html/gegl/images
 
 ENDOFROOTSCRIPT

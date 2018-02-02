@@ -9,18 +9,18 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Haveged package contains abr3ak daemon that generates an unpredictable stream of random numbers andbr3ak feeds the /dev/random device.br3ak"
 SECTION="postlfs"
-VERSION=1.9.1
+VERSION=1.9.2
 NAME="haveged"
 
 
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/haveged/haveged-1.9.1.tar.gz
+URL=https://downloads.sourceforge.net/haveged/haveged-1.9.2.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/haveged/haveged-1.9.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/haveged/haveged-1.9.1.tar.gz
+wget -nc https://downloads.sourceforge.net/haveged/haveged-1.9.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/haveged/haveged-1.9.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/haveged/haveged-1.9.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/haveged/haveged-1.9.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/haveged/haveged-1.9.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/haveged/haveged-1.9.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/haveged/haveged-1.9.2.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -42,8 +42,8 @@ make "-j`nproc`" || make
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
-mkdir -pv    /usr/share/doc/haveged-1.9.1 &&
-cp -v README /usr/share/doc/haveged-1.9.1
+mkdir -pv    /usr/share/doc/haveged-1.9.2 &&
+cp -v README /usr/share/doc/haveged-1.9.2
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -56,13 +56,13 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/8.1/blfs-systemd-units-20160602.tar.bz2
-tar xf blfs-systemd-units-20160602.tar.bz2
-cd blfs-systemd-units-20160602
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
+tar xf blfs-systemd-units-20180105.tar.bz2
+cd blfs-systemd-units-20180105
 make install-haveged
 
 cd ..
-rm -rf blfs-systemd-units-20160602
+rm -rf blfs-systemd-units-20180105
 popd
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

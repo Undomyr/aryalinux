@@ -12,7 +12,6 @@ SECTION="general"
 VERSION=1.14.0
 NAME="wayland"
 
-#REQ:libffi
 #REQ:libxml2
 #OPT:doxygen
 #OPT:graphviz

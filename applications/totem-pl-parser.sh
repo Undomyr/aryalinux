@@ -9,9 +9,10 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Totem PL Parser packagebr3ak contains a simple GObject-based library used to parse multiplebr3ak playlist formats.br3ak"
 SECTION="gnome"
-VERSION=3.10.8
+VERSION=3.26.0
 NAME="totem-pl-parser"
 
+#REQ:gmime3
 #REQ:gmime
 #REQ:libsoup
 #REC:gobject-introspection
@@ -22,11 +23,11 @@ NAME="totem-pl-parser"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/totem-pl-parser/3.10/totem-pl-parser-3.10.8.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/totem-pl-parser/3.26/totem-pl-parser-3.26.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/totem-pl-parser/3.10/totem-pl-parser-3.10.8.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.10.8.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.10.8.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.10.8.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.10.8.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.10.8.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.10.8.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/totem-pl-parser/3.10/totem-pl-parser-3.10.8.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/totem-pl-parser/3.26/totem-pl-parser-3.26.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.26.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.26.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.26.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.26.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.26.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/totem-pl-parser/totem-pl-parser-3.26.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/totem-pl-parser/3.26/totem-pl-parser-3.26.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -41,13 +42,15 @@ fi
 
 whoami > /tmp/currentuser
 
-./configure --prefix=/usr --disable-static &&
-make "-j`nproc`" || make
+mkdir build &&
+cd build &&
+meson --prefix /usr --default-library shared .. &&
+ninja
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
+ninja install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

@@ -9,23 +9,22 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Rust programming language isbr3ak designed to be a safe, concurrent, practical language.br3ak"
 SECTION="general"
-VERSION=1.19.0
+VERSION=1.22.1
 NAME="rust"
 
 #REQ:curl
 #REQ:cmake
 #REQ:python2
 #OPT:gdb
-#OPT:ninja
 
 
 cd $SOURCE_DIR
 
-URL=https://static.rust-lang.org/dist/rustc-1.19.0-src.tar.gz
+URL=https://static.rust-lang.org/dist/rustc-1.22.1-src.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://static.rust-lang.org/dist/rustc-1.19.0-src.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rustc/rustc-1.19.0-src.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/rustc/rustc-1.19.0-src.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rustc/rustc-1.19.0-src.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rustc/rustc-1.19.0-src.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rustc/rustc-1.19.0-src.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rustc/rustc-1.19.0-src.tar.gz
+wget -nc https://static.rust-lang.org/dist/rustc-1.22.1-src.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rustc/rustc-1.22.1-src.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/rustc/rustc-1.22.1-src.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rustc/rustc-1.22.1-src.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rustc/rustc-1.22.1-src.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rustc/rustc-1.22.1-src.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rustc/rustc-1.22.1-src.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -41,7 +40,7 @@ fi
 whoami > /tmp/currentuser
 
 cat <<EOF > config.toml
-# see src/bootstrap/config.toml.example for more possible options
+# see config.toml.example for more possible options
 [llvm]
 targets = "X86"
 [build]
@@ -49,8 +48,10 @@ targets = "X86"
 extended = true
 [install]
 prefix = "/usr"
-docdir = "share/doc/rustc-1.19.0"
+docdir = "share/doc/rustc-1.22.1"
+[rust]
 channel = "stable"
+rpath = false
 EOF
 
 

@@ -13,9 +13,9 @@ VERSION=1.3.4
 NAME="xinit"
 
 #REQ:x7lib
-#REQ:twm
-#REQ:xclock
-#REQ:xterm
+#REC:twm
+#REC:xclock
+#REC:xterm
 
 
 cd $SOURCE_DIR

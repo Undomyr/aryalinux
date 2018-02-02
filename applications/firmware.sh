@@ -60,7 +60,7 @@ mkdir -p initrd/kernel/x86/microcode
 cd initrd
 
 
-cp -v /lib/firmware/amd_ucode/<MYCONTAINER> kernel/x86/microcode/AuthenticAMD.bin
+cp -v /lib/firmware/amd-ucode/<MYCONTAINER> kernel/x86/microcode/AuthenticAMD.bin
 
 
 cp -v /lib/firmware/intel-ucode/<XX-YY-ZZ> kernel/x86/microcode/GenuineIntel.bin

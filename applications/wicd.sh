@@ -44,7 +44,7 @@ fi
 
 whoami > /tmp/currentuser
 
-sed -e "/detection failed/ a                self.init='init/default/wicd'" \
+sed -e "/detection failed/ a\                self.init='init/default/wicd'" \
     -i.orig setup.py &&
 rm po/*.po           &&
 python setup.py configure --no-install-kde     \

@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak xterm is a terminal emulator forbr3ak the X Window System.br3ak"
 SECTION="x"
-VERSION=330
+VERSION=331
 NAME="xterm"
 
 #REQ:x7app
@@ -19,11 +19,11 @@ NAME="xterm"
 
 cd $SOURCE_DIR
 
-URL=http://invisible-mirror.net/archives/xterm/xterm-330.tgz
+URL=http://invisible-mirror.net/archives/xterm/xterm-331.tgz
 
 if [ ! -z $URL ]
 then
-wget -nc http://invisible-mirror.net/archives/xterm/xterm-330.tgz || wget -nc ftp://invisible-island.net/xterm/xterm-330.tgz
+wget -nc http://invisible-mirror.net/archives/xterm/xterm-331.tgz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

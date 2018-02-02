@@ -10,8 +10,8 @@ set +h
 #REQ:perl-modules#file-slurp-tiny
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/G/GR/GRANTM/XML-LibXML-Simple-0.97.tar.gz"
-VERSION=0.97
+URL="https://www.cpan.org/authors/id/M/MA/MARKOV/XML-LibXML-Simple-0.99.tar.gz"
+VERSION=0.99
 NAME="perl-modules#perl-xml-libxml-simple"
 
 cd $SOURCE_DIR

@@ -21,6 +21,7 @@ NAME="tl-installer"
 #REC:freeglut
 #REC:python2
 #REC:ruby
+#REC:tk
 #REC:xorg-server
 
 

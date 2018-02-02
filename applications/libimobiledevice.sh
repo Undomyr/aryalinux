@@ -19,14 +19,12 @@ URL=http://www.libimobiledevice.org/downloads/libimobiledevice-1.2.0.tar.bz2
 cd $SOURCE_DIR
 
 wget -nc $URL
-wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/2017.09/libimobiledevice-1.2.0-sslv2.patch
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
 
 tar -xf $TARBALL
 cd $DIRECTORY
 
-patch -Np1 -i ../libimobiledevice-1.2.0-sslv2.patch
 ./configure --prefix=/usr  &&
 make "-j`nproc`"
 sudo make install

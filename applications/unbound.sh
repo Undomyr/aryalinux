@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Unbound is a validating,br3ak recursive, and caching DNS resolver. It is designed as a set ofbr3ak modular components that incorporate modern features, such asbr3ak enhanced security (DNSSEC) validation, Internet Protocol Version 6br3ak (IPv6), and a client resolver library API as an integral part ofbr3ak the architecture.br3ak"
 SECTION="server"
-VERSION=1.6.5
+VERSION=1.6.8
 NAME="unbound"
 
 #REQ:openssl
@@ -22,11 +22,11 @@ NAME="unbound"
 
 cd $SOURCE_DIR
 
-URL=http://www.unbound.net/downloads/unbound-1.6.5.tar.gz
+URL=http://www.unbound.net/downloads/unbound-1.6.8.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://www.unbound.net/downloads/unbound-1.6.5.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/unbound/unbound-1.6.5.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/unbound/unbound-1.6.5.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/unbound/unbound-1.6.5.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/unbound/unbound-1.6.5.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/unbound/unbound-1.6.5.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/unbound/unbound-1.6.5.tar.gz
+wget -nc http://www.unbound.net/downloads/unbound-1.6.8.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/unbound/unbound-1.6.8.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/unbound/unbound-1.6.8.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/unbound/unbound-1.6.8.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/unbound/unbound-1.6.8.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/unbound/unbound-1.6.8.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/unbound/unbound-1.6.8.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -107,13 +107,13 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/8.1/blfs-systemd-units-20160602.tar.bz2
-tar xf blfs-systemd-units-20160602.tar.bz2
-cd blfs-systemd-units-20160602
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
+tar xf blfs-systemd-units-20180105.tar.bz2
+cd blfs-systemd-units-20180105
 make install-unbound
 
 cd ..
-rm -rf blfs-systemd-units-20160602
+rm -rf blfs-systemd-units-20180105
 popd
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

@@ -9,22 +9,21 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The lxqt-notificationd package isbr3ak the LXQt notification daemon.br3ak"
 SECTION="lxqt"
-VERSION=0.11.1
+VERSION=0.12.0
 NAME="lxqt-notificationd"
 
 #REQ:liblxqt
-#REQ:lxqt-common
 #OPT:git
 #OPT:lxqt-l10n
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/lxde/lxqt-notificationd/releases/download/0.11.1/lxqt-notificationd-0.11.1.tar.xz
+URL=https://github.com/lxde/lxqt-notificationd/releases/download/0.12.0/lxqt-notificationd-0.12.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/lxde/lxqt-notificationd/releases/download/0.11.1/lxqt-notificationd-0.11.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxqt-notificationd/lxqt-notificationd-0.11.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/lxqt-notificationd/lxqt-notificationd-0.11.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-notificationd/lxqt-notificationd-0.11.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-notificationd/lxqt-notificationd-0.11.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-notificationd/lxqt-notificationd-0.11.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-notificationd/lxqt-notificationd-0.11.1.tar.xz
+wget -nc https://github.com/lxde/lxqt-notificationd/releases/download/0.12.0/lxqt-notificationd-0.12.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lxqt-notificationd/lxqt-notificationd-0.12.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/lxqt-notificationd/lxqt-notificationd-0.12.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-notificationd/lxqt-notificationd-0.12.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lxqt-notificationd/lxqt-notificationd-0.12.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-notificationd/lxqt-notificationd-0.12.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lxqt-notificationd/lxqt-notificationd-0.12.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

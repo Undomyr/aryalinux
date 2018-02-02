@@ -18,7 +18,6 @@ NAME="pidgin"
 #REC:gnutls
 #REC:nss
 #OPT:avahi
-#OPT:check
 #OPT:cyrus-sasl
 #OPT:dbus
 #OPT:GConf

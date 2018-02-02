@@ -9,10 +9,9 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Qt5 is a cross-platformbr3ak application framework that is widely used for developingbr3ak application software with a graphical user interface (GUI) (inbr3ak which cases Qt5 is classified as abr3ak widget toolkit), and also used for developing non-GUI programs suchbr3ak as command-line tools and consoles for servers. One of the majorbr3ak users of Qt is KDE Frameworks 5 (KF5).br3ak"
 SECTION="x"
-VERSION=5.9.1
+VERSION=5.10.0
 NAME="qt5"
 
-#REQ:python2
 #REQ:x7lib
 #REC:alsa-lib
 #REC:cacerts
@@ -29,7 +28,6 @@ NAME="qt5"
 #REC:libxkbcommon
 #REC:mesa
 #REC:mtdev
-#REC:openssl10
 #REC:pcre2
 #REC:sqlite
 #REC:wayland
@@ -49,11 +47,11 @@ NAME="qt5"
 
 cd $SOURCE_DIR
 
-URL=https://download.qt.io/archive/qt/5.9/5.9.1/single/qt-everywhere-opensource-src-5.9.1.tar.xz
+URL=https://download.qt.io/archive/qt/5.10/5.10.0/single/qt-everywhere-src-5.10.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://download.qt.io/archive/qt/5.9/5.9.1/single/qt-everywhere-opensource-src-5.9.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.9.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.9.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.9.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.9.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.9.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-opensource-src-5.9.1.tar.xz
+wget -nc https://download.qt.io/archive/qt/5.10/5.10.0/single/qt-everywhere-src-5.10.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -73,17 +71,26 @@ export QT5PREFIX=/opt/qt5
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mkdir /opt/qt-5.9.1
-ln -sfnv qt-5.9.1 /opt/qt5
+mkdir /opt/qt-5.10.0
+ln -sfnv qt-5.10.0 /opt/qt5
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
-echo "INCLUDEPATH += /usr/include/openssl-1.0" >>           \
-                     qtbase/src/network/network.pro         &&
-export OPENSSL_LIBS='-L/usr/lib/openssl-1.0 -lssl -lcrypto' &&
+
+-archdatadir    /usr/lib/qt5                \
+            -bindir         /usr/bin                    \
+            -plugindir      /usr/lib/qt5/plugins        \
+            -importdir      /usr/lib/qt5/imports        \
+            -headerdir      /usr/include/qt5            \
+            -datadir        /usr/share/qt5              \
+            -docdir         /usr/share/doc/qt5          \
+            -translationdir /usr/share/qt5/translations \
+            -examplesdir    /usr/share/doc/qt5/examples
+
+
 ./configure -prefix /opt/qt5                          \
             -sysconfdir /etc/xdg                        \
             -confirm-license                            \

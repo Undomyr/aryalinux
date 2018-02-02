@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="004-gcc-pass1.sh"
-TARBALL="gcc-7.2.0.tar.xz"
+TARBALL="gcc-7.3.0.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,12 +29,12 @@ then
 	cd $DIRECTORY
 fi
 
-tar -xf ../mpfr-3.1.5.tar.xz
-mv -v mpfr-3.1.5 mpfr
+tar -xf ../mpfr-4.0.0.tar.xz
+mv -v mpfr-4.0.0 mpfr
 tar -xf ../gmp-6.1.2.tar.xz
 mv -v gmp-6.1.2 gmp
-tar -xf ../mpc-1.0.3.tar.gz
-mv -v mpc-1.0.3 mpc
+tar -xf ../mpc-1.1.0.tar.gz
+mv -v mpc-1.1.0 mpc
 for file in gcc/config/{linux,i386/linux{,64}}.h
 do
   cp -uv $file{,.orig}

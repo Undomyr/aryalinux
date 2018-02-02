@@ -9,8 +9,8 @@ set +h
 #REQ:perl-modules#net-ssleay
 
 SOURCE_ONLY=y
-URL="http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-2.052.tar.gz"
-VERSION=2.052
+URL="http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-2.054.tar.gz"
+VERSION=2.054
 NAME="perl-modules#io-socket-ssl"
 
 cd $SOURCE_DIR

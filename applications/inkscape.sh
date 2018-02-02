@@ -39,7 +39,8 @@ URL=https://media.inkscape.org/dl/resources/file/inkscape-0.92.2.tar.bz2
 if [ ! -z $URL ]
 then
 wget -nc https://media.inkscape.org/dl/resources/file/inkscape-0.92.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/inkscape/inkscape-0.92.2.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/inkscape/inkscape-0.92.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/inkscape/inkscape-0.92.2.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/inkscape/inkscape-0.92.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/inkscape/inkscape-0.92.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/inkscape/inkscape-0.92.2.tar.bz2
-wget -nc http://www.linuxfromscratch.org/patches/blfs/8.1/inkscape-0.92.2-use_versioned_ImageMagick6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/inkscape/inkscape-0.92.2-use_versioned_ImageMagick6-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/inkscape-0.92.2-use_versioned_ImageMagick6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/inkscape/inkscape-0.92.2-use_versioned_ImageMagick6-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/inkscape-0.92.2-poppler-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/inkscape/inkscape-0.92.2-poppler-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -54,7 +55,8 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../inkscape-0.92.2-use_versioned_ImageMagick6-1.patch
+patch -Np1 -i ../inkscape-0.92.2-use_versioned_ImageMagick6-1.patch &&
+patch -Np1 -i ../inkscape-0.92.2-poppler-1.patch
 
 
 sed -i 's| abs(| std::fabs(|g' src/ui/tools/flood-tool.cpp
@@ -64,7 +66,7 @@ bash download-gtest.sh
 
 
 mkdir build &&
-cd build    &&
+cd    build &&
 cmake -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_BUILD_TYPE=Release  \
       ..                          &&

@@ -8,8 +8,8 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="http://search.cpan.org/CPAN/authors/id/G/GB/GBARR/IO-1.25.tar.gz"
-VERSION=1.25
+URL="http://search.cpan.org/CPAN/authors/id/T/TO/TODDR/IO-1.36_01.tar.gz"
+VERSION=1.36_01
 NAME="perl-modules#io"
 
 cd $SOURCE_DIR
