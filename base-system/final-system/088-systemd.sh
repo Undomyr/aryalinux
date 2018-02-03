@@ -76,10 +76,12 @@ rm -f /usr/lib/pkgconfig/mount.pc
 rm -f /usr/lib/pkgconfig/blkid.pc
 rm -f /usr/lib/pkgconfig/uuid.pc
 rm -f /usr/bin/env
-rm -f /usr/lib/libblkid.so.1
 
 
 systemd-machine-id-setup
+
+rm -f /usr/lib/libblkid.so.1
+
 cat > /lib/systemd/systemd-user-sessions << "EOF"
 #!/bin/bash
 rm -f /run/nologin
