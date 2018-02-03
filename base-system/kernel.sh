@@ -179,7 +179,7 @@ turnOff CONFIG_UNWINDER_ORC
 
 make "-j`nproc`"
 make modules_install
-make firmware_install
+# make firmware_install
 cp -v arch/x86/boot/bzImage "/boot/vmlinuz-$LINUX_VERSION"
 cp -v System.map "/boot/System.map-$LINUX_VERSION"
 cp -v .config "/boot/config-$LINUX_VERSION"
