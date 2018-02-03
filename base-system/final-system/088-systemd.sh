@@ -72,11 +72,11 @@ done
 ln -sfv ../lib/systemd/systemd /sbin/init
 rm -f /usr/bin/xsltproc
 
-rm -f /usr/lib/pkgconfig/
-rm -f /usr/lib/pkgconfig/
-rm -f /usr/lib/pkgconfig/
-rm -f /usr/bin/
-rm -f /usr/lib/
+rm -f /usr/lib/pkgconfig/mount.pc
+rm -f /usr/lib/pkgconfig/blkid.pc
+rm -f /usr/lib/pkgconfig/uuid.pc
+rm -f /usr/bin/env
+rm -f /usr/lib/libblkid.so.1
 
 
 systemd-machine-id-setup
