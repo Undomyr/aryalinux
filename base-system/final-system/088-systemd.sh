@@ -30,6 +30,13 @@ then
 fi
 
 ln -sf /tools/bin/true /usr/bin/xsltproc
+
+ln -svf /tools/lib/pkgconfig/mount.pc /usr/lib/pkgconfig/
+ln -svf /tools/lib/pkgconfig/blkid.pc /usr/lib/pkgconfig/
+ln -svf /tools/lib/pkgconfig/uuid.pc /usr/lib/pkgconfig/
+ln -svf /tools/bin/env /usr/bin/
+ln -svf /tools/lib/libblkid.so.1 /usr/lib/
+
 tar -xf ../systemd-man-pages-237.tar.xz
 sed '178,222d' -i src/resolve/meson.build
 sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
@@ -64,6 +71,14 @@ for tool in runlevel reboot shutdown poweroff halt telinit; do
 done
 ln -sfv ../lib/systemd/systemd /sbin/init
 rm -f /usr/bin/xsltproc
+
+rm -f /usr/lib/pkgconfig/
+rm -f /usr/lib/pkgconfig/
+rm -f /usr/lib/pkgconfig/
+rm -f /usr/bin/
+rm -f /usr/lib/
+
+
 systemd-machine-id-setup
 cat > /lib/systemd/systemd-user-sessions << "EOF"
 #!/bin/bash
