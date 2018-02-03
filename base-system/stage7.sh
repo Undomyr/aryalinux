@@ -164,6 +164,11 @@ fi
 
 /sources/lvm2.sh
 
+if ! grep "026-elfutils" /sources/build-log &> /dev/null
+then
+	/sources/extras/026-elf-utils.sh
+fi
+
 if ! grep kernel /sources/build-log &> /dev/null
 then
 	/sources/kernel.sh
