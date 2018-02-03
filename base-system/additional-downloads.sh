@@ -12,7 +12,7 @@ wget -nc http://ftp.gnu.org/gnu/which/which-2.21.tar.gz
 wget -nc http://mirrors.ocf.berkeley.edu/tanglu/pool/main/o/os-prober/os-prober_1.71.tar.xz
 wget -nc https://github.com/rhboot/efivar/releases/download/31/efivar-31.tar.bz2
 wget -nc https://github.com/rhboot/efibootmgr/releases/download/14/efibootmgr-14.tar.bz2
-wget -nc https://downloads.sourceforge.net/freetype/freetype-2.8.tar.bz2
+wget -nc https://downloads.sourceforge.net/freetype/freetype-2.9.tar.bz2
 wget -nc http://unifoundry.com/pub/unifont-7.0.05/font-builds/unifont-7.0.05.pcf.gz
 wget -nc https://www.kernel.org/pub/software/utils/pciutils/pciutils-3.5.5.tar.xz
 wget -nc http://rpm5.org/files/popt/popt-1.16.tar.gz
