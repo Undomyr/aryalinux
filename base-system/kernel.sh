@@ -155,7 +155,6 @@ turnOn CONFIG_USB_UHCI_HCD
 
 turnOn CONFIG_USB_STORAGE
 turnOff CONFIG_CHARGER_ISP1704
-turnOff CONFIG_UNWINDER_ORC
 
 echo "CONFIG_SQUASHFS_FRAGMENT_CACHE_SIZE=3" >> .config
 sed "s@CONFIG_MESSAGE_LOGLEVEL_DEFAULT=4@CONFIG_MESSAGE_LOGLEVEL_DEFAULT=7@g" .config
@@ -176,6 +175,7 @@ sed -i "s@# CONFIG_FHANDLE is not set@CONFIG_FHANDLE=y@g" .config
 sed -i "s@CONFIG_UEVENT_HELPER=y@# CONFIG_UEVENT_HELPER is not set@g" .config
 sed -i "s@# CONFIG_TMPFS_POSIX_ACL is not set@CONFIG_TMPFS_POSIX_ACL=y@g" .config
 
+turnOff CONFIG_UNWINDER_ORC
 
 make "-j`nproc`"
 make modules_install
