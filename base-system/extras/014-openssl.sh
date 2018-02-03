@@ -9,7 +9,7 @@ export MAKEFLAGS="-j `nproc`"
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="015-openssl.sh"
-TARBALL="openssl-1.1.0g.tar.gz"
+TARBALL="openssl-1.1.0f.tar.gz"
 
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
