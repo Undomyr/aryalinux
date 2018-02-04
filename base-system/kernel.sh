@@ -209,7 +209,7 @@ cd /sources
 rm -rf $FIRMWARE_DIR
 
 mkinitramfs $(ls /lib/modules/)
-mv initrd.img* /boot/
+mv initrd.img* /boot/initrd.img-$LINUX_VERSION
 
 echo "$STEPNAME" | tee -a $LOGFILE
 
