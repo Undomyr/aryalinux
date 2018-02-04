@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Mesa is an OpenGL compatible 3Dbr3ak graphics library.br3ak"
 SECTION="x"
-VERSION=17.1.8
+VERSION=17.3.3
 NAME="mesa"
 
 #REQ:x7lib
@@ -28,13 +28,13 @@ NAME="mesa"
 
 cd $SOURCE_DIR
 
-URL=https://mesa.freedesktop.org/archive/mesa-17.1.8.tar.xz
+URL=https://mesa.freedesktop.org/archive/mesa-17.3.3.tar.xz
 
 if [ ! -z $URL ]
 then
 
-wget -nc https://mesa.freedesktop.org/archive/mesa-17.1.8.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mesa/mesa-17.1.8.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/mesa/mesa-17.1.8.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mesa/mesa-17.1.8.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mesa/mesa-17.1.8.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mesa/mesa-17.1.8.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mesa/mesa-17.1.8.tar.xz || wget -nc ftp://ftp.freedesktop.org/pub/mesa/mesa-17.1.8.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/mesa-17.1.8-add_xdemos-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/mesa/mesa-17.1.8-add_xdemos-1.patch
+wget -nc $URL
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/mesa-17.3.3-add_xdemos-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -108,8 +108,8 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-install -v -dm755 /usr/share/doc/mesa-17.1.8 &&
-cp -rfv docs/* /usr/share/doc/mesa-17.1.8
+install -v -dm755 /usr/share/doc/mesa-17.3.3 &&
+cp -rfv docs/* /usr/share/doc/mesa-17.3.3
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
