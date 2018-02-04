@@ -9,6 +9,15 @@ chown -R root:root $LFS/tools
 
 mkdir -pv $LFS/{dev,proc,sys,run}
 
+set +e
+umount $LFS/dev/pts
+umount $LFS/dev/shm
+umount $LFS/dev
+umount $LFS/sys
+umount $LFS/proc
+umount $LFS/run
+set -e
+
 # Create /dev/console and /dev/null if not done already
 
 if [ ! -e /dev/console ]; then
@@ -18,15 +27,6 @@ fi
 if [ ! -e /dev/null ]; then
 	mknod -m 666 $LFS/dev/null c 1 3
 fi
-
-set +e
-umount $LFS/dev/pts
-umount $LFS/dev/shm
-umount $LFS/dev
-umount $LFS/sys
-umount $LFS/proc
-umount $LFS/run
-set -e
 
 mount -v --bind /dev $LFS/dev
 
