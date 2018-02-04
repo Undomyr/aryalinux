@@ -20,11 +20,10 @@ set -e
 
 # Create /dev/console and /dev/null if not done already
 
-if [ ! -e /dev/console ]; then
-	
+if [ ! -e $LFS/dev/console ]; then
 	mknod -m 600 $LFS/dev/console c 5 1
 fi
-if [ ! -e /dev/null ]; then
+if [ ! -e $LFS/dev/null ]; then
 	mknod -m 666 $LFS/dev/null c 1 3
 fi
 
