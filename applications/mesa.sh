@@ -79,7 +79,7 @@ GLL_DRV="i915,nouveau,r300,r600,radeonsi,svga,swrast" &&
             --enable-dri3						\
             --enable-glx-tls					\
             --enable-vdpau						\
-            --with-egl-platforms="$EGL_PLATFORMS" \
+            --with-platforms="$EGL_PLATFORMS" \
             --with-dri-drivers="$DRI_DRIVERS"	\
             --with-gallium-drivers=$GLL_DRV &&
 unset GLL_DRV &&
