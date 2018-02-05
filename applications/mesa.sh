@@ -69,7 +69,6 @@ GLL_DRV="i915,nouveau,r300,r600,radeonsi,svga,swrast" &&
             --enable-osmesa						\
             --enable-xa               	    	\
             --enable-gallium-llvm				\
-            --enable-llvm-shared-libs			\
             --enable-egl						\
             --enable-shared-glapi				\
             --enable-gbm        	            \
