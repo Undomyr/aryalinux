@@ -20,6 +20,7 @@ NAME="mesa"
 #REC:elfutils
 #REC:llvm
 #REC:wayland
+#REC:wayland-protocols
 #REC:libva-wo-mesa
 #REC:libvdpau
 #OPT:libgcrypt
