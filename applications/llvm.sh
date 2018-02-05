@@ -58,7 +58,7 @@ CC=gcc CXX=g++                              \
 cmake -DCMAKE_INSTALL_PREFIX=/usr           \
       -DLLVM_ENABLE_FFI=ON                  \
       -DCMAKE_BUILD_TYPE=Release            \
-      -DLLVM_BUILD_SHARED_LIBS=ON           \
+      -DBUILD_SHARED_LIBS=ON           \
       -DLLVM_TARGETS_TO_BUILD="host;AMDGPU" \
       -Wno-dev ..                           &&
 make "-j`nproc`" || make
