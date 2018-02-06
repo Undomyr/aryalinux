@@ -24,11 +24,11 @@ NAME="mupdf"
 
 cd $SOURCE_DIR
 
-URL=http://www.mupdf.com/downloads/archive/mupdf-1.12.0-source.tar.gz
+URL=http://www.mupdf.com/downloads/mupdf-1.12.0-source.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://www.mupdf.com/downloads/archive/mupdf-1.12.0-source.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mupdf/mupdf-1.12.0-source.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/mupdf/mupdf-1.12.0-source.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mupdf/mupdf-1.12.0-source.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mupdf/mupdf-1.12.0-source.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mupdf/mupdf-1.12.0-source.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mupdf/mupdf-1.12.0-source.tar.gz
+wget -nc wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mupdf/mupdf-1.12.0-source.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/mupdf/mupdf-1.12.0-source.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mupdf/mupdf-1.12.0-source.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mupdf/mupdf-1.12.0-source.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mupdf/mupdf-1.12.0-source.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mupdf/mupdf-1.12.0-source.tar.gz
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/mupdf-1.12.0-consolidated_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/mupdf/mupdf-1.12.0-consolidated_fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
