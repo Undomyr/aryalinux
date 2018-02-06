@@ -29,7 +29,7 @@ DESCRIPTION="GNOME is a desktop environment that is composed entirely of free an
 #REQ:gnome-online-accounts
 #REQ:gnome-video-effects
 #REQ:grilo
-#REQ:gtkhtml
+#OPT:gtkhtml
 #REQ:libchamplain
 #REQ:libgdata
 #REQ:libgee
