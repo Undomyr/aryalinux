@@ -11,6 +11,8 @@ VERSION="0.5.3"
 
 #REQ:libwnck
 #REQ:libgtop
+#REQ:libxslt
+#REQ:libxml2
 
 cd $SOURCE_DIR
 
