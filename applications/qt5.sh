@@ -80,18 +80,7 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
--archdatadir    /usr/lib/qt5                \
-            -bindir         /usr/bin                    \
-            -plugindir      /usr/lib/qt5/plugins        \
-            -importdir      /usr/lib/qt5/imports        \
-            -headerdir      /usr/include/qt5            \
-            -datadir        /usr/share/qt5              \
-            -docdir         /usr/share/doc/qt5          \
-            -translationdir /usr/share/qt5/translations \
-            -examplesdir    /usr/share/doc/qt5/examples
-
-
-./configure -prefix /opt/qt5                          \
+./configure -prefix /opt/qt5                            \
             -sysconfdir /etc/xdg                        \
             -confirm-license                            \
             -opensource                                 \
@@ -252,7 +241,6 @@ ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
-
 
 
 
