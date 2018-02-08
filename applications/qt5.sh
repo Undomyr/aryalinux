@@ -71,7 +71,7 @@ export QT5PREFIX=/opt/qt5
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-mkdir /opt/qt-5.10.0
+mkdir -pv /opt/qt-5.10.0
 ln -sfnv qt-5.10.0 /opt/qt5
 
 ENDOFROOTSCRIPT
