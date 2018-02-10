@@ -50,6 +50,7 @@ NAME="libreoffice"
 #REC:redland
 #REC:serf
 #REC:unixodbc
+#REC:postgresql
 #OPT:avahi
 #OPT:bluez
 #OPT:dconf
@@ -115,7 +116,6 @@ sed -e "/distro-install-file-lists/d" -i Makefile.in &&
              --without-system-dicts      \
              --disable-dconf             \
              --disable-odk               \
-             --disable-firebird-sdbc     \
              --enable-release-build=yes  \
              --enable-python=system      \
              --with-system-apr           \
@@ -137,12 +137,11 @@ sed -e "/distro-install-file-lists/d" -i Makefile.in &&
              --with-system-odbc          \
              --with-system-openldap      \
              --with-system-openssl       \
-             --with-system-poppler       \
-             --disable-postgresql        \
-             --without-java              \
+             --with-system-postgresql    \
              --with-system-redland       \
              --with-system-serf          \
-             --with-system-zlib
+             --with-system-zlib          \
+             --without-java
 
 
 make build-nocheck
