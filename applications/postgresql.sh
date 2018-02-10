@@ -67,6 +67,9 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+rm -rf /srv/pgsql/
+rm -rf /run/postgresql
+
 install -v -dm700 /srv/pgsql/data &&
 install -v -dm755 /run/postgresql
 if ! grep "postgres" /etc/group; then
