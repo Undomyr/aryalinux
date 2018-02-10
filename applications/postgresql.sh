@@ -68,10 +68,13 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -v -dm700 /srv/pgsql/data &&
-install -v -dm755 /run/postgresql &&
-groupadd -g 41 postgres &&
-useradd -c "PostgreSQL Server" -g postgres -d /srv/pgsql/data \
-        -u 41 postgres &&
+install -v -dm755 /run/postgresql
+if ! grep "postgres" /etc/group; then
+	groupadd -g 41 postgres
+fi
+if ! grep "postgres" /etc/passwd; then
+	useradd -c "PostgreSQL Server" -g postgres -d /srv/pgsql/data -u 41 postgres
+fi
 chown -Rv postgres:postgres /srv/pgsql /run/postgresql
 
 ENDOFROOTSCRIPT
