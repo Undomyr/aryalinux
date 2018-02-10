@@ -9,8 +9,8 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak LibreOffice is a full-featuredbr3ak office suite. It is largely compatible with Microsoft Office and is descended frombr3ak OpenOffice.org.br3ak"
 SECTION="xsoft"
-VERSION_MAJOR=5.3.0
-VERSION_MINOR=3
+VERSION_MAJOR=5.4.4
+VERSION_MINOR=2
 VERSION=$VERSION_MAJOR.$VERSION_MINOR
 PARENT_DIR_URL="http://download.documentfoundation.org/libreoffice/src/$VERSION_MAJOR/"
 NAME="libreoffice"
@@ -90,7 +90,7 @@ fi
 
 whoami > /tmp/currentuser
 
-if [ -z "$LANGUAGE" ]; then export LANGUAGE=en-US; fi
+if [ -z "$LANGUAGE" ]; then export LANGUAGE=ALL; fi
 
 install -dm755 external/tarballs &&
 ln -sv ../../../libreoffice-dictionaries-$VERSION_MAJOR.$VERSION_MINOR.tar.xz external/tarballs/ &&
@@ -138,7 +138,7 @@ sed -e "/distro-install-file-lists/d" -i Makefile.in &&
              --with-system-openldap      \
              --with-system-openssl       \
              --with-system-poppler       \
-             --disable-postgresql-sdbc   \
+             --disable-postgresql        \
              --without-java              \
              --with-system-redland       \
              --with-system-serf          \
