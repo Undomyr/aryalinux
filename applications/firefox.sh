@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="Firefox is a stand-alone browser based on the Mozilla codebase."
 SECTION="xsoft"
-VERSION=58.0.1
+VERSION=58.0.2
 NAME="firefox"
 
 #REQ:alsa-lib
@@ -59,7 +59,7 @@ URL=https://ftp.mozilla.org/pub/firefox/releases/$VERSION/source/firefox-$VERSIO
 if [ ! -z $URL ]
 then
 wget -nc $URL
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-$VERSION-system_graphite2_harfbuzz-1.patch
+wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/1.1/firefox-$VERSION-system_graphite2_harfbuzz-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
