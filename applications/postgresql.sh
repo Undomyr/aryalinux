@@ -111,7 +111,6 @@ sleep 5
 clear
 
 
-
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 su - postgres -c '/usr/bin/createdb test' &&
 echo "create table t1 ( name varchar(20), state_province varchar(20) );" \
