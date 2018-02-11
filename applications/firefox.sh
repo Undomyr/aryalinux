@@ -170,15 +170,15 @@ EOF
 patch -Np1 -i ../firefox-$VERSION-system_graphite2_harfbuzz-1.patch
 
 ./mach build
-./mach install                                                  &&
+sudo ./mach install                                                  &&
 
-mkdir -pv  /usr/lib/mozilla/plugins                             &&
-ln    -sfv ../../mozilla/plugins /usr/lib/firefox-$VERSION/browser
+sudo mkdir -pv  /usr/lib/mozilla/plugins                             &&
+sudo ln    -sfv ../../mozilla/plugins /usr/lib/firefox-$VERSION/browser
 
-mkdir -pv /usr/share/applications &&
-mkdir -pv /usr/share/pixmaps &&
+sudo mkdir -pv /usr/share/applications &&
+sudo mkdir -pv /usr/share/pixmaps &&
 
-cat > /usr/share/applications/firefox.desktop << "EOF" &&
+sudo tee -a /usr/share/applications/firefox.desktop << "EOF" &&
 [Desktop Entry]
 Encoding=UTF-8
 Name=Firefox Web Browser
@@ -193,7 +193,7 @@ MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/vnd.mo
 StartupNotify=true
 EOF
 
-ln -sfv /usr/lib/firefox-$VERSION/browser/icons/mozicon128.png \
+sudo ln -sfv /usr/lib/firefox-$VERSION/browser/icons/mozicon128.png \
         /usr/share/pixmaps/firefox.png
 
 
