@@ -23,7 +23,7 @@ tar -xf $TARBALL
 
 cd $DIRECTORY
 
-./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static &&
+./autogen.sh --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static &&
 make
 sudo make install
 
