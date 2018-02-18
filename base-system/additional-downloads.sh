@@ -54,7 +54,7 @@ mv -f ~/aryalinux/applications/alps-scripts-$VERSION.tar.gz .
 wget -nc https://sourceforge.net/projects/cdrtools/files/cdrtools-3.01.tar.bz2
 wget -nc https://launchpad.net/ubuntu/+archive/primary/+files/cdrkit_1.1.11.orig.tar.gz
 wget -nc https://cmake.org/files/v3.9/cmake-3.9.1.tar.gz
-wget -nc http://pkgs.fedoraproject.org/repo/pkgs/squashfs-tools/squashfs4.3.tar.gz/370d0470f3c823bf408a3b7a1f145746/squashfs4.3.tar.gz
+wget -nc https://sourceforge.net/projects/squashfs/files/squashfs/squashfs4.3/squashfs4.3.tar.gz
 wget -nc aryalinux.org/releases/2016.08/bootx64.efi
 wget -nc http://downloads.sourceforge.net/infozip/unzip60.tar.gz
 
