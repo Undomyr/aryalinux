@@ -79,8 +79,8 @@ http://tukaani.org/xz/xz-5.2.3.tar.xz
 http://zlib.net/zlib-1.2.11.tar.xz
 http://www.linuxfromscratch.org/patches/lfs/development/bzip2-1.0.6-install_docs-1.patch
 http://www.linuxfromscratch.org/patches/lfs/development/coreutils-8.29-i18n-1.patch
-http://www.linuxfromscratch.org/patches/lfs/development/glibc-2.26-fhs-1.patch
-http://www.linuxfromscratch.org/patches/lfs/development/glibc-2.26-local_glob_exploits-2.patch
+https://raw.githubusercontent.com/FluidIdeas/patches/1.1/glibc-2.26-fhs-1.patch
+https://raw.githubusercontent.com/FluidIdeas/patches/1.1/glibc-2.26-local_glob_exploits-2.patch
 http://www.linuxfromscratch.org/patches/lfs/development/kbd-2.0.4-backspace-1.patch
 http://www.linuxfromscratch.org/patches/lfs/development/ninja-1.8.2-add_NINJAJOBS_var-1.patch
 http://www.linuxfromscratch.org/patches/lfs/development/sysvinit-2.88dsf-consolidated-1.patch
