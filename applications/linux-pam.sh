@@ -29,7 +29,7 @@ URL=http://linux-pam.org/library/Linux-PAM-1.3.0.tar.bz2
 if [ ! -z $URL ]
 then
 wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://linux-pam.org/library/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Linux-PAM/Linux-PAM-1.3.0.tar.bz2
-wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://linux-pam.org/documentation/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/Linux-PAM/Linux-PAM-1.2.0-docs.tar.bz2
+wget http://www.linux-pam.org/documentation/Linux-PAM-1.2.0-docs.tar.bz2 -O Linux-PAM-1.2.0-docs.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -44,8 +44,7 @@ fi
 
 whoami > /tmp/currentuser
 
-tar -xf ../Linux-PAM-1.2.0-docs.tar.bz2 --strip-components=1
-
+tar -xf ../Linux-PAM-1.2.0-docs.tar.bz2
 
 ./configure --prefix=/usr                    \
             --sysconfdir=/etc                \
