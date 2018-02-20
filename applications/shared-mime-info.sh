@@ -38,7 +38,7 @@ fi
 whoami > /tmp/currentuser
 
 ./configure --prefix=/usr &&
-make "-j`nproc`" || make
+make
 
 
 
