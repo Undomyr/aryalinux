@@ -23,7 +23,7 @@ DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 tar xf $TARBALL
 cd $DIRECTORY
 
-./autoreconf --force --install
+autoreconf --force --install
 ./configure --prefix=/usr --enable-shared &&
 make
 sudo make install
