@@ -26,7 +26,7 @@ DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 tar xf $TARBALL
 cd $DIRECTORY
 ./autogen.sh --prefix=/usr
-./configure --prefix=/usr --enable-shared &&
+./configure --prefix=/usr --disable-parallel &&
 make
 sudo make install
 
