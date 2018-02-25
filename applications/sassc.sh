@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#REQ:libsass
+
 NAME=sassc
 DESCRIPTION="libsass command line driver"
 VERSION=3.4.8

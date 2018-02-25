@@ -6,6 +6,9 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#REQ:sass
+#REQ:inkscape
+
 NAME=libsass
 DESCRIPTION="A C/C++ implementation of a Sass compiler"
 VERSION=3.4.9
