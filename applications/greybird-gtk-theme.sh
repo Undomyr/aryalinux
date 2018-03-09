@@ -25,7 +25,7 @@ DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 tar xf $TARBALL
 cd $DIRECTORY
 
-./autogen --prefix=/usr &&
+./autogen.sh --prefix=/usr &&
 make
 sudo make install
 
