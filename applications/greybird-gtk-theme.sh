@@ -13,6 +13,7 @@ DESCRIPTION="Desktop Suite for Xfce"
 
 #REQ:gtk2
 #REQ:gtk3
+#REQ:sass
 
 cd $SOURCE_DIR
 
