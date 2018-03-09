@@ -12,7 +12,7 @@ VERSION="2.3.4"
 #REQ:xorg-server
 #REC:mtdev
 
-URL=http://ftp.kaist.ac.kr/x.org/individual/driver/xf86-video-vesa-2.3.4.tar.bz2
+URL=https://sources.voidlinux.eu/xf86-video-vesa-2.3.4/xf86-video-vesa-2.3.4.tar.bz2
 
 export XORG_PREFIX=/usr
 export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
