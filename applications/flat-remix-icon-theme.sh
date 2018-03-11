@@ -8,7 +8,7 @@ set +h
 
 SOURCE_ONLY=n
 NAME="flat-remix-icon-theme"
-VERSION=20180225
+VERSION=20180311
 DESCRIPTION="Flat Remix is a flat icon theme for Linux"
 
 #REQ:gtk2
@@ -16,15 +16,10 @@ DESCRIPTION="Flat Remix is a flat icon theme for Linux"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/daniruiz/flat-remix/archive/20180225.tar.gz
-TARBALL="$NAME-$VERSION.tar.gz"
-wget -c $URL -O "$NAME-$VERSION.tar.gz"
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
-
-tar xf $TARBALL
-cd $DIRECTORY
-
-sudo make install
+URL=https://sourceforge.net/projects/aryalinux-bin/files/artifacts/flat-remix-icon-theme.tar.xz
+TARBALL=flat-remix-icon-theme.tar.xz
+wget -c $URL
+sudo tar xf $TARBALL -C /
 
 cd $SOURCE_DIR
 
