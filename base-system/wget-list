@@ -83,4 +83,4 @@ https://raw.githubusercontent.com/FluidIdeas/patches/1.1/glibc-2.26-fhs-1.patch
 https://raw.githubusercontent.com/FluidIdeas/patches/1.1/glibc-2.26-local_glob_exploits-2.patch
 http://www.linuxfromscratch.org/patches/lfs/development/kbd-2.0.4-backspace-1.patch
 http://www.linuxfromscratch.org/patches/lfs/development/ninja-1.8.2-add_NINJAJOBS_var-1.patch
-http://www.linuxfromscratch.org/patches/lfs/development/sysvinit-2.88dsf-consolidated-1.patch
+https://raw.githubusercontent.com/FluidIdeas/patches/1.1/sysvinit-2.88dsf-consolidated-1.patch

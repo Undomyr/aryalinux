@@ -13,6 +13,7 @@ DESCRIPTION="Desktop Suite for Xfce"
 
 #REQ:gtk2
 #REQ:gtk3
+#REQ:sass
 
 cd $SOURCE_DIR
 
@@ -25,7 +26,7 @@ DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 tar xf $TARBALL
 cd $DIRECTORY
 
-./autogen --prefix=/usr &&
+./autogen.sh --prefix=/usr &&
 make
 sudo make install
 
