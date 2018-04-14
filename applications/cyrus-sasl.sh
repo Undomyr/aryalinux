@@ -25,7 +25,7 @@ NAME="cyrus-sasl"
 
 cd $SOURCE_DIR
 
-URL=ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz
+URL=https://www.cyrusimap.org/releases/cyrus-sasl-2.1.26.tar.gz
 
 if [ ! -z $URL ]
 then
