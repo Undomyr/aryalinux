@@ -39,8 +39,8 @@ then
 
 cd /sources
 
-LINUX_VERSION=`ls linux-4*xz | sed "s@linux-@@g" | sed "s@\.tar\.xz@@g"`
-LINUX_TARBALL=`ls linux-4*xz`
+LINUX_VERSION=`ls linux-4*gz | sed "s@linux-@@g" | sed "s@\.tar\.xz@@g"`
+LINUX_TARBALL=`ls linux-4*gz`
 LINUX_SRC_DIR=`tar -tf $LINUX_TARBALL | cut "-d/" -f1 | uniq`
 tar xf $LINUX_TARBALL
 cd $LINUX_SRC_DIR
