@@ -40,6 +40,7 @@ wget -nc https://github.com/FluidIdeas/patches/raw/1.1/aufs-4.17.tar.gz
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-base.patch
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-kbuild.patch
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-mmap.patch
+wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-loopback.patch
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/0.21-nvme_ioctl.h.patch
 
 pushd ~/aryalinux/applications
