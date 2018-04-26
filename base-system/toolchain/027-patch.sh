@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="027-patch.sh"
-TARBALL="patch-2.7.5.tar.xz"
+TARBALL="patch-2.7.6.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 

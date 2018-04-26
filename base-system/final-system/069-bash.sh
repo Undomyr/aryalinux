@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="069-bash.sh"
-TARBALL="bash-4.4.12.tar.gz"
+TARBALL="bash-4.4.18.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -30,7 +30,7 @@ then
 fi
 
 ./configure --prefix=/usr                       \
-            --docdir=/usr/share/doc/bash-4.4.12 \
+            --docdir=/usr/share/doc/bash-4.4.18 \
             --without-bash-malloc               \
             --with-installed-readline
 make

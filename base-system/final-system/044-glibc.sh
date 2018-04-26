@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="044-glibc.sh"
-TARBALL="glibc-2.26.tar.xz"
+TARBALL="glibc-2.27.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,8 +29,7 @@ then
 	cd $DIRECTORY
 fi
 
-patch -Np1 -i ../glibc-2.26-fhs-1.patch
-patch -Np1 -i ../glibc-2.26-local_glob_exploits-2.patch
+patch -Np1 -i ../glibc-2.27-fhs-1.patch
 ln -sfv /tools/lib/gcc /usr/lib
 case $(uname -m) in
     i?86)    GCC_INCDIR=/usr/lib/gcc/$(uname -m)-pc-linux-gnu/7.3.0/include
@@ -95,7 +94,7 @@ ethers: files
 rpc: files
 # End /etc/nsswitch.conf
 EOF
-tar -xf ../../tzdata2018c.tar.gz
+tar -xf ../../tzdata2018d.tar.gz
 ZONEINFO=/usr/share/zoneinfo
 mkdir -pv $ZONEINFO/{posix,right}
 for tz in etcetera southamerica northamerica europe africa antarctica  \

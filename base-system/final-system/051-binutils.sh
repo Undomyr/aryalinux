@@ -38,6 +38,7 @@ cd       build
              --enable-plugins    \
              --enable-shared     \
              --disable-werror    \
+             --enable-64-bit-bfd \
              --with-system-zlib
 make tooldir=/usr
 make tooldir=/usr install
