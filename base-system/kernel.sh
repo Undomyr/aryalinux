@@ -39,13 +39,13 @@ then
 
 cd /sources
 
-LINUX_VERSION=4.17-rc2
-LINUX_TARBALL=linux-4.17-rc2.tar.gz
+# LINUX_VERSION=`ls linux-4*z | sed "s@linux-@@g" | sed "s@\.tar\.xz@@g" | sed "s@\.tar\.gz@@g"`
+LINUX_TARBALL=`ls linux-4*z`
 LINUX_SRC_DIR=`tar -tf $LINUX_TARBALL | cut "-d/" -f1 | uniq`
 tar xf $LINUX_TARBALL
 cd $LINUX_SRC_DIR
 
-tar -xvf ../aufs-4.17.tar.gz -C .
+tar -xvf ../aufs-*.tar.gz -C .
 for patch in ../aufs4*.patch
 do
 	patch -Np1 -i $patch
@@ -179,7 +179,8 @@ sed -i "s@# CONFIG_TMPFS_POSIX_ACL is not set@CONFIG_TMPFS_POSIX_ACL=y@g" .confi
 
 make "-j`nproc`"
 make modules_install
-make firmware_install
+# make firmware_install
+LINUX_VERSION=$(ls /lib/modules/)
 cp -v arch/x86/boot/bzImage "/boot/vmlinuz-$LINUX_VERSION"
 cp -v System.map "/boot/System.map-$LINUX_VERSION"
 cp -v .config "/boot/config-$LINUX_VERSION"
