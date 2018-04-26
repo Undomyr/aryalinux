@@ -39,13 +39,13 @@ then
 
 cd /sources
 
-LINUX_VERSION=`ls linux-4*xz | sed "s@linux-@@g" | sed "s@\.tar\.xz@@g"`
-LINUX_TARBALL=`ls linux-4*xz`
+LINUX_VERSION=4.17-rc2
+LINUX_TARBALL=linux-4.17-rc2.tar.gz
 LINUX_SRC_DIR=`tar -tf $LINUX_TARBALL | cut "-d/" -f1 | uniq`
 tar xf $LINUX_TARBALL
 cd $LINUX_SRC_DIR
 
-tar -xvf ../aufs-*.tar.gz -C .
+tar -xvf ../aufs-4.17.tar.gz -C .
 for patch in ../aufs4*.patch
 do
 	patch -Np1 -i $patch
@@ -117,7 +117,6 @@ turnOn CONFIG_AUFS_FHSM
 turnOn CONFIG_AUFS_RDU
 turnOn CONFIG_AUFS_SHWH
 turnOn CONFIG_AUFS_BR_RAMFS
-turnOn CONFIG_AUFS_BDEV_LOOP
 turnOff CONFIG_AUFS_DEBUG
 
 turnOn CONFIG_SQUASHFS
