@@ -36,6 +36,7 @@ ln -svf /tools/lib/pkgconfig/blkid.pc /usr/lib/pkgconfig/
 ln -svf /tools/lib/pkgconfig/uuid.pc /usr/lib/pkgconfig/
 ln -svf /tools/bin/env /usr/bin/
 ln -svf /tools/lib/libblkid.so.1 /usr/lib/
+ln -svf /tools/lib/libmount.so.1 /usr/lib/
 
 tar -xf ../systemd-man-pages-238.tar.xz
 sed '171,$ d' -i src/resolve/meson.build
