@@ -43,11 +43,11 @@ UUID=$EFIPART_UUID       /boot/efi    vfat     defaults            0     1
 efivarfs       /sys/firmware/efi/efivars  efivarfs  defaults  0      1
 EOF
 
-BOOTLOADER_ID="grub"
+BOOTLOADER_ID="$OS_NAME $OS_VERSION $OS_CODENAME"
 PARTNUMBER=$(echo $EFIPART | sed "s@$DEV_NAME@@g")
 
 grub-install --target=$(uname -m)-efi --efi-directory=/boot/efi --bootloader-id="$BOOTLOADER_ID" --recheck --debug
-efibootmgr --create --gpt --disk $DEV_NAME --part $PARTNUMBER --write-signature --label "$OS_NAME $OS_VERSION $OS_CODENAME" --loader "/EFI/grub/grubx64.efi"
+# efibootmgr --create --gpt --disk $DEV_NAME --part $PARTNUMBER --write-signature --label "$OS_NAME $OS_VERSION $OS_CODENAME" --loader "/EFI/grub/grubx64.efi"
 grub-mkconfig -o /boot/grub/grub.cfg
 
 fi
