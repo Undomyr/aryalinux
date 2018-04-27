@@ -43,7 +43,7 @@ UUID=$EFIPART_UUID       /boot/efi    vfat     defaults            0     1
 efivarfs       /sys/firmware/efi/efivars  efivarfs  defaults  0      1
 EOF
 
-BOOTLOADER_ID="$OS_NAME $OS_VERSION $OS_CODENAME"
+BOOTLOADER_ID="$OS_NAME $OS_VERSION $OS_CODENAME ($ROOT_PART)"
 PARTNUMBER=$(echo $EFIPART | sed "s@$DEV_NAME@@g")
 
 grub-install --target=$(uname -m)-efi --efi-directory=/boot/efi --bootloader-id="$BOOTLOADER_ID" --recheck --debug
