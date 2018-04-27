@@ -30,6 +30,13 @@ then
 fi
 
 ln -sf /tools/bin/true /usr/bin/xsltproc
+
+ln -svf /tools/lib/pkgconfig/mount.pc /usr/lib/pkgconfig/
+ln -svf /tools/lib/pkgconfig/blkid.pc /usr/lib/pkgconfig/
+ln -svf /tools/lib/pkgconfig/uuid.pc /usr/lib/pkgconfig/
+ln -svf /tools/bin/env /usr/bin/
+ln -svf /tools/lib/libblkid.so.1 /usr/lib/
+
 tar -xf ../systemd-man-pages-238.tar.xz
 sed '171,$ d' -i src/resolve/meson.build
 sed -i '527,565 d'                  src/basic/missing.h
@@ -63,6 +70,12 @@ LANG=en_US.UTF-8 ninja
 LANG=en_US.UTF-8 ninja install
 rm -rfv /usr/lib/rpm
 rm -f /usr/bin/xsltproc
+
+rm -f /usr/lib/pkgconfig/mount.pc
+rm -f /usr/lib/pkgconfig/blkid.pc
+rm -f /usr/lib/pkgconfig/uuid.pc
+rm -f /usr/bin/env
+
 systemd-machine-id-setup
 cat > /lib/systemd/systemd-user-sessions << "EOF"
 #!/bin/bash
