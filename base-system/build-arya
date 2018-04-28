@@ -128,6 +128,8 @@ def inputBuildProperties():
 		readInput('Enter you choice (1 - 4) If in doubt choose 1 : ', 'KERNEL_CONFIG_OPT', propsFile, '1')
 	passwords['root'] = getpassword('Enter the root password : ', 'Re-enter the root password : ')
 	passwords['user'] = getpassword('Enter the user password : ', 'Re-enter the user password : ')
+	readInput('Install bootloader? (Y/n) : ', 'INSTALL_BOOTLOADER', propsFile, 'y')
+	readInput('Create Live ISO? (Y/n) : ', 'CREATE_LIVE_ISO', propsFile, 'y')
 
 def freshBuild(startFrom):
 	startFrom = int(startFrom)
@@ -296,9 +298,9 @@ def freshBuild(startFrom):
 			except:
 				print 'Error occured in the installation of desktop environment'
 				exit()
-
-	pr = subprocess.Popen(['./createlivedisk.sh'], shell=True)
-	pr.wait()
+	if getParamValue('CREATE_LIVE_ISO') == 'y' or getParamValue('CREATE_LIVE_ISO') == 'Y':
+		pr = subprocess.Popen(['./createlivedisk.sh'], shell=True)
+		pr.wait()
 
 print 'Do you want to start a new build or resume a build that was previously started ?'
 print '1. Start a fresh build'

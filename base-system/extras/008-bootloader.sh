@@ -10,6 +10,10 @@ SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="008-bootloader.sh"
 
+if [ "$INSTALL_BOOTLOADER" == "n" ] || [ "$INSTALL_BOOTLOADER" == "N" ]; then
+	exit
+fi
+
 if ! grep "$STEPNAME" $LOGFILE &> /dev/null
 then
 
