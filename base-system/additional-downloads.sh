@@ -48,13 +48,13 @@ wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-mma
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-loopback.patch
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/0.21-nvme_ioctl.h.patch
 
-pushd ~/aryalinux/applications
+pushd ../applications
 git checkout $VERSION
 git pull
 tar -czf alps-scripts-$VERSION.tar.gz *.sh
 popd
 
-mv -f ~/aryalinux/applications/alps-scripts-$VERSION.tar.gz .
+mv -f ../applications/alps-scripts-$VERSION.tar.gz .
 
 wget -nc https://sourceforge.net/projects/cdrtools/files/cdrtools-3.01.tar.bz2
 wget -nc https://launchpad.net/ubuntu/+archive/primary/+files/cdrkit_1.1.11.orig.tar.gz

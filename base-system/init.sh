@@ -80,14 +80,20 @@ cd /
 # in the kernel, which can only be accomplished by patching the kernel as there
 # is no such feature in a vanilla kernel.
 
-mkdir -p /mnt/writable
-mount -t tmpfs -o rw tmpfs /mnt/writable
+mkdir -p /mnt/tempdir
+mount -t tmpfs -o rw tmpfs /mnt/tmpdir
+mkdir -p /mnt/tempdir/writable
+mkdir -p /mnt/tempdir/workdir
+#mount -t tmpfs -o rw tmpfs /mnt/writable
 
 UNIONFSOPT="/mnt/writable=rw:/mnt/system=ro"
 AUFSOPT="/mnt/writable=rw:/mnt/system=ro"
 mount -t unionfs -o dirs=${UNIONFSOPT} unionfs ${ROOT} 2> /dev/null || \
 mount -t aufs -o br=${AUFSOPT} none ${ROOT} 2> /dev/null || \
+mount -t overlay overlay -oupperdir=/mnt/tmpdir/writable,lowerdir=/mnt/system,workdir=/mnt/tmpdir/workdir ${ROOT} || \
 {
+    echo "Union FS failed."
+    sleep 10
     # If UnionFS fails, fall back to copy/bind mounting
     copyBindMount
 }
