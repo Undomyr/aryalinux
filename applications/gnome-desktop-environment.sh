@@ -91,5 +91,29 @@ DESCRIPTION="GNOME is a desktop environment that is composed entirely of free an
 #REQ:seahorse
 #REQ:notification-daemon
 #REQ:polkit-gnome
+#REQ:vpn-support
+#REQ:cups-filters
+#REQ:xdg-user-dirs
+#REQ:plank
+#REQ:aryalinux-wallpapers
+#REQ:aryalinux-fonts
+#REQ:aryalinux-themes
+#REQ:aryalinux-icons
+#REQ:arc-gtk-theme
+#REQ:paper-gtk-theme
+#REQ:adapta-gtk-theme
+#REQ:flat-remix-icons
+#REQ:numix-icons
+#REQ:aryalinux-gnome-settings
+#REQ:lightdm-gtk-greeter
+
+pushd $SOURCE_DIR
+wget https://raw.githubusercontent.com/FluidIdeas/utils/master/wallpaper-list-update.sh -O udpate-wallpapers.sh
+chmod a+x udpate-wallpapers.sh
+sudo ./udpate-wallpapers.sh
+popd
+
+sudo systemctl disable gdm
+sudo systemctl enable lightdm
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
