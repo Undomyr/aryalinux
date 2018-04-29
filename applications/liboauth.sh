@@ -13,8 +13,7 @@ VERSION=1.0.3
 NAME="liboauth"
 
 #REQ:curl
-#REQ:openssl
-#REQ:nss
+#OPT:nss
 #OPT:doxygen
 
 

@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak VLC is a media player, streamer,br3ak and encoder. It can play from many inputs, such as files, networkbr3ak streams, capture devices, desktops, or DVD, SVCD, VCD, and audiobr3ak CD. It can use most audio and video codecs (MPEG 1/2/4, H264, VC-1,br3ak DivX, WMV, Vorbis, AC3, AAC, etc.), and it can also convert tobr3ak different formats and/or send streams through the network.br3ak"
 SECTION="multimedia"
-VERSION=2.2.8
+VERSION=3.0.2
 NAME="vlc"
 
 #REC:alsa-lib
@@ -60,12 +60,11 @@ NAME="vlc"
 
 cd $SOURCE_DIR
 
-URL=https://download.videolan.org/vlc/2.2.8/vlc-2.2.8.tar.xz
+URL=https://download.videolan.org/vlc/3.0.2/vlc-3.0.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://download.videolan.org/vlc/2.2.8/vlc-2.2.8.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/vlc/vlc-2.2.8.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/vlc/vlc-2.2.8.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/vlc/vlc-2.2.8.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/vlc/vlc-2.2.8.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/vlc/vlc-2.2.8.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/vlc/vlc-2.2.8.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/vlc-2.2.8-ffmpeg3-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/vlc/vlc-2.2.8-ffmpeg3-1.patch
+wget -nc https://download.videolan.org/vlc/3.0.2/vlc-3.0.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/vlc/vlc-3.0.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/vlc/vlc-3.0.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/vlc/vlc-3.0.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/vlc/vlc-3.0.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/vlc/vlc-3.0.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/vlc/vlc-3.0.2.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -86,9 +85,9 @@ export QT4DIR="$QT4PREFIX"
 export QTDIR="$QT4PREFIX"
 export PATH="$PATH:$QT4BINDIR"
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
-patch -Np1 -i ../vlc-2.2.8-ffmpeg3-1.patch    &&
-sed -i 's/error-implicit-function-declaration//' configure &&
-./configure --prefix=/usr --disable-atmo &&
+sed -i '/vlc_demux.h/a #define LUA_COMPAT_APIINTCASTS' modules/lua/vlc.h   &&
+sed -i '/DEPRECATED/s:^://:'  modules/text_renderer/freetype/text_layout.c &&
+BUILDCC=gcc ./configure --prefix=/usr --disable-opencv &&
 make "-j`nproc`" || make
 
 
@@ -100,7 +99,7 @@ export QT4DIR="$QT4PREFIX"
 export QTDIR="$QT4PREFIX"
 export PATH="$PATH:$QT4BINDIR"
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/opt/qt4/lib/pkgconfig"
-make docdir=/usr/share/doc/vlc-2.2.8 install
+make docdir=/usr/share/doc/vlc-3.0.2 install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

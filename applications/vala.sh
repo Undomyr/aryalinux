@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Vala is a new programming languagebr3ak that aims to bring modern programming language features tobr3ak GNOME developers without imposingbr3ak any additional runtime requirements and without using a differentbr3ak ABI compared to applications and libraries written in C.br3ak"
 SECTION="general"
-VERSION=0.38.5
+VERSION=0.40.3
 NAME="vala"
 
 #REQ:glib2
@@ -20,11 +20,11 @@ NAME="vala"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/vala/0.38/vala-0.38.5.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/vala/0.40/vala-0.40.3.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/vala/0.38/vala-0.38.5.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/vala/vala-0.38.5.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/vala/vala-0.38.5.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/vala/vala-0.38.5.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/vala/vala-0.38.5.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/vala/vala-0.38.5.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/vala/vala-0.38.5.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/vala/0.38/vala-0.38.5.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/vala/0.40/vala-0.40.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/vala/vala-0.40.3.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/vala/vala-0.40.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/vala/vala-0.40.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/vala/vala-0.40.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/vala/vala-0.40.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/vala/vala-0.40.3.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/vala/0.40/vala-0.40.3.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -39,7 +39,7 @@ fi
 
 whoami > /tmp/currentuser
 
-sed -i '102d; 108,124d; 126,127d'  configure.ac &&
+sed -i '115d; 121,137d; 139,140d'  configure.ac &&
 sed -i '/valadoc/d' Makefile.am                 &&
 ACLOCAL= autoreconf -fiv                        &&
 ./configure --prefix=/usr                       &&

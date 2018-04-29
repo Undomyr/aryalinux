@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="%DESCRIPTION%"
 SECTION="general"
-VERSION=1.15.4
+VERSION=1.17.0
 NAME="python-modules#pycairo"
 
 #REQ:cairo
@@ -18,11 +18,11 @@ NAME="python-modules#pycairo"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/pygobject/pycairo/releases/download/v1.15.4/pycairo-1.15.4.tar.gz
+URL=https://github.com/pygobject/pycairo/releases/download/v1.17.0/pycairo-1.17.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/pygobject/pycairo/releases/download/v1.15.4/pycairo-1.15.4.tar.gz
+wget -nc https://github.com/pygobject/pycairo/releases/download/v1.17.0/pycairo-1.17.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -39,7 +39,9 @@ python2 setup.py build
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-python2 setup.py install --optimize=1
+python2 setup.py install --optimize=1   &&
+python2 setup.py install_pycairo_header &&
+python2 setup.py install_pkgconfig
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo bash -e ./rootscript.sh
@@ -50,7 +52,9 @@ python3 setup.py build
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-python3 setup.py install --optimize=1
+python3 setup.py install --optimize=1   &&
+python3 setup.py install_pycairo_header &&
+python3 setup.py install_pkgconfig
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo bash -e ./rootscript.sh

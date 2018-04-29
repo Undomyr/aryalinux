@@ -12,16 +12,16 @@ SECTION="multimedia"
 VERSION=2245
 NAME="x264"
 
-#REC:yasm
+#REC:nasm
 
 
 cd $SOURCE_DIR
 
-URL=https://download.videolan.org/x264/snapshots/x264-snapshot-20170822-2245-stable.tar.bz2
+URL=https://download.videolan.org/x264/snapshots/x264-snapshot-20180212-2245-stable.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://download.videolan.org/x264/snapshots/x264-snapshot-20170822-2245-stable.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/x264/x264-snapshot-20170822-2245-stable.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/x264/x264-snapshot-20170822-2245-stable.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/x264/x264-snapshot-20170822-2245-stable.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/x264/x264-snapshot-20170822-2245-stable.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/x264/x264-snapshot-20170822-2245-stable.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/x264/x264-snapshot-20170822-2245-stable.tar.bz2
+wget -nc https://download.videolan.org/x264/snapshots/x264-snapshot-20180212-2245-stable.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/x264/x264-snapshot-20180212-2245-stable.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/x264/x264-snapshot-20180212-2245-stable.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/x264/x264-snapshot-20180212-2245-stable.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/x264/x264-snapshot-20180212-2245-stable.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/x264/x264-snapshot-20180212-2245-stable.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/x264/x264-snapshot-20180212-2245-stable.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

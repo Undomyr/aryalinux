@@ -17,10 +17,10 @@ NAME="mesa"
 #REQ:python-modules#Mako
 #REQ:python2
 #REQ:wayland
+#REC:wayland-protocols
 #REC:elfutils
 #REC:llvm
 #REC:wayland
-#REC:wayland-protocols
 #REC:libva-wo-mesa
 #REC:libvdpau
 #OPT:libgcrypt
@@ -35,7 +35,7 @@ if [ ! -z $URL ]
 then
 
 wget -nc $URL
-wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/1.1/mesa-17.3.3-add_xdemos-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/mesa-17.3.3-add_xdemos-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -53,7 +53,7 @@ whoami > /tmp/currentuser
 export XORG_PREFIX=/usr
 export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 
-patch -Np1 -i ../mesa-17.3.3-add_xdemos-1.patch
+patch -Np1 -i ../mesa-17.1.8-add_xdemos-1.patch
 
 EGL_PLATFORMS="drm,x11,wayland"
 DRI_DRIVERS="i915,i965,nouveau,r200,radeon,swrast"
@@ -69,6 +69,7 @@ GLL_DRV="i915,nouveau,r300,r600,radeonsi,svga,swrast" &&
             --enable-osmesa						\
             --enable-xa               	    	\
             --enable-gallium-llvm				\
+            --enable-llvm-shared-libs			\
             --enable-egl						\
             --enable-shared-glapi				\
             --enable-gbm        	            \
@@ -78,7 +79,7 @@ GLL_DRV="i915,nouveau,r300,r600,radeonsi,svga,swrast" &&
             --enable-dri3						\
             --enable-glx-tls					\
             --enable-vdpau						\
-            --with-platforms="$EGL_PLATFORMS" \
+            --with-egl-platforms="$EGL_PLATFORMS" \
             --with-dri-drivers="$DRI_DRIVERS"	\
             --with-gallium-drivers=$GLL_DRV &&
 unset GLL_DRV &&

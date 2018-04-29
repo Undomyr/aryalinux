@@ -6,13 +6,11 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#REQ:perl-modules#digest-hmac
 #REQ:perl-modules#io-socket-inet6
-#REQ:perl-modules#io
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/N/NL/NLNETLABS/Net-DNS-1.14.tar.gz"
-VERSION=1.14
+URL="https://www.cpan.org/authors/id/N/NL/NLNETLABS/Net-DNS-1.15.tar.gz"
+VERSION=1.15
 NAME="perl-modules#perl-net-dns"
 
 cd $SOURCE_DIR

@@ -14,7 +14,6 @@ NAME="python2"
 
 #OPT:bluez
 #OPT:valgrind
-#OPT:openssl
 #OPT:sqlite
 #OPT:tk
 

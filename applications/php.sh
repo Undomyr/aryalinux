@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak PHP is the PHP Hypertextbr3ak Preprocessor. Primarily used in dynamic web sites, it allows forbr3ak programming code to be directly embedded into the HTML markup. Itbr3ak is also useful as a general purpose scripting language.br3ak"
 SECTION="general"
-VERSION=7.2.1
+VERSION=7.2.4
 NAME="php"
 
 #REC:apache
@@ -31,7 +31,6 @@ NAME="php"
 #REC:postgresql
 #REC:sqlite
 #REC:unixodbc
-#REC:openssl
 #REC:cyrus-sasl
 #REC:xorg-server
 #REC:t1lib
@@ -55,7 +54,6 @@ NAME="php"
 #OPT:postgresql
 #OPT:sqlite
 #OPT:unixodbc
-#OPT:openssl
 #OPT:cyrus-sasl
 #OPT:mitkrb
 #OPT:xorg-server
@@ -63,11 +61,11 @@ NAME="php"
 
 cd $SOURCE_DIR
 
-URL=http://www.php.net/distributions/php-7.2.1.tar.xz
+URL=http://www.php.net/distributions/php-7.2.4.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://www.php.net/distributions/php-7.2.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/php/php-7.2.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/php/php-7.2.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/php/php-7.2.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/php/php-7.2.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/php/php-7.2.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/php/php-7.2.1.tar.xz
+wget -nc http://www.php.net/distributions/php-7.2.4.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/php/php-7.2.4.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/php/php-7.2.4.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/php/php-7.2.4.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/php/php-7.2.4.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/php/php-7.2.4.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/php/php-7.2.4.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -139,13 +137,13 @@ make
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install                                     &&
 install -v -m644 php.ini-production /etc/php.ini &&
-install -v -m755 -d /usr/share/doc/php-7.2.1 &&
+install -v -m755 -d /usr/share/doc/php-7.2.4 &&
 install -v -m644    CODING_STANDARDS EXTENSIONS INSTALL NEWS README* UPGRADING* php.gif \
-                    /usr/share/doc/php-7.2.1 &&
+                    /usr/share/doc/php-7.2.4 &&
 ln -v -sfn          /usr/lib/php/doc/Archive_Tar/docs/Archive_Tar.txt \
-                    /usr/share/doc/php-7.2.1 &&
+                    /usr/share/doc/php-7.2.4 &&
 ln -v -sfn          /usr/lib/php/doc/Structures_Graph/docs \
-                    /usr/share/doc/php-7.2.1
+                    /usr/share/doc/php-7.2.4
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -206,7 +204,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
 tar xf blfs-systemd-units-20180105.tar.bz2
 cd blfs-systemd-units-20180105
 make install-php-fpm

@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The lsof package is useful to LiStbr3ak Open Files for a given running application or process.br3ak"
 SECTION="general"
-VERSION=4.89
+VERSION=4.91
 NAME="lsof"
 
 #REQ:libtirpc
@@ -17,11 +17,11 @@ NAME="lsof"
 
 cd $SOURCE_DIR
 
-URL=https://www.mirrorservice.org/sites/lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_4.89.tar.bz2
+URL=ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_4.91.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.mirrorservice.org/sites/lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_4.89.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lsof/lsof_4.89.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/lsof/lsof_4.89.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lsof/lsof_4.89.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lsof/lsof_4.89.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lsof/lsof_4.89.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lsof/lsof_4.89.tar.bz2
+wget -nc ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_4.91.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/lsof/lsof_4.91.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/lsof/lsof_4.91.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/lsof/lsof_4.91.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/lsof/lsof_4.91.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/lsof/lsof_4.91.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/lsof/lsof_4.91.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -36,8 +36,8 @@ fi
 
 whoami > /tmp/currentuser
 
-tar -xf lsof_4.89_src.tar  &&
-cd lsof_4.89_src           &&
+tar -xf lsof_4.91_src.tar  &&
+cd lsof_4.91_src           &&
 ./Configure -n linux       &&
 make CFGL="-L./lib -ltirpc"
 

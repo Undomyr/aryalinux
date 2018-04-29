@@ -13,9 +13,6 @@ VERSION=6.2.32
 NAME="db"
 
 #OPT:tcl
-#OPT:openjdk
-#OPT:java
-#OPT:sharutils
 
 
 cd $SOURCE_DIR

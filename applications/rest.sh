@@ -12,7 +12,7 @@ SECTION="gnome"
 VERSION=0.8.1
 NAME="rest"
 
-#REQ:cacerts
+#REQ:make-ca
 #REQ:libsoup
 #REC:gobject-introspection
 #OPT:gtk-doc

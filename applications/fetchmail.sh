@@ -12,7 +12,6 @@ SECTION="basicnet"
 VERSION=6.3.26
 NAME="fetchmail"
 
-#REC:openssl
 #REC:procmail
 #OPT:python2
 #OPT:tk

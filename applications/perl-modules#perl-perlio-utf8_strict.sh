@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#REQ:perl-modules#test-exception(forthetestsuite)
+#REQ:perl-modules#perl-test-exception
 
 SOURCE_ONLY=y
 URL="https://www.cpan.org/authors/id/L/LE/LEONT/PerlIO-utf8_strict-0.007.tar.gz"

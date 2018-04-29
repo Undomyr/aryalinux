@@ -12,6 +12,7 @@ SECTION="general"
 VERSION=0.14
 NAME="python-modules#docutils"
 
+#REC:python2
 
 
 cd $SOURCE_DIR
@@ -33,11 +34,11 @@ fi
 cd $DIRECTORY
 fi
 
-python3 setup.py build
+python setup.py build
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-python3 setup.py install --optimize=1 &&
+python setup.py install --optimize=1 &&
 
 for f in /usr/bin/rst*.py; do
   ln -svf $(basename $f) /usr/bin/$(basename $f .py)

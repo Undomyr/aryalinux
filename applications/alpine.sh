@@ -12,7 +12,6 @@ SECTION="basicnet"
 VERSION=2.21
 NAME="alpine"
 
-#REC:openssl
 #OPT:openldap
 #OPT:mitkrb
 #OPT:aspell
@@ -22,11 +21,11 @@ NAME="alpine"
 
 cd $SOURCE_DIR
 
-URL=http://alpine.freeiz.com/alpine/release/src/alpine-2.21.tar.xz
+URL=http://anduin.linuxfromscratch.org/BLFS/alpine/alpine-2.21.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://alpine.freeiz.com/alpine/release/src/alpine-2.21.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/alpine/alpine-2.21.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/alpine/alpine-2.21.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/alpine/alpine-2.21.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/alpine/alpine-2.21.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/alpine/alpine-2.21.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/alpine/alpine-2.21.tar.xz
+wget -nc http://anduin.linuxfromscratch.org/BLFS/alpine/alpine-2.21.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/alpine/alpine-2.21.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/alpine/alpine-2.21.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/alpine/alpine-2.21.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/alpine/alpine-2.21.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/alpine/alpine-2.21.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/alpine/alpine-2.21.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

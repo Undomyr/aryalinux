@@ -12,8 +12,7 @@ SECTION="basicnet"
 VERSION=0.30.2
 NAME="neon"
 
-#REC:openssl
-#REC:gnutls
+#OPT:gnutls
 #OPT:libxml2
 #OPT:mitkrb
 

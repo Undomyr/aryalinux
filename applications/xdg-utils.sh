@@ -14,7 +14,7 @@ NAME="xdg-utils"
 
 #REQ:xmlto
 #REQ:lynx
-#OPT:w3m
+#REQ:w3m
 #REQ:links
 #REQ:x7app
 #OPT:dbus

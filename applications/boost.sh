@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Boost provides a set of freebr3ak peer-reviewed portable C++ source libraries. It includes librariesbr3ak for linear algebra, pseudorandom number generation, multithreading,br3ak image processing, regular expressions and unit testing.br3ak"
 SECTION="general"
-VERSION=1_66_0
+VERSION=1_67_0
 NAME="boost"
 
 #REC:general_which
@@ -19,11 +19,11 @@ NAME="boost"
 
 cd $SOURCE_DIR
 
-URL=https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.bz2
+URL=https://dl.bintray.com/boostorg/release/1.67.0/source/boost_1_67_0.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/boost/boost_1_66_0.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/boost/boost_1_66_0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/boost/boost_1_66_0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/boost/boost_1_66_0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/boost/boost_1_66_0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/boost/boost_1_66_0.tar.bz2
+wget -nc https://dl.bintray.com/boostorg/release/1.67.0/source/boost_1_67_0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/boost/boost_1_67_0.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/boost/boost_1_67_0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/boost/boost_1_67_0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/boost/boost_1_67_0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/boost/boost_1_67_0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/boost/boost_1_67_0.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -37,10 +37,6 @@ cd $DIRECTORY
 fi
 
 whoami > /tmp/currentuser
-
-sed -e '/using python/ s@;@: /usr/include/python${PYTHON_VERSION/3*/${PYTHON_VERSION}m} ;@' \
-    -i bootstrap.sh
-
 
 ./bootstrap.sh --prefix=/usr &&
 ./b2 stage threading=multi link=shared

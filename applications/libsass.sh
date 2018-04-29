@@ -6,9 +6,6 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#REQ:sass
-#REQ:inkscape
-
 NAME=libsass
 DESCRIPTION="A C/C++ implementation of a Sass compiler"
 VERSION=3.4.9
@@ -24,7 +21,7 @@ DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 tar xf $TARBALL
 cd $DIRECTORY
 
-autoreconf --force --install
+./autoreconf --force --install
 ./configure --prefix=/usr --enable-shared &&
 make
 sudo make install

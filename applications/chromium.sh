@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Chromium is an open-source browserbr3ak project that aims to build a safer, faster, and more stable way forbr3ak all users to experience the web.br3ak"
 SECTION="xsoft"
-VERSION=64.0.3282.119
+VERSION=64.0.3282.186
 NAME="chromium"
 
 #REQ:alsa-lib
@@ -26,7 +26,7 @@ NAME="chromium"
 #REQ:python2
 #REQ:usbutils
 #REQ:xorg-server
-#REC:cacerts
+#REC:make-ca
 #REC:flac
 #REC:git
 #REC:TTF-and-OTF-fonts#liberation-fonts
@@ -51,12 +51,12 @@ NAME="chromium"
 
 cd $SOURCE_DIR
 
-URL=https://commondatastorage.googleapis.com/chromium-browser-official/chromium-64.0.3282.119.tar.xz
+URL=https://commondatastorage.googleapis.com/chromium-browser-official/chromium-64.0.3282.186.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://commondatastorage.googleapis.com/chromium-browser-official/chromium-64.0.3282.119.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/chromium/chromium-64.0.3282.119.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/chromium/chromium-64.0.3282.119.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-64.0.3282.119.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-64.0.3282.119.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-64.0.3282.119.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-64.0.3282.119.tar.xz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/chromium-64.0.3282.119-constexpr-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/chromium/chromium-64.0.3282.119-constexpr-1.patch
+wget -nc https://commondatastorage.googleapis.com/chromium-browser-official/chromium-64.0.3282.186.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/chromium/chromium-64.0.3282.186.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/chromium/chromium-64.0.3282.186.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-64.0.3282.186.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/chromium/chromium-64.0.3282.186.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-64.0.3282.186.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/chromium/chromium-64.0.3282.186.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/chromium-64.0.3282.186-constexpr-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/chromium/chromium-64.0.3282.186-constexpr-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -80,7 +80,7 @@ sed '/static_assert/s:^://:' \
     -i third_party/WebKit/Source/platform/wtf/text/TextCodec.h
 
 
-patch -Np1 -i ../chromium-64.0.3282.119-constexpr-1.patch
+patch -Np1 -i ../chromium-64.0.3282.186-constexpr-1.patch
 
 
 for LIB in flac freetype harfbuzz-ng libjpeg \
@@ -189,7 +189,7 @@ sudo rm rootscript.sh
 mkdir temp                                         &&
 cd temp                                            &&
 case $(uname -m) in
-    x86_64) ar -x ../../google-chrome-stable_64.0.3282.119-1_amd64.deb
+    x86_64) ar -x ../../google-chrome-stable_64.0.3282.186-1_amd64.deb
     ;;
     i?86)   ar -x ../../google-chrome-stable_48.0.2564.116-1_i386.deb
     ;;

@@ -8,8 +8,8 @@ set +h
 
 
 SOURCE_ONLY=y
-URL="http://search.cpan.org/CPAN/authors/id/A/AB/ABH/Mozilla-CA-20160104.tar.gz"
-VERSION=20160104
+URL="http://search.cpan.org/CPAN/authors/id/A/AB/ABH/Mozilla-CA-20180117.tar.gz"
+VERSION=20180117
 NAME="perl-modules#mozilla-ca"
 
 cd $SOURCE_DIR

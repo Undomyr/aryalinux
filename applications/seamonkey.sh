@@ -9,10 +9,9 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak SeaMonkey is a browser suite, thebr3ak Open Source sibling of Netscape.br3ak It includes the browser, composer, mail and news clients, and anbr3ak IRC client. It is the follow-on to the Mozilla browser suite.br3ak"
 SECTION="xsoft"
-VERSION=2.49.1
+VERSION=2.49.2
 NAME="seamonkey"
 
-#REQ:alsa-lib
 #REQ:autoconf213
 #REQ:gtk2
 #REQ:gtk3
@@ -24,14 +23,15 @@ NAME="seamonkey"
 #REC:libvpx
 #REC:nspr
 #REC:nss
+#REC:pulseaudio
 #REC:sqlite
+#OPT:alsa-lib
 #OPT:curl
 #OPT:dbus-glib
 #OPT:doxygen
 #OPT:GConf
 #OPT:gst10-plugins-base
 #OPT:openjdk
-#OPT:pulseaudio
 #OPT:startup-notification
 #OPT:valgrind
 #OPT:wget
@@ -40,11 +40,11 @@ NAME="seamonkey"
 
 cd $SOURCE_DIR
 
-URL=https://archive.mozilla.org/pub/seamonkey/releases/2.49.1/source/seamonkey-2.49.1.source.tar.xz
+URL=https://archive.mozilla.org/pub/seamonkey/releases/2.49.2/source/seamonkey-2.49.2.source.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://archive.mozilla.org/pub/seamonkey/releases/2.49.1/source/seamonkey-2.49.1.source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/seamonkey/seamonkey-2.49.1.source.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/seamonkey/seamonkey-2.49.1.source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/seamonkey/seamonkey-2.49.1.source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/seamonkey/seamonkey-2.49.1.source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/seamonkey/seamonkey-2.49.1.source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/seamonkey/seamonkey-2.49.1.source.tar.xz
+wget -nc https://archive.mozilla.org/pub/seamonkey/releases/2.49.2/source/seamonkey-2.49.2.source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/seamonkey/seamonkey-2.49.2.source.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/seamonkey/seamonkey-2.49.2.source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/seamonkey/seamonkey-2.49.2.source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/seamonkey/seamonkey-2.49.2.source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/seamonkey/seamonkey-2.49.2.source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/seamonkey/seamonkey-2.49.2.source.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -73,8 +73,10 @@ ac_add_options --disable-necko-wifi
 # Uncomment these lines if you have installed optional dependencies:
 #ac_add_options --enable-system-hunspell
 #ac_add_options --enable-startup-notification
-# Comment out the following option if you have PulseAudio installed
-ac_add_options --disable-pulseaudio
+# Uncomment the following option if you have not installed PulseAudio
+#ac_add_options --disable-pulseaudio
+# and uncomment this if you installed alsa-lib instead of PulseAudio
+#ac_add_options --enable-alsa
 # Comment out following option if you have gconf installed
 ac_add_options --disable-gconf
 # Comment out following options if you have not installed
@@ -98,9 +100,11 @@ ac_add_options --enable-gio
 ac_add_options --enable-official-branding
 ac_add_options --enable-safe-browsing
 ac_add_options --enable-url-classifier
-# Use internal cairo due to reports of unstable execution with
-# system cairo
-#ac_add_options --enable-system-cairo
+# From firefox-40 (and the corresponding version of seamonkey),
+# using system cairo caused seamonkey to crash
+# frequently when it was doing background rendering in a tab.
+# This appears to again work in seamonkey-2.49.2
+ac_add_options --enable-system-cairo
 ac_add_options --enable-system-ffi
 ac_add_options --enable-system-pixman
 ac_add_options --with-pthreads
@@ -123,7 +127,7 @@ make -f client.mk
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make  -f client.mk install INSTALL_SDK= &&
-chown -R 0:0 /usr/lib/seamonkey-2.49.1    &&
+chown -R 0:0 /usr/lib/seamonkey-2.49.2    &&
 cp -v $(find -name seamonkey.1 | head -n1) /usr/share/man/man1
 
 ENDOFROOTSCRIPT
@@ -162,7 +166,7 @@ Categories=Network;GTK;Application;Email;Browser;WebBrowser;News;
 StartupNotify=true
 Terminal=false
 EOF
-ln -sfv /usr/lib/seamonkey-2.49.1/chrome/icons/default/seamonkey.png \
+ln -sfv /usr/lib/seamonkey-2.49.2/chrome/icons/default/seamonkey.png \
         /usr/share/pixmaps
 
 ENDOFROOTSCRIPT

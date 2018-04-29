@@ -12,7 +12,7 @@ SECTION="postlfs"
 VERSION=1.0.3
 NAME="gptfdisk"
 
-#REC:popt
+#REQ:popt
 #OPT:icu
 
 
@@ -23,7 +23,7 @@ URL=https://downloads.sourceforge.net/gptfdisk/gptfdisk-1.0.3.tar.gz
 if [ ! -z $URL ]
 then
 wget -nc https://downloads.sourceforge.net/gptfdisk/gptfdisk-1.0.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gptfdisk/gptfdisk-1.0.3.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gptfdisk/gptfdisk-1.0.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gptfdisk/gptfdisk-1.0.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gptfdisk/gptfdisk-1.0.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gptfdisk/gptfdisk-1.0.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gptfdisk/gptfdisk-1.0.3.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/gptfdisk-1.0.3-convenience-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/gptfdisk/gptfdisk-1.0.3-convenience-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/gptfdisk-1.0.3-convenience-2.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/gptfdisk/gptfdisk-1.0.3-convenience-2.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -38,13 +38,13 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../gptfdisk-1.0.3-convenience-1.patch &&
-make POPT=1
+patch -Np1 -i ../gptfdisk-1.0.3-convenience-2.patch &&
+make "-j`nproc`" || make
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make POPT=1 install
+make install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

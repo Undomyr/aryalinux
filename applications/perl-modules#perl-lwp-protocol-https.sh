@@ -6,7 +6,7 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#REQ:.._postlfs_openssl#REQ:perl-modules#perl-lwp
+#REQ:perl-modules#perl-lwp
 #REQ:perl-modules#io-socket-ssl
 #REQ:perl-modules#mozilla-ca
 

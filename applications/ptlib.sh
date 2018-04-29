@@ -13,7 +13,6 @@ VERSION=2.10.11
 NAME="ptlib"
 
 #REC:alsa-lib
-#REC:openssl
 #OPT:cyrus-sasl
 #OPT:lua
 #OPT:openldap
@@ -54,7 +53,8 @@ sed -i '/\/ioctl.h/a#include <sys/uio.h>' src/ptlib/unix/channel.cxx
 
 patch -Np1 -i ../ptlib-2.10.11-openssl-1.1.0-1.patch &&
 patch -Np1 -i ../ptlib-2.10.11-bison_fixes-2.patch &&
-./configure --prefix=/usr &&
+./configure --prefix=/usr  \
+            --disable-odbc &&
 make "-j`nproc`" || make
 
 

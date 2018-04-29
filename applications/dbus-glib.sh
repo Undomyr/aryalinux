@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The D-Bus GLib package containsbr3ak GLib interfaces to thebr3ak D-Bus API.br3ak"
 SECTION="general"
-VERSION=0.108
+VERSION=0.110
 NAME="dbus-glib"
 
 #REQ:dbus
@@ -19,11 +19,11 @@ NAME="dbus-glib"
 
 cd $SOURCE_DIR
 
-URL=https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.108.tar.gz
+URL=https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.110.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.108.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/dbus-glib/dbus-glib-0.108.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/dbus-glib/dbus-glib-0.108.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/dbus-glib/dbus-glib-0.108.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/dbus-glib/dbus-glib-0.108.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/dbus-glib/dbus-glib-0.108.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/dbus-glib/dbus-glib-0.108.tar.gz
+wget -nc https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.110.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/dbus-glib/dbus-glib-0.110.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/dbus-glib/dbus-glib-0.110.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/dbus-glib/dbus-glib-0.110.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/dbus-glib/dbus-glib-0.110.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/dbus-glib/dbus-glib-0.110.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/dbus-glib/dbus-glib-0.110.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

@@ -12,7 +12,6 @@ SECTION="basicnet"
 VERSION=.2
 NAME="lynx"
 
-#REC:openssl
 #OPT:gnutls
 #OPT:zip
 #OPT:unzip

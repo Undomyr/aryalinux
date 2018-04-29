@@ -19,7 +19,6 @@ NAME="pulseaudio"
 #REC:dbus
 #REC:glib2
 #REC:libcap
-#REC:openssl
 #REC:speex
 #REC:x7lib
 #OPT:avahi
@@ -39,6 +38,7 @@ URL=https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-11.1.tar
 if [ ! -z $URL ]
 then
 wget -nc https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-11.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/pulseaudio/pulseaudio-11.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/pulseaudio/pulseaudio-11.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/pulseaudio/pulseaudio-11.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/pulseaudio/pulseaudio-11.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/pulseaudio/pulseaudio-11.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/pulseaudio/pulseaudio-11.1.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/pulseaudio-11.1-glibc_2.27_fix-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/pulseaudio/pulseaudio-11.1-glibc_2.27_fix-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -53,6 +53,8 @@ fi
 
 whoami > /tmp/currentuser
 
+patch -Np1 -i ../pulseaudio-11.1-glibc_2.27_fix-1.patch &&
+AUTOPOINT='intltoolize --automake --copy' autoreconf -fiv &&
 ./configure --prefix=/usr        \
             --sysconfdir=/etc    \
             --localstatedir=/var \

@@ -12,7 +12,6 @@ SECTION="postlfs"
 VERSION=5.44
 NAME="stunnel"
 
-#REQ:openssl
 
 
 cd $SOURCE_DIR

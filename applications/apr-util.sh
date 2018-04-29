@@ -13,7 +13,6 @@ VERSION=1.6.1
 NAME="apr-util"
 
 #REQ:apr
-#REC:openssl
 #OPT:db
 #OPT:mariadb
 #OPT:openldap

@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The GStreamer Bad Plug-ins packagebr3ak contains a set of plug-ins that aren't up to par compared to thebr3ak rest. They might be close to being good quality, but they'rebr3ak missing something - be it a good code review, some documentation, abr3ak set of tests, a real live maintainer, or some actual wide use.br3ak"
 SECTION="multimedia"
-VERSION=1.12.4
+VERSION=1.14.0
 NAME="gst10-plugins-bad"
 
 #REQ:gst10-plugins-base
@@ -32,12 +32,9 @@ NAME="gst10-plugins-bad"
 #OPT:libmpeg2
 #OPT:x7driver
 #OPT:libwebp
-#OPT:mesa
-#OPT:mpg123
 #OPT:neon
 #OPT:nettle
 #OPT:opencv
-#OPT:openjpeg
 #OPT:openjpeg2
 #OPT:opus
 #OPT:qt5
@@ -50,11 +47,11 @@ NAME="gst10-plugins-bad"
 
 cd $SOURCE_DIR
 
-URL=https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.12.4.tar.xz
+URL=https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.14.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.12.4.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.12.4.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.12.4.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.12.4.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.12.4.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.12.4.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.12.4.tar.xz
+wget -nc https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.14.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.14.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.14.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.14.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.14.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.14.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gst-plugins-bad/gst-plugins-bad-1.14.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -69,11 +66,10 @@ fi
 
 whoami > /tmp/currentuser
 
-sed -i 's/openjpeg-2.2/openjpeg-2.3/' ext/openjpeg/gstopenjpeg.h    &&
 ./configure --prefix=/usr                                           \
             --disable-wayland                                       \
             --disable-opencv                                        \
-            --with-package-name="GStreamer Bad Plugins 1.12.4 BLFS" \
+            --with-package-name="GStreamer Bad Plugins 1.14.0 BLFS" \
             --with-package-origin="http://www.linuxfromscratch.org/blfs/view/svn/" &&
 make "-j`nproc`" || make
 

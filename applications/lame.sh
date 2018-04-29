@@ -38,7 +38,7 @@ fi
 whoami > /tmp/currentuser
 
 case $(uname -m) in
-   i?86) sed -i -e '/xmmintrin\.h/d' configure ;;
+   i?86) sed -i -e 's/<xmmintrin.h/&.nouse/' configure ;;
 esac
 
 

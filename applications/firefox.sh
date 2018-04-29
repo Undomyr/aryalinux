@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="Firefox is a stand-alone browser based on the Mozilla codebase."
 SECTION="xsoft"
-VERSION=58.0.2
+VERSION=56.0
 NAME="firefox"
 
 #REQ:alsa-lib
@@ -33,7 +33,7 @@ NAME="firefox"
 #REC:libevent
 #REC:libvpx
 #REC:sqlite
-#OPT:cargo
+#REQ:cargo
 #REQ:rust
 #OPT:curl
 #OPT:dbus-glib
@@ -59,7 +59,6 @@ URL=https://ftp.mozilla.org/pub/firefox/releases/$VERSION/source/firefox-$VERSIO
 if [ ! -z $URL ]
 then
 wget -nc $URL
-wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/1.1/firefox-$VERSION-system_graphite2_harfbuzz-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -78,44 +77,24 @@ export SHELL=/bin/sh
 
 cat > mozconfig << "EOF"
 # If you have a multicore machine, all cores will be used by default.
-# You can change the number of non-rust jobs by setting a valid number
-# of cores in this option, but when rust crates are being compiled
-# jobs will be scheduled for all the online CPU cores.
+# If desired, you can reduce the number of cores used, e.g. to 1, by
+# uncommenting the next line and setting a valid number of CPU cores.
 #mk_add_options MOZ_MAKE_FLAGS="-j1"
-
 # If you have installed dbus-glib, comment out this line:
-# ac_add_options --disable-dbus
-
+#ac_add_options --disable-dbus
 # If you have installed dbus-glib, and you have installed (or will install)
 # wireless-tools, and you wish to use geolocation web services, comment out
 # this line
-# ac_add_options --disable-necko-wifi
-
-# API Keys for geolocation APIs - necko-wifi (above) is required for MLS
-# Uncomment the following line if you wish to use Mozilla Location Service
-#ac_add_options --with-mozilla-api-keyfile=$PWD/mozilla-key
-
-# Uncomment the following line if you wish to use Google's geolocaton API
-# (needed for use with saved maps with Google Maps)
-#ac_add_options --with-google-api-keyfile=$PWD/google-key
-
+#ac_add_options --disable-necko-wifi
+# Uncomment this option if you wish to build with gtk+-2
+#ac_add_options --enable-default-toolkit=cairo-gtk2
 # Uncomment these lines if you have installed optional dependencies:
 #ac_add_options --enable-system-hunspell
 #ac_add_options --enable-startup-notification
-
-# Uncomment the following option if you have not installed PulseAudio
+# Comment out following option if you have PulseAudio installed
 #ac_add_options --disable-pulseaudio
-# and uncomment this if you installed alsa-lib instead of PulseAudio
-#ac_add_options --enable-alsa
-
 # If you have installed GConf, comment out this line
-# ac_add_options --disable-gconf
-
-# Stylo is the new CSS code, including the rust 'style'
-# package. It is enabled by default but requires clang.
-# Uncomment this if you do not wish to use stylo.
-#ac_add_options --disable-stylo
-
+#ac_add_options --disable-gconf
 # Comment out following options if you have not installed
 # recommended dependencies:
 ac_add_options --enable-system-sqlite
@@ -124,61 +103,51 @@ ac_add_options --with-system-libvpx
 ac_add_options --with-system-nspr
 ac_add_options --with-system-nss
 ac_add_options --with-system-icu
-
 # If you are going to apply the patch for system graphite
 # and system harfbuzz, uncomment these lines:
-#ac_add_options --with-system-graphite2
-#ac_add_options --with-system-harfbuzz
-
+# ac_add_options --with-system-graphite2
+# ac_add_options --with-system-harfbuzz
 # Stripping is now enabled by default.
 # Uncomment these lines if you need to run a debugger:
 #ac_add_options --disable-strip
 #ac_add_options --disable-install-strip
-
 # The BLFS editors recommend not changing anything below this line:
 ac_add_options --prefix=/usr
 ac_add_options --enable-application=browser
-
 ac_add_options --disable-crashreporter
 ac_add_options --disable-updater
-# enabling the tests will use a lot more space and significantly
-# increase the build time, for no obvious benefit.
 ac_add_options --disable-tests
-
-# Optimization for size is broken with gcc7
-ac_add_options --enable-optimize="-O2"
-
+ac_add_options --enable-optimize
+ac_add_options --enable-gio
 ac_add_options --enable-official-branding
-
-# From firefox-40, using system cairo caused firefox to crash
-# frequently when it was doing background rendering in a tab.
-# This appears to again work in firefox-56
-ac_add_options --enable-system-cairo
+ac_add_options --enable-safe-browsing
+ac_add_options --enable-url-classifier
+# From firefox-40, using system cairo causes firefox to crash
+# frequently when it is doing background rendering in a tab.
+#ac_add_options --enable-system-cairo
 ac_add_options --enable-system-ffi
 ac_add_options --enable-system-pixman
-
 ac_add_options --with-pthreads
-
 ac_add_options --with-system-bz2
 ac_add_options --with-system-jpeg
 ac_add_options --with-system-png
 ac_add_options --with-system-zlib
-
 mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-build-dir
 EOF
 
-patch -Np1 -i ../firefox-$VERSION-system_graphite2_harfbuzz-1.patch
 
-./mach build
-sudo ./mach install                                                  &&
+sed -e s/_EVENT_SIZEOF/EVENT__SIZEOF/ \
+    -i ipc/chromium/src/base/message_pump_libevent.cc
 
-sudo mkdir -pv  /usr/lib/mozilla/plugins                             &&
-sudo ln    -sfv ../../mozilla/plugins /usr/lib/firefox-$VERSION/browser
+make -f client.mk
+sudo make -f client.mk install INSTALL_SDK= &&
+sudo chown -R 0:0 /usr/lib/firefox-$VERSION   &&
+sudo mkdir -pv    /usr/lib/mozilla/plugins  &&
+sudo ln    -sfv   ../../mozilla/plugins /usr/lib/firefox-$VERSION/browser
 
 sudo mkdir -pv /usr/share/applications &&
 sudo mkdir -pv /usr/share/pixmaps &&
-
-sudo tee -a /usr/share/applications/firefox.desktop << "EOF" &&
+sudo tee /usr/share/applications/firefox.desktop << "EOF" &&
 [Desktop Entry]
 Encoding=UTF-8
 Name=Firefox Web Browser
@@ -192,10 +161,39 @@ Categories=GNOME;GTK;Network;WebBrowser;
 MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;
 StartupNotify=true
 EOF
-
 sudo ln -sfv /usr/lib/firefox-$VERSION/browser/icons/mozicon128.png \
         /usr/share/pixmaps/firefox.png
 
+
+# Create package...
+
+make -f client.mk install INSTALL_SDK= DESTDIR=$BINARY_DIR/firefox-$VERSION-$(uname -m) &&
+sudo chown -R 0:0 $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/lib/firefox-$VERSION   &&
+sudo mkdir -pv    $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/lib/mozilla/plugins  &&
+sudo ln    -sfv   ../../mozilla/plugins $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/lib/firefox-$VERSION/browser
+
+sudo mkdir -pv $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/share/applications &&
+sudo mkdir -pv $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/share/pixmaps &&
+sudo tee $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/share/applications/firefox.desktop << "EOF" &&
+[Desktop Entry]
+Encoding=UTF-8
+Name=Firefox Web Browser
+Comment=Browse the World Wide Web
+GenericName=Web Browser
+Exec=firefox %u
+Terminal=false
+Type=Application
+Icon=firefox
+Categories=GNOME;GTK;Network;WebBrowser;
+MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true
+EOF
+sudo ln -sfv /usr/lib/firefox-$VERSION/browser/icons/mozicon128.png \
+        $BINARY_DIR/firefox-$VERSION-$(uname -m)/usr/share/pixmaps/firefox.png
+pushd $BINARY_DIR/firefox-$VERSION-$(uname -m)
+sudo tar -cJvf ../firefox-$VERSION-$(uname -m).tar.xz *
+popd
+sudo rm -r $BINARY_DIR/firefox-$VERSION-$(uname -m)
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 

@@ -9,23 +9,23 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The libgusb package contains thebr3ak GObject wrappers for libusb-1.0br3ak that makes it easy to do asynchronous control, bulk and interruptbr3ak transfers with proper cancellation and integration into a mainloop.br3ak"
 SECTION="general"
-VERSION=0.2.11
+VERSION=0.3.0
 NAME="libgusb"
 
 #REQ:libusb
+#REC:gtk-doc
 #REC:gobject-introspection
 #REC:usbutils
 #REC:vala
-#OPT:gtk-doc
 
 
 cd $SOURCE_DIR
 
-URL=https://people.freedesktop.org/~hughsient/releases/libgusb-0.2.11.tar.xz
+URL=https://people.freedesktop.org/~hughsient/releases/libgusb-0.3.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://people.freedesktop.org/~hughsient/releases/libgusb-0.2.11.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libgusb/libgusb-0.2.11.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libgusb/libgusb-0.2.11.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgusb/libgusb-0.2.11.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgusb/libgusb-0.2.11.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libgusb/libgusb-0.2.11.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libgusb/libgusb-0.2.11.tar.xz
+wget -nc https://people.freedesktop.org/~hughsient/releases/libgusb-0.3.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libgusb/libgusb-0.3.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libgusb/libgusb-0.3.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgusb/libgusb-0.3.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libgusb/libgusb-0.3.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libgusb/libgusb-0.3.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libgusb/libgusb-0.3.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -40,13 +40,15 @@ fi
 
 whoami > /tmp/currentuser
 
-./configure --prefix=/usr --disable-static &&
-make "-j`nproc`" || make
+mkdir build &&
+cd    build &&
+meson --prefix=/usr &&
+ninja
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
+ninja install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

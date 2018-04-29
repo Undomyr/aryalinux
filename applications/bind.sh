@@ -7,15 +7,14 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The BIND package provides a DNSbr3ak server and client utilities. If you are only interested in thebr3ak utilities, refer to the <a class=\"xref\" href=\"../basicnet/bind-utils.html\" title=\"BIND Utilities-9.12.0\">BINDbr3ak Utilities-9.12.0</a>.br3ak"
+DESCRIPTION="br3ak The BIND package provides a DNSbr3ak server and client utilities. If you are only interested in thebr3ak utilities, refer to the <a class=\"xref\" href=\"../basicnet/bind-utils.html\" title=\"BIND Utilities-9.12.1\">BINDbr3ak Utilities-9.12.1</a>.br3ak"
 SECTION="server"
-VERSION=9.12.0
+VERSION=9.12.1
 NAME="bind"
 
 #OPT:libcap
 #OPT:libxml2
 #OPT:mitkrb
-#OPT:openssl
 #OPT:db
 #OPT:mariadb
 #OPT:openldap
@@ -31,12 +30,12 @@ NAME="bind"
 
 cd $SOURCE_DIR
 
-URL=ftp://ftp.isc.org/isc/bind9/9.12.0/bind-9.12.0.tar.gz
+URL=ftp://ftp.isc.org/isc/bind9/9.12.1/bind-9.12.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.isc.org/isc/bind9/9.12.0/bind-9.12.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/bind/bind-9.12.0.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/bind/bind-9.12.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/bind/bind-9.12.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/bind/bind-9.12.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/bind/bind-9.12.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/bind/bind-9.12.0.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/bind-9.12.0-use_iproute2-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/bind/bind-9.12.0-use_iproute2-1.patch
+wget -nc ftp://ftp.isc.org/isc/bind9/9.12.1/bind-9.12.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/bind/bind-9.12.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/bind/bind-9.12.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/bind/bind-9.12.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/bind/bind-9.12.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/bind/bind-9.12.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/bind/bind-9.12.1.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/bind-9.12.1-use_iproute2-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/bind/bind-9.12.1-use_iproute2-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -51,7 +50,7 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../bind-9.12.0-use_iproute2-1.patch
+patch -Np1 -i ../bind-9.12.1-use_iproute2-1.patch
 
 
 ./configure --prefix=/usr           \
@@ -91,11 +90,11 @@ sudo rm rootscript.sh
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
-install -v -m755 -d /usr/share/doc/bind-9.12.0/{arm,misc} &&
+install -v -m755 -d /usr/share/doc/bind-9.12.1/{arm,misc} &&
 install -v -m644    doc/arm/*.html \
-                    /usr/share/doc/bind-9.12.0/arm &&
+                    /usr/share/doc/bind-9.12.1/arm &&
 install -v -m644    doc/misc/{dnssec,ipv6,migrat*,options,rfc-compliance,roadmap,sdb} \
-                    /usr/share/doc/bind-9.12.0/misc
+                    /usr/share/doc/bind-9.12.1/misc
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -297,7 +296,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
 tar xf blfs-systemd-units-20180105.tar.bz2
 cd blfs-systemd-units-20180105
 make install-named

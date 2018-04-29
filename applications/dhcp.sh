@@ -9,18 +9,18 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The ISC DHCP package contains bothbr3ak the client and server programs for DHCP. <span class=\"command\"><strong>dhclient</strong> (the client) is used forbr3ak connecting to a network which uses DHCP to assign networkbr3ak addresses. <span class=\"command\"><strong>dhcpd</strong> (thebr3ak server) is used for assigning network addresses on privatebr3ak networks.br3ak"
 SECTION="basicnet"
-VERSION=4.3.6
+VERSION=4.4.1
 NAME="dhcp"
 
 
 
 cd $SOURCE_DIR
 
-URL=ftp://ftp.isc.org/isc/dhcp/4.3.6/dhcp-4.3.6.tar.gz
+URL=ftp://ftp.isc.org/isc/dhcp/4.4.1/dhcp-4.4.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.isc.org/isc/dhcp/4.3.6/dhcp-4.3.6.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/dhcp/dhcp-4.3.6.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/dhcp/dhcp-4.3.6.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcp-4.3.6.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcp-4.3.6.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcp-4.3.6.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcp-4.3.6.tar.gz
+wget -nc ftp://ftp.isc.org/isc/dhcp/4.4.1/dhcp-4.4.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/dhcp/dhcp-4.4.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/dhcp/dhcp-4.4.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcp-4.4.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/dhcp/dhcp-4.4.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcp-4.4.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/dhcp/dhcp-4.4.1.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -124,7 +124,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
 tar xf blfs-systemd-units-20180105.tar.bz2
 cd blfs-systemd-units-20180105
 make install-dhclient
@@ -200,7 +200,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
 tar xf blfs-systemd-units-20180105.tar.bz2
 cd blfs-systemd-units-20180105
 make install-dhcpd

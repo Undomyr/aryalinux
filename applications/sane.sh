@@ -49,12 +49,9 @@ whoami > /tmp/currentuser
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-if [ -d /var/lock ]; then
-	touch /var/lock/sane
-else
-	rm -f /var/lock
-	mkdir -pv /var/lock
-fi
+rm -f /var/lock
+mkdir -pv /var/lock/
+touch /var/lock/sane
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo bash -e ./rootscript.sh
@@ -80,7 +77,7 @@ sudo usermod -a -G scanner `cat /tmp/currentuser`
             --sysconfdir=/etc    \
             --localstatedir=/var \
             --with-group=scanner \
-            --with-docdir=/usr/share/doc/sane-backend-1.0.27 &&
+            --with-docdir=/usr/share/doc/sane-backends-1.0.27 &&
 make "-j`nproc`" || make
 
 

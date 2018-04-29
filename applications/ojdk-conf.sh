@@ -74,8 +74,30 @@ MANPATH_MAP /opt/jdk/bin /opt/jdk/man
 MANDB_MAP /opt/jdk/man /var/cache/man/jdk
 # End Java addition
 EOF
-mkdir -p /var/cache/man
+mkdir -p /var/cache/man &&
 mandb -c /opt/jdk/man
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+/usr/sbin/make-ca -g --force &&
+ln -sfv /etc/ssl/java/cacerts.jks /opt/jdk/lib/security/cacerts
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+cd /opt/jdk
+bin/keytool -list -cacerts
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

@@ -12,7 +12,7 @@ SECTION="general"
 VERSION=2.1.3
 NAME="qca"
 
-#REQ:cacerts
+#REQ:make-ca
 #REQ:cmake
 #REQ:qt5
 #REQ:general_which

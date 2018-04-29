@@ -12,10 +12,10 @@ SECTION="gnome"
 VERSION=3.25.4.1
 NAME="geocode-glib"
 
+#REQ:gtk-doc
 #REQ:json-glib
 #REQ:libsoup
 #REC:gobject-introspection
-#OPT:gtk-doc
 
 
 cd $SOURCE_DIR
@@ -39,8 +39,8 @@ fi
 
 whoami > /tmp/currentuser
 
-mkdir build &&
-cd build &&
+mkdir build            &&
+cd    build            &&
 meson --prefix /usr .. &&
 ninja
 

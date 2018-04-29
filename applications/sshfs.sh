@@ -44,13 +44,16 @@ if [ $(uname -m) = "i686" ]; then
 fi
 
 
-./configure --prefix=/usr &&
-make "-j`nproc`" || make
+mkdir build &&
+cd    build &&
+          
+meson --prefix=/usr .. &&
+ninja
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install
+ninja install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -61,7 +64,7 @@ sudo rm rootscript.sh
 sshfs example.com:/home/userid ~/examplepath
 
 
-fusermount -u ~/example
+fusermount3 -u ~/example
 
 
 

@@ -12,8 +12,7 @@ SECTION="basicnet"
 VERSION=1.19.4
 NAME="wget"
 
-#REC:cacerts
-#REC:openssl
+#REC:make-ca
 #OPT:gnutls
 #OPT:gpgme
 #OPT:libidn

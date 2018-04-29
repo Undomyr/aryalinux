@@ -12,9 +12,6 @@ SECTION="x"
 VERSION=1.19.6
 NAME="xorg-server"
 
-#REQ:openssl
-#REQ:nettle
-#REQ:libgcrypt
 #REQ:pixman
 #REQ:x7font
 #REQ:xkeyboard-config
@@ -25,6 +22,8 @@ NAME="xorg-server"
 #OPT:acpid
 #OPT:doxygen
 #OPT:fop
+#OPT:nettle
+#OPT:libgcrypt
 #OPT:xcb-util-keysyms
 #OPT:xcb-util-image
 #OPT:xcb-util-renderutil

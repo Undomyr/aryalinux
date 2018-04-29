@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak File Roller is an archive managerbr3ak for GNOME with support for tar,br3ak bzip2, gzip, zip, jar, compress, lzop and many other archivebr3ak formats.br3ak"
 SECTION="gnome"
-VERSION=3.26.2
+VERSION=3.28.0
 NAME="file-roller"
 
 #REQ:gtk3
@@ -27,11 +27,11 @@ NAME="file-roller"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/file-roller/3.26/file-roller-3.26.2.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/file-roller/3.28/file-roller-3.28.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/file-roller/3.26/file-roller-3.26.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/file-roller/file-roller-3.26.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/file-roller/file-roller-3.26.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/file-roller/file-roller-3.26.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/file-roller/file-roller-3.26.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/file-roller/file-roller-3.26.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/file-roller/file-roller-3.26.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/file-roller/3.26/file-roller-3.26.2.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/file-roller/3.28/file-roller-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/file-roller/file-roller-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/file-roller/file-roller-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/file-roller/file-roller-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/file-roller/file-roller-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/file-roller/file-roller-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/file-roller/file-roller-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/file-roller/3.28/file-roller-3.28.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -46,15 +46,15 @@ fi
 
 whoami > /tmp/currentuser
 
-./configure --prefix=/usr         \
-            --disable-packagekit  \
-            --disable-static &&
-make "-j`nproc`" || make
+mkdir build &&
+cd    build &&
+meson --prefix=/usr -Dpackagekit=false .. &&
+ninja
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install &&
+ninja install &&
 chmod -v 0755 /usr/libexec/file-roller/isoinfo.sh
 
 ENDOFROOTSCRIPT

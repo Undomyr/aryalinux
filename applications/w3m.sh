@@ -14,7 +14,6 @@ NAME="w3m"
 
 #REQ:gc
 #OPT:gpm
-#OPT:openssl10
 #OPT:imlib2
 #OPT:gtk2
 #OPT:gdk-pixbuf
@@ -43,11 +42,11 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../w3m-0.5.3-bdwgc72-1.patch &&
-sed -i 's/file_handle/file_foo/' istream.{c,h} &&
+patch -Np1 -i ../w3m-0.5.3-bdwgc72-1.patch      &&
+sed -i 's/file_handle/file_foo/' istream.{c,h}  &&
 sed -i 's#gdk-pixbuf-xlib-2.0#& x11#' configure &&
-PKG_CONFIG_PATH="/usr/lib/openssl-1.0/pkgconfig:$PKG_CONFIG_PATH" \
-    ./configure --prefix=/usr --sysconfdir=/etc  &&
+sed -i '/USE_EGD/s/define/undef/' config.h.in   &&
+./configure --prefix=/usr --sysconfdir=/etc  &&
 make "-j`nproc`" || make
 
 

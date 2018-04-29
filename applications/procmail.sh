@@ -21,6 +21,7 @@ URL=http://www.ring.gr.jp/archives/net/mail/procmail/procmail-3.22.tar.gz
 if [ ! -z $URL ]
 then
 wget -nc http://www.ring.gr.jp/archives/net/mail/procmail/procmail-3.22.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/procmail/procmail-3.22.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/procmail/procmail-3.22.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/procmail/procmail-3.22.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/procmail/procmail-3.22.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/procmail/procmail-3.22.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/procmail/procmail-3.22.tar.gz || wget -nc ftp://ftp.informatik.rwth-aachen.de/pub/packages/procmail/procmail-3.22.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/procmail-3.22-consolidated_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/procmail/procmail-3.22-consolidated_fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -37,8 +38,9 @@ whoami > /tmp/currentuser
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-sed -i 's/getline/get_line/' src/*.[ch] &&
-make LOCKINGTEST=/tmp MANDIR=/usr/share/man install &&
+sed -i 's/getline/get_line/' src/*.[ch]                   &&
+patch -Np1 -i ../procmail-3.22-consolidated_fixes-1.patch &&
+make LOCKINGTEST=/tmp MANDIR=/usr/share/man install       &&
 make install-suid
 
 ENDOFROOTSCRIPT

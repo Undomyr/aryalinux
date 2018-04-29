@@ -12,7 +12,6 @@ SECTION="basicnet"
 VERSION=2.1.8
 NAME="libevent"
 
-#REC:openssl
 #OPT:doxygen
 
 

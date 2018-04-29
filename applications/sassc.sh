@@ -6,8 +6,6 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#REQ:libsass
-
 NAME=sassc
 DESCRIPTION="libsass command line driver"
 VERSION=3.4.8
@@ -23,7 +21,7 @@ DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 tar xf $TARBALL
 cd $DIRECTORY
 
-autoreconf --force --install
+./autoreconf --force --install
 ./configure --prefix=/usr --enable-shared &&
 make
 sudo make install

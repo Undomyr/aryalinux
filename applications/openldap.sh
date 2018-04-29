@@ -9,11 +9,10 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The OpenLDAP package provides anbr3ak open source implementation of the Lightweight Directory Accessbr3ak Protocol.br3ak"
 SECTION="server"
-VERSION=2.4.45
+VERSION=2.4.46
 NAME="openldap"
 
 #REC:cyrus-sasl
-#REC:openssl
 #OPT:icu
 #OPT:gnutls
 #OPT:pth
@@ -25,12 +24,12 @@ NAME="openldap"
 
 cd $SOURCE_DIR
 
-URL=ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-2.4.45.tgz
+URL=ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-2.4.46.tgz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-2.4.45.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openldap/openldap-2.4.45.tgz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/openldap/openldap-2.4.45.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openldap/openldap-2.4.45.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openldap/openldap-2.4.45.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openldap/openldap-2.4.45.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openldap/openldap-2.4.45.tgz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/openldap-2.4.45-consolidated-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/openldap/openldap-2.4.45-consolidated-1.patch
+wget -nc ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-2.4.46.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/openldap/openldap-2.4.46.tgz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/openldap/openldap-2.4.46.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/openldap/openldap-2.4.46.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/openldap/openldap-2.4.46.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/openldap/openldap-2.4.46.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/openldap/openldap-2.4.46.tgz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/openldap-2.4.46-consolidated-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/openldap/openldap-2.4.46-consolidated-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -45,7 +44,7 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../openldap-2.4.45-consolidated-1.patch &&
+patch -Np1 -i ../openldap-2.4.46-consolidated-1.patch &&
 autoconf &&
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
@@ -86,7 +85,7 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
-patch -Np1 -i ../openldap-2.4.45-consolidated-1.patch &&
+patch -Np1 -i ../openldap-2.4.46-consolidated-1.patch &&
 autoconf &&
 ./configure --prefix=/usr         \
             --sysconfdir=/etc     \
@@ -120,9 +119,19 @@ install -v -dm700 -o ldap -g ldap /var/lib/openldap     &&
 install -v -dm700 -o ldap -g ldap /etc/openldap/slapd.d &&
 chmod   -v    640     /etc/openldap/slapd.{conf,ldif}   &&
 chown   -v  root:ldap /etc/openldap/slapd.{conf,ldif}   &&
-install -v -dm755 /usr/share/doc/openldap-2.4.45 &&
+install -v -dm755 /usr/share/doc/openldap-2.4.46 &&
 cp      -vfr      doc/{drafts,rfc,guide} \
-                  /usr/share/doc/openldap-2.4.45
+                  /usr/share/doc/openldap-2.4.46
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+sed 's/\.la$/.so/' -i /etc/openldap/slapd.{conf,ldif}{,.default}
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -135,7 +144,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20180105.tar.bz2
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
 tar xf blfs-systemd-units-20180105.tar.bz2
 cd blfs-systemd-units-20180105
 make install-slapd

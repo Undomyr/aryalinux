@@ -12,8 +12,8 @@ set +h
 #REQ:perl-modules#tie-ixhash
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/G/GR/GRANTM/XML-Simple-2.24.tar.gz"
-VERSION=2.24
+URL="https://www.cpan.org/authors/id/G/GR/GRANTM/XML-Simple-2.25.tar.gz"
+VERSION=2.25
 NAME="perl-modules#perl-xml-simple"
 
 cd $SOURCE_DIR

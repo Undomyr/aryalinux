@@ -9,8 +9,8 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak LibreOffice is a full-featuredbr3ak office suite. It is largely compatible with Microsoft Office and is descended frombr3ak OpenOffice.org.br3ak"
 SECTION="xsoft"
-VERSION_MAJOR=5.4.4
-VERSION_MINOR=2
+VERSION_MAJOR=6.0.1
+VERSION_MINOR=1
 VERSION=$VERSION_MAJOR.$VERSION_MINOR
 PARENT_DIR_URL="http://download.documentfoundation.org/libreoffice/src/$VERSION_MAJOR/"
 NAME="libreoffice"
@@ -50,7 +50,6 @@ NAME="libreoffice"
 #REC:redland
 #REC:serf
 #REC:unixodbc
-#OPT:postgresql
 #OPT:avahi
 #OPT:bluez
 #OPT:dconf
@@ -116,6 +115,7 @@ sed -e "/distro-install-file-lists/d" -i Makefile.in &&
              --without-system-dicts      \
              --disable-dconf             \
              --disable-odk               \
+             --disable-firebird-sdbc     \
              --enable-release-build=yes  \
              --enable-python=system      \
              --with-system-apr           \
@@ -137,11 +137,12 @@ sed -e "/distro-install-file-lists/d" -i Makefile.in &&
              --with-system-odbc          \
              --with-system-openldap      \
              --with-system-openssl       \
+             --with-system-poppler       \
              --disable-postgresql-sdbc   \
+             --without-java              \
              --with-system-redland       \
              --with-system-serf          \
-             --with-system-zlib          \
-             --without-java
+             --with-system-zlib
 
 
 make build-nocheck

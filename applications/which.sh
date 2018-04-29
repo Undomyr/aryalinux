@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak Download (HTTP): <a class=\"ulink\" href=\"https://ftp.gnu.org/gnu/which/which-2.21.tar.gz\">https://ftp.gnu.org/gnu/which/which-2.21.tar.gz</a>br3ak"
+DESCRIPTION="br3ak The first option is to install the actual GNU which package.br3ak"
 SECTION="general"
 VERSION=2.21
 NAME="general_which"

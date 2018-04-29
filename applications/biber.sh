@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Biber is a BibTeX replacement for users of biblatex, written inbr3ak Perl, with full Unicode support.br3ak"
 SECTION="pst"
-VERSION=2.10
+VERSION=2.11
 NAME="biber"
 
 #REQ:perl-modules#perl-autovivification
@@ -52,12 +52,12 @@ NAME="biber"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/plk/biber/archive/v2.10.tar.gz
+URL=https://github.com/plk/biber/archive/v2.11.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/plk/biber/archive/v2.10.tar.gz
-wget -nc http://sourceforge.net/projects/biblatex/files/biblatex-3.10/biblatex-3.10.tds.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/biblatex/biblatex-3.10.tds.tgz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/biblatex/biblatex-3.10.tds.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.10.tds.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.10.tds.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.10.tds.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.10.tds.tgz
+wget -nc https://github.com/plk/biber/archive/v2.11.tar.gz
+wget -nc http://sourceforge.net/projects/biblatex/files/biblatex-3.11/biblatex-3.11.tds.tgz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/biblatex/biblatex-3.11.tds.tgz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/biblatex/biblatex-3.11.tds.tgz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.11.tds.tgz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/biblatex/biblatex-3.11.tds.tgz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.11.tds.tgz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/biblatex/biblatex-3.11.tds.tgz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -72,8 +72,8 @@ fi
 
 whoami > /tmp/currentuser
 
-wget -c https://github.com/plk/biber/archive/v2.10.tar.gz \
-     -O biber-2.10.tar.gz
+wget -c https://github.com/plk/biber/archive/v2.11.tar.gz \
+     -O biber-2.11.tar.gz
 
 
 perl ./Build.PL &&
@@ -82,7 +82,7 @@ perl ./Build.PL &&
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-tar -xf ../biblatex-3.10.tds.tgz -C /opt/texlive/2017/texmf-dist &&
+tar -xf ../biblatex-3.11.tds.tgz -C /opt/texlive/2017/texmf-dist &&
 texhash &&
 ./Build install
 

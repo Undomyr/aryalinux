@@ -36,7 +36,7 @@ fi
 whoami > /tmp/currentuser
 
 export GMAKE_NOWARN=true &&
-make INS_BASE=/usr DEFINSUSR=root DEFINSGRP=root
+make -j1 INS_BASE=/usr DEFINSUSR=root DEFINSGRP=root
 
 
 

@@ -12,8 +12,7 @@ SECTION="basicnet"
 VERSION=1.7.0
 NAME="ldns"
 
-#REC:openssl
-#OPT:cacerts
+#OPT:make-ca
 #OPT:libpcap
 #OPT:python2
 #OPT:swig
@@ -44,7 +43,6 @@ whoami > /tmp/currentuser
 ./configure --prefix=/usr           \
             --sysconfdir=/etc       \
             --disable-static        \
-            --disable-dane-ta-usage \
             --with-drill            &&
 make "-j`nproc`" || make
 

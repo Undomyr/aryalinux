@@ -8,27 +8,17 @@ set +h
 
 SOURCE_ONLY=n
 NAME="greybird-gtk-theme"
-VERSION=3.22.6
+VERSION=SVN
 DESCRIPTION="Desktop Suite for Xfce"
 
 #REQ:gtk2
 #REQ:gtk3
-#REQ:sass
 
 cd $SOURCE_DIR
 
-URL=https://github.com/shimmerproject/Greybird/archive/v3.22.6.tar.gz
-TARBALL="$NAME-$VERSION.tar.gz"
+wget -nc https://sourceforge.net/projects/aryalinux-bin/files/artifacts/greybird-gtk-theme.tar.gz
 
-wget -c $URL -O $TARBALL
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
-
-tar xf $TARBALL
-cd $DIRECTORY
-
-./autogen.sh --prefix=/usr &&
-make
-sudo make install
+sudo tar xf greybird-gtk-theme.tar.gz -C /
 
 cd $SOURCE_DIR
 

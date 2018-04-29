@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="%DESCRIPTION%"
 SECTION="general"
-VERSION=2.9.7
+VERSION=2.9.8
 NAME="python-modules#libxml2py2"
 
 #REQ:libxml2
@@ -18,11 +18,11 @@ NAME="python-modules#libxml2py2"
 
 cd $SOURCE_DIR
 
-URL=http://xmlsoft.org/sources/libxml2-2.9.7.tar.gz
+URL=http://xmlsoft.org/sources/libxml2-2.9.8.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc http://xmlsoft.org/sources/libxml2-2.9.7.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libxml/libxml2-2.9.7.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libxml/libxml2-2.9.7.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxml/libxml2-2.9.7.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxml/libxml2-2.9.7.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libxml/libxml2-2.9.7.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libxml/libxml2-2.9.7.tar.gz || wget -nc ftp://xmlsoft.org/libxml2/libxml2-2.9.7.tar.gz
+wget -nc http://xmlsoft.org/sources/libxml2-2.9.8.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libxml/libxml2-2.9.8.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libxml/libxml2-2.9.8.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxml/libxml2-2.9.8.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libxml/libxml2-2.9.8.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libxml/libxml2-2.9.8.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libxml/libxml2-2.9.8.tar.gz || wget -nc ftp://xmlsoft.org/libxml2/libxml2-2.9.8.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

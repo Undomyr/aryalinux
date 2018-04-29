@@ -14,9 +14,8 @@ NAME="systemd"
 
 #REQ:linux-pam
 #REC:polkit
-#OPT:cacerts
+#OPT:make-ca
 #OPT:curl
-#OPT:elfutils
 #OPT:gnutls
 #OPT:iptables
 #OPT:libgcrypt
@@ -37,8 +36,8 @@ URL=https://github.com/systemd/systemd/archive/v238/systemd-238.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc $URL
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/systemd-238-upstream_fixes-1.patch
+wget -nc https://github.com/systemd/systemd/archive/v238/systemd-238.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/systemd/systemd-238.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/systemd/systemd-238.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-238.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/systemd/systemd-238.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-238.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-238.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/systemd-238-upstream_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/systemd/systemd-238-upstream_fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -54,11 +53,13 @@ fi
 whoami > /tmp/currentuser
 
 patch -Np1 -i ../systemd-238-upstream_fixes-1.patch
+
+
 sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
+
 
 mkdir build &&
 cd    build &&
-
 meson --prefix=/usr         \
       --sysconfdir=/etc     \
       --localstatedir=/var  \
@@ -74,35 +75,56 @@ meson --prefix=/usr         \
       -Dsysusers=false      \
       -Db_lto=false         \
       ..                    &&
-
 ninja
-sudo ninja install
-sudo rm -rfv /usr/lib/rpm
 
-sudo tee -a /etc/pam.d/system-session << "EOF"
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+ninja install
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+rm -rfv /usr/lib/rpm
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+cat >> /etc/pam.d/system-session << "EOF"
 # Begin Systemd addition
-    
-session   required    pam_loginuid.so
-session   optional    pam_systemd.so
-
+ 
+session required pam_loginuid.so
+session optional pam_systemd.so
 # End Systemd addition
 EOF
-
-sudo tee /etc/pam.d/systemd-user << "EOF"
+cat > /etc/pam.d/systemd-user << "EOF"
 # Begin /etc/pam.d/systemd-user
-
-account  required pam_access.so
-account  include  system-account
-
-session  required pam_env.so
-session  required pam_limits.so
-session  include  system-session
-
-auth     required pam_deny.so
+account required pam_access.so
+account include system-account
+session required pam_env.so
+session required pam_limits.so
+session include system-session
+auth required pam_deny.so
 password required pam_deny.so
-
 # End /etc/pam.d/systemd-user
 EOF
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
+
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi

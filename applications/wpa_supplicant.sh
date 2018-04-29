@@ -13,7 +13,6 @@ VERSION=2.6
 NAME="wpa_supplicant"
 
 #REC:libnl
-#REC:openssl
 #OPT:dbus
 #OPT:libxml2
 #OPT:qt5

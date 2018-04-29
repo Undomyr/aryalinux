@@ -70,7 +70,7 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
-rsync -avzcP --delete --exclude="/dos/" --exclude="/spell/" \
+rsync -avzcP --exclude="/dos/" --exclude="/spell/" \
     ftp.nluug.nl::Vim/runtime/ ./runtime/
 
 

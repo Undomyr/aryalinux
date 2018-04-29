@@ -12,7 +12,6 @@ SECTION="postlfs"
 VERSION=3.4
 NAME="nettle"
 
-#OPT:openssl
 
 
 cd $SOURCE_DIR

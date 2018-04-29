@@ -12,7 +12,7 @@ SECTION="lxde"
 VERSION=0.9.3
 NAME="lxpanel"
 
-#REQ:keybinder2
+#REQ:keybinder
 #REQ:libwnck2
 #REQ:lxmenu-data
 #REQ:menu-cache

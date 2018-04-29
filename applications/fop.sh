@@ -14,6 +14,7 @@ NAME="fop"
 
 #REQ:apache-ant
 #OPT:junit
+#OPT:maven
 #OPT:xorg-server
 
 
@@ -25,8 +26,6 @@ if [ ! -z $URL ]
 then
 wget -nc https://archive.apache.org/dist/xmlgraphics/fop/source/fop-2.2-src.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/fop/fop-2.2-src.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/fop/fop-2.2-src.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/fop/fop-2.2-src.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/fop/fop-2.2-src.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/fop/fop-2.2-src.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/fop/fop-2.2-src.tar.gz
 wget -nc https://downloads.sourceforge.net/offo/2.2/offo-hyphenation.zip
-wget -nc http://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-i586.tar.gz
-wget -nc http://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -46,30 +45,11 @@ cp offo-hyphenation/hyph/* fop/hyph &&
 rm -rf offo-hyphenation
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-case `uname -m` in
-  i?86)
-    tar -xf ../jai-1_1_3-lib-linux-i586.tar.gz
-    cp -v jai-1_1_3/lib/{jai*,mlibwrapper_jai.jar} $JAVA_HOME/jre/lib/ext/
-    cp -v jai-1_1_3/lib/libmlib_jai.so             $JAVA_HOME/jre/lib/i386/
-    ;;
-  x86_64)
-    tar -xf ../jai-1_1_3-lib-linux-amd64.tar.gz
-    cp -v jai-1_1_3/lib/{jai*,mlibwrapper_jai.jar} $JAVA_HOME/jre/lib/ext/
-    cp -v jai-1_1_3/lib/libmlib_jai.so             $JAVA_HOME/jre/lib/amd64/
-    ;;
-esac
-
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
 sed -i '\@</javad@i\
 <arg value="-Xdoclint:none"/>\
-<arg value="--allow-script-in-comments"/>' fop/build.xml
+<arg value="--allow-script-in-comments"/>\
+<arg value="--ignore-source-errors"/>' \
+    fop/build.xml
 
 
 sed -e '/hyph\.stack/s/512k/1M/' \
@@ -78,10 +58,7 @@ sed -e '/hyph\.stack/s/512k/1M/' \
 
 cd fop                    &&
 export LC_ALL=en_US.UTF-8 &&
-ant compile               &&
-ant jar-main              &&
-ant jar-hyphenation       &&
-ant javadocs              &&
+ant all javadocs          &&
 mv build/javadocs .
 
 

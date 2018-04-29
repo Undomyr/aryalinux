@@ -13,7 +13,6 @@ VERSION=1.3.9
 NAME="serf"
 
 #REQ:apr-util
-#REQ:openssl
 #REQ:scons
 #OPT:mitkrb
 

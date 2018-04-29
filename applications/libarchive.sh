@@ -15,7 +15,6 @@ NAME="libarchive"
 #OPT:libxml2
 #OPT:lzo
 #OPT:nettle
-#OPT:openssl
 
 
 cd $SOURCE_DIR

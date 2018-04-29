@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak ImageMagick is a collection ofbr3ak tools and libraries to read, write, and manipulate an image inbr3ak various image formats. Image processing operations are availablebr3ak from the command line. Bindings for Perl and C++ are alsobr3ak available.br3ak"
 SECTION="general"
-VERSION=11
+VERSION=23
 NAME="imagemagick"
 
 #REC:x7lib
@@ -47,11 +47,11 @@ NAME="imagemagick"
 
 cd $SOURCE_DIR
 
-URL=https://www.imagemagick.org/download/releases/ImageMagick-7.0.7-11.tar.xz
+URL=https://www.imagemagick.org/download/releases/ImageMagick-7.0.7-23.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.imagemagick.org/download/releases/ImageMagick-7.0.7-11.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ImageMagick/ImageMagick-7.0.7-11.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ImageMagick/ImageMagick-7.0.7-11.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.7-11.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.7-11.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.7-11.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.7-11.tar.xz || wget -nc ftp://ftp.imagemagick.org/pub/ImageMagick/releases/ImageMagick-7.0.7-11.tar.xz
+wget -nc https://www.imagemagick.org/download/releases/ImageMagick-7.0.7-23.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ImageMagick/ImageMagick-7.0.7-23.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ImageMagick/ImageMagick-7.0.7-23.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.7-23.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.7-23.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.7-23.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ImageMagick/ImageMagick-7.0.7-23.tar.xz || wget -nc ftp://ftp.imagemagick.org/pub/ImageMagick/releases/ImageMagick-7.0.7-23.tar.xz
 wget -nc http://www.mcmurchy.com/ralcgm/ralcgm-3.51.tar.gz
 wget -nc http://www.mcmurchy.com/urt/urt-3.1b.tar.gz
 

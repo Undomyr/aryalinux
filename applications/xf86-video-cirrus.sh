@@ -13,7 +13,7 @@ VERSION="1.5.3"
 
 cd $SOURCE_DIR
 
-URL="https://sources.voidlinux.eu/xf86-video-cirrus-1.5.3/xf86-video-cirrus-1.5.3.tar.bz2"
+URL="http://ftp.kaist.ac.kr/x.org/individual/driver/xf86-video-cirrus-1.5.3.tar.bz2"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`

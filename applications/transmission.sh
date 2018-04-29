@@ -14,7 +14,6 @@ NAME="transmission"
 
 #REQ:curl
 #REQ:libevent
-#REQ:openssl
 #REC:gtk3
 #OPT:doxygen
 #OPT:gdb

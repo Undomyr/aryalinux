@@ -21,11 +21,11 @@ NAME="libvpx"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/webmproject/libvpx/archive/v1.7.0/libvpx-v1.7.0.tar.gz
+URL=https://github.com/webmproject/libvpx/archive/v1.7.0/libvpx-1.7.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/webmproject/libvpx/archive/v1.7.0/libvpx-v1.7.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libvpx/libvpx-v1.7.0.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libvpx/libvpx-v1.7.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libvpx/libvpx-v1.7.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libvpx/libvpx-v1.7.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libvpx/libvpx-v1.7.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libvpx/libvpx-v1.7.0.tar.gz
+wget -nc https://github.com/webmproject/libvpx/archive/v1.7.0/libvpx-1.7.0.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libvpx/libvpx-1.7.0.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libvpx/libvpx-1.7.0.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libvpx/libvpx-1.7.0.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libvpx/libvpx-1.7.0.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libvpx/libvpx-1.7.0.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libvpx/libvpx-1.7.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
