@@ -27,7 +27,7 @@ URL=http://anduin.linuxfromscratch.org/BLFS/mozjs/mozjs-38.2.1.rc0.tar.bz2
 if [ ! -z $URL ]
 then
 wget -nc http://anduin.linuxfromscratch.org/BLFS/mozjs/mozjs-38.2.1.rc0.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mozjs/mozjs-38.2.1.rc0.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/mozjs/mozjs-38.2.1.rc0.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mozjs/mozjs-38.2.1.rc0.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mozjs/mozjs-38.2.1.rc0.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mozjs/mozjs-38.2.1.rc0.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mozjs/mozjs-38.2.1.rc0.tar.bz2
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/js38-38.2.1-upstream_fixes-2.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/js38/js38-38.2.1-upstream_fixes-2.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.2/js38-38.2.1-upstream_fixes-2.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/js38/js38-38.2.1-upstream_fixes-2.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

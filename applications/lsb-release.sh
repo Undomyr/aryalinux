@@ -45,7 +45,8 @@ sed -i "s|n/a|unavailable|" lsb_release
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 install -v -m 644 lsb_release.1 /usr/share/man/man1 &&
-install -v -m 755 lsb_release   /usr/bin
+install -v -m 755 lsb_release   /usr/bin            &&
+install -v -m 755 help2man      /usr/bin
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

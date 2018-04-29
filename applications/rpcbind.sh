@@ -22,7 +22,7 @@ URL=https://downloads.sourceforge.net/rpcbind/rpcbind-0.2.4.tar.bz2
 if [ ! -z $URL ]
 then
 wget -nc https://downloads.sourceforge.net/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/rpcbind/rpcbind-0.2.4.tar.bz2
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/rpcbind-0.2.4-vulnerability_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/rpcbind/rpcbind-0.2.4-vulnerability_fixes-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.2/rpcbind-0.2.4-vulnerability_fixes-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/rpcbind/rpcbind-0.2.4-vulnerability_fixes-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

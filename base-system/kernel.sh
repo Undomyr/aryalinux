@@ -39,10 +39,17 @@ then
 
 cd /sources
 
-LINUX_TARBALL=`ls linux-4*z`
+LINUX_VERSION=`ls linux*xz | sed "s@linux-@@g" | sed "s@\.tar\.xz@@g"`
+LINUX_TARBALL=`ls linux*xz`
 LINUX_SRC_DIR=`tar -tf $LINUX_TARBALL | cut "-d/" -f1 | uniq`
 tar xf $LINUX_TARBALL
 cd $LINUX_SRC_DIR
+
+tar -xvf ../aufs-*.tar.gz -C .
+for patch in ../aufs4*.patch
+do
+	patch -Np1 -i $patch
+done
 
 make mrproper
 
@@ -95,6 +102,24 @@ turnOn CONFIG_SND_HDA_CODEC_CA0132_DSP
 turnOn CONFIG_SND_HDA_PATCH_LOADER
 turnOn CONFIG_SND_HDA_RECONFIG
 
+turnOn CONFIG_AUFS_FS
+turnOn CONFIG_AUFS_BRANCH_MAX_127
+turnOff CONFIG_AUFS_BRANCH_MAX_511
+turnOff CONFIG_AUFS_BRANCH_MAX_1023
+turnOff CONFIG_AUFS_BRANCH_MAX_32767
+turnOn CONFIG_AUFS_SBILIST
+turnOn CONFIG_AUFS_HFSNOTIFY
+turnOn CONFIG_AUFS_HNOTIFY
+turnOn CONFIG_AUFS_EXPORT
+turnOn CONFIG_AUFS_INO_T_64
+turnOn CONFIG_AUFS_XATTR
+turnOn CONFIG_AUFS_FHSM
+turnOn CONFIG_AUFS_RDU
+turnOn CONFIG_AUFS_SHWH
+turnOn CONFIG_AUFS_BR_RAMFS
+turnOn CONFIG_AUFS_BDEV_LOOP
+turnOff CONFIG_AUFS_DEBUG
+
 turnOn CONFIG_SQUASHFS
 turnOn CONFIG_SQUASHFS_FILE_CACHE
 turnOn CONFIG_SQUASHFS_DECOMP_SINGLE
@@ -130,7 +155,6 @@ turnOn CONFIG_USB_UHCI_HCD
 
 turnOn CONFIG_USB_STORAGE
 turnOff CONFIG_CHARGER_ISP1704
-turnOff CONFIG_UNWINDER_ORC
 
 echo "CONFIG_SQUASHFS_FRAGMENT_CACHE_SIZE=3" >> .config
 sed "s@CONFIG_MESSAGE_LOGLEVEL_DEFAULT=4@CONFIG_MESSAGE_LOGLEVEL_DEFAULT=7@g" .config
@@ -154,8 +178,7 @@ sed -i "s@# CONFIG_TMPFS_POSIX_ACL is not set@CONFIG_TMPFS_POSIX_ACL=y@g" .confi
 
 make "-j`nproc`"
 make modules_install
-
-LINUX_VERSION=$(ls /lib/modules/)
+make firmware_install
 cp -v arch/x86/boot/bzImage "/boot/vmlinuz-$LINUX_VERSION"
 cp -v System.map "/boot/System.map-$LINUX_VERSION"
 cp -v .config "/boot/config-$LINUX_VERSION"

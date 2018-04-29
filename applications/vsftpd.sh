@@ -12,7 +12,6 @@ SECTION="server"
 VERSION=3.0.3
 NAME="vsftpd"
 
-#REQ:libnsl
 #OPT:libcap
 #OPT:linux-pam
 

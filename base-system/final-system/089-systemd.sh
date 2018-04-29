@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="089-systemd.sh"
-TARBALL="systemd-238.tar.gz"
+TARBALL="systemd-man-pages-237.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -38,11 +38,8 @@ ln -svf /tools/bin/env /usr/bin/
 ln -svf /tools/lib/libblkid.so.1 /usr/lib/
 ln -svf /tools/lib/libmount.so.1 /usr/lib/
 
-tar -xf ../systemd-man-pages-238.tar.xz
-sed '171,$ d' -i src/resolve/meson.build
-sed -i '527,565 d'                  src/basic/missing.h
-sed -i '24 d'                       src/core/load-fragment.c
-sed -i '53 a#include <sys/mount.h>' src/shared/bus-unit-util.c
+tar -xf ../systemd-man-pages-237.tar.xz
+sed '178,222d' -i src/resolve/meson.build
 sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
 mkdir -p build
 cd       build
@@ -70,6 +67,10 @@ meson --prefix=/usr                \
 LANG=en_US.UTF-8 ninja
 LANG=en_US.UTF-8 ninja install
 rm -rfv /usr/lib/rpm
+for tool in runlevel reboot shutdown poweroff halt telinit; do
+     ln -sfv ../bin/systemctl /sbin/${tool}
+done
+ln -sfv ../lib/systemd/systemd /sbin/init
 rm -f /usr/bin/xsltproc
 
 rm -f /usr/lib/pkgconfig/mount.pc

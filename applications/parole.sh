@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Parole is a DVD/CD/music playerbr3ak for Xfce that uses GStreamer.br3ak"
 SECTION="xfce"
-VERSION=1.0.1
+VERSION=0.8.1
 NAME="parole"
 
 #REQ:gst10-plugins-base
@@ -20,11 +20,11 @@ NAME="parole"
 
 cd $SOURCE_DIR
 
-URL=http://archive.xfce.org/src/apps/parole/1.0/parole-1.0.1.tar.bz2
+URL=http://archive.xfce.org/src/apps/parole/0.8/parole-0.8.1.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://archive.xfce.org/src/apps/parole/1.0/parole-1.0.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/parole/parole-1.0.1.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/parole/parole-1.0.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/parole/parole-1.0.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/parole/parole-1.0.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/parole/parole-1.0.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/parole/parole-1.0.1.tar.bz2
+wget -nc http://archive.xfce.org/src/apps/parole/0.8/parole-0.8.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/parole/parole-0.8.1.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/parole/parole-0.8.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/parole/parole-0.8.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/parole/parole-0.8.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/parole/parole-0.8.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/parole/parole-0.8.1.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The xbitmaps package containsbr3ak bitmap images used by multiple applications built in Xorg chapter.br3ak"
 SECTION="x"
-VERSION=1.1.2
+VERSION=1.1.1
 NAME="xbitmaps"
 
 #REQ:util-macros
@@ -17,11 +17,11 @@ NAME="xbitmaps"
 
 cd $SOURCE_DIR
 
-URL=https://www.x.org/pub/individual/data/xbitmaps-1.1.2.tar.bz2
+URL=https://www.x.org/pub/individual/data/xbitmaps-1.1.1.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.x.org/pub/individual/data/xbitmaps-1.1.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xbitmaps/xbitmaps-1.1.2.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/xbitmaps/xbitmaps-1.1.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xbitmaps/xbitmaps-1.1.2.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xbitmaps/xbitmaps-1.1.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xbitmaps/xbitmaps-1.1.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xbitmaps/xbitmaps-1.1.2.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/data/xbitmaps-1.1.2.tar.bz2
+wget -nc https://www.x.org/pub/individual/data/xbitmaps-1.1.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xbitmaps/xbitmaps-1.1.1.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/xbitmaps/xbitmaps-1.1.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xbitmaps/xbitmaps-1.1.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xbitmaps/xbitmaps-1.1.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xbitmaps/xbitmaps-1.1.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xbitmaps/xbitmaps-1.1.1.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/data/xbitmaps-1.1.1.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

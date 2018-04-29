@@ -16,12 +16,12 @@ NAME="gpm"
 
 cd $SOURCE_DIR
 
-URL=http://anduin.linuxfromscratch.org/BLFS/gpm/gpm-1.20.7.tar.bz2
+URL=http://www.nico.schottelius.org/software/gpm/archives/gpm-1.20.7.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc http://anduin.linuxfromscratch.org/BLFS/gpm/gpm-1.20.7.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gpm/gpm-1.20.7.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gpm/gpm-1.20.7.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gpm/gpm-1.20.7.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gpm/gpm-1.20.7.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gpm/gpm-1.20.7.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gpm/gpm-1.20.7.tar.bz2 || wget -nc ftp://anduin.linuxfromscratch.org/BLFS/gpm/gpm-1.20.7.tar.bz2
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/gpm-1.20.7-glibc_2.26-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/gpm/gpm-1.20.7-glibc_2.26-1.patch
+wget -nc http://www.nico.schottelius.org/software/gpm/archives/gpm-1.20.7.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gpm/gpm-1.20.7.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gpm/gpm-1.20.7.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gpm/gpm-1.20.7.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gpm/gpm-1.20.7.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gpm/gpm-1.20.7.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gpm/gpm-1.20.7.tar.bz2
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.2/gpm-1.20.7-glibc_2.26-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/gpm/gpm-1.20.7-glibc_2.26-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

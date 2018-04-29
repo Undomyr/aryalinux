@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Apache Ant package is abr3ak Java-based build tool. In theory,br3ak it is like the <span class=\"command\"><strong>make</strong>br3ak command, but without <span class=\"command\"><strong>make</strong>'s wrinkles. Ant is different. Instead of a model that isbr3ak extended with shell-based commands, Ant is extended using Java classes. Instead of writing shellbr3ak commands, the configuration files are XML-based, calling out abr3ak target tree that executes various tasks. Each task is run by anbr3ak object that implements a particular task interface.br3ak"
 SECTION="general"
-VERSION=1.10.3
+VERSION=1.10.2
 NAME="apache-ant"
 
 #REQ:glib2
@@ -18,11 +18,12 @@ NAME="apache-ant"
 
 cd $SOURCE_DIR
 
-URL=https://archive.apache.org/dist/ant/source/apache-ant-1.10.3-src.tar.xz
+URL=https://archive.apache.org/dist/ant/source/apache-ant-1.10.2-src.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://archive.apache.org/dist/ant/source/apache-ant-1.10.3-src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/apache-ant/apache-ant-1.10.3-src.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/apache-ant/apache-ant-1.10.3-src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/apache-ant/apache-ant-1.10.3-src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/apache-ant/apache-ant-1.10.3-src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/apache-ant/apache-ant-1.10.3-src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/apache-ant/apache-ant-1.10.3-src.tar.xz
+wget -nc https://archive.apache.org/dist/ant/source/apache-ant-1.10.2-src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/apache-ant/apache-ant-1.10.2-src.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/apache-ant/apache-ant-1.10.2-src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/apache-ant/apache-ant-1.10.2-src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/apache-ant/apache-ant-1.10.2-src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/apache-ant/apache-ant-1.10.2-src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/apache-ant/apache-ant-1.10.2-src.tar.xz
+wget -nc http://www.netrexx.org/files/NetRexx-3.06-GA.zip
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -37,21 +38,27 @@ fi
 
 whoami > /tmp/currentuser
 
+cp -v ../jai-core-1.1.3.jar  \
+      ../jai-codec-1.1.3.jar \
+      ../xz-1.0.jar  lib     &&
+unzip -p ../NetRexx-3.06-GA.zip lib/NetRexxC.jar > lib/NetRexxC.jar
+
+
 ./bootstrap.sh
 
 
-bootstrap/bin/ant -f fetch.xml -Ddest=system &&
+bootstrap/bin/ant -f fetch.xml -Ddest=system || true &&
 cp -v lib/*.jar lib/optional/
 
 
-./build.sh -Ddist.dir=$PWD/ant-1.10.3 dist
+./build.sh -Ddist.dir=$PWD/ant-1.10.2 dist
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-cp -rv ant-1.10.3 /opt/            &&
-chown -R root:root /opt/ant-1.10.3 &&
-ln -sfv ant-1.10.3 /opt/ant
+cp -rv ant-1.10.2 /opt/            &&
+chown -R root:root /opt/ant-1.10.2 &&
+ln -sfv ant-1.10.2 /opt/ant
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

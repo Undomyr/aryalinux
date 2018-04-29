@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak IBus is an Intelligent Input Bus.br3ak It is a new input framework for Linux OS. It provides a fullbr3ak featured and user friendly input method user interface.br3ak"
 SECTION="general"
-VERSION=1.5.18
+VERSION=1.5.17
 NAME="ibus"
 
 #REQ:dconf
@@ -28,12 +28,11 @@ NAME="ibus"
 
 cd $SOURCE_DIR
 
-URL=https://github.com/ibus/ibus/releases/download/1.5.18/ibus-1.5.18.tar.gz
+URL=https://github.com/ibus/ibus/releases/download/1.5.17/ibus-1.5.17.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/ibus/ibus/releases/download/1.5.18/ibus-1.5.18.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ibus/ibus-1.5.18.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ibus/ibus-1.5.18.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ibus/ibus-1.5.18.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ibus/ibus-1.5.18.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ibus/ibus-1.5.18.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ibus/ibus-1.5.18.tar.gz
-wget -nc https://www.unicode.org/Public/zipped/10.0.0/UCD.zip
+wget -nc https://github.com/ibus/ibus/releases/download/1.5.17/ibus-1.5.17.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ibus/ibus-1.5.17.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ibus/ibus-1.5.17.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ibus/ibus-1.5.17.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ibus/ibus-1.5.17.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ibus/ibus-1.5.17.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ibus/ibus-1.5.17.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -48,10 +47,6 @@ fi
 
 whoami > /tmp/currentuser
 
-mkdir -p               /usr/share/unicode/ucd &&
-unzip -u ../UCD.zip -d /usr/share/unicode/ucd
-
-
 sed -i 's@/desktop/ibus@/org/freedesktop/ibus@g' \
     data/ibus.schemas.in \
     data/dconf/org.freedesktop.ibus.gschema.xml.in
@@ -59,7 +54,6 @@ sed -i 's@/desktop/ibus@/org/freedesktop/ibus@g' \
 
 ./configure --prefix=/usr             \
             --sysconfdir=/etc         \
-            --disable-unicode-dict    \
             --disable-emoji-dict      &&
 rm -f tools/main.c                    &&
 make "-j`nproc`" || make

@@ -9,18 +9,18 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Tripwire package containsbr3ak programs used to verify the integrity of the files on a givenbr3ak system.br3ak"
 SECTION="postlfs"
-VERSION=2.4.3.7
+VERSION=2.4.3.6
 NAME="tripwire"
 
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/Tripwire/tripwire-open-source/releases/download/2.4.3.7/tripwire-open-source-2.4.3.7.tar.gz
+URL=https://github.com/Tripwire/tripwire-open-source/releases/download/2.4.3.6/tripwire-open-source-2.4.3.6.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/Tripwire/tripwire-open-source/releases/download/2.4.3.7/tripwire-open-source-2.4.3.7.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/tripwire/tripwire-open-source-2.4.3.7.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/tripwire/tripwire-open-source-2.4.3.7.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/tripwire/tripwire-open-source-2.4.3.7.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/tripwire/tripwire-open-source-2.4.3.7.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/tripwire/tripwire-open-source-2.4.3.7.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/tripwire/tripwire-open-source-2.4.3.7.tar.gz
+wget -nc https://github.com/Tripwire/tripwire-open-source/releases/download/2.4.3.6/tripwire-open-source-2.4.3.6.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/tripwire/tripwire-open-source-2.4.3.6.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/tripwire/tripwire-open-source-2.4.3.6.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/tripwire/tripwire-open-source-2.4.3.6.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/tripwire/tripwire-open-source-2.4.3.6.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/tripwire/tripwire-open-source-2.4.3.6.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/tripwire/tripwire-open-source-2.4.3.6.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -35,10 +35,9 @@ fi
 
 whoami > /tmp/currentuser
 
-sed -e '/^CLOBBER/s/false/true/'         \
-    -e 's|TWDB="${prefix}|TWDB="/var|'   \
+sed -e 's|TWDB="${prefix}|TWDB="/var|'   \
     -e '/TWMAN/ s|${prefix}|/usr/share|' \
-    -e '/TWDOCS/s|${prefix}/doc/tripwire|/usr/share/doc/tripwire-2.4.3.7|' \
+    -e '/TWDOCS/s|${prefix}/doc/tripwire|/usr/share/doc/tripwire-2.4.3.6|' \
     -i installer/install.cfg                               &&
 find . -name Makefile.am | xargs                           \
     sed -i 's/^[[:alpha:]_]*_HEADERS.*=/noinst_HEADERS =/' &&
@@ -51,7 +50,7 @@ make "-j`nproc`" || make
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
-cp -v policy/*.txt /usr/share/doc/tripwire-2.4.3.7
+cp -v policy/*.txt /usr/share/doc/tripwire-2.4.3.6
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

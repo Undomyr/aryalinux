@@ -9,8 +9,8 @@ set +h
 #REQ:perl-modules#perl-xml-libxml
 #REQ:libxslt
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/S/SH/SHLOMIF/XML-LibXSLT-1.96.tar.gz"
-VERSION=1.96
+URL="https://www.cpan.org/authors/id/S/SH/SHLOMIF/XML-LibXSLT-1.95.tar.gz"
+VERSION=1.95
 NAME="perl-modules#perl-xml-libxslt"
 
 cd $SOURCE_DIR

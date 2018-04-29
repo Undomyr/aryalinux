@@ -9,14 +9,13 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Gvfs package is a userspacebr3ak virtual filesystem designed to work with the I/O abstractions ofbr3ak GLib's GIO library.br3ak"
 SECTION="gnome"
-VERSION=1.36.0
+VERSION=1.34.2
 NAME="gvfs"
 
 #REQ:dbus
 #REQ:glib2
 #REC:gcr
 #REC:gtk3
-#REC:libcdio
 #REC:libgdata
 #REC:libgudev
 #REC:libsecret
@@ -31,20 +30,22 @@ NAME="gvfs"
 #OPT:gnome-online-accounts
 #OPT:gtk-doc
 #OPT:libarchive
+#OPT:libcdio
 #OPT:libgcrypt
 #OPT:libxml2
 #OPT:libxslt
 #OPT:openssh
 #OPT:samba
+#OPT:obex-data-server
 
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gvfs/1.36/gvfs-1.36.0.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/gvfs/1.34/gvfs-1.34.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gvfs/1.36/gvfs-1.36.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gvfs/gvfs-1.36.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gvfs/gvfs-1.36.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gvfs/gvfs-1.36.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gvfs/gvfs-1.36.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gvfs/gvfs-1.36.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gvfs/gvfs-1.36.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gvfs/1.36/gvfs-1.36.0.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/gvfs/1.34/gvfs-1.34.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gvfs/gvfs-1.34.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gvfs/gvfs-1.34.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gvfs/gvfs-1.34.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gvfs/gvfs-1.34.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gvfs/gvfs-1.34.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gvfs/gvfs-1.34.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gvfs/1.34/gvfs-1.34.2.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -59,26 +60,15 @@ fi
 
 whoami > /tmp/currentuser
 
-mkdir build &&
-cd    build &&
-meson --prefix=/usr     \
-      --sysconfdir=/etc \
-      -Dfuse=false      \
-      -Dgphoto2=false   \
-      -Dafc=false       \
-      -Dbluray=false    \
-      -Dnfs=false       \
-      -Dmtp=false       \
-      -Dsmb=false       \
-      -Ddnssd=false     \
-      -Dgoa=false       \
-      -Dgoogle=false    &&
-ninja
+./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --disable-gphoto2 &&
+make "-j`nproc`" || make
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install
+make install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
