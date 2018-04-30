@@ -38,11 +38,9 @@ rm -rf pciutils-3.5.5
 
 tar xf freetype-2.9.tar.bz2
 cd freetype-2.9
-sed -e "/AUX.*.gxvalid/s@^# @@" \
-    -e "/AUX.*.otvalid/s@^# @@" \
-    -i modules.cfg              &&
+sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg &&
 
-sed -r -e 's:.*(#.*SUBPIXEL.*) .*:\1:' \
+sed -r "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:" \
     -i include/freetype/config/ftoption.h  &&
 
 ./configure --prefix=/usr --disable-static --disable-harfbuzz &&
