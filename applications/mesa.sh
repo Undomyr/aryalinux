@@ -61,7 +61,7 @@ VULKAN=" --with-vulkan-drivers=intel,radeon "
 EGL_PLATFORMS="drm,x11"
 
 
-./configure \
+./configure CFLAGS='-O2' CXXFLAGS='-O2' LDFLAGS=-lLLVM \
   --prefix=$XORG_PREFIX \
   --sysconfdir=/etc \
   --with-dri-driverdir=/usr/lib${LIBDIRSUFFIX}/xorg/modules/dri \
