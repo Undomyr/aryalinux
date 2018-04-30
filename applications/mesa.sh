@@ -84,9 +84,7 @@ EGL_PLATFORMS="drm,x11"
   --enable-glx-tls \
   --enable-gles1 \
   --enable-gles2 \
-  --enable-vdpau \
-  --enable-opencl \
-  --enable-opencl-icd
+  --enable-vdpau
 make "-j`nproc`" || make
 
 
