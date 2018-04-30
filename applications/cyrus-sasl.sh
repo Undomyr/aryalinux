@@ -24,13 +24,13 @@ NAME="cyrus-sasl"
 
 cd $SOURCE_DIR
 
-URL=ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz
+URL=https://www.cyrusimap.org/releases/cyrus-sasl-2.1.26.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/8.2/cyrus-sasl-2.1.26-fixes-3.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/cyrus-sasl/cyrus-sasl-2.1.26-fixes-3.patch
-wget -nc http://www.linuxfromscratch.org/patches/blfs/8.2/cyrus-sasl-2.1.26-openssl-1.1.0-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/cyrus-sasl/cyrus-sasl-2.1.26-openssl-1.1.0-1.patch
+wget -nc https://www.cyrusimap.org/releases/cyrus-sasl-2.1.26.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/cyrus-sasl/cyrus-sasl-2.1.26.tar.gz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/cyrus-sasl-2.1.26-fixes-3.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/cyrus-sasl/cyrus-sasl-2.1.26-fixes-3.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/cyrus-sasl-2.1.26-openssl-1.1.0-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/cyrus-sasl/cyrus-sasl-2.1.26-openssl-1.1.0-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

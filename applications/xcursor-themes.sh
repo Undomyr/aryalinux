@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The xcursor-themes packagebr3ak contains the redglass and whiteglass animated cursor themes.br3ak"
 SECTION="x"
-VERSION=1.0.4
+VERSION=1.0.5
 NAME="xcursor-themes"
 
 #REQ:x7app
@@ -17,11 +17,11 @@ NAME="xcursor-themes"
 
 cd $SOURCE_DIR
 
-URL=https://www.x.org/pub/individual/data/xcursor-themes-1.0.4.tar.bz2
+URL=https://www.x.org/pub/individual/data/xcursor-themes-1.0.5.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.x.org/pub/individual/data/xcursor-themes-1.0.4.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xcursor-themes/xcursor-themes-1.0.4.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/xcursor-themes/xcursor-themes-1.0.4.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xcursor-themes/xcursor-themes-1.0.4.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xcursor-themes/xcursor-themes-1.0.4.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xcursor-themes/xcursor-themes-1.0.4.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xcursor-themes/xcursor-themes-1.0.4.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/data/xcursor-themes-1.0.4.tar.bz2
+wget -nc https://www.x.org/pub/individual/data/xcursor-themes-1.0.5.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/xcursor-themes/xcursor-themes-1.0.5.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/xcursor-themes/xcursor-themes-1.0.5.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/xcursor-themes/xcursor-themes-1.0.5.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/xcursor-themes/xcursor-themes-1.0.5.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/xcursor-themes/xcursor-themes-1.0.5.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/xcursor-themes/xcursor-themes-1.0.5.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/data/xcursor-themes-1.0.5.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

@@ -9,18 +9,18 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The libuv package is abr3ak multi-platform support library with a focus on asynchronous I/O..br3ak"
 SECTION="general"
-VERSION=1.19.1
+VERSION=1.20.2
 NAME="libuv"
 
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/libuv/libuv/archive/v1.19.1/libuv-1.19.1.tar.gz
+URL=https://dist.libuv.org/dist/v1.20.2/libuv-v1.20.2.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/libuv/libuv/archive/v1.19.1/libuv-1.19.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libuv/libuv-1.19.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libuv/libuv-1.19.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libuv/libuv-1.19.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libuv/libuv-1.19.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libuv/libuv-1.19.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libuv/libuv-1.19.1.tar.gz
+wget -nc https://dist.libuv.org/dist/v1.20.2/libuv-v1.20.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libuv/libuv-v1.20.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libuv/libuv-v1.20.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libuv/libuv-v1.20.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libuv/libuv-v1.20.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libuv/libuv-v1.20.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libuv/libuv-v1.20.2.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

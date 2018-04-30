@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Colord is a system service thatbr3ak makes it easy to manage, install, and generate color profiles. Itbr3ak is used mainly by GNOME Colorbr3ak Manager for system integration and use when no users arebr3ak logged in.br3ak"
 SECTION="general"
-VERSION=1.4.1
+VERSION=1.4.3
 NAME="colord"
 
 #REQ:dbus
@@ -32,11 +32,11 @@ NAME="colord"
 
 cd $SOURCE_DIR
 
-URL=https://www.freedesktop.org/software/colord/releases/colord-1.4.1.tar.xz
+URL=https://www.freedesktop.org/software/colord/releases/colord-1.4.3.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.freedesktop.org/software/colord/releases/colord-1.4.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/colord/colord-1.4.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/colord/colord-1.4.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/colord/colord-1.4.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/colord/colord-1.4.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/colord/colord-1.4.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/colord/colord-1.4.1.tar.xz
+wget -nc https://www.freedesktop.org/software/colord/releases/colord-1.4.3.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/colord/colord-1.4.3.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/colord/colord-1.4.3.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/colord/colord-1.4.3.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/colord/colord-1.4.3.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/colord/colord-1.4.3.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/colord/colord-1.4.3.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -63,19 +63,23 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
+mv po/fur.po po/ur.po &&
+sed -i 's/fur/ur/' po/LINGUAS
+
+
 mkdir build &&
 cd build &&
-meson --prefix=/usr                   \
-      --sysconfdir=/etc               \
-      --localstatedir=/var            \
-      -Dwith-daemon-user=colord       \
-      -Denable-vala=true              \
-      -Denable-systemd=true           \
-      -Denable-libcolordcompat=true   \
-      -Denable-argyllcms-sensor=false \
-      -Denable-bash-completion=false  \
-      -Denable-docs=false             \
-      -Denable-man=false ..           &&
+meson --prefix=/usr            \
+      --sysconfdir=/etc        \
+      --localstatedir=/var     \
+      -Ddaemon_user=colord     \
+      -Dvapi=true              \
+      -Dsystemd=true           \
+      -Dlibcolordcompat=true   \
+      -Dargyllcms_sensor=false \
+      -Dbash_completion=false  \
+      -Ddocs=false             \
+      -Dman=false ..           &&
 ninja
 
 

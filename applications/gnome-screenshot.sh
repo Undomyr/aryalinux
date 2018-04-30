@@ -37,13 +37,13 @@ fi
 
 whoami > /tmp/currentuser
 
+sed -e '/AppData/N;N;p;s/\.appdata\./.metainfo./' \
+    -i /usr/share/gettext-0.19.8/its/appdata.loc
+
+
 mkdir build &&
 cd    build &&
 meson --prefix=/usr .. &&
-sed '/^build all/s@src/org.gnome.Screenshot.metainfo.xml@@' \
-    -i build.ninja                          &&
-cp ../src/org.gnome.Screenshot.metainfo.xml.in \
-      src/org.gnome.Screenshot.metainfo.xml &&
 ninja
 
 

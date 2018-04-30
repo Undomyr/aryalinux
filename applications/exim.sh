@@ -9,12 +9,11 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Exim package contains a Mailbr3ak Transport Agent written by the University of Cambridge, releasedbr3ak under the GNU Public License.br3ak"
 SECTION="server"
-VERSION=4.90.1
+VERSION=4.91
 NAME="exim"
 
 #REQ:libnsl
 #REQ:pcre
-#OPT:db
 #OPT:cyrus-sasl
 #OPT:libidn
 #OPT:linux-pam
@@ -28,11 +27,11 @@ NAME="exim"
 
 cd $SOURCE_DIR
 
-URL=http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.90.1.tar.xz
+URL=http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.91.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.90.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/exim/exim-4.90.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/exim/exim-4.90.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/exim/exim-4.90.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/exim/exim-4.90.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/exim/exim-4.90.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/exim/exim-4.90.1.tar.xz || wget -nc ftp://ftp.exim.org/pub/exim/exim4/exim-4.90.1.tar.xz
+wget -nc http://mirrors-usa.go-parts.com/eximftp/exim/exim4/exim-4.91.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/exim/exim-4.91.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/exim/exim-4.91.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/exim/exim-4.91.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/exim/exim-4.91.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/exim/exim-4.91.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/exim/exim-4.91.tar.xz || wget -nc ftp://ftp.exim.org/pub/exim/exim4/exim-4.91.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -72,8 +71,8 @@ make "-j`nproc`" || make
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install                                    &&
 install -v -m644 doc/exim.8 /usr/share/man/man8 &&
-install -v -d -m755    /usr/share/doc/exim-4.90.1 &&
-install -v -m644 doc/* /usr/share/doc/exim-4.90.1 &&
+install -v -d -m755    /usr/share/doc/exim-4.91 &&
+install -v -m644 doc/* /usr/share/doc/exim-4.91 &&
 ln -sfv exim /usr/sbin/sendmail                 &&
 install -v -d -m750 -o exim -g exim /var/spool/exim
 

@@ -12,7 +12,7 @@ SECTION="x"
 VERSION=1.1.2
 NAME="libXdmcp"
 
-#REQ:x7proto
+#REQ:xorgproto
 #OPT:xmlto
 #OPT:fop
 #OPT:libxslt

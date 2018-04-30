@@ -17,9 +17,9 @@ set -e
 
 cd $SOURCE_DIR
 
-URL=https://www.freedesktop.org/software/libevdev/libevdev-1.5.8.tar.xz
+URL=https://www.freedesktop.org/software/libevdev/libevdev-1.5.9.tar.xz
 
-wget -nc https://www.freedesktop.org/software/libevdev/libevdev-1.5.8.tar.xz
+wget -nc https://www.freedesktop.org/software/libevdev/libevdev-1.5.9.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
@@ -101,9 +101,9 @@ sudo rm -rf $DIRECTORY
 
 cd $SOURCE_DIR
 
-URL=https://www.freedesktop.org/software/libinput/libinput-1.10.0.tar.xz
+URL=https://www.freedesktop.org/software/libinput/libinput-1.10.5.tar.xz
 
-wget -nc https://www.freedesktop.org/software/libinput/libinput-1.10.0.tar.xz
+wget -nc https://www.freedesktop.org/software/libinput/libinput-1.10.5.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
@@ -134,8 +134,8 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-install -v -dm755 /usr/share/doc/libinput-1.10.0 &&
-cp -rv html/*     /usr/share/doc/libinput-1.10.0
+install -v -dm755 /usr/share/doc/libinput-1.10.5 &&
+cp -rv html/*     /usr/share/doc/libinput-1.10.5
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo bash -e ./rootscript.sh
@@ -157,10 +157,10 @@ sudo rm -rf $DIRECTORY
 
 cd $SOURCE_DIR
 
-URL=https://www.x.org/pub/individual/driver/xf86-input-libinput-0.26.0.tar.bz2
+URL=https://www.x.org/pub/individual/driver/xf86-input-libinput-0.27.1.tar.bz2
 
-wget -nc https://www.x.org/pub/individual/driver/xf86-input-libinput-0.26.0.tar.bz2
-wget -nc ftp://ftp.x.org/pub/individual/driver/xf86-input-libinput-0.26.0.tar.bz2
+wget -nc https://www.x.org/pub/individual/driver/xf86-input-libinput-0.27.1.tar.bz2
+wget -nc ftp://ftp.x.org/pub/individual/driver/xf86-input-libinput-0.27.1.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
@@ -312,10 +312,10 @@ sudo rm -rf $DIRECTORY
 
 cd $SOURCE_DIR
 
-URL=https://www.x.org/pub/individual/driver/xf86-video-amdgpu-1.4.0.tar.gz
+URL=https://www.x.org/pub/individual/driver/xf86-video-amdgpu-18.0.1.tar.bz2
 
-wget -nc https://www.x.org/pub/individual/driver/xf86-video-amdgpu-1.4.0.tar.gz
-wget -nc ftp://ftp.x.org/pub/individual/driver/xf86-video-amdgpu-1.4.0.tar.gz
+wget -nc https://www.x.org/pub/individual/driver/xf86-video-amdgpu-18.0.1.tar.bz2
+wget -nc ftp://ftp.x.org/pub/individual/driver/xf86-video-amdgpu-18.0.1.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
@@ -349,10 +349,10 @@ sudo rm -rf $DIRECTORY
 
 cd $SOURCE_DIR
 
-URL=https://www.x.org/pub/individual/driver/xf86-video-ati-7.10.0.tar.bz2
+URL=https://www.x.org/pub/individual/driver/xf86-video-ati-18.0.1.tar.bz2
 
-wget -nc https://www.x.org/pub/individual/driver/xf86-video-ati-7.10.0.tar.bz2
-wget -nc ftp://ftp.x.org/pub/individual/driver/xf86-video-ati-7.10.0.tar.bz2
+wget -nc https://www.x.org/pub/individual/driver/xf86-video-ati-18.0.1.tar.bz2
+wget -nc ftp://ftp.x.org/pub/individual/driver/xf86-video-ati-18.0.1.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
@@ -365,10 +365,7 @@ make
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-make install                         &&
-install -v -m644 conf/10-radeon.conf \
-  /usr/share/X11/xorg.conf.d
-
+make install
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
 sudo bash -e ./rootscript.sh

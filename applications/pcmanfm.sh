@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The PCManFM package contains anbr3ak extremely fast, lightweight, yet feature-rich file manager withbr3ak tabbed browsing.br3ak"
 SECTION="lxde"
-VERSION=1.2.5
+VERSION=1.3.0
 NAME="pcmanfm"
 
 #REQ:libfm
@@ -20,11 +20,11 @@ NAME="pcmanfm"
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/pcmanfm/pcmanfm-1.2.5.tar.xz
+URL=https://downloads.sourceforge.net/pcmanfm/pcmanfm-1.3.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/pcmanfm/pcmanfm-1.2.5.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/pcmanfm/pcmanfm-1.2.5.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/pcmanfm/pcmanfm-1.2.5.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/pcmanfm/pcmanfm-1.2.5.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/pcmanfm/pcmanfm-1.2.5.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/pcmanfm/pcmanfm-1.2.5.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/pcmanfm/pcmanfm-1.2.5.tar.xz
+wget -nc https://downloads.sourceforge.net/pcmanfm/pcmanfm-1.3.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/pcmanfm/pcmanfm-1.3.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/pcmanfm/pcmanfm-1.3.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/pcmanfm/pcmanfm-1.3.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/pcmanfm/pcmanfm-1.3.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/pcmanfm/pcmanfm-1.3.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/pcmanfm/pcmanfm-1.3.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

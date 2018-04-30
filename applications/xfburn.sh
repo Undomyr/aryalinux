@@ -13,8 +13,9 @@ VERSION=0.5.5
 NAME="xfburn"
 
 #REQ:exo
-#REQ:libxfce4util
-#REQ:libisoburn
+#REQ:libburn
+#REQ:libisofs
+#REQ:libxfce4ui
 #REQ:gst10-plugins-base
 #OPT:cdrdao
 

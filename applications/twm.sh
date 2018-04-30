@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The twm package contains a verybr3ak minimal window manager.br3ak"
 SECTION="x"
-VERSION=1.0.9
+VERSION=1.0.10
 NAME="twm"
 
 #REQ:xorg-server
@@ -17,11 +17,11 @@ NAME="twm"
 
 cd $SOURCE_DIR
 
-URL=https://www.x.org/pub/individual/app/twm-1.0.9.tar.bz2
+URL=https://www.x.org/pub/individual/app/twm-1.0.10.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.x.org/pub/individual/app/twm-1.0.9.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/app/twm-1.0.9.tar.bz2
+wget -nc https://www.x.org/pub/individual/app/twm-1.0.10.tar.bz2 || wget -nc ftp://ftp.x.org/pub/individual/app/twm-1.0.10.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

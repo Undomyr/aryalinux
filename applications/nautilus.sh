@@ -9,9 +9,10 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Nautilus package contains thebr3ak GNOME file manager.br3ak"
 SECTION="gnome"
-VERSION=3.26.2
+VERSION=3.28.0.1
 NAME="nautilus"
 
+#REQ:gexiv2
 #REQ:gnome-autoar
 #REQ:gnome-desktop
 #REQ:tracker
@@ -26,11 +27,11 @@ NAME="nautilus"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/nautilus/3.26/nautilus-3.26.2.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/nautilus/3.28/nautilus-3.28.0.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/nautilus/3.26/nautilus-3.26.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nautilus/nautilus-3.26.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/nautilus/nautilus-3.26.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nautilus/nautilus-3.26.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nautilus/nautilus-3.26.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nautilus/nautilus-3.26.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nautilus/nautilus-3.26.2.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/nautilus/3.26/nautilus-3.26.2.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/nautilus/3.28/nautilus-3.28.0.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/nautilus/nautilus-3.28.0.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/nautilus/nautilus-3.28.0.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/nautilus/nautilus-3.28.0.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/nautilus/nautilus-3.28.0.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/nautilus/nautilus-3.28.0.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/nautilus/nautilus-3.28.0.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/nautilus/3.28/nautilus-3.28.0.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -48,9 +49,11 @@ whoami > /tmp/currentuser
 sed s/\'libm\'/\'m\'/ -i meson.build &&
 mkdir build &&
 cd    build &&
-meson --prefix=/usr     \
-      --sysconfdir=/etc \
-      -Denable-selinux=false .. &&
+meson --prefix=/usr      \
+      --sysconfdir=/etc  \
+      -Dselinux=false    \
+      -Dpackagekit=false \
+      .. &&
 ninja
 
 

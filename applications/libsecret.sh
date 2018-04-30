@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The libsecret package contains abr3ak GObject based library for accessing the Secret Service API.br3ak"
 SECTION="gnome"
-VERSION=0.18.5
+VERSION=0.18.6
 NAME="libsecret"
 
 #REQ:glib2
@@ -28,11 +28,11 @@ NAME="libsecret"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/libsecret/0.18/libsecret-0.18.5.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/libsecret/0.18/libsecret-0.18.6.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/libsecret/0.18/libsecret-0.18.5.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libsecret/libsecret-0.18.5.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libsecret/libsecret-0.18.5.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsecret/libsecret-0.18.5.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsecret/libsecret-0.18.5.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libsecret/libsecret-0.18.5.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libsecret/libsecret-0.18.5.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/libsecret/0.18/libsecret-0.18.5.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/libsecret/0.18/libsecret-0.18.6.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/libsecret/libsecret-0.18.6.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/libsecret/libsecret-0.18.6.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsecret/libsecret-0.18.6.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/libsecret/libsecret-0.18.6.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/libsecret/libsecret-0.18.6.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/libsecret/libsecret-0.18.6.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/libsecret/0.18/libsecret-0.18.6.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

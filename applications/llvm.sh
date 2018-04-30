@@ -29,9 +29,9 @@ URL=http://llvm.org/releases/6.0.0/llvm-6.0.0.src.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc $URL
-wget -nc http://llvm.org/releases/6.0.0/cfe-6.0.0.src.tar.xz
-wget -nc http://llvm.org/releases/6.0.0/compiler-rt-6.0.0.src.tar.xz
+wget -nc http://llvm.org/releases/6.0.0/llvm-6.0.0.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/llvm-6.0.0.src.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/llvm/llvm-6.0.0.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-6.0.0.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/llvm-6.0.0.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-6.0.0.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/llvm-6.0.0.src.tar.xz
+wget -nc http://llvm.org/releases/6.0.0/cfe-6.0.0.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/llvm/cfe-6.0.0.src.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/llvm/cfe-6.0.0.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-6.0.0.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/llvm/cfe-6.0.0.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-6.0.0.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/llvm/cfe-6.0.0.src.tar.xz
+wget -nc http://llvm.org/releases/6.0.0/compiler-rt-6.0.0.src.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/compiler-rt/compiler-rt-6.0.0.src.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/compiler-rt/compiler-rt-6.0.0.src.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-6.0.0.src.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/compiler-rt/compiler-rt-6.0.0.src.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-6.0.0.src.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/compiler-rt/compiler-rt-6.0.0.src.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -48,14 +48,12 @@ whoami > /tmp/currentuser
 
 tar -xf ../cfe-6.0.0.src.tar.xz -C tools &&
 tar -xf ../compiler-rt-6.0.0.src.tar.xz -C projects &&
-
 mv tools/cfe-6.0.0.src tools/clang &&
 mv projects/compiler-rt-6.0.0.src projects/compiler-rt
 
 
 mkdir -v build &&
 cd       build &&
-
 CC=gcc CXX=g++                              \
 cmake -DCMAKE_INSTALL_PREFIX=/usr           \
       -DLLVM_ENABLE_FFI=ON                  \

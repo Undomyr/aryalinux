@@ -14,6 +14,7 @@ NAME="fop"
 
 #REQ:apache-ant
 #OPT:junit
+#OPT:maven
 #OPT:xorg-server
 
 

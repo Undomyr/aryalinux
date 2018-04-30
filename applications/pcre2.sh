@@ -39,6 +39,7 @@ whoami > /tmp/currentuser
 ./configure --prefix=/usr                       \
             --docdir=/usr/share/doc/pcre2-10.31 \
             --enable-unicode                    \
+            --enable-jit                        \
             --enable-pcre2-16                   \
             --enable-pcre2-32                   \
             --enable-pcre2grep-libz             \

@@ -12,7 +12,7 @@ SECTION="x"
 VERSION=1.0.8
 NAME="libXau"
 
-#REQ:x7proto
+#REQ:xorgproto
 
 
 cd $SOURCE_DIR

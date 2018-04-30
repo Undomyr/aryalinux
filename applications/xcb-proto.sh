@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The xcb-proto package provides thebr3ak XML-XCB protocol descriptions that libxcb uses to generate the majority of itsbr3ak code and API.br3ak"
 SECTION="x"
-VERSION=1.12
+VERSION=1.13
 NAME="xcb-proto"
 
 #OPT:python2
@@ -18,13 +18,11 @@ NAME="xcb-proto"
 
 cd $SOURCE_DIR
 
-URL=https://xcb.freedesktop.org/dist/xcb-proto-1.12.tar.bz2
+URL=https://xcb.freedesktop.org/dist/xcb-proto-1.13.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://xcb.freedesktop.org/dist/xcb-proto-1.12.tar.bz2
-wget -nc http://www.linuxfromscratch.org/patches/blfs/8.2/xcb-proto-1.12-python3-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/xcb-proto/xcb-proto-1.12-python3-1.patch
-wget -nc http://www.linuxfromscratch.org/patches/blfs/8.2/xcb-proto-1.12-schema-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/xcb-proto/xcb-proto-1.12-schema-1.patch
+wget -nc https://xcb.freedesktop.org/dist/xcb-proto-1.13.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -41,12 +39,6 @@ whoami > /tmp/currentuser
 
 export XORG_PREFIX=/usr
 export XORG_CONFIG="--prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static"
-
-
-patch -Np1 -i ../xcb-proto-1.12-schema-1.patch
-
-
-patch -Np1 -i ../xcb-proto-1.12-python3-1.patch
 
 
 ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static

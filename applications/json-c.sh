@@ -9,18 +9,18 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The JSON-C implements a referencebr3ak counting object model that allows you to easily construct JSONbr3ak objects in C, output them as JSON formatted strings and parse JSONbr3ak formatted strings back into the C representation of JSON objects.br3ak"
 SECTION="general"
-VERSION=0.13
+VERSION=0.13.1
 NAME="json-c"
 
 
 
 cd $SOURCE_DIR
 
-URL=https://s3.amazonaws.com/json-c_releases/releases/json-c-0.13.tar.gz
+URL=https://s3.amazonaws.com/json-c_releases/releases/json-c-0.13.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://s3.amazonaws.com/json-c_releases/releases/json-c-0.13.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/jsonc/json-c-0.13.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/jsonc/json-c-0.13.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/jsonc/json-c-0.13.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/jsonc/json-c-0.13.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/jsonc/json-c-0.13.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/jsonc/json-c-0.13.tar.gz
+wget -nc https://s3.amazonaws.com/json-c_releases/releases/json-c-0.13.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/jsonc/json-c-0.13.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/jsonc/json-c-0.13.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/jsonc/json-c-0.13.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/jsonc/json-c-0.13.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/jsonc/json-c-0.13.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/jsonc/json-c-0.13.1.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
