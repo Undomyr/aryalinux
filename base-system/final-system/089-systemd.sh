@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="089-systemd.sh"
-TARBALL="systemd-238.tar.xz"
+TARBALL="systemd-238.tar.gz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
