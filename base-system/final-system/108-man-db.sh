@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="108-man-db.sh"
-TARBALL="man-db-2.8.1.tar.xz"
+TARBALL="man-db-2.8.3.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -30,7 +30,7 @@ then
 fi
 
 ./configure --prefix=/usr                        \
-            --docdir=/usr/share/doc/man-db-2.8.1 \
+            --docdir=/usr/share/doc/man-db-2.8.3 \
             --sysconfdir=/etc                    \
             --disable-setuid                     \
             --enable-cache-owner=bin             \
@@ -39,7 +39,6 @@ fi
             --with-grap=/usr/bin/grap
 make
 make install
-sed -i "s:man man:root root:g" /usr/lib/tmpfiles.d/man-db.conf
 
 
 cd $SOURCE_DIR

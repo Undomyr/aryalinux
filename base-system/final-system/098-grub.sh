@@ -18,8 +18,8 @@ cd $SOURCE_DIR
 
 # Installation of pciutils
 
-tar xf pciutils-3.5.5.tar.xz
-cd pciutils-3.5.5
+tar xf pciutils-3.4.1.tar.gz
+cd pciutils-3.4.1
 
 make PREFIX=/usr                \
      SHAREDIR=/usr/share/hwdata \
@@ -32,15 +32,17 @@ make PREFIX=/usr                \
 chmod -v 755 /usr/lib/libpci.so
 
 cd $SOURCE_DIR
-rm -rf pciutils-3.5.5
+rm -rf pciutils-3.4.1
 
 # Installation of freetype2
 
-tar xf freetype-2.9.tar.bz2
-cd freetype-2.9
-sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg &&
+tar xf freetype-2.6.3.tar.bz2
+cd freetype-2.6.3
+sed -e "/AUX.*.gxvalid/s@^# @@" \
+    -e "/AUX.*.otvalid/s@^# @@" \
+    -i modules.cfg              &&
 
-sed -r "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:" \
+sed -r -e 's:.*(#.*SUBPIXEL.*) .*:\1:' \
     -i include/freetype/config/ftoption.h  &&
 
 ./configure --prefix=/usr --disable-static --disable-harfbuzz &&
@@ -48,7 +50,7 @@ make
 make install
 
 cd $SOURCE_DIR
-rm -rf freetype-2.9
+rm -rf freetype-2.6.3
 
 if [ "$TARBALL" != "" ]
 then

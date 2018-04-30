@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="028-perl.sh"
-TARBALL="perl-5.26.1.tar.xz"
+TARBALL="perl-5.26.2.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -32,8 +32,8 @@ fi
 sh Configure -des -Dprefix=/tools -Dlibs=-lm
 make
 cp -v perl cpan/podlators/scripts/pod2man /tools/bin
-mkdir -pv /tools/lib/perl5/5.26.1
-cp -Rv lib/* /tools/lib/perl5/5.26.1
+mkdir -pv /tools/lib/perl5/5.26.2
+cp -Rv lib/* /tools/lib/perl5/5.26.2
 
 
 cd $SOURCE_DIR
