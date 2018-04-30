@@ -39,7 +39,7 @@ then
 
 cd /sources
 
-LINUX_TARBALL=`ls linux-4*z`
+LINUX_TARBALL=`ls linux*z`
 LINUX_SRC_DIR=`tar -tf $LINUX_TARBALL | cut "-d/" -f1 | uniq`
 tar xf $LINUX_TARBALL
 cd $LINUX_SRC_DIR
@@ -152,7 +152,7 @@ sed -i "s@# CONFIG_TMPFS_POSIX_ACL is not set@CONFIG_TMPFS_POSIX_ACL=y@g" .confi
 
 
 make "-j`nproc`"
-make firmware_install
+make modules_install
 
 LINUX_VERSION=$(ls /lib/modules/)
 cp -v arch/x86/boot/bzImage "/boot/vmlinuz-$LINUX_VERSION"
