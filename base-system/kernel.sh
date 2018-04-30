@@ -39,7 +39,7 @@ then
 
 cd /sources
 
-LINUX_TARBALL=$(grep "https://www.kernel.org/pub/linux/kernel" wget-list | rev | cut -d/ -f1 | rev)
+LINUX_TARBALL=$(grep "kernel.org/pub/linux/kernel" wget-list | rev | cut -d/ -f1 | rev)
 LINUX_SRC_DIR=`tar -tf $LINUX_TARBALL | cut "-d/" -f1 | uniq`
 tar xf $LINUX_TARBALL
 cd $LINUX_SRC_DIR
