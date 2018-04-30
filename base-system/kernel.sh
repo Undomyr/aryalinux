@@ -39,7 +39,7 @@ then
 
 cd /sources
 
-LINUX_TARBALL=`ls linux-*z`
+LINUX_TARBALL=`ls linux-4*z`
 LINUX_SRC_DIR=`tar -tf $LINUX_TARBALL | cut "-d/" -f1 | uniq`
 tar xf $LINUX_TARBALL
 cd $LINUX_SRC_DIR
