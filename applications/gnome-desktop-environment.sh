@@ -11,9 +11,9 @@ NAME="gnome-desktop-environment"
 VERSION="3.28"
 DESCRIPTION="GNOME is a desktop environment that is composed entirely of free and open-source software. GNOME was originally an acronym for GNU Network Object Model Environment."
 
+#REQ:gdk-pixbuf
 #REQ:accountsservice
 #REQ:desktop-file-utils
-#REQ:gdk-pixbuf
 #REQ:gcr
 #REQ:gsettings-desktop-schemas
 #REQ:libsecret
