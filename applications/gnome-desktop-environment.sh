@@ -13,6 +13,7 @@ DESCRIPTION="GNOME is a desktop environment that is composed entirely of free an
 
 #REQ:accountsservice
 #REQ:desktop-file-utils
+#REQ:gdk-pixbuf
 #REQ:gcr
 #REQ:gsettings-desktop-schemas
 #REQ:libsecret
