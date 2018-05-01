@@ -6,6 +6,8 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
+#REQ:libsass
+
 NAME=sassc
 DESCRIPTION="libsass command line driver"
 VERSION=3.5.0
@@ -27,14 +29,6 @@ autoreconf -fi &&
 ./configure --prefix=/usr --disable-static &&
 make
 sudo make install
-
-tar -xf ../sassc-3.5.0.tar.gz &&
-cd sassc-3.5.0 &&
-
-autoreconf -fi &&
-
-./configure --prefix=/usr &&
-make
 
 cd $SOURCE_DIR
 sudo rm -rf sassc-3.5.0

@@ -8,9 +8,9 @@ set +h
 
 NAME=libsass
 DESCRIPTION="A C/C++ implementation of a Sass compiler"
-VERSION=3.4.9
+VERSION=3.5.2
 
-URL=https://github.com/sass/libsass/releases/download/3.4.9/libsass-3.4.9.tar.gz
+URL=https://github.com/sass/libsass/archive/3.5.2/libsass-3.5.2.tar.gz
 
 cd $SOURCE_DIR
 
@@ -21,8 +21,9 @@ DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 tar xf $TARBALL
 cd $DIRECTORY
 
-./autoreconf --force --install
-./configure --prefix=/usr --enable-shared &&
+autoreconf -fi &&
+
+./configure --prefix=/usr &&
 make
 sudo make install
 
