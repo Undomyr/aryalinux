@@ -22,6 +22,7 @@ NAME="nautilus"
 #REC:libexif
 #REC:adwaita-icon-theme
 #REC:gvfs
+#REQ:appstream-glib
 #OPT:gtk-doc
 
 
