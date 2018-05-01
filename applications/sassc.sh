@@ -8,26 +8,36 @@ set +h
 
 NAME=sassc
 DESCRIPTION="libsass command line driver"
-VERSION=3.4.8
+VERSION=3.5.0
 
-URL=https://github.com/sass/sassc/releases/download/3.4.8/sassc-3.4.8.tar.gz
+URL=https://github.com/sass/sassc/archive/3.5.0/sassc-3.5.0.tar.gz
 
 cd $SOURCE_DIR
 
 wget -nc $URL
+wget -nc https://github.com/sass/libsass/archive/3.5.2/libsass-3.5.2.tar.gz
+
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL
 cd $DIRECTORY
 
-./autoreconf --force --install
-./configure --prefix=/usr --enable-shared &&
+autoreconf -fi &&
+./configure --prefix=/usr --disable-static &&
 make
 sudo make install
 
+tar -xf ../sassc-3.5.0.tar.gz &&
+cd sassc-3.5.0 &&
+
+autoreconf -fi &&
+
+./configure --prefix=/usr &&
+make
+
 cd $SOURCE_DIR
-sudo rm -rf libsass-3.4.9
+sudo rm -rf sassc-3.5.0
 
 echo "sassc=>$(date)" | sudo tee -a /etc/alps/installed-list
 echo "sassc:$VERSION" | sudo tee -a /etc/alps/versions
