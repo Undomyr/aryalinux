@@ -40,6 +40,7 @@ if [ ! -z $URL ]
 then
 
 wget -nc $URL
+wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/1.0/evolution-data-server-3.29.1-icu.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -53,6 +54,8 @@ cd $DIRECTORY
 fi
 
 whoami > /tmp/currentuser
+
+patch -Np1 -i ../evolution-data-server-3.29.1-icu.patch
 
 mkdir build &&
 cd    build &&
