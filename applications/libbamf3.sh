@@ -11,6 +11,8 @@ VERSION="0.5.3"
 
 #REQ:libwnck
 #REQ:libgtop
+#REQ:python-modules#libxml2py2
+#REQ:libxslt
 
 cd $SOURCE_DIR
 
