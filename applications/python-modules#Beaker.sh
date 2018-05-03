@@ -12,7 +12,7 @@ SECTION="general"
 VERSION=1.9.1
 NAME="python-modules#Beaker"
 
-#OPT:python-modules#funcsigs
+#REQ:python-modules#funcsigs
 
 
 cd $SOURCE_DIR
