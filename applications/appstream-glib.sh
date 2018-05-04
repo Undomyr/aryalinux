@@ -11,6 +11,7 @@ DESCRIPTION="appstream-glib"
 VERSION=0.7.8
 NAME="appstream-glib"
 
+#REQ:yaml
 #REQ:gcab
 
 cd $SOURCE_DIR
