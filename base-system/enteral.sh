@@ -31,10 +31,10 @@ fi
 
 if [ -d $LFS/opt/x-server ]; then
         echo "x-server found.."
-        if [ -d $LFS/opt/gnome3 ]; then
-                echo "gnome3 found.."
-                mount -t overlay -oupperdir=$LFS/opt/gnome3,lowerdir=$LFS/opt/x-server:$LFS,workdir=$LFS/tmp overlay $LFS || {
-                        echo "Could not mount gnome3 and x-server"
+        if [ -d $LFS/opt/desktop-environment ]; then
+                echo "desktop-environment found.."
+                mount -t overlay -oupperdir=$LFS/opt/desktop-environment,lowerdir=$LFS/opt/x-server:$LFS,workdir=$LFS/tmp overlay $LFS || {
+                        echo "Could not mount desktop-environment and x-server"
                 }
         else
                 mount -t overlay -oupperdir=$LFS/opt/x-server,lowerdir=$LFS,workdir=$LFS/tmp overlay $LFS || {

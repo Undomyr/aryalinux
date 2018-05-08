@@ -341,14 +341,14 @@ do_mount_root
 
 if [ -d /.root/opt/x-server ]; then
 	echo "x-server found.."
-	if [ -d /.root/opt/gnome3 ]; then
-		echo "gnome3 found.."
-		mount -t overlay -olowerdir=/.root/opt/gnome3:/.root/opt/x-server:/.root,workdir=/.root/tmp overlay /.root || {
-			echo "Could not mount gnome3 and x-server"
+	if [ -d /.root/opt/desktop-environment ]; then
+		echo "desktop-environment found.."
+		mount -t overlay -oupperdir=/.root/opt/desktop-environment,lowerdir=/.root/opt/x-server:/.root,workdir=/.root/tmp overlay /.root || {
+			echo "Could not mount desktop-environment and x-server"
 			/bin/busybox sh
 		}
 	else
-		mount -t overlay -olowerdir=/.root/opt/x-server:/.root,workdir=/.root/tmp overlay /.root || {
+		mount -t overlay -oupperdir=/.root/opt/x-server,lowerdir=/.root,workdir=/.root/tmp overlay /.root || {
 			echo "Could not mount x-server"
 			/bin/busybox sh
 		}
