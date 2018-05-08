@@ -1,5 +1,10 @@
-sudo apt-get install bison g++ texinfo squashfs-tools gawk
+#!/bin/bash
 
+# Installing requried packages
+
+sudo apt-get install bison g++ texinfo squashfs-tools gawk make syslinux-utils
+
+# Checking libraries
 cat > library-check.sh << "EOF"
 #!/bin/bash
 for lib in lib{gmp,mpfr,mpc}.la; do
@@ -9,8 +14,9 @@ done
 unset lib
 EOF
 bash library-check.sh
-clear
-bash library-check.sh
+
+# Installing development libraries
+
 wget http://ftp.gnu.org/gnu/gmp/gmp-6.1.0.tar.xz
 tar xf gmp-6.1.0.tar.xz 
 cd gmp-6.1.0/
@@ -18,18 +24,34 @@ cd gmp-6.1.0/
 clear
 ./configure --prefix=/usr && make && sudo make install 
 cd ..
+rm -rf gmp-6.1.0/
+
 wget http://www.mpfr.org/mpfr-3.1.3/mpfr-3.1.3.tar.xz
 tar xf mpfr-3.1.3.tar.xz 
 cd mpfr-3.1.3/
 ./configure --prefix=/usr && make && sudo make install 
 cd ..
+rm -rf mpfr-3.1.3/
+
 wget http://www.multiprecision.org/mpc/download/mpc-1.0.3.tar.gz
 tar xf mpc-1.0.3.tar.gz 
 cd mpc-1.0.3/
 ./configure --prefix=/usr && make && sudo make install 
 cd ..
-history
+rm -rf mpc-1.0.3/
+
+# Installing our version of cdrtools because ubuntu's version is an alias for geniosimage. This is needed to create ISO.
+
+wget https://sourceforge.net/projects/cdrtools/files/cdrtools-3.01.tar.bz2
+tar xf cdrtools-3.01.tar.bz2
+cd cdrtools-3.01/
+make
+cp -v ./mkisofs/OBJ/`uname -m`-linux-cc/mkisofs /usr/bin
+cd ..
+rm -r cdrtools-3.01/
 clear
+
+# Checking once again.
 cat > version-check.sh << "EOF"
 #!/bin/bash
 # Simple script to list version numbers of critical development tools
