@@ -188,6 +188,22 @@ mount -t squashfs -o ro,loop /mnt/medium/aryalinux/root.sfs /mnt/system || {
     /bin/busybox sh
 }
 
+if [ -d /mnt/system/opt/x-server ]; then
+	echo "x-server found.."
+	if [ -d /mnt/system/opt/gnome3 ]; then
+		echo "gnome3 found.."
+		mount -t overlay -olowerdir=/mnt/system/opt/gnome3:/mnt/system/opt/x-server:/mnt/system,workdir=/mnt/system/tmp overlay /mnt/system || {
+			echo "Could not mount gnome3 and x-server"
+			/bin/busybox sh
+		}
+	else
+		mount -t overlay -olowerdir=/mnt/system/opt/x-server:/mnt/system,workdir=/mnt/system/tmp overlay /mnt/system || {
+			echo "Could not mount x-server"
+			/bin/busybox sh
+		}
+	fi
+fi
+
 busybox clear
 echo "Loading AryaLinux. Please wait..."
 
