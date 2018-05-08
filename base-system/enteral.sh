@@ -29,15 +29,6 @@ then
 	swapon -v $SWAP_PART
 fi
 
-mount -v --bind /dev $LFS/dev
-
-mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620
-mount -vt proc proc $LFS/proc
-mount -vt sysfs sysfs $LFS/sys
-mount -vt tmpfs tmpfs $LFS/run
-
-mount -vt tmpfs tmpfs $LFS/dev/shm
-
 if [ -d $LFS/opt/x-server ]; then
         echo "x-server found.."
         if [ -d $LFS/opt/gnome3 ]; then
@@ -51,6 +42,15 @@ if [ -d $LFS/opt/x-server ]; then
                 }
         fi
 fi
+
+mount -v --bind /dev $LFS/dev
+
+mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620
+mount -vt proc proc $LFS/proc
+mount -vt sysfs sysfs $LFS/sys
+mount -vt tmpfs tmpfs $LFS/run
+
+mount -vt tmpfs tmpfs $LFS/dev/shm
 
 chroot "$LFS" /usr/bin/env -i              \
     HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \

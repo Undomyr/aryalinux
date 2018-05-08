@@ -2,6 +2,12 @@
 
 export LFS=/mnt/lfs
 
+umount $LFS &> /dev/null
+umount $LFS &> /dev/null
+umount $LFS &> /dev/null
+umount $LFS &> /dev/null
+umount $LFS &> /dev/null
+
 umount $LFS/boot/efi &> /dev/null
 umount $LFS/sys/firmware/efi/efivars &> /dev/null
 umount $LFS/dev/pts &> /dev/null
