@@ -38,6 +38,20 @@ mount -vt tmpfs tmpfs $LFS/run
 
 mount -vt tmpfs tmpfs $LFS/dev/shm
 
+if [ -d $LFS/opt/x-server ]; then
+        echo "x-server found.."
+        if [ -d $LFS/opt/gnome3 ]; then
+                echo "gnome3 found.."
+                mount -t overlay -oupperdir=$LFS/opt/gnome3,lowerdir=$LFS/opt/x-server:$LFS,workdir=$LFS/tmp overlay $LFS || {
+                        echo "Could not mount gnome3 and x-server"
+                }
+        else
+                mount -t overlay -oupperdir=$LFS/opt/x-server,lowerdir=$LFS,workdir=$LFS/tmp overlay $LFS || {
+                        echo "Could not mount x-server"
+                }
+        fi
+fi
+
 chroot "$LFS" /usr/bin/env -i              \
     HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin     \
