@@ -40,6 +40,12 @@ tar -cJvf dracut-master.tar.xz dracut-master
 rm -r dracut-master
 rm -r master.zip
 wget -nc https://sourceware.org/ftp/lvm2/releases/LVM2.2.02.171.tgz
+wget -nc https://sourceforge.net/projects/aryalinux-bin/files/releases/$VERSION/aufs-4.16.tar.gz
+wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-base.patch
+wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-kbuild.patch
+wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-loopback.patch
+wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-mmap.patch
+wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-standalone.patch
 wget -nc http://anduin.linuxfromscratch.org/BLFS/other/make-ca.sh-20170514
 wget -nc https://sourceware.org/ftp/elfutils/0.170/elfutils-0.170.tar.bz2
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/0.21-nvme_ioctl.h.patch
