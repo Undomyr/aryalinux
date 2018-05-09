@@ -1,14 +1,9 @@
 #!/bin/bash
 
-echo "Entering enteral.sh"
-echo "Unmounting all..."
-./umountal.sh
-
 RUNASUSER="$2"
 COMMAND="$1"
 PACKAGE="$3"
 
-echo "Mounting..."
 if [ -f /sources/build-properties ]
 then
 	echo "No build-properties found on /sources"
@@ -45,11 +40,9 @@ mount -vt tmpfs tmpfs $LFS/run
 
 mount -vt tmpfs tmpfs $LFS/dev/shm
 
-if [ "x$COMMAND" != "xnorun" ]; then
+./mount-overlays.sh
 
 chroot "$LFS" /usr/bin/env -i              \
-    HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
-    PATH=/bin:/usr/bin:/sbin:/usr/sbin     \
-    /bin/bash --login -e +h $*
-
-fi
+	HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
+	PATH=/bin:/usr/bin:/sbin:/usr/sbin     \
+	/bin/bash --login -e +h $*

@@ -4,6 +4,7 @@ set -e
 set +h
 
 cd /sources/
+
 . ./build-properties
 
 if ! grep "root-and-admin-passwords" /sources/build-log &> /dev/null

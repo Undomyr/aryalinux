@@ -9,7 +9,10 @@ set +h
 
 export LFS=/mnt/lfs
 mkdir -pv $LFS
-mount $ROOT_PART $LFS
+
+if ! mount | grep "^$ROOT_PART" &> /dev/null; then
+  mount $ROOT_PART $LFS
+fi
 
 cat > $LFS/tools/bin/stripdebug <<EOF
 /tools/bin/find /usr/lib -type f -name \*.a \

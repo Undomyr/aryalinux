@@ -17,25 +17,13 @@ $LFS/home
 "
 
 for DEVICE in $DEVICES; do
-	if mount | grep "$DEVICE"; then
-		umount $DEVICE
+	if mount | grep "$DEVICE" &> /dev/null; then
+		umount -v $DEVICE
 	fi
 done
 
-if mount | grep "^$ROOT_PART" && mount | grep "^overlay on $LFS"; then
-	echo "Both overlay and root partition mounted."
-	echo "Unmounting overlay"
-	umount $LFS
-	echo "Unmounting root"
-	umount $ROOT_PART
-elif mount | grep "^$ROOT_PART"; then
-	echo "Only root mounted"
-	echo "Unmounting root"
-	umount $ROOT_PART
-elif mount | grep "^overlay on $LFS"; then
-	echo "Only overlay mounted"
-	echo "Unmounting overlay"
-	umount $LFS
+if mount | grep "^overlay on $LFS" &> /dev/null; then
+	umount -v $LFS
 fi
 
 exit 0
