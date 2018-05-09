@@ -81,11 +81,14 @@ CREATE_ROOTSFS="y"
 
 fi
 
-mount $ROOT_PART $LFS
-if [ "x$HOME_PART" != "x" ]
-then
-	mount $HOME_PART $LFS/home
+if ! mount | grep "$ROOT_PART" &> /dev/null; then
+    mount $ROOT_PART $LFS
+    if [ "x$HOME_PART" != "x" ]
+    then
+        mount $HOME_PART $LFS/home
+    fi
 fi
+
 
 mount -v --bind /dev $LFS/dev
 
@@ -133,10 +136,12 @@ set +e
 set -e
 
 echo "About to mount $LFS"
-mount $ROOT_PART $LFS
-if [ "x$HOME_PART" != "x" ]
-then
-	mount $HOME_PART $LFS/home
+if ! mount | grep "$ROOT_PART" &> /dev/null; then
+    mount $ROOT_PART $LFS
+    if [ "x$HOME_PART" != "x" ]
+    then
+        mount $HOME_PART $LFS/home
+    fi
 fi
 
 if [ -f $LFS/etc/lightdm/lightdm.conf ]
