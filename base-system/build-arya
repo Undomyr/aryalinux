@@ -222,9 +222,12 @@ def freshBuild(startFrom):
 			try:
 				logCurrentStage('6')
 				print 'Installing essentials...'
-				runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/essentials.sh', getParamValue('USERNAME')])
+				runScriptWithArgs('./create-dir.sh', '.', ['x-server'])
+				# runScriptWithArgs('./umountal.sh', '.', [])
+				runScriptWithArgs('./enteral.sh', '/sources', ['/sources/apps/essentials.sh', getParamValue('USERNAME')])
 				print 'Installing xserver...'
-				runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'xserver-meta'])
+				# runScriptWithArgs('./umountal.sh', '.', [])
+				runScriptWithArgs('./enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'xserver-meta'])
 				startFrom = startFrom + 1
 				if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
 					try:
@@ -256,26 +259,34 @@ def freshBuild(startFrom):
 				if getParamValue('DESKTOP_ENVIRONMENT') == '2':
 					desktopEnv = 'mate'
 					print 'Installing ' + desktopEnv
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'mate-desktop-environment'])
+					# runScriptWithArgs('./umountal.sh', '.', [])
+					runScriptWithArgs('./create-dir.sh', '.', ['mate'])
+					runScriptWithArgs('./enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'mate-desktop-environment'])
 				elif getParamValue('DESKTOP_ENVIRONMENT') == '1':
 					desktopEnv = 'xfce'
 					print 'Installing ' + desktopEnv
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'xfce-desktop-environment'])
+					# runScriptWithArgs('./umountal.sh', '.', [])
+					runScriptWithArgs('./create-dir.sh', '/sources', ['xfce'])
+					runScriptWithArgs('./enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'xfce-desktop-environment'])
 				elif getParamValue('DESKTOP_ENVIRONMENT') == '3':
 					desktopEnv = 'kde5'
 					print 'Installing ' + desktopEnv
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'gtk2'])
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'gtk3'])
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'GConf'])
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'pulseaudio'])
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'qt5'])
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'kde-desktop-environment'])
+					# runScriptWithArgs('./umountal.sh', '.', [])
+					runScriptWithArgs('./create-dir.sh', '.', ['kde5'])
+					runScriptWithArgs('./enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'gtk2'])
+					runScriptWithArgs('./enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'gtk3'])
+					runScriptWithArgs('./enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'GConf'])
+					runScriptWithArgs('./enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'pulseaudio'])
+					runScriptWithArgs('./enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'qt5'])
+					runScriptWithArgs('./enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'kde-desktop-environment'])
 				elif getParamValue('DESKTOP_ENVIRONMENT') == '4':
 					desktopEnv = 'gnome'
 					print 'Installing ' + desktopEnv
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'gnome-desktop-environment']);
+					# runScriptWithArgs('./umountal.sh', '.', [])
+					runScriptWithArgs('./create-dir.sh', '.', ['gnome3'])
+					runScriptWithArgs('./enteral.sh', '/sources', ['/sources/apps/app.sh', getParamValue('USERNAME'), 'gnome-desktop-environment']);
 				if os.path.exists('/sources/distro-build.sh'):
-					runScriptWithArgs('/sources/enteral.sh', '/sources', ['/sources/apps/executioner.sh', getParamValue('USERNAME'), '/sources/distro-build.sh']);
+					runScriptWithArgs('./enteral.sh', '/sources', ['/sources/apps/executioner.sh', getParamValue('USERNAME'), '/sources/distro-build.sh']);
 				startFrom = startFrom + 1
 				if getParamValue('CREATE_BACKUPS') == 'y' or getParamValue('CREATE_BACKUPS') == 'Y':
 					try:

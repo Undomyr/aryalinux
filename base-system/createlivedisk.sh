@@ -117,6 +117,8 @@ chroot "$LFS" /usr/bin/env -i              \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin     \
     /bin/bash /sources/mkliveinitramfs.sh
 
+./enteral.sh norun
+
 chroot "$LFS" /usr/bin/env -i              \
     HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin     \
@@ -132,6 +134,7 @@ set +e
 ./umountal.sh
 set -e
 
+echo "About to mount $LFS"
 mount $ROOT_PART $LFS
 if [ "x$HOME_PART" != "x" ]
 then

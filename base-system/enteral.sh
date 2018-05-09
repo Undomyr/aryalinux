@@ -1,16 +1,23 @@
 #!/bin/bash
 
-./umountal.sh &> /dev/null
+echo "Entering enteral.sh"
+echo "Unmounting all..."
+./umountal.sh
 
 RUNASUSER="$2"
 COMMAND="$1"
 PACKAGE="$3"
 
+echo "Mounting..."
 if [ -f /sources/build-properties ]
 then
-	. /sources/build-properties
+	echo "No build-properties found on /sources"
+	cp /sources/build-properties .
+	. ./build-properties
+	mount -v -t ext4 $ROOT_PART $LFS
 elif [ -f ./build-properties ]
 then
+	echo "Build properties found on $(pwd)"
 	. ./build-properties
 	mount -v -t ext4 $ROOT_PART $LFS
 fi
@@ -38,7 +45,11 @@ mount -vt tmpfs tmpfs $LFS/run
 
 mount -vt tmpfs tmpfs $LFS/dev/shm
 
+if [ "x$COMMAND" != "xnorun" ]; then
+
 chroot "$LFS" /usr/bin/env -i              \
     HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin     \
     /bin/bash --login -e +h $*
+
+fi
