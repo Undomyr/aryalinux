@@ -34,11 +34,7 @@ wget -nc https://hg.mozilla.org/projects/nss/raw-file/tip/lib/ckfw/builtins/cert
 wget -nc https://openssl.org/source/openssl-1.1.0f.tar.gz
 wget -nc http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.06.tar.xz
 wget -nc http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.9.1.tar.gz
-wget -nc https://github.com/dracutdevs/dracut/archive/master.zip
-unzip master.zip
-tar -cJvf dracut-master.tar.xz dracut-master
-rm -r dracut-master
-rm -r master.zip
+
 wget -nc https://sourceware.org/ftp/lvm2/releases/LVM2.2.02.171.tgz
 wget -nc https://github.com/FluidIdeas/patches/raw/$VERSION/aufs-4.16.tar.gz
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-base.patch
