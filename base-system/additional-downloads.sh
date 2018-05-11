@@ -30,6 +30,9 @@ wget -nc https://ftp.gnu.org/gnu/wget/wget-1.19.1.tar.xz
 wget -nc http://www.sudo.ws/dist/sudo-1.8.20p2.tar.gz
 wget -nc https://ftp.osuosl.org/pub/blfs/conglomeration/libffi/libffi-3.2.1.tar.gz
 wget -nc https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tar.xz
+wget -nc https://github.com/djlucas/make-ca/archive/v0.7/make-ca-0.7.tar.gz
+wget -nc http://www.cacert.org/certs/root.crt
+wget -nc http://www.cacert.org/certs/class3.crt
 wget -nc https://hg.mozilla.org/projects/nss/raw-file/tip/lib/ckfw/builtins/certdata.txt
 wget -nc https://openssl.org/source/openssl-1.1.0f.tar.gz
 wget -nc http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.06.tar.xz
