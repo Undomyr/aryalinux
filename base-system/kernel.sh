@@ -47,7 +47,7 @@ cd $LINUX_SRC_DIR
 tar -xvf ../aufs-*.tar.gz -C .
 for patch in ../aufs4*.patch
 do
-	patch -Np1 -i $patch
+       patch -Np1 -i $patch
 done
 
 make mrproper
@@ -207,8 +207,7 @@ make install
 cd /sources
 rm -rf $FIRMWARE_DIR
 
-mkinitramfs $LINUX_VERSION
-mv initrd.img* /boot/
+dracut -f /boot/initrd.img-$LINUX_VERSION `ls /lib/modules`
 
 echo "$STEPNAME" | tee -a $LOGFILE
 
