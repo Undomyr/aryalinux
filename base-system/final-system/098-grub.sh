@@ -59,12 +59,6 @@ fi
 
 sed -i "s@GNU GRUB  version %s@$OS_NAME $OS_VERSION $OS_CODENAME \- GNU GRUB@g" grub-core/normal/main.c
 
-if [ `uname -m` == "x86_64" ]
-then
-
-export CFLAGS="-Wno-error=packed-not-aligned"
-export MAKEFLAGS=""
-
 ./configure --prefix=/usr      \
 	--sbindir=/sbin        \
 	--localstatedir=/var   \
@@ -75,29 +69,6 @@ export MAKEFLAGS=""
 	--with-grubdir="grub"  \
 	--disable-werror       \
 	--with-platform=efi --target=x86_64 &&
-make
-make install
-
-fi
-
-cd $SOURCE_DIR
-rm -r $DIRECTORY
-tar xf $TARBALL
-cd $DIRECTORY
-
-export CFLAGS="-Wno-error=packed-not-aligned"
-export MAKEFLAGS=""
-
-./configure --prefix=/usr      \
-	--sbindir=/sbin        \
-	--localstatedir=/var   \
-	--sysconfdir=/etc      \
-	--enable-grub-mkfont   \
-	--program-prefix=""    \
-	--with-bootdir="/boot" \
-	--with-grubdir="grub"  \
-	--disable-werror       \
-        --host=i686 &&
 make
 make install
 
