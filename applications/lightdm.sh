@@ -388,8 +388,6 @@ sudo getent passwd lightdm || useradd -c "Light Display Manager" -u 63 -g lightd
 
 sudo chown -R lightdm:lightdm /var/lib/lightdm /var/log/lightdm
 
-sudo chmod 700 /usr/share/polkit-1/rules.d
-sudo chmod 600 /usr/share/polkit-1/rules.d/*
 sudo chown -R polkitd:polkitd /usr/share/polkit-1/rules.d
 sudo systemctl enable lightdm
 
