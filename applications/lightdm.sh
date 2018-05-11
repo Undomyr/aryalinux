@@ -13,7 +13,7 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 SOURCE_ONLY=n
 NAME="lightdm"
 DESCRIPTION="A light-weight desktop manager with greeters available in GTK/QT."
-VERSION=1.24.0
+VERSION=1.18.3
 
 #REQ:xserver-meta
 #REQ:itstool
@@ -25,7 +25,7 @@ VERSION=1.24.0
 
 cd $SOURCE_DIR
 
-URL="https://launchpad.net/lightdm/1.24/1.24.0/+download/lightdm-1.24.0.tar.xz"
+URL="https://launchpad.net/lightdm/1.18/1.18.3/+download/lightdm-1.18.3.tar.xz"
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 wget -nc $URL
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
@@ -46,34 +46,15 @@ export MOC4=moc-qt4
 			--disable-liblightdm-qt
 
 make "-j`nproc`"
-
-cat > 1434987998845.sh << "ENDOFFILE"
-make install
-ENDOFFILE
-chmod a+x 1434987998845.sh
-sudo ./1434987998845.sh
-sudo rm -rf 1434987998845.sh
-
-cat > 1434987998845.sh << "ENDOFFILE"
-rm -rf /etc/apparmor.d /etc/init
-install -dm770 /var/lib/lightdm
-install -dm711 /var/log/lightdm
-
-chmod +t /var/lib/lightdm
-
-echo "GDK_CORE_DEVICE_EVENTS=true" > /var/lib/lightdm/.pam_environment
-
-chmod 644 /var/lib/lightdm/.pam_environment
-
-install -dm755 /etc/lightdm
-
-ENDOFFILE
-chmod a+x 1434987998845.sh
-sudo ./1434987998845.sh
-sudo rm -rf 1434987998845.sh
-
-cat > 1434987998845.sh << "ENDOFFILE"
-cat > /etc/lightdm/lightdm.conf << "EOF"
+sudo make install
+sudo rm -rf /etc/apparmor.d /etc/init
+sudo install -dm770 /var/lib/lightdm
+sudo install -dm711 /var/log/lightdm
+sudo chmod +t /var/lib/lightdm
+echo "GDK_CORE_DEVICE_EVENTS=true" | sudo tee -a /var/lib/lightdm/.pam_environment
+sudo chmod 644 /var/lib/lightdm/.pam_environment
+sudo install -dm755 /etc/lightdm
+sudo tee /etc/lightdm/lightdm.conf << "EOF"
 #
 # General configuration
 #
@@ -224,13 +205,8 @@ session-wrapper=/etc/lightdm/Xsession
 #height=768
 #depth=8
 EOF
-ENDOFFILE
-chmod a+x 1434987998845.sh
-sudo ./1434987998845.sh
-sudo rm -rf 1434987998845.sh
 
-cat > 1434987998845.sh << "ENDOFFILE"
-cat > /etc/lightdm/users.conf << "EOF"
+sudo tee /etc/lightdm/users.conf << "EOF"
 #
 # User accounts configuration
 #
@@ -247,7 +223,7 @@ hidden-users=nobody nobody4 noaccess
 hidden-shells=/bin/false /sbin/nologin
 EOF
 
-cat > ${DEST}/etc/lightdm/Xsession << "EOF"
+sudo tee /etc/lightdm/Xsession << "EOF"
 #!/bin/sh
 #
 # LightDM wrapper to run around X sessions.
@@ -307,17 +283,10 @@ echo "X session wrapper complete, running session $@"
 exec $@
 EOF
 
-ENDOFFILE
-chmod a+x 1434987998845.sh
-sudo ./1434987998845.sh
-sudo rm -rf 1434987998845.sh
 
-cat > 1434987998845.sh << "ENDOFFILE"
-chmod 755 /etc/lightdm/Xsession
-
-install -dm755 /etc/pam.d
-
-cat > /etc/pam.d/lightdm << "EOF"
+sudo chmod 755 /etc/lightdm/Xsession
+sudo install -dm755 /etc/pam.d
+sudo tee /etc/pam.d/lightdm << "EOF"
 # Begin /etc/pam.d/lightdm
 
 auth     requisite      pam_nologin.so
@@ -337,7 +306,7 @@ session  optional       pam_gnome_keyring.so auto_start
 # End /etc/pam.d/lightdm
 EOF
 
-cat > /etc/pam.d/lightdm-autologin << "EOF"
+sudo tee /etc/pam.d/lightdm-autologin << "EOF"
 # Begin /etc/pam.d/lightdm-autologin
 
 auth     requisite      pam_nologin.so
@@ -356,7 +325,7 @@ session  include        system-session
 # End /etc/pam.d/lightdm-autologin
 EOF
 
-cat > /etc/pam.d/lightdm-greeter << "EOF"
+sudo tee /etc/pam.d/lightdm-greeter << "EOF"
 # Begin /etc/pam.d/lightdm-greeter
 
 auth     required       pam_env.so
@@ -368,15 +337,10 @@ session  required       pam_unix.so
 
 # End /etc/pam.d/lightdm-greeter
 EOF
-ENDOFFILE
-chmod a+x 1434987998845.sh
-sudo ./1434987998845.sh
-sudo rm -rf 1434987998845.sh
 
-cat > 1434987998845.sh << "ENDOFFILE"
-install -dm700 /usr/share/polkit-1/rules.d
+sudo install -dm700 /usr/share/polkit-1/rules.d
 
-cat > /usr/share/polkit-1/rules.d/lightdm.rules << "EOF"
+sudo tee /usr/share/polkit-1/rules.d/lightdm.rules << "EOF"
 polkit.addRule(function(action, subject) {
     if (subject.user == "lightdm") {
         polkit.log("action=" + action);
@@ -394,15 +358,15 @@ polkit.addRule(function(action, subject) {
 });
 EOF
 
-chmod 600 /usr/share/polkit-1/rules.d/lightdm.rules
+sudo chmod 600 /usr/share/polkit-1/rules.d/lightdm.rules
 
-install -dm755 /etc/tmpfiles.d /lib/systemd/system
+sudo install -dm755 /etc/tmpfiles.d /lib/systemd/system
 
-cat > /etc/tmpfiles.d/lightdm.conf << "EOF"
+sudo tee /etc/tmpfiles.d/lightdm.conf << "EOF"
 d /run/lightdm 0711 lightdm lightdm
 EOF
 
-cat > /lib/systemd/system/lightdm.service << "EOF"
+sudo tee /lib/systemd/system/lightdm.service << "EOF"
 [Unit]
 Description=Light Display Manager
 Documentation=man:lightdm(1)
@@ -419,31 +383,18 @@ BusName=org.freedesktop.DisplayManager
 Alias=display-manager.service
 EOF
 
-ENDOFFILE
-chmod a+x 1434987998845.sh
-sudo ./1434987998845.sh
-sudo rm -rf 1434987998845.sh
+sudo getent group lightdm || groupadd -g 63 lightdm
+sudo getent passwd lightdm || useradd -c "Light Display Manager" -u 63 -g lightdm -d /var/lib/lightdm -s /sbin/nologin lightdm
 
-cat > 1434987998845.sh << "ENDOFFILE"
-getent group lightdm > /dev/null || groupadd -g 63 lightdm
-getent passwd lightdm > /dev/null || useradd -c "Light Display Manager" -u 63 -g lightdm -d /var/lib/lightdm -s /sbin/nologin lightdm
+sudo chown -R lightdm:lightdm /var/lib/lightdm /var/log/lightdm
 
-chown -R lightdm:lightdm /var/lib/lightdm /var/log/lightdm
-
-chmod 700 /usr/share/polkit-1/rules.d
-chmod 600 /usr/share/polkit-1/rules.d/*
-chown -R polkitd:polkitd /usr/share/polkit-1/rules.d
-
-systemctl enable lightdm
-
-ENDOFFILE
-chmod a+x 1434987998845.sh
-sudo ./1434987998845.sh
-sudo rm -rf 1434987998845.sh
+sudo chmod 700 /usr/share/polkit-1/rules.d
+sudo chmod 600 /usr/share/polkit-1/rules.d/*
+sudo chown -R polkitd:polkitd /usr/share/polkit-1/rules.d
+sudo systemctl enable lightdm
 
 
- 
 cd $SOURCE_DIR
 cleanup "$NAME" "$DIRECTORY"
- 
+
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"
