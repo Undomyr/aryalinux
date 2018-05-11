@@ -13,7 +13,7 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 SOURCE_ONLY=n
 NAME="lightdm"
 DESCRIPTION="A light-weight desktop manager with greeters available in GTK/QT."
-VERSION=1.10.5
+VERSION=1.24.0
 
 #REQ:xserver-meta
 #REQ:itstool
@@ -25,15 +25,11 @@ VERSION=1.10.5
 
 cd $SOURCE_DIR
 
-wget -nc https://launchpad.net/lightdm/1.10/1.10.5/+download/lightdm-1.10.5.tar.xz
-wget -nc https://launchpad.net/lightdm-gtk-greeter/2.0/2.0.1/+download/lightdm-gtk-greeter-2.0.1.tar.gz
-
-
-TARBALL=lightdm-1.10.5.tar.xz
-DIRECTORY=lightdm-1.10.5
-
+URL="https://launchpad.net/lightdm/1.24/1.24.0/+download/lightdm-1.24.0.tar.xz"
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+wget -nc $URL
+DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
 tar -xf $TARBALL
-
 cd $DIRECTORY
 
 export MOC4=moc-qt4

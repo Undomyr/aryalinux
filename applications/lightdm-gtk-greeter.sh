@@ -11,7 +11,7 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 . /var/lib/alps/functions
 
 NAME=lightdm-gtk-greeter
-VERSION=2.0.1
+VERSION=2.0.5
 DESCRIPTION="GTK Based greeter for lightdm display manager"
 
 #REQ:lightdm
@@ -21,14 +21,11 @@ DESCRIPTION="GTK Based greeter for lightdm display manager"
 
 cd $SOURCE_DIR
 
-wget -nc https://launchpad.net/lightdm-gtk-greeter/2.0/2.0.1/+download/lightdm-gtk-greeter-2.0.1.tar.gz
-
-
-TARBALL=lightdm-gtk-greeter-2.0.1.tar.gz
-DIRECTORY=lightdm-gtk-greeter-2.0.1
-
+URL="https://launchpad.net/lightdm-gtk-greeter/2.0/2.0.5/+download/lightdm-gtk-greeter-2.0.5.tar.gz"
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+wget -nc $URL
+DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
 tar -xf $TARBALL
-
 cd $DIRECTORY
 
 export CFLAGS="-Wno-error=format-nonliteral"
