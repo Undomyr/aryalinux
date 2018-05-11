@@ -34,9 +34,6 @@ cd $DIRECTORY
 
 export MOC4=moc-qt4
 
-CFLAGS="-march=native -mtune=native -O3"   \
-CXXFLAGS="-march=native -mtune=native -O3" \
-CPPLAGS="-march=native -mtune=native -O3"  \
 ./configure --prefix=/usr \
             --sysconfdir=/etc \
             --localstatedir=/var \
