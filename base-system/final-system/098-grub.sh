@@ -77,9 +77,13 @@ export MAKEFLAGS=""
 	--with-platform=efi --target=x86_64 &&
 make
 make install
-make clean
 
 fi
+
+cd $SOURCE_DIR
+rm -r $DIRECTORY
+tar xf $TARBALL
+cd $DIRECTORY
 
 export CFLAGS="-Wno-error=packed-not-aligned"
 export MAKEFLAGS=""
