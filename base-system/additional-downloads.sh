@@ -29,6 +29,9 @@ wget -nc https://www.gnupg.org/ftp/gcrypt/gnutls/v3.5/gnutls-3.5.14.tar.xz
 wget -nc https://ftp.gnu.org/gnu/wget/wget-1.19.1.tar.xz
 wget -nc http://www.sudo.ws/dist/sudo-1.8.20p2.tar.gz
 wget -nc https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tar.xz
+wget -nc https://github.com/djlucas/make-ca/archive/v0.7/make-ca-0.7.tar.gz
+wget -nc http://www.cacert.org/certs/root.crt
+wget -nc http://www.cacert.org/certs/class3.crt
 wget -nc https://hg.mozilla.org/projects/nss/raw-file/tip/lib/ckfw/builtins/certdata.txt
 wget -nc http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.06.tar.xz
 wget -nc http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.9.1.tar.gz
@@ -46,7 +49,6 @@ wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-kbu
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-loopback.patch
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-mmap.patch
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-standalone.patch
-wget -nc http://anduin.linuxfromscratch.org/BLFS/other/make-ca.sh-20170514
 wget -nc https://sourceware.org/ftp/elfutils/0.170/elfutils-0.170.tar.bz2
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/0.21-nvme_ioctl.h.patch
 
