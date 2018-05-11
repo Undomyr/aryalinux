@@ -157,12 +157,9 @@ then
 	/sources/initramfs.sh
 fi
 
-if ! grep "014-openssl.sh" /sources/build-log &> /dev/null
-then
-	/sources/extras/014-openssl.sh
+if ! grep lvm2 /sources/build-log &> /dev/null; then
+	/sources/lvm2.sh
 fi
-
-/sources/lvm2.sh
 
 if ! grep "026-elfutils" /sources/build-log &> /dev/null
 then
