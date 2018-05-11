@@ -75,11 +75,14 @@ export MAKEFLAGS=""
 	--with-grubdir="grub"  \
 	--disable-werror       \
 	--with-platform=efi --target=x86_64 &&
-make || make clean || make
+make
 make install
 make clean
 
 fi
+
+export CFLAGS="-Wno-error=packed-not-aligned"
+export MAKEFLAGS=""
 
 ./configure --prefix=/usr      \
 	--sbindir=/sbin        \
@@ -89,8 +92,9 @@ fi
 	--program-prefix=""    \
 	--with-bootdir="/boot" \
 	--with-grubdir="grub"  \
-	--disable-werror &&
-make || make clean || make
+	--disable-werror       \
+        --host=i686 &&
+make
 make install
 
 mkdir -pv /usr/share/fonts/unifont
