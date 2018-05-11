@@ -62,7 +62,10 @@ sed -i "s@GNU GRUB  version %s@$OS_NAME $OS_VERSION $OS_CODENAME \- GNU GRUB@g" 
 if [ `uname -m` == "x86_64" ]
 then
 
-CFLAGS="-Wno-error=packed-not-aligned" ./configure --prefix=/usr      \
+export CFLAGS="-Wno-error=packed-not-aligned"
+export MAKEFLAGS=""
+
+./configure --prefix=/usr      \
 	--sbindir=/sbin        \
 	--localstatedir=/var   \
 	--sysconfdir=/etc      \
@@ -72,13 +75,13 @@ CFLAGS="-Wno-error=packed-not-aligned" ./configure --prefix=/usr      \
 	--with-grubdir="grub"  \
 	--disable-werror       \
 	--with-platform=efi --target=x86_64 &&
-make
+make || make clean || make
 make install
 make clean
 
 fi
 
-CFLAGS="-Wno-error=packed-not-aligned" ./configure --prefix=/usr      \
+./configure --prefix=/usr      \
 	--sbindir=/sbin        \
 	--localstatedir=/var   \
 	--sysconfdir=/etc      \
@@ -87,7 +90,7 @@ CFLAGS="-Wno-error=packed-not-aligned" ./configure --prefix=/usr      \
 	--with-bootdir="/boot" \
 	--with-grubdir="grub"  \
 	--disable-werror &&
-make
+make || make clean || make
 make install
 
 mkdir -pv /usr/share/fonts/unifont
