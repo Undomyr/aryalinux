@@ -29,20 +29,6 @@ then
 	swapon -v $SWAP_PART
 fi
 
-if [ -d $LFS/opt/x-server ]; then
-        echo "x-server found.."
-        if [ -d $LFS/opt/desktop-environment ]; then
-                echo "desktop-environment found.."
-                mount -t overlay -oupperdir=$LFS/opt/desktop-environment,lowerdir=$LFS/opt/x-server:$LFS,workdir=$LFS/tmp overlay $LFS || {
-                        echo "Could not mount desktop-environment and x-server"
-                }
-        else
-                mount -t overlay -oupperdir=$LFS/opt/x-server,lowerdir=$LFS,workdir=$LFS/tmp overlay $LFS || {
-                        echo "Could not mount x-server"
-                }
-        fi
-fi
-
 mount -v --bind /dev $LFS/dev
 
 mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620
@@ -50,9 +36,11 @@ mount -vt proc proc $LFS/proc
 mount -vt sysfs sysfs $LFS/sys
 mount -vt tmpfs tmpfs $LFS/run
 
-mount -vt tmpfs tmpfs $LFS/dev/shm
+if [ -h $LFS/dev/shm ]; then
+  mkdir -pv $LFS/$(readlink $LFS/dev/shm)
+fi
 
 chroot "$LFS" /usr/bin/env -i              \
     HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin     \
-    /bin/bash --login -e +h $*
+/bin/bash --login -e +h $*

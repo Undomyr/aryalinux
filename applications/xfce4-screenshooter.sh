@@ -7,14 +7,14 @@ set +h
 
 DESCRIPTION="An application to take screenshots. Default screenshot application for XFCE"
 NAME="xfce4-screenshooter"
-VERSION="1.8.2"
+VERSION="1.9.2"
 
 #REQ:libsoup
 
 KDE_PREFIX=/usr
 cd $SOURCE_DIR
 
-URL=http://archive.xfce.org/src/apps/xfce4-screenshooter/1.8/xfce4-screenshooter-1.8.2.tar.bz2
+URL=https://git.xfce.org/apps/xfce4-screenshooter/snapshot/xfce4-screenshooter-1.9.2.tar.gz
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `

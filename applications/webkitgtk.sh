@@ -14,7 +14,6 @@ NAME="webkitgtk"
 
 #REQ:cairo
 #REQ:cmake
-#REQ:enchant
 #REQ:gst10-plugins-base
 #REQ:gst10-plugins-bad
 #REQ:gtk2
@@ -28,6 +27,7 @@ NAME="webkitgtk"
 #REQ:ruby
 #REQ:sqlite
 #REQ:general_which
+#REC:enchant
 #REC:geoclue2
 #REC:gobject-introspection
 #REC:hicolor-icon-theme

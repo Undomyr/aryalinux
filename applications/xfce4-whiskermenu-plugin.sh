@@ -13,14 +13,14 @@ export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
 SOURCE_ONLY=n
 DESCRIPTION="The Whisker Menu presents a Windows-Like start menu for XFCE panel"
 NAME="xfce4-whiskermenu-plugin"
-VERSION="1.7.1"
+VERSION="2.1.7"
 
 #REQ:cmake
 
 
 cd $SOURCE_DIR
 
-URL=http://archive.xfce.org/src/panel-plugins/xfce4-whiskermenu-plugin/1.7/xfce4-whiskermenu-plugin-1.7.1.tar.bz2
+URL=https://git.xfce.org/panel-plugins/xfce4-whiskermenu-plugin/snapshot/xfce4-whiskermenu-plugin-2.1.7.tar.gz
 
 wget -nc $URL
 

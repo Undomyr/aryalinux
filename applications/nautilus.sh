@@ -17,12 +17,12 @@ NAME="nautilus"
 #REQ:gnome-desktop
 #REQ:tracker
 #REQ:libnotify
+#REQ:appstream-glib
 #REC:exempi
 #REC:gobject-introspection
 #REC:libexif
 #REC:adwaita-icon-theme
 #REC:gvfs
-#REQ:appstream-glib
 #OPT:gtk-doc
 
 

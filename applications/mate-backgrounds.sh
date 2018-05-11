@@ -9,11 +9,11 @@ set +h
 SOURCE_ONLY=n
 NAME="mate-backgrounds"
 DESCRIPTION="Backgrounds for the mate desktop environment"
-VERSION="1.18.0"
+VERSION=1.20.0
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.18/mate-backgrounds-1.18.0.tar.xz"
+URL="http://pub.mate-desktop.org/releases/1.20/mate-backgrounds-1.20.0.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`
