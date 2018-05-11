@@ -62,7 +62,7 @@ sed -i "s@GNU GRUB  version %s@$OS_NAME $OS_VERSION $OS_CODENAME \- GNU GRUB@g" 
 if [ `uname -m` == "x86_64" ]
 then
 
-./configure --prefix=/usr      \
+CFLAGS="-Wno-error=packed-not-aligned" ./configure --prefix=/usr      \
 	--sbindir=/sbin        \
 	--localstatedir=/var   \
 	--sysconfdir=/etc      \
@@ -72,13 +72,13 @@ then
 	--with-grubdir="grub"  \
 	--disable-werror       \
 	--with-platform=efi --target=x86_64 &&
-make "-j`nproc`"
+make
 make install
 make clean
 
 fi
 
-./configure --prefix=/usr      \
+CFLAGS="-Wno-error=packed-not-aligned" ./configure --prefix=/usr      \
 	--sbindir=/sbin        \
 	--localstatedir=/var   \
 	--sysconfdir=/etc      \
