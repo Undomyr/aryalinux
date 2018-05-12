@@ -140,8 +140,8 @@ EOF
 sed -e s/_EVENT_SIZEOF/EVENT__SIZEOF/ \
     -i ipc/chromium/src/base/message_pump_libevent.cc
 
-make -f client.mk
-sudo make -f client.mk install INSTALL_SDK= &&
+./mach build
+sudo ./mach install &&
 sudo chown -R 0:0 /usr/lib/firefox-$VERSION   &&
 sudo mkdir -pv    /usr/lib/mozilla/plugins  &&
 sudo ln    -sfv   ../../mozilla/plugins /usr/lib/firefox-$VERSION/browser
