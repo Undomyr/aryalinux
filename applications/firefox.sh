@@ -7,17 +7,19 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="Firefox is a stand-alone browser based on the Mozilla codebase."
+DESCRIPTION="br3ak Firefox is a stand-alone browserbr3ak based on the Mozilla codebase.br3ak"
 SECTION="xsoft"
-VERSION=61.0b4
+VERSION=59.0.2
 NAME="firefox"
 
-#REQ:alsa-lib
 #REQ:autoconf213
 #REQ:gtk3
 #REQ:gtk2
 #REQ:libnotify
 #REQ:nss
+#REQ:pulseaudio
+#REQ:alsa-lib
+#REQ:rust
 #REQ:unzip
 #REQ:yasm
 #REQ:zip
@@ -25,7 +27,6 @@ NAME="firefox"
 #REQ:GConf
 #REQ:ffmpeg
 #REQ:libwebp
-#REQ:pulseaudio
 #REQ:startup-notification
 #REQ:valgrind
 #REQ:liboauth
@@ -33,9 +34,8 @@ NAME="firefox"
 #REC:icu
 #REC:libevent
 #REC:libvpx
+#REC:llvm
 #REC:sqlite
-#OPT:cargo
-#REQ:rust
 #OPT:curl
 #OPT:dbus-glib
 #OPT:doxygen
@@ -43,7 +43,6 @@ NAME="firefox"
 #OPT:ffmpeg
 #OPT:libwebp
 #OPT:openjdk
-#OPT:pulseaudio
 #OPT:startup-notification
 #OPT:valgrind
 #OPT:wget
@@ -55,13 +54,15 @@ NAME="firefox"
 
 cd $SOURCE_DIR
 
-URL=https://ftp.mozilla.org/pub/firefox/releases/$VERSION/source/firefox-$VERSION.source.tar.xz
+URL=https://hg.mozilla.org/releases/mozilla-release/archive/239e434d6d2b8e1e2b697c3416d1e96d48fe98e5.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc $URL
+wget -nc https://hg.mozilla.org/releases/mozilla-release/archive/239e434d6d2b8e1e2b697c3416d1e96d48fe98e5.tar.bz2 -O $NAME-$VERSION.tar.bz2
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-59.0.2-ffmpeg4.0-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-59.0.2-ffmpeg4.0-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-59.0.2-system_graphite2_harfbuzz-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-59.0.2-system_graphite2_harfbuzz-1.patch
 
-TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
+TARBALL="$NAME-$VERSION.tar.bz2"
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
 	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
@@ -78,8 +79,9 @@ export SHELL=/bin/sh
 
 cat > mozconfig << "EOF"
 # If you have a multicore machine, all cores will be used by default.
-# If desired, you can reduce the number of cores used, e.g. to 1, by
-# uncommenting the next line and setting a valid number of CPU cores.
+# You can change the number of non-rust jobs by setting a valid number
+# of cores in this option, but when rust crates are being compiled
+# jobs will be scheduled for all the available CPU cores.
 #mk_add_options MOZ_MAKE_FLAGS="-j1"
 # If you have installed dbus-glib, comment out this line:
 #ac_add_options --disable-dbus
@@ -87,15 +89,25 @@ cat > mozconfig << "EOF"
 # wireless-tools, and you wish to use geolocation web services, comment out
 # this line
 #ac_add_options --disable-necko-wifi
-# Uncomment this option if you wish to build with gtk+-2
-#ac_add_options --enable-default-toolkit=cairo-gtk2
+# API Keys for geolocation APIs - necko-wifi (above) is required for MLS
+# Uncomment the following line if you wish to use Mozilla Location Service
+#ac_add_options --with-mozilla-api-keyfile=$PWD/mozilla-key
+# Uncomment the following line if you wish to use Google's geolocaton API
+# (needed for use with saved maps with Google Maps)
+#ac_add_options --with-google-api-keyfile=$PWD/google-key
 # Uncomment these lines if you have installed optional dependencies:
 #ac_add_options --enable-system-hunspell
 #ac_add_options --enable-startup-notification
-# Comment out following option if you have PulseAudio installed
-#ac_add_options --disable-pulseaudio
+# Uncomment the following option if you have not installed PulseAudio
+##ac_add_options --disable-pulseaudio
+# and uncomment this if you installed alsa-lib instead of PulseAudio
+#ac_add_options --enable-alsa
 # If you have installed GConf, comment out this line
 #ac_add_options --disable-gconf
+# Stylo is the new CSS code, including the rust 'style'
+# package. It is enabled by default but requires clang.
+# Uncomment this if you do not wish to use stylo.
+#ac_add_options --disable-stylo
 # Comment out following options if you have not installed
 # recommended dependencies:
 ac_add_options --enable-system-sqlite
@@ -106,8 +118,8 @@ ac_add_options --with-system-nss
 ac_add_options --with-system-icu
 # If you are going to apply the patch for system graphite
 # and system harfbuzz, uncomment these lines:
-# ac_add_options --with-system-graphite2
-# ac_add_options --with-system-harfbuzz
+ac_add_options --with-system-graphite2
+ac_add_options --with-system-harfbuzz
 # Stripping is now enabled by default.
 # Uncomment these lines if you need to run a debugger:
 #ac_add_options --disable-strip
@@ -117,14 +129,13 @@ ac_add_options --prefix=/usr
 ac_add_options --enable-application=browser
 ac_add_options --disable-crashreporter
 ac_add_options --disable-updater
+# enabling the tests will use a lot more space and significantly
+# increase the build time, for no obvious benefit.
 ac_add_options --disable-tests
-ac_add_options --enable-optimize
-# ac_add_options --enable-gio
+# Optimization for size is broken with gcc7
+ac_add_options --enable-optimize="-O2"
 ac_add_options --enable-official-branding
-# ac_add_options --enable-safe-browsing
-ac_add_options --enable-url-classifier
-# From firefox-40, using system cairo causes firefox to crash
-# frequently when it is doing background rendering in a tab.
+# In firefox-59.0 system cairo breaks the build, so comment it.
 #ac_add_options --enable-system-cairo
 ac_add_options --enable-system-ffi
 ac_add_options --enable-system-pixman
@@ -137,18 +148,34 @@ mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-build-dir
 EOF
 
 
-sed -e s/_EVENT_SIZEOF/EVENT__SIZEOF/ \
-    -i ipc/chromium/src/base/message_pump_libevent.cc
+patch -Np1 -i ../firefox-59.0.2-system_graphite2_harfbuzz-1.patch
 
+
+#echo "AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ" > google-key
+#echo "d2284a20-0505-4927-a809-7ffaf4d91e55" > mozilla-key
+
+
+patch -Np1 -i ../firefox-59.0.2-ffmpeg-4.0-1.patch &&
 ./mach build
-sudo ./mach install &&
-sudo chown -R 0:0 /usr/lib/firefox-$VERSION   &&
-sudo mkdir -pv    /usr/lib/mozilla/plugins  &&
-sudo ln    -sfv   ../../mozilla/plugins /usr/lib/firefox-$VERSION/browser
 
-sudo mkdir -pv /usr/share/applications &&
-sudo mkdir -pv /usr/share/pixmaps &&
-sudo tee /usr/share/applications/firefox.desktop << "EOF" &&
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+./mach install                                                  &&
+mkdir -pv  /usr/lib/mozilla/plugins                             &&
+ln    -sfv ../../mozilla/plugins /usr/lib/firefox/browser/
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
+
+
+sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
+mkdir -pv /usr/share/applications &&
+mkdir -pv /usr/share/pixmaps &&
+cat > /usr/share/applications/firefox.desktop << "EOF" &&
 [Desktop Entry]
 Encoding=UTF-8
 Name=Firefox Web Browser
@@ -162,8 +189,15 @@ Categories=GNOME;GTK;Network;WebBrowser;
 MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;
 StartupNotify=true
 EOF
-sudo ln -sfv /usr/lib/firefox-$VERSION/browser/icons/mozicon128.png \
+ln -sfv /usr/lib/firefox/browser/chrome/icons/default/default128.png \
         /usr/share/pixmaps/firefox.png
+
+ENDOFROOTSCRIPT
+sudo chmod 755 rootscript.sh
+sudo bash -e ./rootscript.sh
+sudo rm rootscript.sh
+
+
 
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
