@@ -121,7 +121,7 @@ ac_add_options --disable-tests
 ac_add_options --enable-optimize
 # ac_add_options --enable-gio
 ac_add_options --enable-official-branding
-ac_add_options --enable-safe-browsing
+# ac_add_options --enable-safe-browsing
 ac_add_options --enable-url-classifier
 # From firefox-40, using system cairo causes firefox to crash
 # frequently when it is doing background rendering in a tab.
