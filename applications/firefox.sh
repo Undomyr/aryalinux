@@ -62,7 +62,7 @@ wget -nc $URL
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-59.0.2-ffmpeg4.0-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-59.0.2-ffmpeg4.0-1.patch
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-59.0.2-system_graphite2_harfbuzz-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-59.0.2-system_graphite2_harfbuzz-1.patch
 
-TARBALL=$(echo $URL | rev | cut d/ f1 | rev)
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
 	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
