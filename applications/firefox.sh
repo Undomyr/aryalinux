@@ -33,7 +33,7 @@ NAME="firefox"
 #REC:libevent
 #REC:libvpx
 #REC:sqlite
-#REQ:cargo
+#OPT:cargo
 #REQ:rust
 #OPT:curl
 #OPT:dbus-glib
