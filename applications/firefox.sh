@@ -58,11 +58,11 @@ URL=https://hg.mozilla.org/releases/mozilla-release/archive/239e434d6d2b8e1e2b69
 
 if [ ! -z $URL ]
 then
-wget -nc https://hg.mozilla.org/releases/mozilla-release/archive/239e434d6d2b8e1e2b697c3416d1e96d48fe98e5.tar.bz2 -O $NAME-$VERSION.tar.bz2
+wget -nc $URL
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-59.0.2-ffmpeg4.0-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-59.0.2-ffmpeg4.0-1.patch
 wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-59.0.2-system_graphite2_harfbuzz-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-59.0.2-system_graphite2_harfbuzz-1.patch
 
-TARBALL="$NAME-$VERSION.tar.bz2"
+TARBALL=$(echo $URL | rev | cut d/ f1 | rev)
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
 	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
@@ -155,7 +155,7 @@ patch -Np1 -i ../firefox-59.0.2-system_graphite2_harfbuzz-1.patch
 #echo "d2284a20-0505-4927-a809-7ffaf4d91e55" > mozilla-key
 
 
-patch -Np1 -i ../firefox-59.0.2-ffmpeg-4.0-1.patch &&
+patch -Np1 -i ../firefox-59.0.2-ffmpeg4.0-1.patch &&
 ./mach build
 
 
