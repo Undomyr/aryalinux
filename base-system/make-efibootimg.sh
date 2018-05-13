@@ -8,6 +8,8 @@ cd $SOURCE_DIR
 
 LABEL="$1"
 
+echo $LABEL
+
 rm -vf grub-embedded.cfg
 rm -vf efiboot.img
 
