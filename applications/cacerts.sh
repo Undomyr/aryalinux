@@ -17,10 +17,18 @@ VERSION="latest"
 #OPT:openjdk
 #OPT:nss
 
+URL=https://github.com/djlucas/make-ca/archive/v0.7/make-ca-0.7.tar.gz
+
 
 cd $SOURCE_DIR
 
-wget -nc https://github.com/djlucas/make-ca/archive/v0.7/make-ca-0.7.tar.gz
+wget -nc $URL
+TARBALL=$(echo $URL | rev | cur -d/ -f1 | rev)
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
+
+tar xf $TARBALL
+cd $DIRECTORY
+
 sudo install -vdm755 /etc/ssl/local &&
 wget http://www.cacert.org/certs/root.crt &&
 wget http://www.cacert.org/certs/class3.crt &&
