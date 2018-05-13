@@ -132,16 +132,6 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
-
-sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-install -v -dm755 /usr/share/doc/libinput-1.10.0 &&
-cp -rv html/*     /usr/share/doc/libinput-1.10.0
-ENDOFROOTSCRIPT
-sudo chmod 755 rootscript.sh
-sudo bash -e ./rootscript.sh
-sudo rm rootscript.sh
-
-
 cd $SOURCE_DIR
 
 sudo rm -rf $DIRECTORY
