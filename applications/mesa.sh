@@ -53,7 +53,7 @@ whoami > /tmp/currentuser
 export XORG_PREFIX=/usr
 export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 
-patch -Np1 -i ../mesa-18.0.1-add_xdemos-1.patch
+patch -Np1 -i ../mesa-18.0.3-add_xdemos-1.patch
 
 DRI_DRIVERS="i915,i965,nouveau,r200,radeon,swrast"
 GALLIUM_DRIVERS="nouveau,r300,r600,svga,radeonsi,swrast,virgl"
