@@ -6,12 +6,12 @@ set +h
 . /var/lib/alps/functions
 
 NAME="xfce4-dev-tools"
-VERSION="4.12.0"
+VERSION="4.4.0"
 
 KDE_PREFIX=/usr
 cd $SOURCE_DIR
 
-URL=https://git.xfce.org/xfce/xfce4-dev-tools/snapshot/xfce4-dev-tools-4.12.0.tar.gz
+URL=http://users.xfce.org/~benny/files/xfce4-dev-tools/4.4/xfce4-dev-tools-4.4.0.tar.bz2
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `

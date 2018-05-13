@@ -9,21 +9,21 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The ntp package contains a clientbr3ak and server to keep the time synchronized between various computersbr3ak over a network. This package is the official referencebr3ak implementation of the NTP protocol.br3ak"
 SECTION="basicnet"
-VERSION=11
+VERSION=10
 NAME="ntp"
 
-#REQ:perl-modules#perl-lwp-protocol-https
+#REC:wget
 #OPT:libcap
 #OPT:libevent
 
 
 cd $SOURCE_DIR
 
-URL=https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p11.tar.gz
+URL=https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p10.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p11.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ntp/ntp-4.2.8p11.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ntp/ntp-4.2.8p11.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ntp/ntp-4.2.8p11.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ntp/ntp-4.2.8p11.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ntp/ntp-4.2.8p11.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ntp/ntp-4.2.8p11.tar.gz
+wget -nc https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p10.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ntp/ntp-4.2.8p10.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ntp/ntp-4.2.8p10.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ntp/ntp-4.2.8p10.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ntp/ntp-4.2.8p10.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ntp/ntp-4.2.8p10.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ntp/ntp-4.2.8p10.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -50,7 +50,8 @@ sudo bash -e ./rootscript.sh
 sudo rm rootscript.sh
 
 
-sed -e 's/"(\\S+)"/"?([^\\s"]+)"?/' \
+sed -e "s/https/http/"              \
+    -e 's/"(\\S+)"/"?([^\\s"]+)"?/' \
     -i scripts/update-leap/update-leap.in
 
 
@@ -60,7 +61,7 @@ sed -e 's/"(\\S+)"/"?([^\\s"]+)"?/' \
             --sysconfdir=/etc     \
             --enable-linuxcaps    \
             --with-lineeditlibs=readline \
-            --docdir=/usr/share/doc/ntp-4.2.8p11 &&
+            --docdir=/usr/share/doc/ntp-4.2.8p10 &&
 make "-j`nproc`" || make
 
 
@@ -120,7 +121,7 @@ sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 . /etc/alps/alps.conf
 
 pushd $SOURCE_DIR
-wget -nc http://www.linuxfromscratch.org/blfs/downloads/svn/blfs-systemd-units-20180105.tar.bz2
+wget -nc http://www.linuxfromscratch.org/blfs/downloads/8.2/blfs-systemd-units-20180105.tar.bz2
 tar xf blfs-systemd-units-20180105.tar.bz2
 cd blfs-systemd-units-20180105
 make install-ntpd

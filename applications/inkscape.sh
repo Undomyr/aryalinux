@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Inkscape is a what you see is whatbr3ak you get Scalable Vector Graphics editor. It is useful for creating,br3ak viewing and changing SVG images.br3ak"
 SECTION="xsoft"
-VERSION=0.92.3
+VERSION=0.92.2
 NAME="inkscape"
 
 #REQ:boost
@@ -34,13 +34,13 @@ NAME="inkscape"
 
 cd $SOURCE_DIR
 
-URL=https://media.inkscape.org/dl/resources/file/inkscape-0.92.3.tar.bz2
+URL=https://media.inkscape.org/dl/resources/file/inkscape-0.92.2.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://media.inkscape.org/dl/resources/file/inkscape-0.92.3.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/inkscape/inkscape-0.92.3.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/inkscape/inkscape-0.92.3.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/inkscape/inkscape-0.92.3.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/inkscape/inkscape-0.92.3.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/inkscape/inkscape-0.92.3.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/inkscape/inkscape-0.92.3.tar.bz2
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/inkscape-0.92.3-use_versioned_ImageMagick6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/inkscape/inkscape-0.92.3-use_versioned_ImageMagick6-1.patch
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/inkscape-0.92.3-poppler64-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/inkscape/inkscape-0.92.3-poppler64-1.patch
+wget -nc https://media.inkscape.org/dl/resources/file/inkscape-0.92.2.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/inkscape/inkscape-0.92.2.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/inkscape/inkscape-0.92.2.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/inkscape/inkscape-0.92.2.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/inkscape/inkscape-0.92.2.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/inkscape/inkscape-0.92.2.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/inkscape/inkscape-0.92.2.tar.bz2
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.2/inkscape-0.92.2-use_versioned_ImageMagick6-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/inkscape/inkscape-0.92.2-use_versioned_ImageMagick6-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.2/inkscape-0.92.2-poppler-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/inkscape/inkscape-0.92.2-poppler-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -55,8 +55,8 @@ fi
 
 whoami > /tmp/currentuser
 
-patch -Np1 -i ../inkscape-0.92.3-use_versioned_ImageMagick6-1.patch &&
-patch -Np1 -i ../inkscape-0.92.3-poppler64-1.patch
+patch -Np1 -i ../inkscape-0.92.2-use_versioned_ImageMagick6-1.patch &&
+patch -Np1 -i ../inkscape-0.92.2-poppler-1.patch
 
 
 sed -i 's| abs(| std::fabs(|g' src/ui/tools/flood-tool.cpp

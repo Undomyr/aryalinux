@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The mpg123 package contains abr3ak console-based MP3 player. It claims to be the fastest MP3 decoderbr3ak for Unix.br3ak"
 SECTION="multimedia"
-VERSION=1.25.10
+VERSION=1.25.6
 NAME="mpg123"
 
 #REC:alsa-lib
@@ -19,11 +19,11 @@ NAME="mpg123"
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/mpg123/mpg123-1.25.10.tar.bz2
+URL=https://downloads.sourceforge.net/mpg123/mpg123-1.25.6.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/mpg123/mpg123-1.25.10.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mpg123/mpg123-1.25.10.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/mpg123/mpg123-1.25.10.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mpg123/mpg123-1.25.10.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mpg123/mpg123-1.25.10.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mpg123/mpg123-1.25.10.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mpg123/mpg123-1.25.10.tar.bz2
+wget -nc https://downloads.sourceforge.net/mpg123/mpg123-1.25.6.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/mpg123/mpg123-1.25.6.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/mpg123/mpg123-1.25.6.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/mpg123/mpg123-1.25.6.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/mpg123/mpg123-1.25.6.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/mpg123/mpg123-1.25.6.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/mpg123/mpg123-1.25.6.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

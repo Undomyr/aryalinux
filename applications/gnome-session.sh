@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The GNOME Session package containsbr3ak the GNOME session manager.br3ak"
 SECTION="gnome"
-VERSION=3.28.0
+VERSION=3.26.1
 NAME="gnome-session"
 
 #REQ:dbus-glib
@@ -27,11 +27,11 @@ NAME="gnome-session"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gnome-session/3.28/gnome-session-3.28.0.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/gnome-session/3.26/gnome-session-3.26.1.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-session/3.28/gnome-session-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-session/gnome-session-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-session/gnome-session-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-session/gnome-session-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-session/gnome-session-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-session/gnome-session-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-session/gnome-session-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-session/3.28/gnome-session-3.28.0.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/gnome-session/3.26/gnome-session-3.26.1.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gnome-session/gnome-session-3.26.1.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gnome-session/gnome-session-3.26.1.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-session/gnome-session-3.26.1.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gnome-session/gnome-session-3.26.1.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gnome-session/gnome-session-3.26.1.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gnome-session/gnome-session-3.26.1.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gnome-session/3.26/gnome-session-3.26.1.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -49,15 +49,13 @@ whoami > /tmp/currentuser
 sed 's@/bin/sh@/bin/sh -l@' -i gnome-session/gnome-session.in
 
 
-mkdir build &&
-cd    build &&
-meson --prefix=/usr &&
-ninja
+./configure --prefix=/usr --docdir=/usr/share/doc/gnome-session-3.26.1 &&
+make "-j`nproc`" || make
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-ninja install
+make install
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

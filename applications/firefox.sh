@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Firefox is a stand-alone browserbr3ak based on the Mozilla codebase.br3ak"
 SECTION="xsoft"
-VERSION=59.0.2
+VERSION=58.0.2
 NAME="firefox"
 
 #REQ:autoconf213
@@ -54,15 +54,14 @@ NAME="firefox"
 
 cd $SOURCE_DIR
 
-URL=https://hg.mozilla.org/releases/mozilla-release/archive/239e434d6d2b8e1e2b697c3416d1e96d48fe98e5.tar.bz2
+URL=https://archive.mozilla.org/pub/firefox/releases/58.0.2/source/firefox-58.0.2.source.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc $URL
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-59.0.2-ffmpeg4.0-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-59.0.2-ffmpeg4.0-1.patch
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/firefox-59.0.2-system_graphite2_harfbuzz-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-59.0.2-system_graphite2_harfbuzz-1.patch
+wget -nc https://archive.mozilla.org/pub/firefox/releases/58.0.2/source/firefox-58.0.2.source.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/firefox/firefox-58.0.2.source.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/firefox/firefox-58.0.2.source.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-58.0.2.source.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/firefox/firefox-58.0.2.source.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-58.0.2.source.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/firefox/firefox-58.0.2.source.tar.xz
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.2/firefox-58.0.2-system_graphite2_harfbuzz-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/firefox/firefox-58.0.2-system_graphite2_harfbuzz-1.patch
 
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
 	DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq | grep -v "^\.$"`
 	tar --no-overwrite-dir -xf $TARBALL
@@ -81,7 +80,7 @@ cat > mozconfig << "EOF"
 # If you have a multicore machine, all cores will be used by default.
 # You can change the number of non-rust jobs by setting a valid number
 # of cores in this option, but when rust crates are being compiled
-# jobs will be scheduled for all the available CPU cores.
+# jobs will be scheduled for all the online CPU cores.
 #mk_add_options MOZ_MAKE_FLAGS="-j1"
 # If you have installed dbus-glib, comment out this line:
 #ac_add_options --disable-dbus
@@ -135,8 +134,10 @@ ac_add_options --disable-tests
 # Optimization for size is broken with gcc7
 ac_add_options --enable-optimize="-O2"
 ac_add_options --enable-official-branding
-# In firefox-59.0 system cairo breaks the build, so comment it.
-#ac_add_options --enable-system-cairo
+# From firefox-40, using system cairo caused firefox to crash
+# frequently when it was doing background rendering in a tab.
+# This appears to again work in firefox-56
+ac_add_options --enable-system-cairo
 ac_add_options --enable-system-ffi
 ac_add_options --enable-system-pixman
 ac_add_options --with-pthreads
@@ -148,14 +149,14 @@ mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-build-dir
 EOF
 
 
-patch -Np1 -i ../firefox-59.0.2-system_graphite2_harfbuzz-1.patch
+patch -Np1 -i ../firefox-58.0.2-system_graphite2_harfbuzz-1.patch
 
 
-#echo "AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ" > google-key
-#echo "d2284a20-0505-4927-a809-7ffaf4d91e55" > mozilla-key
+echo "AIzaSyDxKL42zsPjbke5O8_rPVpVrLrJ8aeE9rQ" > google-key
+echo "d2284a20-0505-4927-a809-7ffaf4d91e55" > mozilla-key
 
 
-patch -Np1 -i ../firefox-59.0.2-ffmpeg4.0-1.patch &&
+
 ./mach build
 
 
@@ -163,7 +164,7 @@ patch -Np1 -i ../firefox-59.0.2-ffmpeg4.0-1.patch &&
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 ./mach install                                                  &&
 mkdir -pv  /usr/lib/mozilla/plugins                             &&
-ln    -sfv ../../mozilla/plugins /usr/lib/firefox/browser/
+ln    -sfv ../../mozilla/plugins /usr/lib/firefox-58.0.2/browser
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh
@@ -189,7 +190,7 @@ Categories=GNOME;GTK;Network;WebBrowser;
 MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;
 StartupNotify=true
 EOF
-ln -sfv /usr/lib/firefox/browser/chrome/icons/default/default128.png \
+ln -sfv /usr/lib/firefox-58.0.2/browser/icons/mozicon128.png \
         /usr/share/pixmaps/firefox.png
 
 ENDOFROOTSCRIPT

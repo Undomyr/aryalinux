@@ -21,7 +21,7 @@ URL=https://downloads.sourceforge.net/id3lib/id3lib-3.8.3.tar.gz
 if [ ! -z $URL ]
 then
 wget -nc https://downloads.sourceforge.net/id3lib/id3lib-3.8.3.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/id3lib/id3lib-3.8.3.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/id3lib/id3lib-3.8.3.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/id3lib/id3lib-3.8.3.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/id3lib/id3lib-3.8.3.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/id3lib/id3lib-3.8.3.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/id3lib/id3lib-3.8.3.tar.gz
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/id3lib-3.8.3-consolidated_patches-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/id3lib/id3lib-3.8.3-consolidated_patches-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/8.2/id3lib-3.8.3-consolidated_patches-1.patch || wget -nc http://www.linuxfromscratch.org/patches/downloads/id3lib/id3lib-3.8.3-consolidated_patches-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

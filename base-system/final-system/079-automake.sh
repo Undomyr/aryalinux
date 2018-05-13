@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="079-automake.sh"
-TARBALL="automake-1.16.1.tar.xz"
+TARBALL="automake-1.15.1.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,7 +29,7 @@ then
 	cd $DIRECTORY
 fi
 
-./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.16.1
+./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.15.1
 make
 make install
 

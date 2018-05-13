@@ -7,9 +7,9 @@ set +h
 . /var/lib/alps/functions
 
 SOURCE_ONLY=n
-DESCRIPTION="br3ak The Gutenprint (formerlybr3ak Gimp-Print) package contains highbr3ak quality drivers for many brands and models of printers for use withbr3ak <a class=\"xref\" href=\"cups.html\" title=\"Cups-2.2.7\">Cups-2.2.7</a>br3ak and the GIMP-2.0. See a list ofbr3ak supported printers at <a class=\"ulink\" href=\"http://gutenprint.sourceforge.net/p_Supported_Printers.php\">http://gutenprint.sourceforge.net/p_Supported_Printers.php</a>.br3ak"
+DESCRIPTION="br3ak The Gutenprint (formerlybr3ak Gimp-Print) package contains highbr3ak quality drivers for many brands and models of printers for use withbr3ak <a class=\"xref\" href=\"cups.html\" title=\"Cups-2.2.6\">Cups-2.2.6</a>br3ak and the GIMP-2.0. See a list ofbr3ak supported printers at <a class=\"ulink\" href=\"http://gutenprint.sourceforge.net/p_Supported_Printers.php\">http://gutenprint.sourceforge.net/p_Supported_Printers.php</a>.br3ak"
 SECTION="pst"
-VERSION=5.2.14
+VERSION=5.2.13
 NAME="gutenprint"
 
 #REC:cups
@@ -23,11 +23,11 @@ NAME="gutenprint"
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/gimp-print/gutenprint-5.2.14.tar.bz2
+URL=https://downloads.sourceforge.net/gimp-print/gutenprint-5.2.13.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/gimp-print/gutenprint-5.2.14.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gutenprint/gutenprint-5.2.14.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gutenprint/gutenprint-5.2.14.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gutenprint/gutenprint-5.2.14.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gutenprint/gutenprint-5.2.14.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gutenprint/gutenprint-5.2.14.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gutenprint/gutenprint-5.2.14.tar.bz2
+wget -nc https://downloads.sourceforge.net/gimp-print/gutenprint-5.2.13.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gutenprint/gutenprint-5.2.13.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gutenprint/gutenprint-5.2.13.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gutenprint/gutenprint-5.2.13.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gutenprint/gutenprint-5.2.13.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gutenprint/gutenprint-5.2.13.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gutenprint/gutenprint-5.2.13.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -51,11 +51,11 @@ make "-j`nproc`" || make
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
-install -v -m755 -d /usr/share/doc/gutenprint-5.2.14/api/gutenprint{,ui2} &&
+install -v -m755 -d /usr/share/doc/gutenprint-5.2.13/api/gutenprint{,ui2} &&
 install -v -m644    doc/gutenprint/html/* \
-                    /usr/share/doc/gutenprint-5.2.14/api/gutenprint &&
+                    /usr/share/doc/gutenprint-5.2.13/api/gutenprint &&
 install -v -m644    doc/gutenprintui2/html/* \
-                    /usr/share/doc/gutenprint-5.2.14/api/gutenprintui2
+                    /usr/share/doc/gutenprint-5.2.13/api/gutenprintui2
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

@@ -13,7 +13,7 @@ fi
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
 STEPNAME="086-Python.sh"
-TARBALL="Python-3.6.5.tar.xz"
+TARBALL="Python-3.6.4.tar.xz"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -38,12 +38,12 @@ make
 make install
 chmod -v 755 /usr/lib/libpython3.6m.so
 chmod -v 755 /usr/lib/libpython3.so
-install -v -dm755 /usr/share/doc/python-3.6.5/html 
+install -v -dm755 /usr/share/doc/python-3.6.4/html 
 tar --strip-components=1  \
     --no-same-owner       \
     --no-same-permissions \
-    -C /usr/share/doc/python-3.6.5/html \
-    -xvf ../python-3.6.5-docs-html.tar.bz2
+    -C /usr/share/doc/python-3.6.4/html \
+    -xvf ../python-3.6.4-docs-html.tar.bz2
 
 
 cd $SOURCE_DIR

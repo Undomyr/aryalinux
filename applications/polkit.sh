@@ -9,11 +9,11 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak Polkit is a toolkit for definingbr3ak and handling authorizations. It is used for allowing unprivilegedbr3ak processes to communicate with privileged processes.br3ak"
 SECTION="postlfs"
-VERSION=0.114
+VERSION=38
 NAME="polkit"
 
 #REQ:glib2
-#REQ:js52
+#REQ:js38
 #REQ:systemd
 #REC:linux-pam
 #OPT:gobject-introspection
@@ -25,11 +25,11 @@ NAME="polkit"
 
 cd $SOURCE_DIR
 
-URL=https://www.freedesktop.org/software/polkit/releases/polkit-0.114.tar.gz
+URL=http://anduin.linuxfromscratch.org/BLFS/polkit/polkit-0.113+git_2919920+js38.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc https://www.freedesktop.org/software/polkit/releases/polkit-0.114.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/polkit/polkit-0.114.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/polkit/polkit-0.114.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/polkit/polkit-0.114.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/polkit/polkit-0.114.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/polkit/polkit-0.114.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/polkit/polkit-0.114.tar.gz
+wget -nc http://anduin.linuxfromscratch.org/BLFS/polkit/polkit-0.113+git_2919920+js38.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/polkit/polkit-0.113+git_2919920+js38.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/polkit/polkit-0.113+git_2919920+js38.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/polkit/polkit-0.113+git_2919920+js38.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/polkit/polkit-0.113+git_2919920+js38.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/polkit/polkit-0.113+git_2919920+js38.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/polkit/polkit-0.113+git_2919920+js38.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -57,10 +57,6 @@ sudo rm rootscript.sh
 
 
 sed -i "s:/sys/fs/cgroup/systemd/:/sys:g" configure
-
-
-sed -e '/JS_ReportWarningUTF8/s/,/, "%s",/'  \
-        -i  src/polkitbackend/polkitbackendjsauthority.cpp
 
 
 ./configure --prefix=/usr                    \

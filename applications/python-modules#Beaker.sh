@@ -9,19 +9,19 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="%DESCRIPTION%"
 SECTION="general"
-VERSION=1.9.1
+VERSION=1.9.0
 NAME="python-modules#Beaker"
 
-#REQ:python-modules#funcsigs
+#OPT:python-modules#funcsigs
 
 
 cd $SOURCE_DIR
 
-URL=https://files.pythonhosted.org/packages/source/B/Beaker/Beaker-1.9.1.tar.gz
+URL=https://files.pythonhosted.org/packages/source/B/Beaker/Beaker-1.9.0.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://files.pythonhosted.org/packages/source/B/Beaker/Beaker-1.9.1.tar.gz
+wget -nc https://files.pythonhosted.org/packages/source/B/Beaker/Beaker-1.9.0.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

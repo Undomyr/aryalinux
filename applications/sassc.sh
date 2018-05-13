@@ -6,32 +6,28 @@ set +h
 . /etc/alps/alps.conf
 . /var/lib/alps/functions
 
-#REQ:libsass
-
 NAME=sassc
 DESCRIPTION="libsass command line driver"
-VERSION=3.5.0
+VERSION=3.4.8
 
-URL=https://github.com/sass/sassc/archive/3.5.0/sassc-3.5.0.tar.gz
+URL=https://github.com/sass/sassc/releases/download/3.4.8/sassc-3.4.8.tar.gz
 
 cd $SOURCE_DIR
 
 wget -nc $URL
-wget -nc https://github.com/sass/libsass/archive/3.5.2/libsass-3.5.2.tar.gz
-
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL
 cd $DIRECTORY
 
-autoreconf -fi &&
-./configure --prefix=/usr --disable-static &&
+./autoreconf --force --install
+./configure --prefix=/usr --enable-shared &&
 make
 sudo make install
 
 cd $SOURCE_DIR
-sudo rm -rf sassc-3.5.0
+sudo rm -rf libsass-3.4.9
 
 echo "sassc=>$(date)" | sudo tee -a /etc/alps/installed-list
 echo "sassc:$VERSION" | sudo tee -a /etc/alps/versions

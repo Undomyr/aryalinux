@@ -13,7 +13,6 @@ VERSION=5.1.4
 NAME="autofs"
 
 #REQ:libtirpc
-#REQ:rpcsvc-proto
 #OPT:nfs-utils
 #OPT:libxml2
 #OPT:mitkrb

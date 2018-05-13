@@ -45,6 +45,7 @@ VERSION=4.12
 #REQ:p7zip-full
 #REQ:xarchiver
 #REQ:imagemagick
+#REQ:thunar-thumbnailers
 #REQ:thunar-archive-plugin
 #REQ:xdg-utils
 #REQ:xdg-user-dirs
