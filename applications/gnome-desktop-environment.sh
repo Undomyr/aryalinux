@@ -113,6 +113,9 @@ chmod a+x udpate-wallpapers.sh
 sudo ./udpate-wallpapers.sh
 popd
 
+sudo sed -i "s@MimeType=inode/directory@# MimeType=inode/directory@g" /usr/share/applications/org.gnome.baobab.desktop
+sudo update-desktop-database
+
 sudo systemctl disable gdm
 sudo systemctl enable lightdm
 
