@@ -29,13 +29,13 @@ NAME="mesa"
 
 cd $SOURCE_DIR
 
-URL=https://mesa.freedesktop.org/archive/mesa-18.0.1.tar.xz
+URL=https://mesa.freedesktop.org/archive/mesa-18.0.3.tar.xz
 
 if [ ! -z $URL ]
 then
 
 wget -nc $URL
-wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/mesa-18.0.1-add_xdemos-1.patch
+wget -nc http://www.linuxfromscratch.org/patches/blfs/svn/mesa-18.0.3-add_xdemos-1.patch
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
