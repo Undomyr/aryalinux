@@ -12,7 +12,7 @@ SECTION="postlfs"
 NAME="cacerts"
 VERSION="latest"
 
-#REQ:openssl
+#REQ:openssl10
 #OPT:java
 #OPT:openjdk
 #OPT:nss
@@ -20,12 +20,18 @@ VERSION="latest"
 
 cd $SOURCE_DIR
 
-wget -nc http://anduin.linuxfromscratch.org/BLFS/other/make-ca.sh-20161126
-wget -nc http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt
-
-sudo install -vm755 make-ca.sh-20161126 /usr/sbin/make-ca.sh
-sudo /usr/sbin/make-ca.sh
-
+wget -nc https://github.com/djlucas/make-ca/archive/v0.7/make-ca-0.7.tar.gz
+sudo install -vdm755 /etc/ssl/local &&
+wget http://www.cacert.org/certs/root.crt &&
+wget http://www.cacert.org/certs/class3.crt &&
+sudo openssl x509 -in root.crt -text -fingerprint -setalias "CAcert Class 1 root" \
+        -addtrust serverAuth -addtrust emailProtection -addtrust codeSigning \
+        > /etc/ssl/local/CAcert_Class_1_root.pem &&
+sudo openssl x509 -in class3.crt -text -fingerprint -setalias "CAcert Class 3 root" \
+        -addtrust serverAuth -addtrust emailProtection -addtrust codeSigning \
+        > /etc/ssl/local/CAcert_Class_3_root.pem
+sudo make install
+sudo /usr/sbin/make-ca -g
 
 if [ ! -z $URL ]; then cd $SOURCE_DIR && cleanup "$NAME" "$DIRECTORY"; fi
 
