@@ -43,7 +43,7 @@ rm -r dracut-master
 rm -r master.zip
 
 wget -nc https://sourceware.org/ftp/lvm2/releases/LVM2.2.02.171.tgz
-wget -nc https://github.com/FluidIdeas/patches/raw/$VERSION/aufs-4.16.tar.gz
+wget -nc https://github.com/FluidIdeas/patches/raw/$VERSION/aufs-4.15.tar.gz
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-base.patch
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-kbuild.patch
 wget -nc https://raw.githubusercontent.com/FluidIdeas/patches/$VERSION/aufs4-loopback.patch
