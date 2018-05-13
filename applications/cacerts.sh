@@ -23,7 +23,7 @@ URL=https://github.com/djlucas/make-ca/archive/v0.7/make-ca-0.7.tar.gz
 cd $SOURCE_DIR
 
 wget -nc $URL
-TARBALL=$(echo $URL | rev | cur -d/ -f1 | rev)
+TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
 
 tar xf $TARBALL
