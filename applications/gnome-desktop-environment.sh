@@ -8,7 +8,7 @@ set +h
 
 SOURCE_ONLY=n
 NAME="gnome-desktop-environment"
-VERSION="3.28"
+VERSION="3.26"
 DESCRIPTION="GNOME is a desktop environment that is composed entirely of free and open-source software. GNOME was originally an acronym for GNU Network Object Model Environment."
 
 #REQ:accountsservice
@@ -102,7 +102,7 @@ DESCRIPTION="GNOME is a desktop environment that is composed entirely of free an
 #REQ:arc-gtk-theme
 #REQ:paper-gtk-theme
 #REQ:adapta-gtk-theme
-#REQ:flat-remix-icons
+#REQ:flat-remix-icon-theme
 #REQ:numix-icons
 #REQ:aryalinux-gnome-settings
 #REQ:lightdm-gtk-greeter
