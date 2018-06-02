@@ -9,8 +9,8 @@ set +h
 #REQ:perl-modules#perl-test-warnings
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/L/LE/LEONT/File-Slurper-0.012.tar.gz"
-VERSION=0.012
+URL="https://www.cpan.org/authors/id/L/LE/LEONT/File-Slurper-0.011.tar.gz"
+VERSION=0.011
 NAME="perl-modules#perl-file-slurper"
 
 cd $SOURCE_DIR

@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Gcr package contains librariesbr3ak used for displaying certificates and accessing key stores. It alsobr3ak provides the viewer for crypto files on the GNOME Desktop.br3ak"
 SECTION="gnome"
-VERSION=3.28.0
+VERSION=3.20.0
 NAME="gcr"
 
 #REQ:glib2
@@ -27,11 +27,11 @@ NAME="gcr"
 
 cd $SOURCE_DIR
 
-URL=http://ftp.gnome.org/pub/gnome/sources/gcr/3.28/gcr-3.28.0.tar.xz
+URL=http://ftp.gnome.org/pub/gnome/sources/gcr/3.20/gcr-3.20.0.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc http://ftp.gnome.org/pub/gnome/sources/gcr/3.28/gcr-3.28.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gcr/gcr-3.28.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gcr/gcr-3.28.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gcr/gcr-3.28.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gcr/gcr-3.28.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gcr/gcr-3.28.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gcr/gcr-3.28.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gcr/3.28/gcr-3.28.0.tar.xz
+wget -nc http://ftp.gnome.org/pub/gnome/sources/gcr/3.20/gcr-3.20.0.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/gcr/gcr-3.20.0.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/gcr/gcr-3.20.0.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/gcr/gcr-3.20.0.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/gcr/gcr-3.20.0.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/gcr/gcr-3.20.0.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/gcr/gcr-3.20.0.tar.xz || wget -nc ftp://ftp.gnome.org/pub/gnome/sources/gcr/3.20/gcr-3.20.0.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then

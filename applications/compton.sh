@@ -8,7 +8,7 @@ set +h
 
 SOURCE_ONLY=n
 NAME="compton"
-VERSION=0.1
+VERSION=SVN
 DESCRIPTION="Compton is a compositor for X, and a fork of xcompmgr-dana"
 
 #REQ:x7lib
@@ -20,9 +20,18 @@ DESCRIPTION="Compton is a compositor for X, and a fork of xcompmgr-dana"
 #REQ:libconfig
 
 cd $SOURCE_DIR
-URL="https://github.com/chjj/compton/archive/v0.1_beta2.tar.gz"
-TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
-DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
+URL="https://github.com/chjj/compton/archive/master.zip"
+if [ ! -z $(echo $URL | grep "/master.zip$") ] && [ ! -f $NAME-master.zip ]; then
+	wget -nc $URL -O $NAME-master.zip
+	TARBALL=$NAME-master.zip
+elif [ ! -z $(echo $URL | grep "/master.zip$") ] && [ -f $NAME-master.zip ]; then
+	echo "Tarball already downloaded. Skipping."
+	TARBALL=$NAME-master.zip
+else
+	wget -nc $URL
+	TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
+fi
+DIRECTORY=$(unzip -l $TARBALL | grep "/" | rev | tr -s " " | cut -d " " -f1 | rev | cut -d/ -f1 | uniq)
 unzip -o $TARBALL
 cd $DIRECTORY
 

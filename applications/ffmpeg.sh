@@ -31,7 +31,7 @@ NAME="ffmpeg"
 #OPT:libcdio
 #OPT:libwebp
 #OPT:opencv
-#OPT:openjpeg2
+#OPT:openjpeg
 #OPT:gnutls
 #OPT:pulseaudio
 #OPT:speex
@@ -48,7 +48,7 @@ URL=http://ffmpeg.org/releases/ffmpeg-3.4.2.tar.xz
 
 if [ ! -z $URL ]
 then
-wget -nc $URL
+wget -nc http://ffmpeg.org/releases/ffmpeg-3.4.2.tar.xz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/ffmpeg/ffmpeg-3.4.2.tar.xz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/ffmpeg/ffmpeg-3.4.2.tar.xz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/ffmpeg/ffmpeg-3.4.2.tar.xz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/ffmpeg/ffmpeg-3.4.2.tar.xz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/ffmpeg/ffmpeg-3.4.2.tar.xz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/ffmpeg/ffmpeg-3.4.2.tar.xz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -64,7 +64,6 @@ fi
 whoami > /tmp/currentuser
 
 sed -i 's/-lflite"/-lflite -lasound"/' configure &&
-
 ./configure --prefix=/usr        \
             --enable-gpl         \
             --enable-version3    \
@@ -83,16 +82,13 @@ sed -i 's/-lflite"/-lflite -lasound"/' configure &&
             --enable-libx264     \
             --enable-libx265     \
             --docdir=/usr/share/doc/ffmpeg-3.4.2 &&
-
 make &&
-
 gcc tools/qt-faststart.c -o tools/qt-faststart
 
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
-
 install -v -m755    tools/qt-faststart /usr/bin &&
 install -v -m755 -d           /usr/share/doc/ffmpeg-3.4.2 &&
 install -v -m644    doc/*.txt /usr/share/doc/ffmpeg-3.4.2

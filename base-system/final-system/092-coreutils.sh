@@ -31,7 +31,6 @@ fi
 
 patch -Np1 -i ../coreutils-8.29-i18n-1.patch
 sed -i '/test.lock/s/^/#/' gnulib-tests/gnulib.mk
-autoreconf -fiv
 FORCE_UNSAFE_CONFIGURE=1 ./configure \
             --prefix=/usr            \
             --enable-no-install-program=kill,uptime

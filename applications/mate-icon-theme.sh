@@ -9,11 +9,11 @@ set +h
 SOURCE_ONLY=n
 NAME="mate-icon-theme"
 DESCRIPTION="MATE Desktop icon theme"
-VERSION=1.20.0
+VERSION="1.18.0"
 
 cd $SOURCE_DIR
 
-URL="http://pub.mate-desktop.org/releases/1.20/mate-icon-theme-1.20.0.tar.xz"
+URL="http://pub.mate-desktop.org/releases/1.18/mate-icon-theme-1.18.2.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`

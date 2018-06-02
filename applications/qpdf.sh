@@ -9,21 +9,20 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak The Qpdf package containsbr3ak command-line programs and library that do structural,br3ak content-preserving transformations on PDF files.br3ak"
 SECTION="general"
-VERSION=8.0.2
+VERSION=7.1.1
 NAME="qpdf"
 
-#REQ:libjpeg
 #OPT:fop
 #OPT:libxslt
 
 
 cd $SOURCE_DIR
 
-URL=https://github.com/qpdf/qpdf/releases/download/release-qpdf-8.0.2/qpdf-8.0.2.tar.gz
+URL=https://downloads.sourceforge.net/qpdf/qpdf-7.1.1.tar.gz
 
 if [ ! -z $URL ]
 then
-wget -nc https://github.com/qpdf/qpdf/releases/download/release-qpdf-8.0.2/qpdf-8.0.2.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qpdf/qpdf-8.0.2.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/qpdf/qpdf-8.0.2.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qpdf/qpdf-8.0.2.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qpdf/qpdf-8.0.2.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qpdf/qpdf-8.0.2.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qpdf/qpdf-8.0.2.tar.gz
+wget -nc https://downloads.sourceforge.net/qpdf/qpdf-7.1.1.tar.gz || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/qpdf/qpdf-7.1.1.tar.gz || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/qpdf/qpdf-7.1.1.tar.gz || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/qpdf/qpdf-7.1.1.tar.gz || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/qpdf/qpdf-7.1.1.tar.gz || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/qpdf/qpdf-7.1.1.tar.gz || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/qpdf/qpdf-7.1.1.tar.gz
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -40,7 +39,7 @@ whoami > /tmp/currentuser
 
 ./configure --prefix=/usr    \
             --disable-static \
-            --docdir=/usr/share/doc/qpdf-8.0.2 &&
+            --docdir=/usr/share/doc/qpdf-7.1.1 &&
 make "-j`nproc`" || make
 
 

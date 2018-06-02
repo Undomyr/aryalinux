@@ -14,9 +14,9 @@ NAME="lxsession"
 
 #REQ:dbus-glib
 #REQ:libunique
+#REQ:lsb-release
 #REQ:polkit
 #REQ:vala
-#OPT:lsb-release
 #OPT:gtk3
 #OPT:libxslt
 #OPT:docbook

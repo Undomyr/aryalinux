@@ -7,7 +7,7 @@ set +h
 . /var/lib/alps/functions
 
 NAME="blueman"
-VERSION="2.0.5"
+VERSION="2.0.4"
 
 #REQ:obex-data-server
 #REQ:python-modules#dbus-python
@@ -18,7 +18,7 @@ VERSION="2.0.5"
 
 cd $SOURCE_DIR
 
-URL="https://github.com/blueman-project/blueman/releases/download/2.0.5/blueman-2.0.5.tar.xz"
+URL="https://github.com/blueman-project/blueman/releases/download/2.0.4/blueman-2.0.4.tar.xz"
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | cut -d/ -f1 | uniq`

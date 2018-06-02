@@ -11,8 +11,8 @@ set +h
 #REQ:perl-modules#ipc-system-simple
 
 SOURCE_ONLY=y
-URL="https://www.cpan.org/authors/id/K/KI/KIMRYAN/File-BaseDir-0.08.tar.gz"
-VERSION=0.08
+URL="https://www.cpan.org/authors/id/K/KI/KIMRYAN/File-BaseDir-0.07.tar.gz"
+VERSION=0.07
 NAME="perl-modules#perl-file-basedir"
 
 cd $SOURCE_DIR

@@ -6,14 +6,14 @@ set +h
 . /var/lib/alps/functions
 
 NAME="xfce4-datetime-plugin"
-VERSION="0.7.0"
+VERSION="0.6.1"
 
 #REQ:libxfcegui4
 
 KDE_PREFIX=/usr
 cd $SOURCE_DIR
 
-URL=https://git.xfce.org/panel-plugins/xfce4-datetime-plugin/snapshot/xfce4-datetime-plugin-datetime-0.7.0.tar.gz
+URL=http://archive.xfce.org/src/panel-plugins/xfce4-datetime-plugin/0.6/xfce4-datetime-plugin-0.6.1.tar.bz2
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `

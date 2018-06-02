@@ -8,9 +8,9 @@ set +h
 
 DESCRIPTION="A very simple task manager for XFCE"
 NAME="xfce4-taskmanager"
-VERSION="1.2.0"
+VERSION="1.0.0"
 
-URL="https://git.xfce.org/apps/xfce4-taskmanager/snapshot/xfce4-taskmanager-1.2.0.tar.gz"
+URL="http://archive.xfce.org/src/apps/xfce4-taskmanager/1.1/xfce4-taskmanager-1.1.0.tar.bz2"
 
 cd $SOURCE_DIR
 wget -nc $URL

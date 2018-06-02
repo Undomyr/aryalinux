@@ -75,7 +75,7 @@ d7dd9b9df336b7dd4028b6b56542ff2c libXxf86dga-1.1.4.tar.bz2
 ba983eba5a9f05d152a0725b8e863151 libdmx-1.1.3.tar.bz2
 8f436e151d5106a9cfaa71857a066d33 libpciaccess-0.14.tar.bz2
 4a4cfeaf24dab1b991903455d6d7d404 libxkbfile-1.0.9.tar.bz2
-42dda8016943dc12aff2c03a036e0937 libxshmfence-1.3.tar.bz2
+66662e76899112c0f99e22f2fc775a7e libxshmfence-1.2.tar.bz2
 EOF
 
 
@@ -105,6 +105,9 @@ do
   tar -xf $package
   pushd $packagedir
   case $packagedir in
+    libxshmfence* )
+      ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static CFLAGS="$CFLAGS -D_GNU_SOURCE"
+    ;;
     libICE* )
       ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static ICE_LIBS=-lpthread
     ;;

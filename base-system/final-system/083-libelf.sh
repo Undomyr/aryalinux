@@ -12,8 +12,8 @@ fi
 
 SOURCE_DIR="/sources"
 LOGFILE="/sources/build-log"
-STEPNAME="082-gettext.sh"
-TARBALL="gettext-0.19.8.1.tar.xz"
+STEPNAME="083-libelf.sh"
+TARBALL="elfutils-0.170.tar.bz2"
 
 echo "$LOGLENGTH" > /sources/lines2track
 
@@ -29,14 +29,10 @@ then
 	cd $DIRECTORY
 fi
 
-sed -i '/^TESTS =/d' gettext-runtime/tests/Makefile.in &&
-sed -i 's/test-lock..EXEEXT.//' gettext-tools/gnulib-tests/Makefile.in
-./configure --prefix=/usr    \
-            --disable-static \
-            --docdir=/usr/share/doc/gettext-0.19.8.1
+./configure --prefix=/usr
 make
-make install
-chmod -v 0755 /usr/lib/preloadable_libintl.so
+make -C libelf install
+install -vm644 config/libelf.pc /usr/lib/pkgconfig
 
 
 cd $SOURCE_DIR

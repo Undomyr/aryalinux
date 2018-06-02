@@ -6,14 +6,14 @@ set +h
 . /var/lib/alps/functions
 
 NAME="plank"
-VERSION="0.11.4"
+VERSION="0.11.1"
 
 #REQ:libgee
 #REQ:libbamf3
 
 cd $SOURCE_DIR
 
-URL=https://launchpad.net/plank/1.0/0.11.4/+download/plank-0.11.4.tar.xz
+URL=https://launchpad.net/plank/1.0/0.11.1/+download/plank-0.11.1.tar.xz
 wget -nc $URL
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar -tf $TARBALL | sed -e 's@/.*@@' | uniq `

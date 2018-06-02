@@ -9,17 +9,26 @@ set +h
 SOURCE_ONLY=n
 NAME="adapta-gtk-theme"
 DESCRIPTION="Adapta GTK theme"
-VERSION=20180311
+VERSION="3.93.0.149"
 
 #REQ:gtk2
 #REQ:gtk3
+#REQ:sassc
+
+URL=https://github.com/adapta-project/adapta-gtk-theme/archive/3.93.0.149.tar.gz
+TARBALL="adapta-gtk-theme-$VERSION.tar.gz"
 
 cd $SOURCE_DIR
 
-URL=https://sourceforge.net/projects/aryalinux-bin/files/artifacts/adapta-gtk-theme.tar.xz
-TARBALL="adapta-gtk-theme.tar.xz"
-wget -c $URL
-sudo tar xf $TARBALL -C /
+wget -c $URL -O $TARBALL
+DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)
+
+tar xf $TARBALL
+cd $DIRECTORY
+./autogen.sh --prefix=/usr
+./configure --prefix=/usr --enable-shared &&
+make
+sudo make install
 
 cd $SOURCE_DIR
 sudo rm -rf $DIRECTORY

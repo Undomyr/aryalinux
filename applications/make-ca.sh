@@ -62,9 +62,6 @@ sudo rm rootscript.sh
 
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
-sed -e 's%= /etc/ssl;%= "/etc/ssl";%' \
-    -e 's%= /usr;%= "/usr";%'         \
-    -i /usr/bin/c_rehash              &&
 /usr/sbin/make-ca -g
 
 ENDOFROOTSCRIPT

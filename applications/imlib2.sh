@@ -9,7 +9,7 @@ set +h
 SOURCE_ONLY=n
 DESCRIPTION="br3ak imlib2 is a graphics library forbr3ak fast file loading, saving, rendering and manipulation.br3ak"
 SECTION="x"
-VERSION=1.5.1
+VERSION=1.4.10
 NAME="imlib2"
 
 #REQ:x7lib
@@ -21,11 +21,11 @@ NAME="imlib2"
 
 cd $SOURCE_DIR
 
-URL=https://downloads.sourceforge.net/enlightenment/imlib2-1.5.1.tar.bz2
+URL=https://downloads.sourceforge.net/enlightenment/imlib2-1.4.10.tar.bz2
 
 if [ ! -z $URL ]
 then
-wget -nc https://downloads.sourceforge.net/enlightenment/imlib2-1.5.1.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/imlib/imlib2-1.5.1.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/imlib/imlib2-1.5.1.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/imlib/imlib2-1.5.1.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/imlib/imlib2-1.5.1.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/imlib/imlib2-1.5.1.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/imlib/imlib2-1.5.1.tar.bz2
+wget -nc https://downloads.sourceforge.net/enlightenment/imlib2-1.4.10.tar.bz2 || wget -nc http://mirrors-usa.go-parts.com/blfs/conglomeration/imlib/imlib2-1.4.10.tar.bz2 || wget -nc http://mirrors-ru.go-parts.com/blfs/conglomeration/imlib/imlib2-1.4.10.tar.bz2 || wget -nc ftp://ftp.lfs-matrix.net/pub/blfs/conglomeration/imlib/imlib2-1.4.10.tar.bz2 || wget -nc http://ftp.lfs-matrix.net/pub/blfs/conglomeration/imlib/imlib2-1.4.10.tar.bz2 || wget -nc ftp://ftp.osuosl.org/pub/blfs/conglomeration/imlib/imlib2-1.4.10.tar.bz2 || wget -nc http://ftp.osuosl.org/pub/blfs/conglomeration/imlib/imlib2-1.4.10.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 if [ -z $(echo $TARBALL | grep ".zip$") ]; then
@@ -47,9 +47,9 @@ make "-j`nproc`" || make
 
 sudo tee rootscript.sh << "ENDOFROOTSCRIPT"
 make install &&
-install -v -m755 -d /usr/share/doc/imlib2-1.5.1 &&
+install -v -m755 -d /usr/share/doc/imlib2-1.4.10 &&
 install -v -m644    doc/{*.gif,index.html} \
-                    /usr/share/doc/imlib2-1.5.1
+                    /usr/share/doc/imlib2-1.4.10
 
 ENDOFROOTSCRIPT
 sudo chmod 755 rootscript.sh

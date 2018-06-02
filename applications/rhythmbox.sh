@@ -15,12 +15,12 @@ set +h
 #REQ:libgpod
 
 NAME=rhythmbox
-VERSION=3.4.2
+VERSION=3.4.1
 DESCRIPTION="Rhythmbox is a music manager and player for gnome desktop environment"
 
 cd $SOURCE_DIR
 
-URL="https://download.gnome.org/sources/rhythmbox/3.4/rhythmbox-3.4.2.tar.xz"
+URL="https://download.gnome.org/sources/rhythmbox/3.4/rhythmbox-3.4.1.tar.xz"
 wget -nc $URL
 TARBALL=$(echo $URL | rev | cut -d/ -f1 | rev)
 DIRECTORY=$(tar tf $TARBALL | cut -d/ -f1 | uniq)

@@ -102,7 +102,7 @@ DESCRIPTION="GNOME is a desktop environment that is composed entirely of free an
 #REQ:arc-gtk-theme
 #REQ:paper-gtk-theme
 #REQ:adapta-gtk-theme
-#REQ:flat-remix-icon-theme
+#REQ:flat-remix-icons
 #REQ:numix-icons
 #REQ:aryalinux-gnome-settings
 #REQ:lightdm-gtk-greeter
