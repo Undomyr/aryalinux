@@ -84,7 +84,6 @@ DESCRIPTION="GNOME is a desktop environment that is composed entirely of free an
 #REQ:gnome-power-manager
 #REQ:gnome-system-monitor
 #REQ:gnome-terminal
-#REQ:gnome-tweak-tool
 #REQ:gnome-weather
 #REQ:gucharmap
 #REQ:network-manager-applet
@@ -102,15 +101,15 @@ DESCRIPTION="GNOME is a desktop environment that is composed entirely of free an
 #REQ:arc-gtk-theme
 #REQ:paper-gtk-theme
 #REQ:adapta-gtk-theme
-#REQ:flat-remix-icons
+#REQ:flat-remix-icon-theme
 #REQ:numix-icons
 #REQ:aryalinux-gnome-settings
 #REQ:lightdm-gtk-greeter
 
 pushd $SOURCE_DIR
-wget https://raw.githubusercontent.com/FluidIdeas/utils/master/wallpaper-list-update.sh -O udpate-wallpapers.sh
-chmod a+x udpate-wallpapers.sh
-sudo ./udpate-wallpapers.sh
+wget -nc https://raw.githubusercontent.com/FluidIdeas/utils/master/wallpaper-list-update.sh
+chmod a+x wallpaper-list-update.sh
+sudo ./wallpaper-list-update.sh
 popd
 
 sudo systemctl disable gdm
@@ -179,7 +178,7 @@ EOF
 if [ ! -f /usr/share/pixmaps/aryalinux.png ]
 then
 pushd /usr/share/pixmaps/
-sudo wget https://sourceforge.net/projects/aryalinux-bin/files/artifacts/aryalinux.png
+sudo wget http://aryalinux.com/files/aryalinux.png
 popd
 fi
 
