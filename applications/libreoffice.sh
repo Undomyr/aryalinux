@@ -93,11 +93,9 @@ whoami > /tmp/currentuser
 if [ -z "$LANGUAGE" ]; then export LANGUAGE=ALL; fi
 
 install -dm755 external/tarballs &&
-ln -sv ../../../libreoffice-dictionaries-$VERSION_MAJOR.$VERSION_MINOR.tar.xz external/tarballs/ &&
-ln -sv ../../../libreoffice-help-$VERSION_MAJOR.$VERSION_MINOR.tar.xz         external/tarballs/
-
-
-ln -sv ../../../libreoffice-translations-$VERSION_MAJOR.$VERSION_MINOR.tar.xz external/tarballs/
+ln -svf ../../../libreoffice-dictionaries-$VERSION_MAJOR.$VERSION_MINOR.tar.xz external/tarballs/ &&
+ln -svf ../../../libreoffice-help-$VERSION_MAJOR.$VERSION_MINOR.tar.xz         external/tarballs/
+ln -svf ../../../libreoffice-translations-$VERSION_MAJOR.$VERSION_MINOR.tar.xz external/tarballs/
 
 
 sed -e "/gzip -f/d"   \
