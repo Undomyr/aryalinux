@@ -7,17 +7,18 @@ set +h
 . /var/lib/alps/functions
 
 NAME="libva-wo-mesa"
-VERSION="1.7.3"
+VERSION="2.1.0"
 
-#REQ:mesa
+#REQ:libdrm
 #OPT:doxygen
-#OPT:wayland
+#REQ:wayland
 
 cd $SOURCE_DIR
 
-URL=http://www.freedesktop.org/software/vaapi/releases/libva/libva-1.7.3.tar.bz2
+URL=https://github.com/intel/libva/releases/download/2.1.0/libva-2.1.0.tar.bz2
 
 wget -nc $URL
+wget -nc https://github.com/intel/intel-vaapi-driver/releases/download/2.1.0/intel-vaapi-driver-2.1.0.tar.bz2
 
 TARBALL=`echo $URL | rev | cut -d/ -f1 | rev`
 DIRECTORY=`tar tf $TARBALL | cut -d/ -f1 | uniq`
@@ -28,7 +29,6 @@ cd $DIRECTORY
 export XORG_PREFIX=/usr
 export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc --localstatedir=/var --disable-static"
 
-sed -i "/seems to be moved/s/^/#/" ltmain.sh &&
 ./configure $XORG_CONFIG &&
 make
 
@@ -40,6 +40,15 @@ sudo ./rootscript.sh
 sudo rm rootscript.sh
 
 cd $SOURCE_DIR
+
+tar xf intel-vaapi-driver-2.1.0.tar.bz2
+cd intel-vaapi-driver-2.1.0
+./configure $XORG_CONFIG &&
+make
+sudo make install
+cd $SOURCE_DIR
+sudo rm -rf intel-vaapi-driver-2.1.0
+
 cleanup "$NAME" "$DIRECTORY"
 
 register_installed "$NAME" "$VERSION" "$INSTALLED_LIST"

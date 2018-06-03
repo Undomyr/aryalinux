@@ -21,7 +21,7 @@ NAME="mesa"
 #REC:elfutils
 #REC:llvm
 #REC:wayland
-#REC:libva-wo-mesa
+#REQ:libva-wo-mesa
 #REC:libvdpau
 #OPT:libgcrypt
 #OPT:nettle
